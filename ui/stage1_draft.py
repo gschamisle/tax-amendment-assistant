@@ -17,7 +17,6 @@ _APPLICATION_BASIS_OPTIONS = [
 ]
 _BASIS_EFFECT_TYPES: dict[str, str] = {
     "신고": "부진정소급효",
-    "발생/거래": "진정소급효",
 }
 
 
@@ -37,6 +36,9 @@ def _parse_jo_ref(jo_ref: str) -> tuple[str, str] | None:
         if m.group(1) is not None:
             return m.group(1), m.group(2) or ""
         return m.group(3), m.group(4) or ""
+    m = re.search(r"(?<!제)(\d+)조(?:의(\d+))?", text)
+    if m:
+        return m.group(1), m.group(2) or ""
     parts = text.split("의")
     if parts and parts[0].isdigit():
         return parts[0], parts[1] if len(parts) > 1 and parts[1].isdigit() else ""
@@ -121,7 +123,7 @@ def _clean_article_ref_for_law(law_name: str, jo_ref: str) -> str:
 
 
 def _find_article_by_outline(articles: list[dict], outline: str) -> dict | None:
-    """개정요강에 명시된 조문번호가 있으면 해당 조문을 찾는다."""
+    """개정요강에 조문번호가 있으면 해당 조문을 찾고, 항번호만 있으면 선택 조문을 유지한다."""
     parsed = _parse_jo_ref(outline)
     if not parsed:
         return None
@@ -129,6 +131,22 @@ def _find_article_by_outline(articles: list[dict], outline: str) -> dict | None:
         if _article_key(article) == parsed:
             return article
     return None
+
+
+def _reset_draft_edit_state() -> None:
+    """새 초안 생성 시 이전 편집 박스/체크박스 상태를 제거한다."""
+    exact_keys = {
+        "s1_instruction_edit",
+        "s1_current_edit",
+        "s1_amended_edit",
+        "s1_buchik_edit",
+        "s1_accepted_suggests",
+        "s1_hang_overrides",
+    }
+    prefixes = ("s1_suggest_", "s1_hang_")
+    for key in list(st.session_state.keys()):
+        if key in exact_keys or key.startswith(prefixes):
+            del st.session_state[key]
 
 
 def _extract_target_hang(outline: str) -> str:
@@ -179,8 +197,22 @@ def _source_current_section(article: dict, outline: str, fallback: str) -> str:
     return fixed if f"<del>{old_text}</del>" in fixed else fallback
 
 
+def _parse_manwon_amount(text: str) -> int | None:
+    m = re.fullmatch(r"\s*([0-9,]+)만원\s*", text)
+    if not m:
+        return None
+    return int(m.group(1).replace(",", ""))
+
+
+def _format_manwon_amount(amount: float) -> str:
+    rounded = round(amount)
+    if abs(amount - rounded) < 0.000001:
+        return f"{rounded:,}만원"
+    return f"{amount:,.1f}만원"
+
+
 def _deterministic_related_reviews(article: dict, outline: str) -> str:
-    """동일 조 다른 항에 같은 현행 수치가 있으면 항상 검토 항목으로 제시한다."""
+    """동일 수치 및 직접 인용 항의 비례 수치를 항상 검토 항목으로 제시한다."""
     target_hang = _extract_target_hang(outline)
     old_new = _extract_old_new(outline)
     if not target_hang or not old_new:
@@ -191,15 +223,32 @@ def _deterministic_related_reviews(article: dict, outline: str) -> str:
         return ""
 
     old_text, new_text = old_new
+    old_amount = _parse_manwon_amount(old_text)
+    new_amount = _parse_manwon_amount(new_text)
+    ratio = (new_amount / old_amount) if old_amount and new_amount else None
     rows: list[str] = []
     for sym, content in _split_hang_blocks(str(article.get("내용", ""))):
-        if not sym or sym == target_sym or old_text not in content:
+        if not sym or sym == target_sym:
             continue
-        if f"제{target_hang}항" in content:
+
+        directly_refs_target = f"제{target_hang}항" in content
+        if old_text in content and directly_refs_target:
             reason = f"제{target_hang}항 직접 인용 및 동일 수치 포함"
-        else:
+            rows.append(f'[검토] {sym}항({reason}): "{old_text}" → "{new_text}" — 코드 스캔')
+        elif old_text in content:
             reason = "같은 조 다른 항에 동일 현행 수치 포함"
-        rows.append(f'[검토] {sym}항({reason}): "{old_text}" → "{new_text}" — 코드 스캔')
+            rows.append(f'[검토] {sym}항({reason}): "{old_text}" → "{new_text}" — 코드 스캔')
+
+        if directly_refs_target and ratio:
+            for amount_text in sorted(set(re.findall(r"[0-9,]+만원", content))):
+                amount = _parse_manwon_amount(amount_text)
+                if not amount or amount_text == old_text:
+                    continue
+                proposed = _format_manwon_amount(amount * ratio)
+                if proposed == amount_text:
+                    continue
+                reason = f"제{target_hang}항 직접 인용, 개정 비율 {old_text}→{new_text} 적용"
+                rows.append(f'[검토] {sym}항({reason}): "{amount_text}" → "{proposed}" — 비례 계산')
     return "\n".join(rows)
 
 
@@ -405,6 +454,7 @@ def render(law_api_key: str, openai_api_key: str) -> None:
 
             with st.spinner("초안 생성 중..."):
                 try:
+                    _reset_draft_edit_state()
                     article_text = _article_text_for_prompt(article)
                     draft = draft_amendment(
                         law_name=law.get("법령명", ""),

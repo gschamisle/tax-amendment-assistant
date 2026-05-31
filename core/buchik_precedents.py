@@ -15,7 +15,6 @@ _DATA_PATH = Path(__file__).resolve().parents[1] / "data" / "buchik_precedents.j
 _FALLBACK_TEMPLATES: dict[str, str] = {
     "장래효": "{law_ref} 시행 이후 최초로 개시하는 사업연도 분부터 적용한다.",
     "부진정소급효": "{law_ref} 시행 이후 과세표준을 신고하는 경우부터 적용한다.",
-    "진정소급효": "(시행일) 이후 발생하는 소득ㆍ거래분부터 적용한다.",
 }
 
 _BASIS_FALLBACK_TEMPLATES: dict[str, str] = {
@@ -25,12 +24,11 @@ _BASIS_FALLBACK_TEMPLATES: dict[str, str] = {
     "지급/수령": "{law_ref} 시행 이후 지급하거나 수령하는 분부터 적용한다.",
     "양도/취득": "{law_ref} 시행 이후 양도하거나 취득하는 분부터 적용한다.",
     "공급": "{law_ref} 시행 이후 공급하는 분부터 적용한다.",
-    "발생/거래": "(시행일) 이후 발생하는 소득ㆍ거래분부터 적용한다.",
+    "발생/거래": "{law_ref} 시행 이후 발생하는 소득ㆍ거래분부터 적용한다.",
 }
 
 _BASIS_TO_EFFECT: dict[str, str] = {
     "신고": "부진정소급효",
-    "발생/거래": "진정소급효",
 }
 
 

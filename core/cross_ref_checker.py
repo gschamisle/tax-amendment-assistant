@@ -10,6 +10,119 @@ from core.law_network import all_law_scope_entries, related_law_names, resolve_l
 
 # "제33조의2" (표준) 또는 "제33의2조" (법령 API 형식) 모두 파싱
 _JO_RE = re.compile(r"제(\d+)의(\d+)조|제(\d+)조(?:의(\d+))?")
+_JO_HO_RE = re.compile(r"제(?:(\d+)의(\d+)조|(\d+)조(?:의(\d+))?)(?:제(\d+)항)?(?:제(\d+)호)?")
+
+_CORE_PARALLEL_TERMS: frozenset[str] = frozenset({
+    "손금불산입",
+    "손금산입",
+    "필요경비불산입",
+    "필요경비산입",
+    "익금불산입",
+    "총수입금액불산입",
+    "결손금",
+    "이월결손금",
+    "기부금",
+    "기업업무추진비",
+    "접대비",
+    "업무무관비용",
+    "업무와관련없는비용",
+    "업무용승용차",
+    "재해손실세액공제",
+})
+
+_PHRASE_SYNONYMS: dict[str, list[str]] = {
+    "손금에산입하지아니한다": ["필요경비에산입하지아니한다"],
+    "손금에산입하지아니한": ["필요경비에산입하지아니한"],
+    "필요경비에산입하지아니한다": ["손금에산입하지아니한다"],
+    "필요경비에산입하지아니한": ["손금에산입하지아니한"],
+    "각사업연도": ["과세기간"],
+    "과세기간": ["각사업연도", "사업연도"],
+    "업무와관련없는비용": ["업무무관비용"],
+    "업무무관비용": ["업무와관련없는비용"],
+    "접대비": ["기업업무추진비"],
+    "기업업무추진비": ["접대비"],
+}
+
+_PARALLEL_ARTICLE_HINTS: dict[tuple[str, str, str], list[dict[str, str]]] = {
+    ("법인세법", "소득세법", "13"): [
+        {
+            "article": "제45조",
+            "reason": "법인세법 제13조의 이월결손금 공제는 소득세법 제45조 결손금 및 이월결손금 공제와 병행 검토 필요",
+        }
+    ],
+    ("법인세법", "소득세법", "21"): [
+        {
+            "article": "제33조제1항제12호",
+            "reason": "법인세법 제21조의 손금불산입 항목은 소득세법 제33조 필요경비 불산입 항목과 병행 검토 필요",
+        }
+    ],
+    ("법인세법", "소득세법", "24"): [
+        {
+            "article": "제34조",
+            "reason": "법인세법 제24조의 기부금 손금불산입은 소득세법 제34조 기부금 필요경비 불산입과 병행 검토 필요",
+        }
+    ],
+    ("법인세법", "소득세법", "25"): [
+        {
+            "article": "제35조",
+            "reason": "법인세법 제25조의 기업업무추진비 손금불산입은 소득세법 제35조 기업업무추진비 필요경비 불산입과 병행 검토 필요",
+        }
+    ],
+    ("법인세법", "소득세법", "27"): [
+        {
+            "article": "제33조제1항제13호",
+            "reason": "법인세법 제27조의 업무와 관련 없는 비용 손금불산입은 소득세법 제33조제1항제13호 업무무관 경비 필요경비 불산입과 병행 검토 필요",
+        }
+    ],
+    ("법인세법", "소득세법", "27의2"): [
+        {
+            "article": "제33조의2",
+            "reason": "법인세법 제27조의2의 업무용승용차 관련비용 손금불산입 특례는 소득세법 제33조의2와 병행 검토 필요",
+        }
+    ],
+    ("법인세법", "소득세법", "58"): [
+        {
+            "article": "제58조",
+            "reason": "법인세법 제58조의 재해손실 세액공제는 소득세법 제58조 재해손실세액공제와 병행 검토 필요",
+        }
+    ],
+    ("소득세법", "법인세법", "45"): [
+        {
+            "article": "제13조",
+            "reason": "소득세법 제45조의 결손금 및 이월결손금 공제는 법인세법 제13조 이월결손금 공제와 병행 검토 필요",
+        }
+    ],
+    ("소득세법", "법인세법", "33"): [
+        {
+            "article": "제21조",
+            "reason": "소득세법 제33조의 필요경비 불산입 항목은 법인세법 제21조 손금불산입 항목과 병행 검토 필요",
+        }
+    ],
+    ("소득세법", "법인세법", "33의2"): [
+        {
+            "article": "제27조의2",
+            "reason": "소득세법 제33조의2의 업무용승용차 관련 비용 필요경비 불산입 특례는 법인세법 제27조의2와 병행 검토 필요",
+        }
+    ],
+    ("소득세법", "법인세법", "34"): [
+        {
+            "article": "제24조",
+            "reason": "소득세법 제34조의 기부금 필요경비 불산입은 법인세법 제24조 기부금 손금불산입과 병행 검토 필요",
+        }
+    ],
+    ("소득세법", "법인세법", "35"): [
+        {
+            "article": "제25조",
+            "reason": "소득세법 제35조의 기업업무추진비 필요경비 불산입은 법인세법 제25조 기업업무추진비 손금불산입과 병행 검토 필요",
+        }
+    ],
+    ("소득세법", "법인세법", "58"): [
+        {
+            "article": "제58조",
+            "reason": "소득세법 제58조의 재해손실세액공제는 법인세법 제58조 재해손실 세액공제와 병행 검토 필요",
+        }
+    ],
+}
 
 _CROSSREF_SYSTEM = """당신은 대한민국 법령 개정 전문가입니다.
 A 법령의 조문이 개정될 때, 동일 취지의 B 법령 조문도 함께 개정해야 하는지 판단하세요.
@@ -75,6 +188,26 @@ def _extract_article_content(
     return ""
 
 
+def _extract_article_ref_parts(article_str: str) -> tuple[str, str, str, str] | None:
+    m = _JO_HO_RE.search(article_str)
+    if not m:
+        return None
+    if m.group(1) is not None:
+        jo, jo_sub = m.group(1), m.group(2) or ""
+    else:
+        jo, jo_sub = m.group(3), m.group(4) or ""
+    return jo, jo_sub, m.group(5) or "", m.group(6) or ""
+
+
+def _format_article_ref(jo: str, jo_sub: str = "", hang: str = "", ho: str = "") -> str:
+    ref = f"제{jo}조" + (f"의{jo_sub}" if jo_sub else "")
+    if hang:
+        ref += f"제{hang}항"
+    if ho:
+        ref += f"제{ho}호"
+    return ref
+
+
 def _normalize_article_ref(article_ref: str, law_name: str) -> str:
     """GPT가 조문 앞에 법령명을 붙여도 조문 표기만 남긴다."""
     ref = str(article_ref).strip()
@@ -83,9 +216,34 @@ def _normalize_article_ref(article_ref: str, law_name: str) -> str:
     return re.sub(r'제(\d+)의(\d+)조', r'제\1조의\2', ref)
 
 
+def _article_ref_from_text(article_text: str) -> str:
+    first_line = article_text.strip().splitlines()[0] if article_text.strip() else ""
+    parts = _extract_article_ref_parts(first_line)
+    if parts:
+        return _format_article_ref(*parts)
+    return ""
+
+
+def _known_parallel_hints(
+    law_name: str,
+    article_text: str,
+    parallel_law_name: str,
+) -> list[dict[str, str]]:
+    ref = _article_ref_from_text(article_text)
+    parts = _extract_article_ref_parts(ref)
+    if not parts:
+        return []
+    jo, jo_sub, _hang, _ho = parts
+    jo_key = f"{jo}의{jo_sub}" if jo_sub else jo
+    return _PARALLEL_ARTICLE_HINTS.get((law_name, parallel_law_name, jo_key), [])
+
+
 # 범용 세법 용어: 많은 조문에 공통으로 쓰여 검색 키워드로 부적합
 _GENERIC_TAX_TERMS: frozenset[str] = frozenset(
-    list(KEYWORD_SYNONYMS.keys()) + [s for syns in KEYWORD_SYNONYMS.values() for s in syns]
+    (
+        set(KEYWORD_SYNONYMS.keys())
+        | {s for syns in KEYWORD_SYNONYMS.values() for s in syns}
+    ) - _CORE_PARALLEL_TERMS
 )
 
 
@@ -120,7 +278,8 @@ def _extract_keywords(article_text: str) -> list[str]:
         key=lambda w: -body_freq[w],
     )[:3]
 
-    combined = list(dict.fromkeys(title_words + top_body))
+    core_terms = [term for term in _CORE_PARALLEL_TERMS if term in article_text.replace(" ", "")]
+    combined = list(dict.fromkeys(core_terms + title_words + top_body))
     return combined if combined else [w for w in re.findall(r'[가-힣]{3,}', title)]
 
 
@@ -138,6 +297,14 @@ def _expand_keywords(keywords: list[str]) -> list[str]:
     return list(dict.fromkeys(expanded))  # 순서 유지 중복 제거
 
 
+def _normalized_text(text: str) -> str:
+    normalized = re.sub(r"\s+", "", text)
+    for old, replacements in _PHRASE_SYNONYMS.items():
+        for replacement in replacements:
+            normalized += " " + normalized.replace(old, replacement)
+    return normalized
+
+
 def _filter_articles(articles: list[dict], keywords: list[str], max_n: int = 20) -> list[dict]:
     """키워드(+동의어) 포함 조문 필터링. 매칭 없으면 빈 리스트 반환.
 
@@ -151,7 +318,7 @@ def _filter_articles(articles: list[dict], keywords: list[str], max_n: int = 20)
 
     def _matches(a: dict) -> bool:
         text = a.get("제목", "") + a.get("내용", "")
-        text_nsp = text.replace(" ", "")
+        text_nsp = _normalized_text(text)
         return any(
             kw in text or kw_nsp in text_nsp
             for kw, kw_nsp in zip(expanded, expanded_nsp)
@@ -159,6 +326,49 @@ def _filter_articles(articles: list[dict], keywords: list[str], max_n: int = 20)
 
     matched = [a for a in articles if _matches(a)]
     return matched[:max_n]
+
+
+def _prepend_hint_articles(
+    articles: list[dict],
+    hints: list[dict[str, str]],
+) -> list[dict]:
+    if not hints:
+        return articles
+    result: list[dict] = []
+    seen: set[str] = set()
+    for hint in hints:
+        parts = _extract_article_ref_parts(hint.get("article", ""))
+        if not parts:
+            continue
+        jo, jo_sub, _hang, _ho = parts
+        target = f"{jo}의{jo_sub}" if jo_sub else jo
+        for article in articles:
+            if str(article.get("조번호", "")) == target and target not in seen:
+                result.append(article)
+                seen.add(target)
+                break
+    for article in articles:
+        jo_no = str(article.get("조번호", ""))
+        if jo_no not in seen:
+            result.append(article)
+            seen.add(jo_no)
+    return result
+
+
+def _hint_match_result(
+    parallel_data: dict,
+    hints: list[dict[str, str]],
+) -> dict[str, str] | None:
+    for hint in hints:
+        content = _extract_article_content(parallel_data, hint.get("article", ""))
+        if content:
+            return {
+                "match": "true",
+                "article": hint.get("article", ""),
+                "reason": hint.get("reason", "코드 병행 매핑"),
+                "내용": content,
+            }
+    return None
 
 
 @functools.lru_cache(maxsize=32)
@@ -189,7 +399,12 @@ def find_parallel_articles(
     try:
         parallel_data = _cached_get_law_text(parallel_law_mst, l_key)
         keywords = _extract_keywords(article_text)
+        hints = _known_parallel_hints(law_name, article_text, parallel_law_name)
+        hint_result = _hint_match_result(parallel_data, hints)
+        if hint_result:
+            return hint_result
         relevant = _filter_articles(parallel_data.get("조문목록", []), keywords)
+        relevant = _prepend_hint_articles(relevant, hints)
         if not relevant:
             # 키워드 매칭 조문 없음 → GPT 호출 없이 즉시 no-match
             return _no_match

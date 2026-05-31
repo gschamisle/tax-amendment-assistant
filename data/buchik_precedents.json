@@ -49,9 +49,9 @@
     "article_title_keywords": ["양도", "취득", "공급", "거래", "소득"],
     "outline_keywords": ["양도", "취득", "공급", "거래", "발생"],
     "application_basis": "발생/거래",
-    "effect_type": "진정소급효",
+    "effect_type": "장래효",
     "article_title_suffix": "에 관한 적용례",
-    "application_sentence": "{jo_label}의 개정규정은 (시행일) 이후 발생하는 소득ㆍ거래분부터 적용한다.",
+    "application_sentence": "{jo_label}의 개정규정은 {law_ref} 시행 이후 발생하는 소득ㆍ거래분부터 적용한다.",
     "source": "대표 선례: 거래ㆍ소득 발생일 적용례 유형"
   }
 ]
