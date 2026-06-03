@@ -1,0 +1,40 @@
+"""API 키 없이 실행 가능한 오프라인 테스트 일괄 실행."""
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+MODULES: tuple[str, ...] = (
+    "scripts.smoke_parallel_hints",
+    "scripts.test_article_comparison_format",
+    "scripts.test_outline_intent",
+)
+
+
+def main() -> int:
+    failed: list[str] = []
+    print("Offline test suite (no API keys)\n")
+
+    for mod in MODULES:
+        print(f"--- {mod} ---")
+        result = subprocess.run(
+            [sys.executable, "-m", mod],
+            cwd=ROOT,
+        )
+        if result.returncode != 0:
+            failed.append(mod)
+        print()
+
+    if failed:
+        print(f"FAILED ({len(failed)}/{len(MODULES)}):", ", ".join(failed), file=sys.stderr)
+        return 1
+
+    print(f"ALL PASSED ({len(MODULES)} modules)")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

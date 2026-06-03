@@ -13,8 +13,9 @@
 4. [실행](#실행)
 5. [3단계 워크플로우](#3단계-워크플로우)
 6. [아키텍처](#아키텍처)
-7. [알려진 한계 및 확장 포인트](#알려진-한계-및-확장-포인트)
-8. [문서](#문서)
+7. [로컬 검증](#로컬-검증-오프라인-테스트)
+8. [알려진 한계 및 확장 포인트](#알려진-한계-및-확장-포인트)
+9. [문서](#문서)
 
 ---
 
@@ -73,8 +74,6 @@ streamlit run app.py
 ```
 
 브라우저에서 `http://localhost:8501` 접속.
-
----
 
 ## 3단계 워크플로우
 
@@ -136,6 +135,26 @@ mofe_2nd/
 ```
 
 자세한 내용은 [docs/architecture.md](docs/architecture.md) 참조.
+
+---
+
+## 로컬 검증 (오프라인 테스트)
+
+API 키 없이 병행 힌트·요강 해석·신구조문 표기 규칙을 한 번에 검증한다.
+
+```bash
+uv run python -m scripts.run_offline_tests
+```
+
+개별 실행:
+
+```bash
+uv run python -m scripts.smoke_parallel_hints
+uv run python -m scripts.test_article_comparison_format
+uv run python -m scripts.test_outline_intent
+```
+
+`push`/`pull_request` 시 GitHub Actions([`.github/workflows/offline-tests.yml`](.github/workflows/offline-tests.yml))에서 동일 스위트를 실행한다.
 
 ---
 
