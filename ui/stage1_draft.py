@@ -744,7 +744,11 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                         try:
                             suggestions = check_all_parallel_laws(
                                 law_name=law_name,
-                                article_text=st.session_state.get("final_amended", ""),
+                                article_text=(
+                                    _article_text_for_prompt(st.session_state.get("s1_article", {}))
+                                    + "\n\n[개정안]\n"
+                                    + st.session_state.get("final_amended", "")
+                                ),
                                 law_api_key=law_api_key,
                                 openai_api_key=openai_api_key,
                                 scope="all" if scope_label == "전체 법령목록" else "related",

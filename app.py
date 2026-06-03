@@ -35,6 +35,27 @@ openai_api_key = OPENAI_API_KEY
 
 if not law_api_key or not openai_api_key:
     st.warning(".env 파일에 LAW_API_KEY, OPENAI_API_KEY를 설정하세요.")
+elif law_api_key and "law_freshness_changes" not in st.session_state:
+    try:
+        from core.law_freshness import compare_with_manifest, load_manifest
+
+        _mf = load_manifest()
+        if _mf.get("laws"):
+            st.session_state["law_freshness_changes"] = compare_with_manifest(law_api_key)
+        else:
+            st.session_state["law_freshness_changes"] = []
+    except Exception:
+        st.session_state["law_freshness_changes"] = []
+
+_freshness = st.session_state.get("law_freshness_changes", [])
+if _freshness:
+    _names = ", ".join(c["name"] for c in _freshness[:5])
+    _more = f" 외 {len(_freshness) - 5}건" if len(_freshness) > 5 else ""
+    st.warning(
+        f"저장된 법령 스냅샷과 현행본이 다릅니다: {_names}{_more}. "
+        "터미널에서 `uv run python scripts/check_law_freshness.py --update-manifest` 후 "
+        "`uv run python scripts/build_special_tax_links.py` 실행을 권장합니다."
+    )
 
 # ── 탭 ────────────────────────────────────────────────────────────────────────
 tab1, tab2, tab3 = st.tabs(["1️⃣ 초안 작성", "2️⃣ 인용·준용 확인", "3️⃣ HWPX 출력"])

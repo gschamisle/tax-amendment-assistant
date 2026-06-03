@@ -1,5 +1,6 @@
 """법제처 Open API 클라이언트."""
 import base64
+import hashlib
 import re
 import requests
 import xml.etree.ElementTree as ET
@@ -164,7 +165,21 @@ def get_law_text(law_mst: str, api_key: str = "", openai_key: str = "") -> dict[
             "제목": title,
             "내용": "\n".join(parts),
         })
-    return {"법령명": law_name, "조문목록": articles}
+    digest = hashlib.sha256(
+        "\n".join(
+            f"{a['조번호']}|{a['제목']}|{a['내용']}"
+            for a in articles
+        ).encode("utf-8"),
+    ).hexdigest()[:16]
+    return {
+        "법령명": law_name,
+        "MST": law_mst,
+        "시행일자": (root.findtext("기본정보/시행일자", "") or "").strip(),
+        "공포일자": (root.findtext("기본정보/공포일자", "") or "").strip(),
+        "조문목록": articles,
+        "article_count": len(articles),
+        "content_hash": digest,
+    }
 
 
 def get_article(law_mst: str, jo_no: str, api_key: str = "", openai_key: str = "") -> str:

@@ -163,4 +163,14 @@ mofe_2nd/
 | [docs/citation-parsing.md](docs/citation-parsing.md) | 인용 파싱 지원 패턴, 한계, 확장 방법 |
 | [docs/parallel-law-detection.md](docs/parallel-law-detection.md) | 병행법령 탐지 로직, 한계, 확장 방법 |
 | [docs/manual-test-scenarios.md](docs/manual-test-scenarios.md) | 기능별 수동 테스트 시나리오 및 알려진 한계 |
+| [docs/corporate-income-tax-parallel-manual.md](docs/corporate-income-tax-parallel-manual.md) | 법인세↔소득세·부가세·조특법 병행개정 매뉴얼 |
+| [docs/reference-materials.md](docs/reference-materials.md) | Git 제외 로컬 PDF·CSV 참고 자료 |
 | [docs/법령한글주소사용방법.md](docs/법령한글주소사용방법.md) | 법제처 한글 URL 생성 규칙 |
+
+### 법령 현행본·조특법 연결 갱신 (연 1회 권장)
+
+```bash
+uv run python scripts/check_law_freshness.py
+uv run python scripts/check_law_freshness.py --update-manifest
+uv run python scripts/build_special_tax_links.py
+```

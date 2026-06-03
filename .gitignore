@@ -14,3 +14,9 @@ node_modules/
 .env
 pdf_pages/
 output/
+
+# Local reference materials (keep on disk, not in git)
+docs/*.pdf
+docs/법령검색목록_법령.csv
+*.pptx
+presentation.html

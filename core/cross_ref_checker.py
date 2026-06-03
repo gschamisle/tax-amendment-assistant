@@ -7,6 +7,7 @@ from openai import OpenAI
 from config import LAW_API_KEY, OPENAI_API_KEY, KEYWORD_SYNONYMS
 from core.law_api import get_law_text
 from core.law_network import all_law_scope_entries, related_law_names, resolve_law_entries
+from core.special_tax_hints import article_ref_to_lookup_keys, citation_hints_for
 
 # "제33조의2" (표준) 또는 "제33의2조" (법령 API 형식) 모두 파싱
 _JO_RE = re.compile(r"제(\d+)의(\d+)조|제(\d+)조(?:의(\d+))?")
@@ -56,6 +57,12 @@ _PARALLEL_ARTICLE_HINTS: dict[tuple[str, str, str], list[dict[str, str]]] = {
             "reason": "법인세법 제21조의 손금불산입 항목은 소득세법 제33조 필요경비 불산입 항목과 병행 검토 필요",
         }
     ],
+    ("법인세법", "소득세법", "23"): [
+        {
+            "article": "제33조제1항제6호",
+            "reason": "법인세법 제23조의 감가상각비 손금불산입은 소득세법 제33조제1항제6호의 감가상각비 필요경비 불산입과 병행 검토 필요",
+        }
+    ],
     ("법인세법", "소득세법", "24"): [
         {
             "article": "제34조",
@@ -80,6 +87,18 @@ _PARALLEL_ARTICLE_HINTS: dict[tuple[str, str, str], list[dict[str, str]]] = {
             "reason": "법인세법 제27조의2의 업무용승용차 관련비용 손금불산입 특례는 소득세법 제33조의2와 병행 검토 필요",
         }
     ],
+    ("법인세법", "소득세법 시행령", "27의2"): [
+        {
+            "article": "제78조의3",
+            "reason": "법인세법 제27조의2의 업무용승용차 관련비용 손금불산입 특례 개정은 소득세법 제33조의2의 하위규정인 소득세법 시행령 제78조의3과 병행 검토 필요",
+        }
+    ],
+    ("법인세법", "소득세법 시행규칙", "27의2"): [
+        {
+            "article": "제42조",
+            "reason": "법인세법 제27조의2의 업무용승용차 관련비용 손금불산입 특례 개정은 소득세법 제33조의2의 하위규정인 소득세법 시행규칙 제42조와 병행 검토 필요",
+        }
+    ],
     ("법인세법", "법인세법 시행령", "27의2"): [
         {
             "article": "제50조의2",
@@ -98,6 +117,64 @@ _PARALLEL_ARTICLE_HINTS: dict[tuple[str, str, str], list[dict[str, str]]] = {
             "reason": "법인세법 제58조의 재해손실 세액공제는 소득세법 제58조 재해손실세액공제와 병행 검토 필요",
         }
     ],
+    ("법인세법", "부가가치세법", "11"): [
+        {
+            "article": "제8조",
+            "reason": "법인세법 제11조의 납세지 변경신고는 부가가치세법 제8조의 사업자등록·변경신고와 연동 검토 필요",
+        }
+    ],
+    ("법인세법", "부가가치세법", "23"): [
+        {
+            "article": "제41조",
+            "reason": "법인세법 제23조의 감가상각비 규정은 부가가치세법 제41조의 감가상각자산 공통매입세액 재계산과 연쇄 검토 필요",
+        },
+        {
+            "article": "제43조",
+            "reason": "법인세법 제23조의 감가상각자산 규정은 부가가치세법 제43조의 감가상각자산 과세사업 전환 매입세액공제와 연쇄 검토 필요",
+        },
+        {
+            "article": "제44조",
+            "reason": "법인세법 제23조의 감가상각자산 규정은 부가가치세법 제44조의 재고품등 매입세액 공제특례와 연쇄 검토 필요",
+        },
+    ],
+    ("법인세법", "부가가치세법", "75의5"): [
+        {
+            "article": "제32조",
+            "reason": "법인세법 제75조의5의 증명서류 수취 불성실 가산세는 부가가치세법 제32조의 세금계산서 발급 규정과 연쇄 검토 필요",
+        },
+        {
+            "article": "제35조",
+            "reason": "법인세법 제75조의5의 증명서류 수취 불성실 가산세는 부가가치세법 제35조의 수입세금계산서와 연쇄 검토 필요",
+        },
+    ],
+    ("법인세법", "부가가치세법", "75의8"): [
+        {
+            "article": "제54조",
+            "reason": "법인세법 제75조의8의 계산서 등 제출 불성실 가산세는 부가가치세법 제54조의 세금계산서합계표 제출과 연쇄 검토 필요",
+        }
+    ],
+    ("법인세법", "부가가치세법", "111"): [
+        {
+            "article": "제8조",
+            "reason": "법인세법 제111조의 사업자등록은 부가가치세법 제8조의 사업자등록과 연동 검토 필요",
+        }
+    ],
+    ("법인세법", "부가가치세법", "116"): [
+        {
+            "article": "제32조",
+            "reason": "법인세법 제116조의 지출증명서류 수취·보관은 부가가치세법 제32조의 세금계산서 발급과 연쇄 검토 필요",
+        },
+        {
+            "article": "제35조",
+            "reason": "법인세법 제116조의 지출증명서류 수취·보관은 부가가치세법 제35조의 수입세금계산서와 연쇄 검토 필요",
+        },
+    ],
+    ("법인세법", "부가가치세법", "120의3"): [
+        {
+            "article": "제54조",
+            "reason": "법인세법 제120조의3의 매입처별 세금계산서합계표 제출은 부가가치세법 제54조의 세금계산서합계표 제출과 연쇄 검토 필요",
+        }
+    ],
     ("소득세법", "법인세법", "45"): [
         {
             "article": "제13조",
@@ -110,10 +187,34 @@ _PARALLEL_ARTICLE_HINTS: dict[tuple[str, str, str], list[dict[str, str]]] = {
             "reason": "소득세법 제33조의 필요경비 불산입 항목은 법인세법 제21조 손금불산입 항목과 병행 검토 필요",
         }
     ],
+    ("소득세법", "법인세법", "33항1호6"): [
+        {
+            "article": "제23조",
+            "reason": "소득세법 제33조제1항제6호의 감가상각비 필요경비 불산입은 법인세법 제23조 감가상각비 손금불산입과 병행 검토 필요",
+        }
+    ],
+    ("소득세법", "법인세법", "33항1호13"): [
+        {
+            "article": "제27조",
+            "reason": "소득세법 제33조제1항제13호의 업무무관 경비 필요경비 불산입은 법인세법 제27조 업무와 관련 없는 비용 손금불산입과 병행 검토 필요",
+        }
+    ],
     ("소득세법", "법인세법", "33의2"): [
         {
             "article": "제27조의2",
             "reason": "소득세법 제33조의2의 업무용승용차 관련 비용 필요경비 불산입 특례는 법인세법 제27조의2와 병행 검토 필요",
+        }
+    ],
+    ("소득세법", "법인세법 시행령", "33의2"): [
+        {
+            "article": "제50조의2",
+            "reason": "소득세법 제33조의2의 업무용승용차 관련 비용 필요경비 불산입 특례 개정은 법인세법 제27조의2의 하위규정인 법인세법 시행령 제50조의2와 병행 검토 필요",
+        }
+    ],
+    ("소득세법", "법인세법 시행규칙", "33의2"): [
+        {
+            "article": "제27조의2",
+            "reason": "소득세법 제33조의2의 업무용승용차 관련 비용 필요경비 불산입 특례 개정은 법인세법 제27조의2의 하위규정인 법인세법 시행규칙 제27조의2와 병행 검토 필요",
         }
     ],
     ("소득세법", "소득세법 시행령", "33의2"): [
@@ -144,6 +245,106 @@ _PARALLEL_ARTICLE_HINTS: dict[tuple[str, str, str], list[dict[str, str]]] = {
         {
             "article": "제58조",
             "reason": "소득세법 제58조의 재해손실세액공제는 법인세법 제58조 재해손실 세액공제와 병행 검토 필요",
+        }
+    ],
+    ("법인세법 시행령", "부가가치세법", "22"): [
+        {
+            "article": "제39조",
+            "reason": "법인세법 시행령 제22조의 부가가치세 매입세액 손금산입은 부가가치세법 제39조의 공제하지 아니하는 매입세액과 연쇄 검토 필요",
+        },
+        {
+            "article": "제42조",
+            "reason": "법인세법 시행령 제22조의 부가가치세 매입세액 손금산입은 부가가치세법 제42조의 의제매입세액 공제특례와 연쇄 검토 필요",
+        },
+    ],
+    ("법인세법 시행령", "부가가치세법 시행령", "22"): [
+        {
+            "article": "제74조",
+            "reason": "법인세법 시행령 제22조의 매입세액 손금산입은 부가가치세법 시행령 제74조의 매입처별 세금계산서합계표 관련 매입세액 공제와 연쇄 검토 필요",
+        },
+        {
+            "article": "제75조",
+            "reason": "법인세법 시행령 제22조의 매입세액 손금산입은 부가가치세법 시행령 제75조의 세금계산서 기재사항 관련 매입세액 공제와 연쇄 검토 필요",
+        },
+    ],
+    ("법인세법 시행령", "부가가치세법 시행령", "24"): [
+        {
+            "article": "제66조",
+            "reason": "법인세법 시행령 제24조의 감가상각자산 범위는 부가가치세법 시행령 제66조의 감가상각자산 자가공급 등 공급가액 계산과 연쇄 검토 필요",
+        },
+        {
+            "article": "제83조",
+            "reason": "법인세법 시행령 제24조의 감가상각자산 범위는 부가가치세법 시행령 제83조의 납부세액·환급세액 재계산과 연쇄 검토 필요",
+        },
+        {
+            "article": "제85조",
+            "reason": "법인세법 시행령 제24조의 감가상각자산 범위는 부가가치세법 시행령 제85조의 감가상각자산 과세사업 전환 매입세액 공제특례와 연쇄 검토 필요",
+        },
+        {
+            "article": "제86조",
+            "reason": "법인세법 시행령 제24조의 감가상각자산 범위는 부가가치세법 시행령 제86조의 일반과세자 전환 시 재고품등 매입세액 공제특례와 연쇄 검토 필요",
+        },
+        {
+            "article": "제107조",
+            "reason": "법인세법 시행령 제24조의 감가상각자산 범위는 부가가치세법 시행령 제107조의 조기환급 대상 사업 설비와 연쇄 검토 필요",
+        },
+    ],
+    ("법인세법 시행령", "부가가치세법 시행령", "19의2"): [
+        {
+            "article": "제87조",
+            "reason": "법인세법 시행령 제19조의2의 대손금 인정 사유는 부가가치세법 시행령 제87조의 대손세액 공제 범위와 연쇄 검토 필요",
+        }
+    ],
+    ("부가가치세법", "법인세법", "8"): [
+        {
+            "article": "제111조",
+            "reason": "부가가치세법 제8조의 사업자등록은 법인세법 제111조의 사업자등록과 연동 검토 필요",
+        },
+        {
+            "article": "제11조",
+            "reason": "부가가치세법 제8조의 변경신고는 법인세법 제11조의 납세지 변경신고와 연동 검토 필요",
+        },
+    ],
+    ("부가가치세법", "법인세법", "32"): [
+        {
+            "article": "제116조",
+            "reason": "부가가치세법 제32조의 세금계산서 발급은 법인세법 제116조의 지출증명서류 수취·보관과 연쇄 검토 필요",
+        }
+    ],
+    ("부가가치세법", "법인세법", "35"): [
+        {
+            "article": "제116조",
+            "reason": "부가가치세법 제35조의 수입세금계산서는 법인세법 제116조의 지출증명서류 수취·보관과 연쇄 검토 필요",
+        }
+    ],
+    ("부가가치세법", "법인세법", "41"): [
+        {
+            "article": "제23조",
+            "reason": "부가가치세법 제41조의 감가상각자산 공통매입세액 재계산은 법인세법 제23조의 감가상각비 규정과 연쇄 검토 필요",
+        }
+    ],
+    ("부가가치세법", "법인세법", "43"): [
+        {
+            "article": "제23조",
+            "reason": "부가가치세법 제43조의 감가상각자산 과세사업 전환 매입세액공제는 법인세법 제23조의 감가상각비 규정과 연쇄 검토 필요",
+        }
+    ],
+    ("부가가치세법", "법인세법", "54"): [
+        {
+            "article": "제120조의3",
+            "reason": "부가가치세법 제54조의 세금계산서합계표 제출은 법인세법 제120조의3의 매입처별 세금계산서합계표 제출과 연쇄 검토 필요",
+        }
+    ],
+    ("부가가치세법 시행령", "법인세법 시행령", "83"): [
+        {
+            "article": "제24조",
+            "reason": "부가가치세법 시행령 제83조의 감가상각자산 관련 재계산은 법인세법 시행령 제24조의 감가상각자산 범위와 연쇄 검토 필요",
+        }
+    ],
+    ("부가가치세법 시행령", "법인세법 시행령", "87"): [
+        {
+            "article": "제19조의2",
+            "reason": "부가가치세법 시행령 제87조의 대손세액 공제 범위는 법인세법 시행령 제19조의2의 대손금 인정 사유와 연쇄 검토 필요",
         }
     ],
 }
@@ -245,7 +446,21 @@ def _article_ref_from_text(article_text: str) -> str:
     parts = _extract_article_ref_parts(first_line)
     if parts:
         return _format_article_ref(*parts)
+    parts = _extract_article_ref_parts(article_text)
+    if parts:
+        return _format_article_ref(*parts)
     return ""
+
+
+def _jo_lookup_keys(jo: str, jo_sub: str = "", hang: str = "", ho: str = "") -> list[str]:
+    base = f"{jo}의{jo_sub}" if jo_sub else jo
+    keys: list[str] = []
+    if hang and ho:
+        keys.append(f"{base}항{hang}호{ho}")
+    if hang:
+        keys.append(f"{base}항{hang}")
+    keys.append(base)
+    return keys
 
 
 def _known_parallel_hints(
@@ -257,9 +472,156 @@ def _known_parallel_hints(
     parts = _extract_article_ref_parts(ref)
     if not parts:
         return []
-    jo, jo_sub, _hang, _ho = parts
-    jo_key = f"{jo}의{jo_sub}" if jo_sub else jo
-    return _PARALLEL_ARTICLE_HINTS.get((law_name, parallel_law_name, jo_key), [])
+    jo, jo_sub, hang, ho = parts
+    lookup_keys = _jo_lookup_keys(jo, jo_sub, hang, ho)
+    if not lookup_keys and ref:
+        lookup_keys = article_ref_to_lookup_keys(ref)
+
+    merged: list[dict[str, str]] = []
+    seen: set[str] = set()
+
+    def _append(hints: list[dict[str, str]]) -> None:
+        for hint in hints:
+            art = hint.get("article", "")
+            key = art or hint.get("reason", "")
+            if key in seen:
+                continue
+            seen.add(key)
+            merged.append(hint)
+
+    for key in lookup_keys:
+        _append(_PARALLEL_ARTICLE_HINTS.get((law_name, parallel_law_name, key), []))
+    _append(citation_hints_for(law_name, parallel_law_name, lookup_keys))
+    return merged
+
+
+_TAX_PAIR_REPLACEMENTS: tuple[tuple[str, str], ...] = (
+    ("필요경비에산입하지아니", "필요경비에산입하지아니"),
+    ("손금에산입하지아니", "필요경비에산입하지아니"),
+    ("필요경비에산입", "필요경비에산입"),
+    ("손금에산입", "필요경비에산입"),
+    ("필요경비불산입", "필요경비불산입"),
+    ("손금불산입", "필요경비불산입"),
+    ("필요경비산입", "필요경비산입"),
+    ("손금산입", "필요경비산입"),
+    ("필요경비", "필요경비"),
+    ("손금", "필요경비"),
+    ("각사업연도", "과세기간"),
+    ("사업연도", "과세기간"),
+    ("내국법인", "거주자"),
+    ("법인", "거주자"),
+    ("업무와관련없는비용", "업무무관비용"),
+    ("관련비용", "관련비용"),
+    ("관련비용등", "관련비용등"),
+)
+
+_TAX_PAIR_TOPIC_TERMS: frozenset[str] = frozenset({
+    "업무용승용차",
+    "필요경비불산입",
+    "필요경비산입",
+    "필요경비에산입하지아니",
+    "필요경비에산입",
+    "업무무관비용",
+    "기부금",
+    "기업업무추진비",
+    "접대비",
+    "결손금",
+    "이월결손금",
+    "재해손실세액공제",
+    "감가상각비",
+    "한도",
+    "특례",
+    "세액공제",
+    "세액감면",
+    "익금",
+    "총수입금액",
+})
+
+
+def _is_corporate_income_tax_pair(law_name: str, parallel_law_name: str) -> bool:
+    return {law_name, parallel_law_name} == {"법인세법", "소득세법"}
+
+
+def _canonical_tax_pair_text(text: str) -> str:
+    normalized = re.sub(r"\s+", "", str(text))
+    for old, new in sorted(_TAX_PAIR_REPLACEMENTS, key=lambda pair: len(pair[0]), reverse=True):
+        normalized = normalized.replace(old, new)
+    return normalized
+
+
+def _article_title(text: str) -> str:
+    first_line = str(text).strip().splitlines()[0] if str(text).strip() else ""
+    m = re.search(r"[（(]([^）)]{2,})[）)]", first_line)
+    return m.group(1).strip() if m else ""
+
+
+def _topic_terms(text: str) -> set[str]:
+    canonical = _canonical_tax_pair_text(text)
+    return {term for term in _TAX_PAIR_TOPIC_TERMS if term in canonical}
+
+
+def _tax_pair_similarity_result(
+    source_law_name: str,
+    article_text: str,
+    parallel_law_name: str,
+    parallel_data: dict,
+) -> dict[str, str] | None:
+    """법인세법↔소득세법은 GPT 전에 제목·핵심 표현 유사도를 코드로 판정한다."""
+    if not _is_corporate_income_tax_pair(source_law_name, parallel_law_name):
+        return None
+
+    source_title = _canonical_tax_pair_text(_article_title(article_text))
+    source_terms = _topic_terms(article_text)
+    if not source_title and not source_terms:
+        return None
+
+    best: tuple[int, dict] | None = None
+    for article in parallel_data.get("조문목록", []):
+        candidate_text = (
+            f"제{article.get('조번호', '')}조({article.get('제목', '')})\n"
+            f"{article.get('내용', '')}"
+        )
+        candidate_title = _canonical_tax_pair_text(str(article.get("제목", "")))
+        candidate_terms = _topic_terms(candidate_text)
+        shared_terms = source_terms & candidate_terms
+
+        score = 0
+        if source_title and candidate_title:
+            if source_title == candidate_title:
+                score += 8
+            elif len(source_title) >= 6 and (
+                source_title in candidate_title or candidate_title in source_title
+            ):
+                score += 6
+        if shared_terms:
+            score += len(shared_terms) * 2
+        if "업무용승용차" in shared_terms:
+            score += 4
+        if {"업무용승용차", "필요경비불산입"} <= shared_terms:
+            score += 4
+
+        if score >= 8 and (best is None or score > best[0]):
+            best = (score, article)
+
+    if not best:
+        return None
+
+    article = best[1]
+    jo_no = str(article.get("조번호", ""))
+    ref = re.sub(r"^(\d+)의(\d+)$", r"제\1조의\2", jo_no)
+    if ref == jo_no:
+        ref = f"제{jo_no}조"
+    title = article.get("제목", "")
+    content = article.get("내용", "")
+    return {
+        "match": "true",
+        "article": ref,
+        "reason": (
+            f"{source_law_name}과 {parallel_law_name} 사이의 조문 제목·핵심 표현이 "
+            "코드 매칭 기준으로 동일 취지입니다."
+        ),
+        "내용": f"{ref}({title})\n{content}" if title else f"{ref}\n{content}",
+    }
 
 
 # 범용 세법 용어: 많은 조문에 공통으로 쓰여 검색 키워드로 부적합
@@ -386,10 +748,13 @@ def _hint_match_result(
     for hint in hints:
         content = _extract_article_content(parallel_data, hint.get("article", ""))
         if content:
+            reason = hint.get("reason", "코드 병행 매핑")
+            if hint.get("hint_source") == "citation":
+                reason = f"[명시 인용] {reason}"
             return {
                 "match": "true",
                 "article": hint.get("article", ""),
-                "reason": hint.get("reason", "코드 병행 매핑"),
+                "reason": reason,
                 "내용": content,
             }
     return None
@@ -415,8 +780,6 @@ def find_parallel_articles(
     """
     key = api_key or OPENAI_API_KEY
     l_key = law_api_key or LAW_API_KEY
-    client = OpenAI(api_key=key)
-
     _no_match: dict[str, str] = {"match": "false", "article": "", "reason": "", "내용": ""}
 
     parallel_data: dict = {}
@@ -427,6 +790,14 @@ def find_parallel_articles(
         hint_result = _hint_match_result(parallel_data, hints)
         if hint_result:
             return hint_result
+        tax_pair_result = _tax_pair_similarity_result(
+            law_name,
+            article_text,
+            parallel_law_name,
+            parallel_data,
+        )
+        if tax_pair_result:
+            return tax_pair_result
         relevant = _filter_articles(parallel_data.get("조문목록", []), keywords)
         relevant = _prepend_hint_articles(relevant, hints)
         if not relevant:
@@ -449,6 +820,7 @@ def find_parallel_articles(
 JSON으로만 답하세요."""
 
     # temperature=0 → 결정론적 출력, 1회 호출로 충분
+    client = OpenAI(api_key=key)
     result = _call_gpt(client, user_content)
     if str(result.get("match", "false")).lower() != "true":
         return _no_match
