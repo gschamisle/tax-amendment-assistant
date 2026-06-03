@@ -6,6 +6,8 @@ from core.law_api import search_laws, get_law_text
 from core.amendment_agent import draft_amendment, parse_draft_sections
 from core.cross_ref_checker import check_all_parallel_laws
 from core.buchik_precedents import build_buchik_from_precedent
+from core.outline_intent import OutlineIntent, hang_to_sym, parse_outline_intent
+from core.article_comparison_format import build_amended_display, build_current_display
 _APPLICATION_BASIS_OPTIONS = [
     "자동 추천",
     "사업연도",
@@ -155,52 +157,18 @@ def _content_key(prefix: str, text: str) -> str:
     return f"{prefix}_{digest}"
 
 
-def _extract_target_hang(outline: str) -> str:
-    m = re.search(r"제(\d+)항|(?<!제)(\d+)항", outline)
-    return (m.group(1) or m.group(2)) if m else ""
-
-
-def _extract_old_new(outline: str) -> tuple[str, str] | None:
-    patterns = [
-        r"현행\s*['\"]?([^'\"\s]+?)['\"]?에서\s*['\"]?([^'\"\s]+?)['\"]?(?:으로|로)",
-        r"['\"]([^'\"]+)['\"]\s*을\s*['\"]([^'\"]+)['\"]\s*(?:으로|로)",
-        r"([0-9,]+만원)\s*에서\s*([0-9,]+만원)\s*(?:으로|로)",
-    ]
-    for pattern in patterns:
-        m = re.search(pattern, outline)
-        if m:
-            return m.group(1), m.group(2)
-    return None
-
-
-def _source_current_section(article: dict, outline: str, fallback: str) -> str:
+def _source_current_section(article: dict, intent: OutlineIntent, fallback: str) -> str:
     """현행 섹션은 실제 법령 원문에서 구성해 GPT 환각을 차단한다."""
-    target_hang = _extract_target_hang(outline)
-    old_new = _extract_old_new(outline)
-    if not target_hang or not old_new:
-        return fallback
-    try:
-        target_sym = _HANG_SYMS[int(target_hang) - 1]
-    except (ValueError, IndexError):
-        return fallback
+    return build_current_display(article, intent, fallback)
 
-    old_text, _new_text = old_new
-    chunks = _split_hang_blocks(str(article.get("내용", "")))
-    if not chunks:
-        return fallback
 
-    result: list[str] = []
-    for sym, content in chunks:
-        if not sym:
-            result.append(content)
-        elif sym == target_sym:
-            marked = content.replace(old_text, f"<del>{old_text}</del>")
-            result.append(marked)
-        else:
-            result.append(f"{sym} (생략)")
-
-    fixed = "\n".join(part for part in result if part.strip())
-    return fixed if f"<del>{old_text}</del>" in fixed else fallback
+def _normalize_amended_section(
+    article: dict,
+    intent: OutlineIntent,
+    gpt_amended: str,
+) -> str:
+    """개정 대상 항만 전문·<u> 유지, 나머지 항은 (현행과같음)으로 통일."""
+    return build_amended_display(article, intent, gpt_amended)
 
 
 def _parse_manwon_amount(text: str) -> int | None:
@@ -217,18 +185,16 @@ def _format_manwon_amount(amount: float) -> str:
     return f"{amount:,.1f}만원"
 
 
-def _deterministic_related_reviews(article: dict, outline: str) -> str:
-    """동일 수치 및 직접 인용 항의 비례 수치를 항상 검토 항목으로 제시한다."""
-    target_hang = _extract_target_hang(outline)
-    old_new = _extract_old_new(outline)
-    if not target_hang or not old_new:
-        return ""
-    try:
-        target_sym = _HANG_SYMS[int(target_hang) - 1]
-    except (ValueError, IndexError):
-        return ""
+def _related_rows_for_change(
+    article: dict,
+    target_hang: str,
+    old_text: str,
+    new_text: str,
+) -> list[str]:
+    target_sym = hang_to_sym(target_hang)
+    if not target_sym:
+        return []
 
-    old_text, new_text = old_new
     old_amount = _parse_manwon_amount(old_text)
     new_amount = _parse_manwon_amount(new_text)
     ratio = (new_amount / old_amount) if old_amount and new_amount else None
@@ -240,7 +206,7 @@ def _deterministic_related_reviews(article: dict, outline: str) -> str:
         directly_refs_target = f"제{target_hang}항" in content
         if old_text in content and directly_refs_target:
             reason = f"제{target_hang}항 직접 인용 및 동일 수치 포함"
-            rows.append(f'[검토] {sym}항({reason}): "{old_text}" → "{new_text}" — 코드 스캔')
+            rows.append(f'[제안] {sym}항({reason}): "{old_text}" → "{new_text}" — 코드 스캔')
         elif old_text in content:
             reason = "같은 조 다른 항에 동일 현행 수치 포함"
             rows.append(f'[검토] {sym}항({reason}): "{old_text}" → "{new_text}" — 코드 스캔')
@@ -256,7 +222,24 @@ def _deterministic_related_reviews(article: dict, outline: str) -> str:
                 if proposed == amount_text:
                     continue
                 reason = f"제{target_hang}항 직접 인용, 개정 비율 {old_text}→{new_text} 적용"
-                rows.append(f'[검토] {sym}항({reason}): "{amount_text}" → "{proposed}" — 비례 계산')
+                rows.append(f'[제안] {sym}항({reason}): "{amount_text}" → "{proposed}" — 비례 계산')
+    return rows
+
+
+def _deterministic_related_reviews(article: dict, intent: OutlineIntent) -> str:
+    """요강에서 추출한 치환 정보로 연관 항 후보를 제시한다."""
+    if not intent.replacements:
+        return ""
+
+    rows: list[str] = []
+    seen: set[str] = set()
+    for rep in intent.replacements:
+        hangs = rep.hangs or intent.target_hangs or ([intent.primary_hang] if intent.primary_hang else [])
+        for hang in hangs:
+            for row in _related_rows_for_change(article, hang, rep.old_text, rep.new_text):
+                if row not in seen:
+                    seen.add(row)
+                    rows.append(row)
     return "\n".join(rows)
 
 
@@ -297,6 +280,7 @@ def _law_url(law_name: str, jo_ref: str = "") -> str:
         return f"{base}/{article}"
     return base
 _HAS_U_RE = re.compile(r"<u>|<del>")
+_HAS_U_ONLY_RE = re.compile(r"<u>")
 _SUGGEST_RE = re.compile(r'\[제안\]\s*(.*?):\s*"([^"]+)"\s*[→-]\s*"([^"]+)"(?:\s*[—\-]\s*(.+))?', re.MULTILINE)
 _REVIEW_RE  = re.compile(r'\[검토\]\s*(.*?):\s*"([^"]+)"\s*[→-]\s*"([^"]+)"(?:\s*[—\-]\s*(.+))?', re.MULTILINE)
 
@@ -530,10 +514,23 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                 try:
                     _reset_draft_edit_state()
                     article_text = _article_text_for_prompt(article)
+                    intent = parse_outline_intent(outline, article, openai_api_key)
+                    st.session_state["s1_outline_intent"] = intent
+                    outline_for_draft = outline
+                    if intent.summary or intent.replacements:
+                        hint_lines = [outline, "", "[앱이 해석한 개정 의도 — 참고]"]
+                        if intent.summary:
+                            hint_lines.append(intent.summary)
+                        for rep in intent.replacements:
+                            hang_label = "·".join(rep.hangs or intent.target_hangs) or "?"
+                            hint_lines.append(
+                                f"- 제{hang_label}항: 「{rep.old_text}」→「{rep.new_text}」"
+                            )
+                        outline_for_draft = "\n".join(hint_lines)
                     draft = draft_amendment(
                         law_name=law.get("법령명", ""),
                         article_text=article_text,
-                        outline=outline,
+                        outline=outline_for_draft,
                         buchik_type=_effect_type_for_basis(application_basis),
                         api_key=openai_api_key,
                     )
@@ -551,12 +548,17 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                         )
                         sections["현행"] = _source_current_section(
                             article,
-                            outline,
+                            intent,
                             sections.get("현행", ""),
+                        )
+                        sections["개정안"] = _normalize_amended_section(
+                            article,
+                            intent,
+                            sections.get("개정안", ""),
                         )
                         sections["연관항"] = _merge_related_text(
                             sections.get("연관항", ""),
-                            _deterministic_related_reviews(article, outline),
+                            _deterministic_related_reviews(article, intent),
                         )
                         sections["부칙"] = buchik_text
                         st.session_state["s1_draft"] = draft
@@ -570,6 +572,15 @@ def render(law_api_key: str, openai_api_key: str) -> None:
         with st.container(border=True):
             sections = st.session_state["s1_sections"]
             st.markdown('<div class="mofe-subheader">생성된 초안</div>', unsafe_allow_html=True)
+
+            intent = st.session_state.get("s1_outline_intent")
+            if intent and intent.summary:
+                src = {"gpt": "AI 해석", "regex": "형식 인식", "heuristic": "조문 대조", "none": ""}.get(intent.source, intent.source)
+                cap = f"**요강 해석** ({src}): {intent.summary}"
+                if intent.replacements:
+                    rep = intent.replacements[0]
+                    cap += f' — `{rep.old_text}` → `{rep.new_text}`'
+                st.caption(cap)
 
             # 연관 항 검토 — [제안]·[검토] 모두 설명 텍스트 + 체크박스 표시
             related = sections.get("연관항", "").strip()
@@ -637,7 +648,7 @@ def render(law_api_key: str, openai_api_key: str) -> None:
             hang_blocks = _split_hang_blocks(amended_raw)
             changed_hangs = [
                 (sym, content) for sym, content in hang_blocks
-                if sym and _HAS_U_RE.search(content) and "(현행과같음)" not in content
+                if sym and _HAS_U_ONLY_RE.search(content) and "(현행과같음)" not in content
             ]
 
             if changed_hangs:
@@ -820,17 +831,27 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                                     + "\n"
                                     + parallel_outline
                                 )
+                                parallel_intent = parse_outline_intent(
+                                    parallel_outline,
+                                    parallel_article,
+                                    openai_api_key,
+                                )
                                 parallel_current = _source_current_section(
                                     parallel_article,
-                                    parallel_analysis_outline,
+                                    parallel_intent,
                                     secs.get("현행", ""),
                                 )
                                 parallel_related = _merge_related_text(
                                     secs.get("연관항", ""),
                                     _deterministic_related_reviews(
                                         parallel_article,
-                                        parallel_analysis_outline,
+                                        parallel_intent,
                                     ),
+                                )
+                                parallel_amended = _normalize_amended_section(
+                                    parallel_article,
+                                    parallel_intent,
+                                    secs.get("개정안", ""),
                                 )
                                 parallel_changes = _related_changes(parallel_related)
                                 parallel_current = _apply_suggestions_to_current(
@@ -839,7 +860,7 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                                     article_text,
                                 )
                                 parallel_amended = _apply_suggestions(
-                                    secs.get("개정안", ""),
+                                    parallel_amended,
                                     parallel_changes,
                                     article_text,
                                 )

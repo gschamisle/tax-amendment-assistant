@@ -188,6 +188,15 @@ def _process_kajeong_an(text: str) -> str:
     4. 변경된 항 블록 내 하위 호/목 줄 (no <u>) → _segment_to_dashes
     """
     lines = _normalize_hang_newlines(text).split("\n")
+    hangs_with_sub_u: set[str] = set()
+    current_sym = ""
+    for line in lines:
+        m = _HANG_START_RE.match(line.lstrip())
+        if m:
+            current_sym = m.group(1).rstrip()
+        elif current_sym and "<u>" in line:
+            hangs_with_sub_u.add(current_sym)
+
     result: list[str] = []
     in_changed_hang = False
 
@@ -196,9 +205,17 @@ def _process_kajeong_an(text: str) -> str:
         m = _HANG_START_RE.match(lstripped)
         if m:
             sym = m.group(1).rstrip()
-            if "<u>" in line:
+            if "<u>" in line or sym in hangs_with_sub_u:
                 in_changed_hang = True
-                result.append(_dash_unchanged_segments(line))
+                if "<u>" in line:
+                    result.append(_dash_unchanged_segments(line))
+                else:
+                    body = lstripped[len(sym):]
+                    if body.strip():
+                        leading = line[: len(line) - len(lstripped)]
+                        result.append(leading + sym + _segment_to_dashes(body))
+                    else:
+                        result.append(line)
             elif "(현행과같음)" in line:
                 in_changed_hang = False
                 result.append(line)

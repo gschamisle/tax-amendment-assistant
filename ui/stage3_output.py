@@ -4,6 +4,7 @@ import re
 import streamlit as st
 from core.hwpx_writer import build_comparison_table, _patch_font_in_hwpx
 from core.law_api import get_law_text
+from core.article_comparison_format import format_compressed_hang_label
 from hwpx.document import HwpxDocument
 
 _HANG_RE = re.compile(r"^[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳]")
@@ -56,7 +57,9 @@ def _split_by_hang(text: str) -> list[str]:
 
 def _is_unchanged(left: str, right: str) -> bool:
     """right에 <u> 없고 '(현행과같음)' 포함이면 미변경."""
-    return "(현행과같음)" in right and "<u>" not in right
+    if "<u>" in right or "(현행과같음)" not in right:
+        return False
+    return "(생략)" in left and "<del>" not in left
 
 
 def _extract_hang_sym(chunk: str) -> str | None:
@@ -86,7 +89,7 @@ def _dedup_hang_chunks(chunks: list[str]) -> list[str]:
 def _compress_unchanged_chunks(
     pairs: list[tuple[str, str]],
 ) -> list[tuple[str, str]]:
-    """연속된 미변경 항을 ①∼③(생략)|①∼③(현행과같음)으로 압축."""
+    """연속된 미변경 항을 ①·②(생략)|①~④(현행과같음) 형식으로 압축."""
     result: list[tuple[str, str]] = []
     i = 0
     while i < len(pairs):
@@ -102,12 +105,10 @@ def _compress_unchanged_chunks(
             if sym:
                 syms.append(sym)
             j += 1
-        if len(syms) == 1:
-            result.append((f"{syms[0]}(생략)", f"{syms[0]}(현행과같음)"))
-        elif len(syms) > 1:
+        if syms:
             result.append((
-                f"{syms[0]}∼{syms[-1]}(생략)",
-                f"{syms[0]}∼{syms[-1]}(현행과같음)",
+                format_compressed_hang_label(syms, "(생략)"),
+                format_compressed_hang_label(syms, "(현행과같음)"),
             ))
         else:
             result.extend(pairs[i:j])
