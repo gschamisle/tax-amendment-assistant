@@ -182,6 +182,34 @@ def _heuristic_intent(outline: str, article_text: str) -> OutlineIntent | None:
     )
 
 
+def _percent_to_bunmu(text: str) -> str:
+    """3% → 100분의 3 (법령 본문 표기)."""
+    m = re.fullmatch(r"(\d+(?:\.\d+)?)%", text.strip())
+    if not m:
+        return ""
+    val = float(m.group(1))
+    if abs(val - round(val)) < 0.000001:
+        return f"100분의 {int(round(val))}"
+    return ""
+
+
+def _resolve_text_pair(old_text: str, new_text: str, article_text: str) -> tuple[str, str]:
+    """요강의 % 표기를 조문 본문의 100분의 N 표기에 맞춘다."""
+    if old_text in article_text:
+        resolved_new = new_text
+        if new_text not in article_text:
+            bun_new = _percent_to_bunmu(new_text)
+            if bun_new:
+                resolved_new = bun_new
+        return old_text, resolved_new
+
+    bun_old = _percent_to_bunmu(old_text)
+    bun_new = _percent_to_bunmu(new_text)
+    if bun_old and bun_old in article_text:
+        return bun_old, bun_new or new_text
+    return old_text, new_text
+
+
 def _extract_old_new_regex(outline: str) -> tuple[str, str] | None:
     patterns = [
         r"['\"]([^'\"]+)['\"]\s*을\s*['\"]([^'\"]+)['\"]\s*(?:으로|로)",
@@ -196,12 +224,14 @@ def _extract_old_new_regex(outline: str) -> tuple[str, str] | None:
     return None
 
 
-def _try_regex_intent(outline: str) -> OutlineIntent | None:
+def _try_regex_intent(outline: str, article_text: str = "") -> OutlineIntent | None:
     ho, mok, hangs = _extract_ho_mok(outline)
     pair = _extract_old_new_regex(outline)
     if not pair:
         return None
-    old_text, new_text = pair
+    old_text, new_text = _resolve_text_pair(pair[0], pair[1], article_text)
+    if article_text and old_text not in article_text:
+        return None
     rep = TextReplacement(old_text=old_text, new_text=new_text, hangs=hangs)
     loc = ""
     if hangs:
@@ -278,6 +308,7 @@ def _gpt_parse_intent(outline: str, article_text: str, api_key: str) -> OutlineI
         new_t = str(item.get("new_text", "")).strip()
         if not old_t or not new_t:
             continue
+        old_t, new_t = _resolve_text_pair(old_t, new_t, article_text)
         if old_t not in article_text:
             continue
         rep_hangs = [str(h) for h in item.get("hangs", []) if str(h).strip()] or hangs
@@ -316,7 +347,7 @@ def parse_outline_intent(
     if not outline:
         return OutlineIntent([], [], "", "none", target_ho="", target_mok="")
 
-    regex_intent = _try_regex_intent(outline)
+    regex_intent = _try_regex_intent(outline, article_text)
     if not prefer_gpt:
         if regex_intent:
             return regex_intent

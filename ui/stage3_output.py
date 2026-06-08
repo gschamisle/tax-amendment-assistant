@@ -240,7 +240,35 @@ def render(law_api_key: str, openai_api_key: str) -> None:
     # ── HWPX 생성 ─────────────────────────────────────────────────────────
     with st.container(border=True):
         st.markdown('<div class="mofe-subheader">HWPX 파일 생성</div>', unsafe_allow_html=True)
-        if st.button("HWPX 생성", type="primary", key="s3_generate"):
+
+        pending_jobs = [
+            j for j in st.session_state.get("s1_amendment_queue", [])
+            if j.get("status") in ("pending", "active")
+        ]
+        review_queue_raw = st.session_state.get("s1_review_queue", [])
+        reviewed_ids = set(st.session_state.get("s1_reviewed_ids", []))
+        pending_required = [
+            d for d in review_queue_raw
+            if d.get("tier") == "required"
+            and d.get("candidate_id") not in reviewed_ids
+            and d.get("law_name")
+            and d.get("article_ref")
+        ]
+        hwpx_blockers = bool(pending_jobs or pending_required)
+        hwpx_ack = False
+        if hwpx_blockers:
+            parts: list[str] = []
+            if pending_required:
+                parts.append(f"필수 연쇄 검토 미완료 {len(pending_required)}건")
+            if pending_jobs:
+                parts.append(f"연쇄 개정 큐 미처리 {len(pending_jobs)}건")
+            st.warning("⚠️ " + " · ".join(parts) + " — HWPX 생성 전 확인이 필요합니다.")
+            hwpx_ack = st.checkbox(
+                "필수 연쇄 검토를 완료했습니다 (미검토 항목이 있어도 진행)",
+                key="s3_hwpx_ack",
+            )
+
+        if st.button("HWPX 생성", type="primary", key="s3_generate", disabled=hwpx_blockers and not hwpx_ack):
             os.makedirs("output", exist_ok=True)
             generated: list[dict] = []  # {"label", "path", "file_name"}
 

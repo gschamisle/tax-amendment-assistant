@@ -3,13 +3,31 @@ from __future__ import annotations
 
 import re
 
-from core.hwpx_writer import _process_kajeong_an
+from core.hwpx_writer import _dash_unchanged_segments
 from core.outline_intent import OutlineIntent, hang_to_sym
 
 _HANG_SYM_RE = re.compile(r"^([①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳])")
-_HO_LINE_RE = re.compile(r"^(\d+)\.\s")
+_HO_LINE_RE = re.compile(r"^(\d+(?:의\d+)?)\.\s")
 _MOK_LINE_RE = re.compile(r"^([가-힣])\.\s")
 _HAS_U_RE = re.compile(r"<u>")
+_INLINE_HANG_RE = re.compile(
+    r"(제\d+조(?:의\d+)?[^①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳]*)"
+    r"([①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳])"
+)
+
+
+def normalize_inline_hang(text: str) -> str:
+    """조 제목 뒤 인라인 ①을 줄바꿈으로 분리."""
+    lines_pre: list[str] = []
+    for line in text.splitlines():
+        if not _HANG_SYM_RE.match(line.lstrip()):
+            m = _INLINE_HANG_RE.search(line)
+            if m:
+                lines_pre.append(line[: m.start(2)].rstrip())
+                lines_pre.append(line[m.start(2) :])
+                continue
+        lines_pre.append(line)
+    return "\n".join(lines_pre)
 
 
 def format_compressed_hang_label(symbols: list[str], suffix: str) -> str:
@@ -66,6 +84,7 @@ def compress_unchanged_hang_lines(lines: list[str], *, amended: bool) -> list[st
 
 
 def split_hang_blocks(text: str) -> list[tuple[str, str]]:
+    text = normalize_inline_hang(text)
     blocks: list[tuple[str, str]] = []
     buf: list[str] = []
     sym = ""
@@ -85,6 +104,16 @@ def split_hang_blocks(text: str) -> list[tuple[str, str]]:
     return blocks
 
 
+def _extract_jo_title(article_text: str) -> str:
+    first_line = article_text.splitlines()[0] if article_text.splitlines() else ""
+    m = _INLINE_HANG_RE.search(first_line)
+    if m:
+        return first_line[: m.start(2)].rstrip()
+    if _HANG_SYM_RE.match(first_line.lstrip()):
+        return ""
+    return first_line.rstrip()
+
+
 def _line_matches_ho(line: str, ho: str) -> bool:
     m = _HO_LINE_RE.match(line.lstrip())
     return bool(ho and m and m.group(1) == ho)
@@ -93,6 +122,30 @@ def _line_matches_ho(line: str, ho: str) -> bool:
 def _line_matches_mok(line: str, mok: str) -> bool:
     m = _MOK_LINE_RE.match(line.lstrip())
     return bool(mok and m and m.group(1) == mok)
+
+
+def _group_ho_lines(lines: list[str]) -> list[tuple[str | None, list[str]]]:
+    """(호번호|None=항 도입부, 줄 목록)"""
+    groups: list[tuple[str | None, list[str]]] = []
+    current_ho: str | None = None
+    buf: list[str] = []
+
+    def flush() -> None:
+        nonlocal buf, current_ho
+        if buf:
+            groups.append((current_ho, buf))
+            buf = []
+
+    for line in lines:
+        m = _HO_LINE_RE.match(line.lstrip())
+        if m:
+            flush()
+            current_ho = m.group(1)
+            buf = [line]
+        else:
+            buf.append(line)
+    flush()
+    return groups
 
 
 def _mark_hang_current(content: str, intent: OutlineIntent) -> str:
@@ -113,35 +166,74 @@ def _mark_hang_current(content: str, intent: OutlineIntent) -> str:
     return "\n".join(lines)
 
 
-def _build_ho_mok_amended_block(content: str, intent: OutlineIntent, gpt_block: str) -> str:
-    """호·목만 개정: 상위 항 전체를 펼치고 미변경 구간은 대시."""
+def _format_unchanged_ho_line(line: str) -> str:
+    m = _HO_LINE_RE.match(line.lstrip())
+    if not m:
+        return line
+    indent = line[: len(line) - len(line.lstrip())]
+    return f"{indent}{m.group(1)}. (현행과같음)"
+
+
+def _format_unchanged_mok_line(line: str) -> str:
+    m = _MOK_LINE_RE.match(line.lstrip())
+    if not m:
+        return line
+    indent = line[: len(line) - len(line.lstrip())]
+    return f"{indent}{m.group(1)}. (현행과같음)"
+
+
+def _apply_change_to_line(line: str, intent: OutlineIntent, gpt_line: str) -> str:
+    if _HAS_U_RE.search(gpt_line):
+        return _dash_unchanged_segments(gpt_line)
     rep = intent.primary_replacement
+    if rep and rep.old_text in line:
+        return _dash_unchanged_segments(line.replace(rep.old_text, f"<u>{rep.new_text}</u>"))
+    return _dash_unchanged_segments(line) if _HAS_U_RE.search(line) else line
+
+
+def _build_ho_mok_amended_block(content: str, intent: OutlineIntent, gpt_block: str) -> str:
+    """호·목만 개정: 항 본문 유지, 미변경 호는 (현행과같음), 변경 호만 대시."""
     gpt_by_ho: dict[str, str] = {}
+    gpt_by_mok: dict[str, str] = {}
     for gl in gpt_block.splitlines():
-        m = _HO_LINE_RE.match(gl.lstrip())
-        if m:
-            gpt_by_ho[m.group(1)] = gl
+        hm = _HO_LINE_RE.match(gl.lstrip())
+        if hm:
+            gpt_by_ho[hm.group(1)] = gl
+        mm = _MOK_LINE_RE.match(gl.lstrip())
+        if mm:
+            gpt_by_mok[mm.group(1)] = gl
 
-    draft_lines: list[str] = []
-    for line in content.splitlines():
-        lstripped = line.lstrip()
-        if intent.amendment_level == "ho" and _line_matches_ho(line, intent.target_ho):
-            gpt_line = gpt_by_ho.get(intent.target_ho, "")
-            if _HAS_U_RE.search(gpt_line):
-                draft_lines.append(gpt_line)
-            elif rep and rep.old_text in line:
-                draft_lines.append(line.replace(rep.old_text, f"<u>{rep.new_text}</u>"))
-            else:
-                draft_lines.append(line)
-        elif intent.amendment_level == "mok" and _line_matches_mok(line, intent.target_mok):
-            if rep and rep.old_text in line:
-                draft_lines.append(line.replace(rep.old_text, f"<u>{rep.new_text}</u>"))
-            else:
-                draft_lines.append(line)
-        else:
-            draft_lines.append(line)
+    groups = _group_ho_lines(content.splitlines())
+    result: list[str] = []
 
-    return _process_kajeong_an("\n".join(draft_lines))
+    for ho_key, lines in groups:
+        if ho_key is None:
+            result.extend(lines)
+            continue
+
+        if intent.amendment_level == "ho":
+            if ho_key == intent.target_ho:
+                for line in lines:
+                    result.append(_apply_change_to_line(line, intent, gpt_by_ho.get(ho_key, "")))
+            else:
+                result.append(_format_unchanged_ho_line(lines[0]))
+            continue
+
+        if intent.amendment_level == "mok":
+            for line in lines:
+                if _line_matches_mok(line, intent.target_mok):
+                    result.append(
+                        _apply_change_to_line(line, intent, gpt_by_mok.get(intent.target_mok, ""))
+                    )
+                elif _MOK_LINE_RE.match(line.lstrip()):
+                    result.append(_format_unchanged_mok_line(line))
+                else:
+                    result.append(line)
+            continue
+
+        result.extend(lines)
+
+    return "\n".join(result)
 
 
 def _current_has_target_mark(marked: str, intent: OutlineIntent) -> bool:
@@ -170,9 +262,14 @@ def build_current_display(article: dict, intent: OutlineIntent, fallback: str = 
         return fallback
 
     lines: list[str] = []
+    title = _extract_jo_title(normalize_inline_hang(str(article.get("내용", ""))))
+    if title:
+        lines.append(title)
+
     for sym, content in blocks:
         if not sym:
-            lines.append(content)
+            if not title:
+                lines.append(content)
         elif sym == target_sym:
             marked = _mark_hang_current(content, intent)
             if not _current_has_target_mark(marked, intent):
@@ -190,41 +287,32 @@ def build_amended_display(
     intent: OutlineIntent,
     gpt_amended: str,
 ) -> str:
-    article_text = str(article.get("내용", ""))
+    article_text = normalize_inline_hang(str(article.get("내용", "")))
     gpt_blocks = split_hang_blocks(gpt_amended)
     gpt_by_sym = {sym: content for sym, content in gpt_blocks if sym}
-    changed_syms = {
-        sym for sym, content in gpt_by_sym.items()
-        if _HAS_U_RE.search(content) and "(현행과같음)" not in content
-    }
 
     target_sym = hang_to_sym(intent.primary_hang) if intent.primary_hang else ""
     rep = intent.primary_replacement
-    if intent.amendment_level in ("ho", "mok") and target_sym:
-        changed_syms.add(target_sym)
-    elif target_sym and rep:
-        changed_syms.add(target_sym)
 
     result: list[str] = []
-    for sym, content in gpt_blocks:
-        if not sym:
-            result.append(content)
+    title = _extract_jo_title(article_text)
+    if title:
+        result.append(title)
 
     article_hangs = [(sym, content) for sym, content in split_hang_blocks(article_text) if sym]
     if not article_hangs:
         return gpt_amended
 
     for sym, orig in article_hangs:
-        if sym in changed_syms:
-            if intent.amendment_level in ("ho", "mok") and sym == target_sym:
-                result.append(_build_ho_mok_amended_block(orig, intent, gpt_by_sym.get(sym, "")))
-            elif sym in gpt_by_sym and _HAS_U_RE.search(gpt_by_sym[sym]):
-                result.append(gpt_by_sym[sym])
-            elif rep and sym == target_sym:
-                marked = orig.replace(rep.old_text, f"<u>{rep.new_text}</u>")
-                result.append(marked if marked != orig else gpt_by_sym.get(sym, f"{sym} (현행과같음)"))
-            else:
-                result.append(gpt_by_sym.get(sym, orig))
+        if sym == target_sym and intent.amendment_level in ("ho", "mok"):
+            result.append(_build_ho_mok_amended_block(orig, intent, gpt_by_sym.get(sym, "")))
+        elif sym == target_sym and rep and rep.old_text in orig:
+            marked = orig.replace(rep.old_text, f"<u>{rep.new_text}</u>")
+            result.append(marked)
+        elif sym in gpt_by_sym and _HAS_U_RE.search(gpt_by_sym[sym]) and "(현행과같음)" not in gpt_by_sym[sym]:
+            result.append(gpt_by_sym[sym])
+        elif sym == target_sym:
+            result.append(gpt_by_sym.get(sym, orig))
         else:
             result.append(f"{sym} (현행과같음)")
 

@@ -8,6 +8,8 @@ from core.cross_ref_checker import check_all_parallel_laws
 from core.buchik_precedents import build_buchik_from_precedent
 from core.outline_intent import OutlineIntent, hang_to_sym, parse_outline_intent
 from core.article_comparison_format import build_amended_display, build_current_display
+from core.related_review_queue import RelatedCandidate, build_review_queue
+from ui.related_review_ui import enqueue_parallel_entries, render_amendment_queue_bar, render_review_queue
 _APPLICATION_BASIS_OPTIONS = [
     "자동 추천",
     "사업연도",
@@ -226,10 +228,49 @@ def _related_rows_for_change(
     return rows
 
 
-def _deterministic_related_reviews(article: dict, intent: OutlineIntent) -> str:
-    """요강에서 추출한 치환 정보로 연관 항 후보를 제시한다."""
+def _sanitize_gpt_related(related: str) -> str:
+    """GPT 연관항 중 명백히 잘못된 형식만 제거 (예: '시행령 소득세법 제129조')."""
+    if not related.strip():
+        return related
+    kept: list[str] = []
+    for line in related.splitlines():
+        s = line.strip()
+        if not s:
+            continue
+        if re.search(r"시행령\s+소득세법|시행규칙\s+소득세법", s):
+            continue
+        kept.append(s)
+    return "\n".join(kept)
+
+
+def _collect_same_article_rows(article: dict, intent: OutlineIntent) -> list[str]:
+    if intent.amendment_level in ("ho", "mok"):
+        return []
+    rows: list[str] = []
+    seen: set[str] = set()
+    for rep in intent.replacements:
+        hangs = rep.hangs or intent.target_hangs or ([intent.primary_hang] if intent.primary_hang else [])
+        for hang in hangs:
+            for row in _related_rows_for_change(article, hang, rep.old_text, rep.new_text):
+                if row not in seen:
+                    seen.add(row)
+                    rows.append(row)
+    return rows
+
+
+def _deterministic_related_reviews(
+    article: dict,
+    intent: OutlineIntent,
+    law_name: str = "",
+    law_api_key: str = "",
+) -> str:
+    """요강·개정 의도 기준 연관 조문 후보."""
     if not intent.replacements:
         return ""
+
+    if intent.amendment_level in ("ho", "mok"):
+        from core.related_article_scanner import find_related_article_reviews
+        return find_related_article_reviews(law_name, article, intent, law_api_key)
 
     rows: list[str] = []
     seen: set[str] = set()
@@ -556,19 +597,36 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                             intent,
                             sections.get("개정안", ""),
                         )
-                        sections["연관항"] = _merge_related_text(
-                            sections.get("연관항", ""),
-                            _deterministic_related_reviews(article, intent),
+                        gpt_related = _sanitize_gpt_related(sections.get("연관항", ""))
+                        det_related = _deterministic_related_reviews(
+                            article,
+                            intent,
+                            law.get("법령명", ""),
+                            law_api_key,
+                        )
+                        sections["연관항"] = _merge_related_text(gpt_related, det_related)
+                        law_name = law.get("법령명", "")
+                        same_rows = _collect_same_article_rows(article, intent)
+                        queue = build_review_queue(
+                            law_name,
+                            article,
+                            intent,
+                            gpt_related,
+                            same_rows,
+                            law_api_key,
                         )
                         sections["부칙"] = buchik_text
                         st.session_state["s1_draft"] = draft
                         st.session_state["s1_sections"] = sections
                         st.session_state["s1_buchik_precedent"] = precedent
+                        st.session_state["s1_review_queue"] = [c.to_dict() for c in queue]
+                        st.session_state.setdefault("s1_reviewed_ids", [])
                 except Exception as e:
                     st.error(f"생성 실패: {e}")
 
     # ── 초안 표시 ─────────────────────────────────────────────────────────────
     if "s1_sections" in st.session_state:
+        render_amendment_queue_bar(law_api_key, openai_api_key, _cached_law_text)
         with st.container(border=True):
             sections = st.session_state["s1_sections"]
             st.markdown('<div class="mofe-subheader">생성된 초안</div>', unsafe_allow_html=True)
@@ -582,56 +640,19 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                     cap += f' — `{rep.old_text}` → `{rep.new_text}`'
                 st.caption(cap)
 
-            # 연관 항 검토 — [제안]·[검토] 모두 설명 텍스트 + 체크박스 표시
-            related = sections.get("연관항", "").strip()
-            accepted_suggests: list[tuple[str, str, str]] = []
-
-            if related:
-                st.warning("⚠️ **연관 항 검토 필요**")
-
-                # 공통 그룹 빌더
-                def _build_groups(matches: list[tuple]) -> dict:
-                    groups: dict[str, dict] = {}
-                    for m in matches:
-                        sym_label, old_val, new_val = m[0], m[1], m[2]
-                        reason = m[3].strip() if len(m) > 3 and m[3] else ""
-                        char_m = _SYM_CHAR_RE.search(sym_label)
-                        sym_char = char_m.group(0) if char_m else sym_label.strip()
-                        if sym_char not in groups:
-                            groups[sym_char] = {"desc": sym_label, "reason": reason, "changes": []}
-                        groups[sym_char]["changes"].append((old_val, new_val))
-                    return groups
-
-                suggest_matches = _SUGGEST_RE.findall(related)
-                review_matches  = _REVIEW_RE.findall(related)
-
-                if suggest_matches or review_matches:
-                    st.markdown("**연관 항 — 체크 시 개정안에 반영됩니다**")
-
-                for prefix, matches in (("[제안]", suggest_matches), ("[검토]", review_matches)):
-                    if not matches:
-                        continue
-                    groups = _build_groups(matches)
-                    for sym_char, info in groups.items():
-                        desc   = info["desc"]
-                        reason = info["reason"]
-                        changes = info["changes"]
-                        caption = f"{prefix} {desc}"
-                        if reason:
-                            caption += f" — {reason}"
-                        st.caption(caption)
-                        label_parts = [f'"{o}" → "{n}"' for o, n in changes]
-                        label = f"{sym_char}항: " + ", ".join(label_parts) + " 적용"
-                        key = f"s1_suggest_{prefix.strip('[]')}_{sym_char}"
-                        if st.checkbox(label, key=key):
-                            for old_val, new_val in changes:
-                                accepted_suggests.append((sym_char, old_val, new_val))
-
-                # 파싱 안 된 나머지 텍스트 표시
-                remaining = _SUGGEST_RE.sub("", _REVIEW_RE.sub("", related)).strip()
-                if remaining:
-                    st.code(remaining, language="")
-
+            queue_raw = st.session_state.get("s1_review_queue", [])
+            review_queue = [RelatedCandidate.from_dict(d) for d in queue_raw]
+            parent_law = st.session_state.get("final_law_name") or st.session_state.get("s1_selected_law", {}).get("법령명", "")
+            parent_article = _article_heading(st.session_state.get("s1_article", {}))
+            accepted_suggests = render_review_queue(
+                review_queue,
+                parent_law,
+                parent_article,
+                st.session_state.get("s1_outline", ""),
+                law_api_key,
+                openai_api_key,
+                _cached_law_text,
+            )
             st.session_state["s1_accepted_suggests"] = accepted_suggests
 
             st.markdown("**개정지시문**")
@@ -793,94 +814,18 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                             extra.append({"법령명": s["법령명"], "조문": clean_ref, "MST": s["MST"]})
                 st.session_state["s2_extra_amendments"] = extra
 
-                # 포함된 병행 법령 초안 생성
-                if extra and st.button("병행 법령 초안 생성", key="s1_parallel_draft"):
-                    outline = st.session_state.get("s1_outline", "")
-                    application_basis = st.session_state.get("s1_application_basis", "자동 추천")
-                    buchik_type = _effect_type_for_basis(application_basis)
-                    parallel_sections: list[dict] = []
-                    for entry in extra:
-                        with st.spinner(f"{entry['법령명']} {entry['조문']} 초안 생성 중..."):
-                            try:
-                                from core.amendment_agent import parse_draft_sections as _pds
-                                from ui.stage3_output import _fetch_parallel_article, _build_comparison_rows
-                                article_text = _fetch_parallel_article(entry, law_api_key, openai_api_key)
-                                if not article_text:
-                                    st.warning(f"{entry['법령명']} {entry['조문']} 조문 조회 실패")
-                                    continue
-                                # 병행 법령의 실제 조문 번호를 outline에 명시
-                                # (원본 outline에 원법령 항 번호가 고정돼 있어 GPT가 그대로 사용하는 버그 방지)
-                                parallel_outline = (
-                                    outline
-                                    + f"\n\n※ 이 병행 법령의 개정 대상 조문은 {entry['조문']}입니다. "
-                                    f"개정지시문의 조문·항 번호는 반드시 {entry['조문']} 기준으로 작성할 것. "
-                                    f"원법령의 항 번호를 그대로 사용하지 말 것."
-                                )
-                                draft = draft_amendment(
-                                    law_name=entry["법령명"],
-                                    article_text=article_text,
-                                    outline=parallel_outline,
-                                    buchik_type=buchik_type,
-                                    api_key=openai_api_key,
-                                )
-                                secs = _pds(draft)
-                                parallel_article = _article_from_text(entry["조문"], article_text)
-                                parallel_article["내용"] = article_text
-                                parallel_analysis_outline = (
-                                    secs.get("지시문", "")
-                                    + "\n"
-                                    + parallel_outline
-                                )
-                                parallel_intent = parse_outline_intent(
-                                    parallel_outline,
-                                    parallel_article,
-                                    openai_api_key,
-                                )
-                                parallel_current = _source_current_section(
-                                    parallel_article,
-                                    parallel_intent,
-                                    secs.get("현행", ""),
-                                )
-                                parallel_related = _merge_related_text(
-                                    secs.get("연관항", ""),
-                                    _deterministic_related_reviews(
-                                        parallel_article,
-                                        parallel_intent,
-                                    ),
-                                )
-                                parallel_amended = _normalize_amended_section(
-                                    parallel_article,
-                                    parallel_intent,
-                                    secs.get("개정안", ""),
-                                )
-                                parallel_changes = _related_changes(parallel_related)
-                                parallel_current = _apply_suggestions_to_current(
-                                    parallel_current,
-                                    parallel_changes,
-                                    article_text,
-                                )
-                                parallel_amended = _apply_suggestions(
-                                    parallel_amended,
-                                    parallel_changes,
-                                    article_text,
-                                )
-                                parallel_buchik, _precedent = _build_buchik(
-                                    parallel_article,
-                                    entry["법령명"],
-                                    application_basis,
-                                    outline,
-                                )
-                                parallel_sections.append({
-                                    "법령명": entry["법령명"],
-                                    "조문": entry["조문"],
-                                    "instruction": secs.get("지시문", ""),
-                                    "rows": _build_comparison_rows(parallel_current, parallel_amended),
-                                    "buchik": parallel_buchik,
-                                })
-                            except Exception as e:
-                                st.error(f"{entry['법령명']} 초안 생성 실패: {e}")
-                    st.session_state["s3_parallel_sections"] = parallel_sections
-                    st.success(f"병행 법령 초안 {len(parallel_sections)}건 생성 완료")
+                if extra and st.button("연쇄 개정 큐에 추가 (1단계 재진입)", key="s1_parallel_queue"):
+                    parent_law = st.session_state.get("final_law_name", law_name)
+                    parent_article = _article_heading(st.session_state.get("s1_article", {}))
+                    n = enqueue_parallel_entries(
+                        extra,
+                        parent_law,
+                        parent_article,
+                        st.session_state.get("s1_outline", ""),
+                        law_api_key,
+                    )
+                    st.success(f"연쇄 개정 큐에 {n}건 추가 — 상단에서 「시작」으로 1단계 재진입")
+                    st.rerun()
 
                 # 기존 캐시 미리보기
                 for ps in st.session_state.get("s3_parallel_sections", []):

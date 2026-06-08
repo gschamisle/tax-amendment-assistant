@@ -157,11 +157,30 @@ charPr XML 구조:
 | `final_buchik` | 부칙 (최종) | stage1 |
 | `s3_generated` | 생성된 HWPX 파일 목록 | stage3 |
 
-### 병행 법령 초안 흐름
+### 연쇄 개정 검토 큐 (Phase 1)
 
-1단계에서 "병행 법령 초안 생성" → `s3_parallel_sections`에 저장.
-3단계에서 이를 읽어 미리보기 + HWPX 생성에 포함.
-두 단계가 세션 상태로 연결됨.
+`core/related_review_queue.py`가 힌트·역인용·병행·같은조·GPT 연관항을 `RelatedCandidate`로 통합하고 `tier`(required/reference)로 분류한다.
+
+1단계 UI(`ui/related_review_ui.py`):
+- **필수 검토** / **참고 검토** expander 분리
+- 타법·타조문: 「검토 완료」 / 「이 조문도 개정」
+- 같은 조 항: 체크박스로 개정안 반영
+
+`s1_amendment_queue`에 연쇄 작업을 쌓고 1단계 재진입(법령·조문·요강 프리필). 병행 법령 검사 결과도 동일 큐로 진입한다.
+
+3단계 HWPX 생성 전: 필수 미검토·pending 큐가 있으면 경고 + 확인 체크박스.
+
+### 인용 그래프 (Phase 2)
+
+`scripts/build_law_citation_graph.py` → `data/law-citation-graph.json` (소득세법·시행령 1차).
+
+`core/citation_graph.py`가 역인용 인덱스를 로드한다. `related_article_scanner`·`related_review_queue`는 그래프 역인용을 API 스캔보다 우선한다.
+
+### 간접 연쇄 유형 (Phase 3)
+
+`core/related_relation_types.py`: `rate_application`, `definition_scope`, `calculation_rule`, `law_to_decree`, `parallel_tax_law`.
+
+`related_article_hints.py` 골든 케이스(129조 등)에 `relation_type`을 부여하고, 일반 케이스는 그래프+유형 규칙이 담당한다.
 
 ---
 
