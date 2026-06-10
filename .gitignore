@@ -14,6 +14,7 @@ node_modules/
 .env
 pdf_pages/
 output/
+data/law-snapshots/
 
 # Local reference materials (keep on disk, not in git)
 docs/*.pdf

@@ -16,6 +16,7 @@ MODULES: tuple[str, ...] = (
     "scripts.test_review_queue",
     "scripts.test_citation_graph",
     "scripts.test_related_relation_types",
+    "scripts.test_parallel_matrix",
 )
 
 
