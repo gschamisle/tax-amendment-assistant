@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 LAW_API_KEY = os.getenv("LAW_API_KEY", "")
 
 LAW_SEARCH_URL = "https://www.law.go.kr/DRF/lawSearch.do"

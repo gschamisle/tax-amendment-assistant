@@ -8,6 +8,8 @@
 """
 from __future__ import annotations
 
+import re
+
 from core.parallel_matrix import matrix_key
 
 GOLDEN_SOURCE = "golden_manual"
@@ -60,6 +62,39 @@ _SECTION3_ROWS: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
      "종전·기준 감가상각비, 중고자산, 즉시상각, 의제상각, 잔존가액, 상각시부인"),
     (("32", "33", "34"), ("73", "73의2"), "상각부인액 처리·감가상각비 명세서"),
 )
+
+
+_ART_JO_RE = re.compile(r"제(?:(\d+)의(\d+)조|(\d+)조(?:의(\d+))?)")
+
+
+def _art_jo(article_ref: str) -> str:
+    m = _ART_JO_RE.search(article_ref)
+    if not m:
+        return ""
+    if m.group(1) is not None:
+        return f"{m.group(1)}의{m.group(2)}"
+    jo, sub = m.group(3), m.group(4)
+    return f"{jo}의{sub}" if sub else jo
+
+
+def golden_direct_pairs() -> set[tuple[str, str, str, str]]:
+    """§1·§2의 직접 병행쌍 — 후보 필터 보정 시 엄격 recall 대상."""
+    out: set[tuple[str, str, str, str]] = set()
+    for bj, _bd, ij, _id, _r in _SECTION1:
+        out.add(("법인세법", bj, "소득세법", ij))
+    for src_law, src_jo, tgt_law, tgt_art, _rel, _r in _SECTION2:
+        out.add((src_law, src_jo, tgt_law, _art_jo(tgt_art)))
+    return out
+
+
+def golden_group_pairs() -> set[tuple[str, str, str, str]]:
+    """§3 감가상각 조문군의 행내 교차쌍 — 그룹 검토 관계 (완화 recall 대상)."""
+    out: set[tuple[str, str, str, str]] = set()
+    for bj_decrees, ij_decrees, _r in _SECTION3_ROWS:
+        for bd in bj_decrees:
+            for sd in ij_decrees:
+                out.add(("법인세법 시행령", bd, "소득세법 시행령", sd))
+    return out
 
 
 def _jo_display(jo_no: str) -> str:
