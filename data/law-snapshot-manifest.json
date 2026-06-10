@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-06-03",
+  "checked_at": "2026-06-10",
   "laws": [
     {
       "name": "법인세법",
@@ -32,6 +32,22 @@
       "공포일": "20260227",
       "article_count": 131,
       "content_hash": "fe5d91d11ecf2ef9"
+    },
+    {
+      "name": "상속세 및 증여세법",
+      "mst": "276123",
+      "시행일": "20251001",
+      "공포일": "20251001",
+      "article_count": 111,
+      "content_hash": "22b2bcb2aaea542f"
+    },
+    {
+      "name": "상속세 및 증여세법 시행령",
+      "mst": "283637",
+      "시행일": "20260227",
+      "공포일": "20260227",
+      "article_count": 132,
+      "content_hash": "26556eaf1a5ec51a"
     },
     {
       "name": "소득세법",

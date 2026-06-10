@@ -22,6 +22,16 @@
    "content_hash": "fe5d91d11ecf2ef9",
    "article_count": 131
   },
+  "상속세 및 증여세법": {
+   "mst": "276123",
+   "content_hash": "22b2bcb2aaea542f",
+   "article_count": 111
+  },
+  "상속세 및 증여세법 시행령": {
+   "mst": "283637",
+   "content_hash": "26556eaf1a5ec51a",
+   "article_count": 132
+  },
   "소득세법": {
    "mst": "285523",
    "content_hash": "8ff3587dae7359b2",
@@ -43,7 +53,7 @@
    "article_count": 449
   }
  },
- "entry_count": 3056,
+ "entry_count": 3472,
  "entries": {
   "법인세법 시행령|10": [
    {
@@ -487,6 +497,15 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「소득세법」 제99조제1항제3호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제63조제3항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제63조제3항",
     "validated": true
    }
   ],
@@ -1120,6 +1139,15 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "부가가치세법 시행령 제26조(용역의 공급으로 보는 특수관계인에 대한 사업용 부동산의 임대용역)가 이 조문을 인용: 「법인세법 시행령」 제2조제8항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제28조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제28조(합병에 따른 이익의 계산방법 등)가 이 조문을 인용: 「법인세법 시행령」 제2조제8항",
     "validated": true
    },
    {
@@ -1986,6 +2014,15 @@
     "source": "golden_manual",
     "reason": "감가상각 병행: 상각부인액 처리·감가상각비 명세서",
     "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제56조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제56조(1주당 최근 3년간의 순손익액의 계산방법)가 이 조문을 인용: 「법인세법 시행령」 제32조제1항",
+    "validated": true
    }
   ],
   "법인세법 시행령|33": [
@@ -2028,7 +2065,144 @@
     "validated": true
    }
   ],
+  "법인세법 시행령|38": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제50조의3제1항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제50조의3제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제50조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제50조의2",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제38조제10항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제38조제10항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제2조의2제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 같은 영 제2조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제48조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제48조제2항",
+    "validated": true
+   }
+  ],
   "법인세법 시행령|39": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제38조제8항제2호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제38조제8항제2호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제14조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제14조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제50조의3제1항제2호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제50조의3제1항제2호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제50조의2제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제50조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제43조의5제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제43조의5제2항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제50조의4",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제50조의4",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제43조제3항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제43조제3항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제48조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제48조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제12조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제12조(공익법인등의 범위)가 이 조문을 인용: 「법인세법 시행령」 제39조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제43조의4",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제43조의4(공익법인등의 전용계좌의 개설ㆍ사용의무)가 이 조문을 인용: 「법인세법 시행령」 제39조제1항제1호",
+    "validated": true
+   },
    {
     "target_law": "소득세법 시행령",
     "target_article": "제80조",
@@ -2049,6 +2223,15 @@
    }
   ],
   "법인세법 시행령|40": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제2조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제2조의2(특수관계인의 범위)가 이 조문을 인용: 「법인세법 시행령」 제40조제1항",
+    "validated": true
+   },
    {
     "target_law": "소득세법 시행령",
     "target_article": "제42조의2",
@@ -2458,6 +2641,17 @@
     "validated": true
    }
   ],
+  "법인세법 시행령|49": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제15조(가업상속)가 이 조문을 인용: 「법인세법 시행령」 제49조",
+    "validated": true
+   }
+  ],
   "법인세법 시행령|50": [
    {
     "target_law": "조세특례제한법 시행령",
@@ -2529,9 +2723,27 @@
     "source": "citation",
     "reason": "명시 인용: 「조세특례제한법」 제74조제1항제2호",
     "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제38조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제38조(공익법인등이 출연받은 재산의 사후관리)가 이 조문을 인용: 「법인세법 시행령」 제56조제11항",
+    "validated": true
    }
   ],
   "법인세법 시행령|61": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제15조(가업상속)가 이 조문을 인용: 「법인세법 시행령」 제61조제1항제2호",
+    "validated": true
+   },
    {
     "target_law": "소득세법 시행령",
     "target_article": "제190조",
@@ -2673,6 +2885,15 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제12조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제12조",
+    "validated": true
+   },
+   {
     "target_law": "소득세법 시행령",
     "target_article": "제89조",
     "relation_type": "citation",
@@ -2702,6 +2923,24 @@
   ],
   "법인세법 시행령|74": [
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제38조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제38조(공익법인등이 출연받은 재산의 사후관리)가 이 조문을 인용: 「법인세법 시행령」 제74조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제54조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제54조(비상장주식등의 평가)가 이 조문을 인용: 「법인세법 시행령」 제74조제1항제1호",
+    "validated": true
+   },
+   {
     "target_law": "소득세법 시행령",
     "target_article": "제165조",
     "relation_type": "citation",
@@ -2717,6 +2956,17 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 시행령 제12조(주식양도차익 및 배당소득의 계산 등)가 이 조문을 인용: 「법인세법 시행령」 제74조제1항제1호",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|76": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제56조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제56조(1주당 최근 3년간의 순손익액의 계산방법)가 이 조문을 인용: 「법인세법 시행령」 제76조",
     "validated": true
    }
   ],
@@ -2923,6 +3173,17 @@
     "validated": true
    }
   ],
+  "법인세법 시행령|86의2": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의4",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의4(특수관계법인으로부터 제공받은 사업기회로 발생한 이익의 증여 의제)가 이 조문을 인용: 「법인세법 시행령」 제86조의2제1항",
+    "validated": true
+   }
+  ],
   "법인세법 시행령|86의3": [
    {
     "target_law": "조세특례제한법",
@@ -2940,6 +3201,15 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「조세특례제한법」 제100조의23제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의3(특수관계법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「법인세법 시행령」 제86조의3제1항",
     "validated": true
    },
    {
@@ -2964,6 +3234,15 @@
    }
   ],
   "법인세법 시행령|88": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제40조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제40조제1항",
+    "validated": true
+   },
    {
     "target_law": "소득세법 시행령",
     "target_article": "제179조",
@@ -2994,12 +3273,66 @@
   ],
   "법인세법 시행령|89": [
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제53조제8항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제53조제8항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제38조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제38조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제63조제1항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제63조제1항제1호",
+    "validated": true
+   },
+   {
     "target_law": "부가가치세법 시행령",
     "target_article": "제62조",
     "relation_type": "citation",
     "confidence": "high",
     "source": "back_citation",
     "reason": "부가가치세법 시행령 제62조(시가의 기준)가 이 조문을 인용: 「법인세법 시행령」 제89조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제31조의4",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제31조의4(금전 무상대출 등에 따른 이익의 계산방법 등)가 이 조문을 인용: 「법인세법 시행령」 제89조제3항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제32조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제32조(재산사용 및 용역제공 등에 따른 이익의 계산방법 등)가 이 조문을 인용: 「법인세법 시행령」 제89조제4항제2호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의5",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의5(특정법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「법인세법 시행령」 제89조",
     "validated": true
    },
    {
@@ -3217,6 +3550,17 @@
     "validated": true
    }
   ],
+  "법인세법|109": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제45조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제45조의2(명의신탁재산의 증여 의제)가 이 조문을 인용: 「법인세법」 제109조제1항",
+    "validated": true
+   }
+  ],
   "법인세법|11": [
    {
     "target_law": "부가가치세법",
@@ -3310,6 +3654,15 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "부가가치세법 제71조(장부의 작성ㆍ보관)가 이 조문을 인용: 「법인세법」 제112조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제51조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제51조(장부의 작성ㆍ비치 의무)가 이 조문을 인용: 「법인세법」 제112조",
     "validated": true
    },
    {
@@ -3563,6 +3916,17 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 시행령 제100조의27(준용규정)가 이 조문을 인용: 「법인세법」 제117조의2",
+    "validated": true
+   }
+  ],
+  "법인세법|119": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제82조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제82조(지급명세서 등의 제출)가 이 조문을 인용: 「법인세법」 제119조",
     "validated": true
    }
   ],
@@ -4086,6 +4450,69 @@
   ],
   "법인세법|14": [
    {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제63조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제63조(유가증권 등의 평가)가 이 조문을 인용: 「법인세법」 제14조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의3(특수관계법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「법인세법」 제14조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의4",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의4(특수관계법인으로부터 제공받은 사업기회로 발생한 이익의 증여 의제)가 이 조문을 인용: 「법인세법」 제14조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의5",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의5(특정법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「법인세법」 제14조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제53조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제53조(코스닥시장에 상장신청을 한 법인의 주식등의 평가 등)가 이 조문을 인용: 「법인세법」 제14조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제56조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제56조(1주당 최근 3년간의 순손익액의 계산방법)가 이 조문을 인용: 「법인세법」 제14조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제71조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제71조(관리ㆍ처분이 부적당한 재산의 물납)가 이 조문을 인용: 「법인세법」 제14조제2항",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제2조",
     "relation_type": "citation",
@@ -4171,6 +4598,15 @@
   ],
   "법인세법|16": [
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제38조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제38조(공익법인등이 출연받은 재산의 사후관리)가 이 조문을 인용: 「법인세법」 제16조제1항제5호",
+    "validated": true
+   },
+   {
     "target_law": "소득세법 시행령",
     "target_article": "제163조",
     "relation_type": "citation",
@@ -4229,6 +4665,15 @@
   ],
   "법인세법|18": [
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제56조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제56조(1주당 최근 3년간의 순손익액의 계산방법)가 이 조문을 인용: 「법인세법」 제18조제4호",
+    "validated": true
+   },
+   {
     "target_law": "소득세법",
     "target_article": "제17조",
     "relation_type": "citation",
@@ -4276,6 +4721,15 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제56조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제56조(1주당 최근 3년간의 순손익액의 계산방법)가 이 조문을 인용: 「법인세법」 제18조의2",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제100조의32",
     "relation_type": "citation",
@@ -4293,6 +4747,15 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「조세특례제한법」 제22조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제56조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제56조(1주당 최근 3년간의 순손익액의 계산방법)가 이 조문을 인용: 「법인세법」 제18조의4",
     "validated": true
    },
    {
@@ -4392,6 +4855,33 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제12조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제12조(공익법인등의 범위)가 이 조문을 인용: 「법인세법」 제2조제2호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의3(특수관계법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「법인세법」 제2조제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의5",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의5(특정법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「법인세법」 제2조제1호",
+    "validated": true
+   },
+   {
     "target_law": "소득세법",
     "target_article": "제1조의2",
     "relation_type": "citation",
@@ -4481,6 +4971,15 @@
     "confidence": "confirmed",
     "source": "golden_manual",
     "reason": "손금불산입 ↔ 필요경비 불산입 일반",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제56조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제56조(1주당 최근 3년간의 순손익액의 계산방법)가 이 조문을 인용: 「법인세법」 제21조제3호",
     "validated": true
    }
   ],
@@ -4630,6 +5129,24 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의3(특수관계법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「법인세법」 제23조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의4",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의4(특수관계법인으로부터 제공받은 사업기회로 발생한 이익의 증여 의제)가 이 조문을 인용: 「법인세법」 제23조",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제25조",
     "relation_type": "citation",
@@ -4701,6 +5218,24 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "부가가치세법 시행령 제45조(종교, 자선, 학술, 구호 등의 공익 목적 단체가 공급하는 재화 또는 용역으로서 면세하는 것의 범위)가 이 조문을 인용: 「법인세법」 제24조제2항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제12조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제12조(공익법인등의 범위)가 이 조문을 인용: 「법인세법」 제24조제2항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제56조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제56조(1주당 최근 3년간의 순손익액의 계산방법)가 이 조문을 인용: 「법인세법」 제24조제5항",
     "validated": true
    },
    {
@@ -5002,6 +5537,24 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제16조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제16조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제38조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제38조(공익법인등이 출연받은 재산의 사후관리)가 이 조문을 인용: 「법인세법」 제29조제1항",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제74조",
     "relation_type": "citation",
@@ -5225,6 +5778,33 @@
   ],
   "법인세법|43": [
    {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제45조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제45조의3(특수관계법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「법인세법」 제43조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의3(특수관계법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「법인세법」 제43조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의4",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의4(특수관계법인으로부터 제공받은 사업기회로 발생한 이익의 증여 의제)가 이 조문을 인용: 「법인세법」 제43조",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제10조",
     "relation_type": "citation",
@@ -5433,6 +6013,15 @@
   ],
   "법인세법|46의3": [
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제54조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제54조(비상장주식등의 평가)가 이 조문을 인용: 「법인세법」 제46조의3",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제121조의24",
     "relation_type": "citation",
@@ -5618,6 +6207,24 @@
   ],
   "법인세법|52": [
    {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제35조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제35조(저가 양수 또는 고가 양도에 따른 이익의 증여)가 이 조문을 인용: 「법인세법」 제52조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제39조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제39조(공익법인등의 자기내부거래에 대한 증여세 과세)가 이 조문을 인용: 「법인세법」 제52조제2항",
+    "validated": true
+   },
+   {
     "target_law": "소득세법 시행령",
     "target_article": "제38조",
     "relation_type": "citation",
@@ -5800,6 +6407,33 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의3(특수관계법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「법인세법」 제55조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의4",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의4(특수관계법인으로부터 제공받은 사업기회로 발생한 이익의 증여 의제)가 이 조문을 인용: 「법인세법」 제55조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의5",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의5(특정법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「법인세법」 제55조제1항",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제46조의4",
     "relation_type": "citation",
@@ -5844,6 +6478,24 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「소득세법」 제104조의2제2항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제60조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제60조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제15조(가업상속)가 이 조문을 인용: 「법인세법」 제55조의2",
     "validated": true
    },
    {
@@ -6000,6 +6652,24 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "부가가치세법 시행령 제91조의2(재화의 수입에 대한 부가가치세 납부 유예)가 이 조문을 인용: 「법인세법」 제60조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제45조의4",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제45조의4(특수관계법인으로부터 제공받은 사업기회로 발생한 이익의 증여 의제)가 이 조문을 인용: 「법인세법」 제60조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제68조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제68조(증여세 과세표준신고)가 이 조문을 인용: 「법인세법」 제60조제1항",
     "validated": true
    },
    {
@@ -6773,6 +7443,15 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제78조제3항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제78조제3항",
+    "validated": true
+   },
+   {
     "target_law": "소득세법",
     "target_article": "제81조의7",
     "relation_type": "citation",
@@ -7507,6 +8186,17 @@
     "validated": true
    }
   ],
+  "부가가치세법 시행령|108": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제2조제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제2조제1호",
+    "validated": true
+   }
+  ],
   "부가가치세법 시행령|109": [
    {
     "target_law": "소득세법 시행령",
@@ -7688,6 +8378,17 @@
     "validated": true
    }
   ],
+  "부가가치세법 시행령|24": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제73조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제73조",
+    "validated": true
+   }
+  ],
   "부가가치세법 시행령|26": [
    {
     "target_law": "소득세법 시행령",
@@ -7790,6 +8491,15 @@
   ],
   "부가가치세법 시행령|45": [
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제12조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제12조",
+    "validated": true
+   },
+   {
     "target_law": "법인세법",
     "target_article": "제24조제2항제1호",
     "relation_type": "citation",
@@ -7816,6 +8526,17 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 시행령 제121조의2(신용카드등 사용금액에 대한 소득공제)가 이 조문을 인용: 「부가가치세법 시행령」 제46조제1호",
+    "validated": true
+   }
+  ],
+  "부가가치세법 시행령|47": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제12조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제12조",
     "validated": true
    }
   ],
@@ -7878,6 +8599,15 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「소득세법」 제99조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제49조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제49조(평가의 원칙등)가 이 조문을 인용: 「부가가치세법 시행령」 제64조",
     "validated": true
    },
    {
@@ -8433,6 +9163,15 @@
   ],
   "부가가치세법|21": [
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의3(특수관계법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「부가가치세법」 제21조제2항",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제107조",
     "relation_type": "citation",
@@ -8442,7 +9181,27 @@
     "validated": true
    }
   ],
+  "부가가치세법|22": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의3(특수관계법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「부가가치세법」 제22조",
+    "validated": true
+   }
+  ],
   "부가가치세법|24": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의3(특수관계법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「부가가치세법」 제24조제1항",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제111조의4",
@@ -9858,6 +10617,15 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제71조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제71조(관리ㆍ처분이 부적당한 재산의 물납)가 이 조문을 인용: 「부가가치세법」 제8조제9항",
+    "validated": true
+   },
+   {
     "target_law": "소득세법",
     "target_article": "제81조의12",
     "relation_type": "citation",
@@ -10049,6 +10817,2038 @@
     "validated": true
    }
   ],
+  "상속세 및 증여세법 시행령|12": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제72조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제72조(자산의 취득가액 등)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제12조",
+    "validated": true
+   },
+   {
+    "target_law": "부가가치세법 시행령",
+    "target_article": "제45조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "부가가치세법 시행령 제45조(종교, 자선, 학술, 구호 등의 공익 목적 단체가 공급하는 재화 또는 용역으로서 면세하는 것의 범위)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제12조",
+    "validated": true
+   },
+   {
+    "target_law": "부가가치세법 시행령",
+    "target_article": "제47조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "부가가치세법 시행령 제47조(공익단체의 범위)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제12조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제39조제1항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제39조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제2조제2호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제2조제2호",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제24조제2항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제24조제2항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제80조제1항제5호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법 시행령」 제80조제1항제5호",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|14": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제39조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제39조(공익성을 고려하여 정하는 기부금의 범위 등)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제14조제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|15": [
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제2조제1항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법 시행령」 제2조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제9조제4항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법 시행령」 제9조제4항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제104조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제104조의3",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제55조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제55조의2",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제49조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제49조",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제99조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제99조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제61조제1항제2호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제61조제1항제2호",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제10조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법」 제10조",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제196조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법 시행령」 제196조",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제26조의4제2항제3호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법 시행령」 제26조의4제2항제3호",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제20조제1항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제20조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제97조의2제4항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제97조의2제4항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제99조의4제1항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법」 제99조의4제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제60조의2제7항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법 시행령」 제60조의2제7항",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제163조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제163조의2(양도소득의 필요경비 계산 특례)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제15조제5항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제27조의6",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제27조의6(가업의 승계에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제15조제3항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제27조의7",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제27조의7(가업승계에 대한 증여세의 납부유예)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제15조제5항제2호",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제68조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제68조(영농자녀등이 증여받는 농지 등에 대한 증여세의 감면)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제15조제19항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|16": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제19조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제19조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제24조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제24조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제68조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제68조(영농자녀등이 증여받는 농지 등에 대한 증여세의 감면)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제16조제4항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|18": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제107조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법 시행령」 제107조제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|19": [
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제36조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제36조(채무의 인수ㆍ변제에 대한 과세특례)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제19조제2항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|2": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제2조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법 시행령」 제2조",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제2조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법 시행령」 제2조의2",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|20의2": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제88조제6호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제88조제6호",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제89조제1항제3호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제89조제1항제3호",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제155조제7항제2호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법 시행령」 제155조제7항제2호",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|26": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제162조제1항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법 시행령」 제162조제1항제1호",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|28": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제2조제8항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제2조제8항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|2의2": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제38조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제38조(한국학교 등의 요건 등)가 이 조문을 인용: 같은 영 제2조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제40조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제40조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제27조의6",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제27조의6(가업의 승계에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제2조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제116조의31",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제116조의31(채무의 인수ㆍ변제에 대한 과세특례)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제2조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제116조의32",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제116조의32(주주등의 자산양도에 관한 법인세 등 과세특례)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제2조의2제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|31의2": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제70조의2제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제70조의2제2항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|31의4": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제89조제3항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제89조제3항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|32": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제89조제4항제2호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제89조제4항제2호",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|34의3": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제2조제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제2조제1호",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제116조의2제12항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법 시행령」 제116조의2제12항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제6조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법」 제6조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제9조제4항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법 시행령」 제9조제4항",
+    "validated": true
+   },
+   {
+    "target_law": "부가가치세법",
+    "target_article": "제21조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「부가가치세법」 제21조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "부가가치세법",
+    "target_article": "제22조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「부가가치세법」 제22조",
+    "validated": true
+   },
+   {
+    "target_law": "부가가치세법",
+    "target_article": "제24조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「부가가치세법」 제24조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제43조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제43조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제23조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제23조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제55조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제55조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제14조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제14조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제86조의3제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제86조의3제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|34의4": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제43조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제43조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제23조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제23조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제55조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제55조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제14조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제14조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제86조의2제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제86조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제6조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법」 제6조제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|34의5": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제2조제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제2조제1호",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제55조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제55조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제14조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제14조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제89조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제89조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|35": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제107조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법 시행령」 제107조제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|38": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제38조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제38조(한국학교 등의 요건 등)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제38조제10항",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제56조제11항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제56조제11항",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제29조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제29조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제16조제1항제5호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제16조제1항제5호",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제17조제2항제4호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제17조제2항제4호",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제74조제1항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제74조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제39조제1항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제39조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제80조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제80조(공익성을 고려하여 정하는 기부금의 범위)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제38조제8항제2호",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|39": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제52조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제52조제2항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|43": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제39조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제39조(공익성을 고려하여 정하는 기부금의 범위 등)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제43조제3항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|43의4": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제160조의2제2항제3호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제160조의2제2항제3호",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제39조제1항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제39조제1항제1호",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|43의5": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제39조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제39조(공익성을 고려하여 정하는 기부금의 범위 등)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제43조의5제2항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|45의2": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제107조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법 시행령」 제107조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제118조의5제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법 시행령」 제118조의5제1항",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제118조의6제11항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법 시행령」 제118조의6제11항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|49": [
+   {
+    "target_law": "부가가치세법 시행령",
+    "target_article": "제64조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「부가가치세법 시행령」 제64조",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제99조제1항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제99조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제167조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제167조(양도소득의 부당행위 계산)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제49조제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|51": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제89조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제89조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제165조제8항제3호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법 시행령」 제165조제8항제3호",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제134조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제134조(실명등기한 부동산의 범위 등)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제51조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|52의2": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제165조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제165조(토지ㆍ건물외의 자산의 기준시가 산정)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제52조의2제3항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|53": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제89조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제89조(시가의 범위 등)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제53조제8항",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제14조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제14조제2항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|54": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제94조제1항제4호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제94조제1항제4호",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제74조제1항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제74조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제46조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제46조의3",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|55": [
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제29조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법 시행령」 제29조제2항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|56": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제14조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제14조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제18조제4호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제18조제4호",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제18조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제18조의2",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제24조제5항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제24조제5항",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제76조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제76조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제18조의4",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제18조의4",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제21조제3호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제21조제3호",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제32조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법 시행령」 제32조제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|58의2": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제165조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제165조(토지ㆍ건물외의 자산의 기준시가 산정)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제58조의2제2항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|59": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제165조제10항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법 시행령」 제165조제10항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제144조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제144조(추계결정ㆍ경정시의 수입금액의 계산)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제59조제2항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|61": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제165조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제165조(토지ㆍ건물외의 자산의 기준시가 산정)가 이 조문을 인용: 「상속세 및 증여세법 시행령」 제61조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|68": [
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제2조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법 시행령」 제2조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제9조제4항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 같은 영 제9조제4항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|69의2": [
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제30조의6",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법」 제30조의6",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|70": [
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제28조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법 시행령」 제28조제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법 시행령|71": [
+   {
+    "target_law": "부가가치세법",
+    "target_article": "제8조제9항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「부가가치세법」 제8조제9항",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제14조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제14조제2항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|12": [
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제76조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 제76조(정치자금의 손금산입특례 등)가 이 조문을 인용: 「상속세 및 증여세법」 제12조제4호",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|13": [
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제30조의5",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 제30조의5(창업자금에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제13조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제27조의6",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제27조의6(가업의 승계에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제13조제3항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|16": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제29조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 제29조(비영리내국법인의 고유목적사업준비금의 손금산입)가 이 조문을 인용: 「상속세 및 증여세법」 제16조",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제80조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제80조(공익성을 고려하여 정하는 기부금의 범위)가 이 조문을 인용: 「상속세 및 증여세법」 제16조제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|18의2": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제97조의2제4항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제97조의2제4항",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제163조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제163조의2(양도소득의 필요경비 계산 특례)가 이 조문을 인용: 「상속세 및 증여세법」 제18조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제30조의7",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 제30조의7(가업승계 시 증여세의 납부유예)가 이 조문을 인용: 「상속세 및 증여세법」 제18조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제27조의6",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제27조의6(가업의 승계에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제18조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제27조의7",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제27조의7(가업승계에 대한 증여세의 납부유예)가 이 조문을 인용: 「상속세 및 증여세법」 제18조의2제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|18의3": [
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제71조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 제71조(영농자녀등이 증여받는 농지 등에 대한 증여세의 감면)가 이 조문을 인용: 「상속세 및 증여세법」 제18조의3제1항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제68조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제68조(영농자녀등이 증여받는 농지 등에 대한 증여세의 감면)가 이 조문을 인용: 「상속세 및 증여세법」 제18조의3제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|2": [
+   {
+    "target_law": "부가가치세법 시행령",
+    "target_article": "제108조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "부가가치세법 시행령 제108조(가산세)가 이 조문을 인용: 「상속세 및 증여세법」 제2조제1호",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|22": [
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제30조의6",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 제30조의6(가업의 승계에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제22조제2항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|23의2": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제89조제1항제3호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제89조제1항제3호",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|28": [
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제30조의5",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 제30조의5(창업자금에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제28조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|34": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제163조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제163조(양도자산의 필요경비)가 이 조문을 인용: 「상속세 및 증여세법」 제34조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|35": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제52조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제52조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제101조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제101조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제96조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 제96조(양도가액)가 이 조문을 인용: 「상속세 및 증여세법」 제35조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|38": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제89조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제89조(시가의 범위 등)가 이 조문을 인용: 「상속세 및 증여세법」 제38조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|3의2": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제163조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제163조(양도자산의 필요경비)가 이 조문을 인용: 「상속세 및 증여세법」 제3조의2제2항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제30조의5",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 제30조의5(창업자금에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제3조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제71조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 제71조(영농자녀등이 증여받는 농지 등에 대한 증여세의 감면)가 이 조문을 인용: 「상속세 및 증여세법」 제3조의2제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|40": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제88조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제88조(부당행위계산의 유형 등)가 이 조문을 인용: 「상속세 및 증여세법」 제40조제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|41의2": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제70조의2제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제70조의2제2항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|41의3": [
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제30조의6",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 제30조의6(가업의 승계에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제41조의3",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제27조의6",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제27조의6(가업의 승계에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제41조의3",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|44": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제151조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제151조(양도의 범위)가 이 조문을 인용: 「상속세 및 증여세법」 제44조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|45의2": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제105조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제105조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제109조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제109조제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|45의3": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제43조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제43조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|45의4": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제60조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제60조제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|47": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제163조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제163조의2(양도소득의 필요경비 계산 특례)가 이 조문을 인용: 「상속세 및 증여세법」 제47조",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제30조의5",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 제30조의5(창업자금에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제47조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제71조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 제71조(영농자녀등이 증여받는 농지 등에 대한 증여세의 감면)가 이 조문을 인용: 「상속세 및 증여세법」 제47조제2항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|48": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제38조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제38조(한국학교 등의 요건 등)가 이 조문을 인용: 「상속세 및 증여세법」 제48조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제39조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제39조(공익성을 고려하여 정하는 기부금의 범위 등)가 이 조문을 인용: 「상속세 및 증여세법」 제48조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제80조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제80조(공익성을 고려하여 정하는 기부금의 범위)가 이 조문을 인용: 「상속세 및 증여세법」 제48조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제71조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제71조(기부장려금)가 이 조문을 인용: 「상속세 및 증여세법」 제48조제2항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|50의2": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제38조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제38조(한국학교 등의 요건 등)가 이 조문을 인용: 「상속세 및 증여세법」 제50조의2",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제39조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제39조(공익성을 고려하여 정하는 기부금의 범위 등)가 이 조문을 인용: 「상속세 및 증여세법」 제50조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제160조의2제2항제3호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제160조의2제2항제3호",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제71조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제71조(기부장려금)가 이 조문을 인용: 「상속세 및 증여세법」 제50조의2",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|50의3": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제38조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제38조(한국학교 등의 요건 등)가 이 조문을 인용: 「상속세 및 증여세법」 제50조의3제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제39조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제39조(공익성을 고려하여 정하는 기부금의 범위 등)가 이 조문을 인용: 「상속세 및 증여세법」 제50조의3제1항제2호",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제80조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제80조(공익성을 고려하여 정하는 기부금의 범위)가 이 조문을 인용: 「상속세 및 증여세법」 제50조의3제1항제2호",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제71조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제71조(기부장려금)가 이 조문을 인용: 「상속세 및 증여세법」 제50조의3제1항제2호",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|50의4": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제39조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제39조(공익성을 고려하여 정하는 기부금의 범위 등)가 이 조문을 인용: 「상속세 및 증여세법」 제50조의4",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|51": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제160조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제160조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제112조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제112조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|53": [
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제30조의5",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 제30조의5(창업자금에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제53조",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제30조의6",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 제30조의6(가업의 승계에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제53조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|56": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제163조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제163조의2(양도소득의 필요경비 계산 특례)가 이 조문을 인용: 「상속세 및 증여세법」 제56조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|60": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제55조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 제55조의2(토지등 양도소득에 대한 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제60조",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제159조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제159조(부담부증여에 대한 양도차익의 계산)가 이 조문을 인용: 「상속세 및 증여세법」 제60조",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제163조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제163조(양도자산의 필요경비)가 이 조문을 인용: 「상속세 및 증여세법」 제60조",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제167조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제167조(양도소득의 부당행위 계산)가 이 조문을 인용: 「상속세 및 증여세법」 제60조",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제99조의5",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제99조의5(영세개인사업자의 체납액 납부의무 소멸특례)가 이 조문을 인용: 「상속세 및 증여세법」 제60조",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제99조의9",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제99조의9(영세개인사업자의 체납액 징수특례)가 이 조문을 인용: 「상속세 및 증여세법」 제60조",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제99조의14",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제99조의14(생계형체납자의 체납액 납부의무 소멸특례)가 이 조문을 인용: 「상속세 및 증여세법」 제60조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|61": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제99조제4항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제99조제4항",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제163조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제163조(양도자산의 필요경비)가 이 조문을 인용: 「상속세 및 증여세법」 제61조제1항제2호",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제178조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제178조의3(국외자산의 시가 산정 등)가 이 조문을 인용: 「상속세 및 증여세법」 제61조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|62": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제166조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제166조(양도차익의 산정 등)가 이 조문을 인용: 「상속세 및 증여세법」 제62조제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|63": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제89조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제89조(시가의 범위 등)가 이 조문을 인용: 「상속세 및 증여세법」 제63조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제131조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 시행령 제131조(정상가격의 범위 등)가 이 조문을 인용: 「상속세 및 증여세법」 제63조제3항",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제14조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제14조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제127조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제127조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제99조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 제99조(기준시가의 산정)가 이 조문을 인용: 「상속세 및 증여세법」 제63조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제178조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제178조의3(국외자산의 시가 산정 등)가 이 조문을 인용: 「상속세 및 증여세법」 제63조",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제183조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제183조의2(정상가격의 개념 등)가 이 조문을 인용: 「상속세 및 증여세법」 제63조제3항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제82조의4",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제82조의4(우리사주조합원 등에 대한 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제63조제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|65": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제99조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 제99조(기준시가의 산정)가 이 조문을 인용: 「상속세 및 증여세법」 제65조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제165조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 시행령 제165조(토지ㆍ건물외의 자산의 기준시가 산정)가 이 조문을 인용: 「상속세 및 증여세법」 제65조제1항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|67": [
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제27조의6",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제27조의6(가업의 승계에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제67조",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제27조의7",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제27조의7(가업승계에 대한 증여세의 납부유예)가 이 조문을 인용: 「상속세 및 증여세법」 제67조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|68": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제60조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제60조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제27조의6",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제27조의6(가업의 승계에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제68조",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제27조의7",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제27조의7(가업승계에 대한 증여세의 납부유예)가 이 조문을 인용: 「상속세 및 증여세법」 제68조",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제68조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제68조(영농자녀등이 증여받는 농지 등에 대한 증여세의 감면)가 이 조문을 인용: 「상속세 및 증여세법」 제68조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|71": [
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제30조의6",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법」 제30조의6",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|72의2": [
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제30조의6",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법」 제30조의6",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|73": [
+   {
+    "target_law": "부가가치세법 시행령",
+    "target_article": "제24조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "부가가치세법 시행령 제24조(재화의 공급으로 보지 아니하는 조세의 물납)가 이 조문을 인용: 「상속세 및 증여세법」 제73조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|76": [
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제30조의6",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 제30조의6(가업의 승계에 대한 증여세 과세특례)가 이 조문을 인용: 「상속세 및 증여세법」 제76조",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제71조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 제71조(영농자녀등이 증여받는 농지 등에 대한 증여세의 감면)가 이 조문을 인용: 「상속세 및 증여세법」 제76조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|77": [
+   {
+    "target_law": "조세특례제한법 시행령",
+    "target_article": "제27조의7",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "조세특례제한법 시행령 제27조의7(가업승계에 대한 증여세의 납부유예)가 이 조문을 인용: 「상속세 및 증여세법」 제77조",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|78": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제75조의4",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "법인세법 제75조의4(기부금영수증 발급ㆍ작성ㆍ보관 불성실 가산세)가 이 조문을 인용: 「상속세 및 증여세법」 제78조제3항",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제81조의7",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "소득세법 제81조의7(기부금영수증 발급ㆍ작성ㆍ보관 불성실 가산세)가 이 조문을 인용: 「상속세 및 증여세법」 제78조제3항",
+    "validated": true
+   }
+  ],
+  "상속세 및 증여세법|82": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제164조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「소득세법」 제164조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제119조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「법인세법」 제119조",
+    "validated": true
+   },
+   {
+    "target_law": "조세특례제한법",
+    "target_article": "제100조의23",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「조세특례제한법」 제100조의23",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|102": [
    {
     "target_law": "법인세법 시행령",
@@ -10068,6 +12868,35 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 시행령 제121조의2(신용카드등 사용금액에 대한 소득공제)가 이 조문을 인용: 「소득세법 시행령」 제106조제7항",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|107": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제18조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제18조(기타 인적공제)가 이 조문을 인용: 「소득세법 시행령」 제107조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제35조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제35조(비과세되는 증여재산의 범위등)가 이 조문을 인용: 「소득세법 시행령」 제107조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제45조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제45조의2(장애인이 증여받은 재산의 과세가액불산입)가 이 조문을 인용: 「소득세법 시행령」 제107조제1항",
     "validated": true
    }
   ],
@@ -10122,12 +12951,32 @@
   ],
   "소득세법 시행령|118의5": [
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제45조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제45조의2(장애인이 증여받은 재산의 과세가액불산입)가 이 조문을 인용: 「소득세법 시행령」 제118조의5제1항",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제105조",
     "relation_type": "citation",
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「조세특례제한법 시행령」 제105조",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|118의6": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제45조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제45조의2(장애인이 증여받은 재산의 과세가액불산입)가 이 조문을 인용: 「소득세법 시행령」 제118조의6제11항",
     "validated": true
    }
   ],
@@ -10266,6 +13115,15 @@
   ],
   "소득세법 시행령|144": [
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제59조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제59조제2항",
+    "validated": true
+   },
+   {
     "target_law": "부가가치세법",
     "target_article": "제46조제1항",
     "relation_type": "citation",
@@ -10317,6 +13175,17 @@
     "validated": true
    }
   ],
+  "소득세법 시행령|151": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제44조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제44조",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|152": [
    {
     "target_law": "법인세법 시행령",
@@ -10358,6 +13227,17 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "법인세법 시행령 제92조의2(토지등양도소득에 대한 과세특례)가 이 조문을 인용: 「소득세법 시행령」 제154조제3항",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|155": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제20조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제20조의2(동거주택 인정의 범위)가 이 조문을 인용: 「소득세법 시행령」 제155조제7항제2호",
     "validated": true
    }
   ],
@@ -10432,6 +13312,17 @@
     "validated": true
    }
   ],
+  "소득세법 시행령|159": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제60조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제60조",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|161의3": [
    {
     "target_law": "법인세법 시행령",
@@ -10451,6 +13342,15 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "법인세법 시행령 제52조(건설자금에 충당한 차입금의 이자의 범위)가 이 조문을 인용: 「소득세법 시행령」 제162조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제26조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제26조(저가 양수 또는 고가 양도에 따른 이익의 계산방법 등)가 이 조문을 인용: 「소득세법 시행령」 제162조제1항제1호",
     "validated": true
    },
    {
@@ -10564,6 +13464,42 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제34조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제34조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제60조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제60조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제61조제1항제2호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제61조제1항제2호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제3조의2제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제3조의2제2항",
+    "validated": true
+   },
+   {
     "target_law": "법인세법",
     "target_article": "제2조제12호",
     "relation_type": "citation",
@@ -10573,7 +13509,63 @@
     "validated": true
    }
   ],
+  "소득세법 시행령|163의2": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제56조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제56조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제47조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제47조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제18조의2제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제18조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조제5항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제15조제5항제1호",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|165": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제51조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제51조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제52조의2제3항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제52조의2제3항",
+    "validated": true
+   },
    {
     "target_law": "법인세법 시행령",
     "target_article": "제74조제1항제1호",
@@ -10581,6 +13573,42 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「법인세법 시행령」 제74조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제58조의2제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제58조의2제2항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제59조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제59조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제65조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제65조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제61조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제61조",
     "validated": true
    },
    {
@@ -10604,6 +13632,15 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제62조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제62조제1항",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제97조의7",
     "relation_type": "citation",
@@ -10623,6 +13660,24 @@
    }
   ],
   "소득세법 시행령|167": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제60조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제60조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제49조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제49조제1항",
+    "validated": true
+   },
    {
     "target_law": "소득세법",
     "target_article": "제105조",
@@ -10744,6 +13799,26 @@
     "validated": true
    }
   ],
+  "소득세법 시행령|178의3": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제61조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제61조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제63조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제63조",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|179": [
    {
     "target_law": "법인세법 시행령",
@@ -10834,6 +13909,17 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「법인세법 시행령」 제88조제1항제8호",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|183의2": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제63조제3항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제63조제3항",
     "validated": true
    }
   ],
@@ -10999,6 +14085,15 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제15조(가업상속)가 이 조문을 인용: 「소득세법 시행령」 제196조",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제17조",
     "relation_type": "citation",
@@ -11079,6 +14174,17 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 시행령 제16조의2(외국인근로자에 대한 과세특례)가 이 조문을 인용: 「소득세법 시행령」 제198조제1항",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|2": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제2조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제2조(주소와 거소의 정의 등)가 이 조문을 인용: 「소득세법 시행령」 제2조",
     "validated": true
    }
   ],
@@ -11775,6 +14881,17 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「조세특례제한법」 제63조의2",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|2의2": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제2조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제2조(주소와 거소의 정의 등)가 이 조문을 인용: 「소득세법 시행령」 제2조의2",
     "validated": true
    }
   ],
@@ -12594,12 +15711,57 @@
   ],
   "소득세법 시행령|80": [
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제12조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제12조(공익법인등의 범위)가 이 조문을 인용: 「소득세법 시행령」 제80조제1항제5호",
+    "validated": true
+   },
+   {
     "target_law": "법인세법 시행령",
     "target_article": "제39조제1항",
     "relation_type": "citation",
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「법인세법 시행령」 제39조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제16조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제16조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제38조제8항제2호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제38조제8항제2호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제50조의3제1항제2호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제50조의3제1항제2호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제48조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제48조제2항",
     "validated": true
    }
   ],
@@ -12803,6 +15965,15 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "법인세법 제92조(국내원천소득 금액의 계산)가 이 조문을 인용: 「소득세법」 제101조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제35조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제35조(저가 양수 또는 고가 양도에 따른 이익의 증여)가 이 조문을 인용: 「소득세법」 제101조제1항",
     "validated": true
    }
   ],
@@ -13010,6 +16181,17 @@
     "validated": true
    }
   ],
+  "소득세법|104의3": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제15조(가업상속)가 이 조문을 인용: 「소득세법」 제104조의3",
+    "validated": true
+   }
+  ],
   "소득세법|105": [
    {
     "target_law": "법인세법",
@@ -13018,6 +16200,15 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "법인세법 제62조의2(비영리내국법인의 자산양도소득에 대한 신고 특례)가 이 조문을 인용: 「소득세법」 제105조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제45조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제45조의2(명의신탁재산의 증여 의제)가 이 조문을 인용: 「소득세법」 제105조",
     "validated": true
    },
    {
@@ -13526,6 +16717,15 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "법인세법 시행령 제162조(지급명세서의 제출)가 이 조문을 인용: 「소득세법」 제127조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제63조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제63조(유가증권 등의 평가)가 이 조문을 인용: 「소득세법」 제127조제1항",
     "validated": true
    },
    {
@@ -14427,6 +17627,15 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제51조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제51조(장부의 작성ㆍ비치 의무)가 이 조문을 인용: 「소득세법」 제160조",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제128조",
     "relation_type": "citation",
@@ -14462,6 +17671,24 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "부가가치세법 시행령 제88조(신용카드 등의 사용에 따른 세액공제 등)가 이 조문을 인용: 「소득세법」 제160조의2제4항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제50조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제50조의2(공익법인등의 전용계좌 개설ㆍ사용 의무)가 이 조문을 인용: 「소득세법」 제160조의2제2항제3호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제43조의4",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제43조의4(공익법인등의 전용계좌의 개설ㆍ사용의무)가 이 조문을 인용: 「소득세법」 제160조의2제2항제3호",
     "validated": true
    },
    {
@@ -14849,6 +18076,15 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "법인세법 시행령 제162조(지급명세서의 제출)가 이 조문을 인용: 「소득세법」 제164조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제82조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제82조(지급명세서 등의 제출)가 이 조문을 인용: 「소득세법」 제164조",
     "validated": true
    },
    {
@@ -15260,6 +18496,15 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제38조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제38조(공익법인등이 출연받은 재산의 사후관리)가 이 조문을 인용: 「소득세법」 제17조제2항제4호",
+    "validated": true
+   },
+   {
     "target_law": "법인세법",
     "target_article": "제5조제2항",
     "relation_type": "citation",
@@ -15441,6 +18686,15 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "법인세법 시행령 제132조(국내원천소득의 범위)가 이 조문을 인용: 「소득세법」 제19조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제16조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제16조(영농상속)가 이 조문을 인용: 「소득세법」 제19조제2항",
     "validated": true
    },
    {
@@ -15720,6 +18974,15 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제15조(가업상속)가 이 조문을 인용: 「소득세법」 제20조제1항제1호",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제16조의4",
     "relation_type": "citation",
@@ -15979,6 +19242,15 @@
    }
   ],
   "소득세법|24": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제16조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제16조(영농상속)가 이 조문을 인용: 「소득세법」 제24조제1항",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제2조",
@@ -17060,6 +20332,24 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제41조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제41조의2(초과배당에 따른 이익의 증여)가 이 조문을 인용: 「소득세법」 제70조의2제2항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제31조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제31조의2(초과배당에 따른 이익의 계산방법 등)가 이 조문을 인용: 「소득세법」 제70조의2제2항",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제122조의3",
     "relation_type": "citation",
@@ -17382,6 +20672,15 @@
     "source": "citation",
     "reason": "명시 인용: 「법인세법」 제75조의4제2항",
     "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제78조제3항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제78조제3항",
+    "validated": true
    }
   ],
   "소득세법|81의9": [
@@ -17466,6 +20765,15 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제20조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제20조의2(동거주택 인정의 범위)가 이 조문을 인용: 「소득세법」 제88조제6호",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제71조의2",
     "relation_type": "citation",
@@ -17539,6 +20847,33 @@
    }
   ],
   "소득세법|89": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제23조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제23조의2(동거주택 상속공제)가 이 조문을 인용: 「소득세법」 제89조제1항제3호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제20조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제20조의2(동거주택 인정의 범위)가 이 조문을 인용: 「소득세법」 제89조제1항제3호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제51조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제51조(지상권등의 평가)가 이 조문을 인용: 「소득세법」 제89조제2항",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제71조의2",
@@ -17795,6 +21130,15 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "법인세법 시행령 제132조(국내원천소득의 범위)가 이 조문을 인용: 「소득세법」 제94조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제54조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제54조(비상장주식등의 평가)가 이 조문을 인용: 「소득세법」 제94조제1항제4호",
     "validated": true
    },
    {
@@ -18216,6 +21560,15 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제35조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제35조",
+    "validated": true
+   },
+   {
     "target_law": "법인세법",
     "target_article": "제67조",
     "relation_type": "citation",
@@ -18246,6 +21599,24 @@
    }
   ],
   "소득세법|97의2": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제15조(가업상속)가 이 조문을 인용: 「소득세법」 제97조의2제4항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제18조의2제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제18조의2제1항",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제77조",
@@ -18302,6 +21673,51 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "부가가치세법 시행령 제64조(토지와 건물 등을 함께 공급하는 경우 건물 등의 공급가액 계산)가 이 조문을 인용: 「소득세법」 제99조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제61조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제61조(부동산 등의 평가)가 이 조문을 인용: 「소득세법」 제99조제4항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제15조(가업상속)가 이 조문을 인용: 「소득세법」 제99조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제49조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제49조(평가의 원칙등)가 이 조문을 인용: 「소득세법」 제99조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제63조제1항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제63조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제65조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제65조제1항",
     "validated": true
    },
    {
@@ -20012,6 +23428,17 @@
     "validated": true
    }
   ],
+  "조세특례제한법 시행령|116의2": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의3(특수관계법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「조세특례제한법 시행령」 제116조의2제12항",
+    "validated": true
+   }
+  ],
   "조세특례제한법 시행령|116의24": [
    {
     "target_law": "부가가치세법",
@@ -20090,6 +23517,15 @@
     "source": "citation",
     "reason": "명시 인용: 「법인세법 시행령」 제16조제1항",
     "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제2조의2제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제2조의2제1항",
+    "validated": true
    }
   ],
   "조세특례제한법 시행령|116의32": [
@@ -20109,6 +23545,15 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「소득세법 시행령」 제162조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제2조의2제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제2조의2제1항",
     "validated": true
    }
   ],
@@ -20622,6 +24067,15 @@
     "source": "citation",
     "reason": "명시 인용: 「소득세법」 제99조",
     "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제51조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제51조",
+    "validated": true
    }
   ],
   "조세특례제한법 시행령|136": [
@@ -20884,6 +24338,24 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "부가가치세법 시행령 제91조의2(재화의 수입에 대한 부가가치세 납부 유예)가 이 조문을 인용: 「조세특례제한법 시행령」 제2조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제15조(가업상속)가 이 조문을 인용: 「조세특례제한법 시행령」 제2조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제68조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제68조(연부연납금액등의 계산)가 이 조문을 인용: 「조세특례제한법 시행령」 제2조제1항",
     "validated": true
    },
    {
@@ -21593,6 +25065,15 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제15조(가업상속)가 이 조문을 인용: 「조세특례제한법 시행령」 제26조의4제2항제3호",
+    "validated": true
+   },
+   {
     "target_law": "법인세법 시행령",
     "target_article": "제40조제1항",
     "relation_type": "citation",
@@ -21783,7 +25264,117 @@
     "validated": true
    }
   ],
+  "조세특례제한법 시행령|27의6": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조제3항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제15조제3항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제68조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제68조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제67조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제67조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제2조의2제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제2조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제41조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제41조의3",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제13조제3항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제13조제3항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제18조의2제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제18조의2제1항",
+    "validated": true
+   }
+  ],
   "조세특례제한법 시행령|27의7": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제67조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제67조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제77조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제77조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제18조의2제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제18조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제68조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제68조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조제5항제2호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제15조제5항제2호",
+    "validated": true
+   },
    {
     "target_law": "소득세법",
     "target_article": "제20조제1항제1호",
@@ -21795,6 +25386,15 @@
    }
   ],
   "조세특례제한법 시행령|28": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제70조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제70조(물납의 신청 및 허가)가 이 조문을 인용: 「조세특례제한법 시행령」 제28조제1항",
+    "validated": true
+   },
    {
     "target_law": "법인세법",
     "target_article": "제44조제2항",
@@ -21813,6 +25413,15 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "법인세법 시행령 제86조(교환으로 인한 자산양도차익상당액의 손금산입)가 이 조문을 인용: 「조세특례제한법 시행령」 제29조제3항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제55조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제55조(순자산가액의 계산방법)가 이 조문을 인용: 「조세특례제한법 시행령」 제29조제2항",
     "validated": true
    },
    {
@@ -22005,6 +25614,15 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「법인세법」 제18조제6호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제19조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제19조제2항",
     "validated": true
    }
   ],
@@ -22267,6 +25885,15 @@
   ],
   "조세특례제한법 시행령|60의2": [
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제15조(가업상속)가 이 조문을 인용: 「조세특례제한법 시행령」 제60조의2제7항",
+    "validated": true
+   },
+   {
     "target_law": "소득세법 시행령",
     "target_article": "제122조제1항",
     "relation_type": "citation",
@@ -22499,12 +26126,48 @@
   ],
   "조세특례제한법 시행령|68": [
    {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제18조의3제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제18조의3제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제68조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제68조",
+    "validated": true
+   },
+   {
     "target_law": "소득세법",
     "target_article": "제89조제1항제2호",
     "relation_type": "citation",
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「소득세법」 제89조제1항제2호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조제19항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제15조제19항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제16조제4항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법 시행령」 제16조제4항",
     "validated": true
    }
   ],
@@ -22650,6 +26313,33 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「소득세법」 제165조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제50조의3제1항제2호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제50조의3제1항제2호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제50조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제50조의2",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제48조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제48조제2항",
     "validated": true
    }
   ],
@@ -22926,6 +26616,15 @@
   ],
   "조세특례제한법 시행령|82의4": [
    {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제63조제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제63조제1항",
+    "validated": true
+   },
+   {
     "target_law": "소득세법 시행령",
     "target_article": "제27조제7항",
     "relation_type": "citation",
@@ -22987,6 +26686,33 @@
    }
   ],
   "조세특례제한법 시행령|9": [
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제15조(가업상속)가 이 조문을 인용: 「조세특례제한법 시행령」 제9조제4항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의3(특수관계법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「조세특례제한법 시행령」 제9조제4항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제68조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제68조(연부연납금액등의 계산)가 이 조문을 인용: 같은 영 제9조제4항",
+    "validated": true
+   },
    {
     "target_law": "법인세법 시행령",
     "target_article": "제42조제2항",
@@ -23715,6 +27441,17 @@
     "validated": true
    }
   ],
+  "조세특례제한법 시행령|99의14": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제60조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제60조",
+    "validated": true
+   }
+  ],
   "조세특례제한법 시행령|99의2": [
    {
     "target_law": "법인세법 시행령",
@@ -23774,6 +27511,15 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「소득세법 시행령」 제133조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제60조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제60조",
     "validated": true
    }
   ],
@@ -23862,6 +27608,17 @@
     "validated": true
    }
   ],
+  "조세특례제한법 시행령|99의9": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제60조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제60조",
+    "validated": true
+   }
+  ],
   "조세특례제한법 시행령|9의2": [
    {
     "target_law": "법인세법",
@@ -23908,6 +27665,15 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "법인세법 시행령 제91조의3(기능통화 도입기업의 과세표준계산방법 관련 세부 규정)가 이 조문을 인용: 「조세특례제한법」 제10조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제15조(가업상속)가 이 조문을 인용: 「조세특례제한법」 제10조",
     "validated": true
    },
    {
@@ -24295,6 +28061,15 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "법인세법 시행령 제120조의4(법인과세 신탁재산에 대한 소득공제)가 이 조문을 인용: 「조세특례제한법」 제100조의23제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제82조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제82조(지급명세서 등의 제출)가 이 조문을 인용: 「조세특례제한법」 제100조의23",
     "validated": true
    }
   ],
@@ -27274,6 +31049,129 @@
     "validated": true
    }
   ],
+  "조세특례제한법|30의5": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제53조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제53조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제3조의2제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제3조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제13조제1항제1호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제13조제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제28조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제28조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제47조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제47조제2항",
+    "validated": true
+   }
+  ],
+  "조세특례제한법|30의6": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제71조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제71조(연부연납)가 이 조문을 인용: 「조세특례제한법」 제30조의6",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제72조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 제72조의2(가업상속에 대한 상속세의 납부유예)가 이 조문을 인용: 「조세특례제한법」 제30조의6",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제69조의2",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제69조의2(가업상속에 대한 상속세의 납부유예 신청 등)가 이 조문을 인용: 「조세특례제한법」 제30조의6",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제53조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제53조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제22조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제22조제2항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제76조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제76조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제41조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제41조의3",
+    "validated": true
+   }
+  ],
+  "조세특례제한법|30의7": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제18조의2제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제18조의2제1항",
+    "validated": true
+   }
+  ],
   "조세특례제한법|33": [
    {
     "target_law": "법인세법",
@@ -27701,6 +31599,24 @@
     "validated": true
    },
    {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의3",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의3(특수관계법인과의 거래를 통한 이익의 증여 의제)가 이 조문을 인용: 「조세특례제한법」 제6조제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제34조의4",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제34조의4(특수관계법인으로부터 제공받은 사업기회로 발생한 이익의 증여 의제)가 이 조문을 인용: 「조세특례제한법」 제6조제1항",
+    "validated": true
+   },
+   {
     "target_law": "소득세법",
     "target_article": "제35조",
     "relation_type": "citation",
@@ -27903,6 +31819,44 @@
     "validated": true
    }
   ],
+  "조세특례제한법|71": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제18조의3제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제18조의3제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제76조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제76조",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제3조의2제1항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제3조의2제1항",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제47조제2항",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제47조제2항",
+    "validated": true
+   }
+  ],
   "조세특례제한법|71의2": [
    {
     "target_law": "소득세법",
@@ -28016,6 +31970,17 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「법인세법」 제112조의2",
+    "validated": true
+   }
+  ],
+  "조세특례제한법|76": [
+   {
+    "target_law": "상속세 및 증여세법",
+    "target_article": "제12조제4호",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "citation",
+    "reason": "명시 인용: 「상속세 및 증여세법」 제12조제4호",
     "validated": true
    }
   ],
@@ -29379,6 +33344,15 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "법인세법 시행령 제92조의10(별장의 범위와 적용기준)가 이 조문을 인용: 「조세특례제한법」 제99조의4제1항제1호",
+    "validated": true
+   },
+   {
+    "target_law": "상속세 및 증여세법 시행령",
+    "target_article": "제15조",
+    "relation_type": "citation",
+    "confidence": "high",
+    "source": "back_citation",
+    "reason": "상속세 및 증여세법 시행령 제15조(가업상속)가 이 조문을 인용: 「조세특례제한법」 제99조의4제1항제1호",
     "validated": true
    },
    {

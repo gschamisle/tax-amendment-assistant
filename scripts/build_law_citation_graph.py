@@ -17,6 +17,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+# Windows 콘솔 cp949 인코딩 크래시 방지
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+
 from core.citation_parser import parse_citations  # noqa: E402
 from core.law_api import get_law_text, search_laws  # noqa: E402
 
