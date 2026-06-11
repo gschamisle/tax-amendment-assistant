@@ -7,8 +7,9 @@
   1. golden_manual   — docs/corporate-income-tax-parallel-manual.md 확정·연쇄 매핑
   2. code_hint       — cross_ref_checker._PARALLEL_ARTICLE_HINTS
   3. related_hint    — related_article_hints._RELATED_HINTS (129조 등)
-  4. citation        — 인용 그래프 타법 엣지 (정방향: 이 조문이 인용하는 타법 조문)
-  5. back_citation   — 인용 그래프 타법 엣지 (역방향: 이 조문을 인용하는 타법 조문)
+  4. semantic_llm    — 3단계 LLM 쌍별 판별 결과 (match=true, 양방향)
+  5. citation        — 인용 그래프 타법 엣지 (정방향: 이 조문이 인용하는 타법 조문)
+  6. back_citation   — 인용 그래프 타법 엣지 (역방향: 이 조문을 인용하는 타법 조문)
 
 사용:
   uv run python scripts/build_parallel_matrix.py                    # 스냅샷 재사용
@@ -41,9 +42,13 @@ from core.related_article_hints import _RELATED_HINTS  # noqa: E402
 
 _SNAPSHOT_DIR = ROOT / "data" / "law-snapshots"
 _GRAPH_PATH = ROOT / "data" / "law-citation-graph.json"
+_ADJUDICATIONS_PATH = ROOT / "data" / "parallel-adjudications.json"
 _OUT = ROOT / "data" / "parallel-law-matrix.json"
 
-_SOURCE_PRIORITY = ("golden_manual", "code_hint", "related_hint", "citation", "back_citation")
+_SOURCE_PRIORITY = (
+    "golden_manual", "code_hint", "related_hint",
+    "semantic_llm", "citation", "back_citation",
+)
 
 # "제33조제1항제12호" / "제33조의2" / "제33의2조" → (jo, jo_sub)
 _ART_RE = re.compile(r"제(?:(\d+)의(\d+)조|(\d+)조(?:의(\d+))?)")
@@ -176,7 +181,33 @@ def build_entries() -> dict[str, list[dict]]:
             n_rel += 1
     print(f"  related_hint: {n_rel}건")
 
-    # 4·5. 인용 그래프 타법 엣지 (양방향)
+    # 4. LLM 쌍별 판별 (3단계, match=true만, 양방향)
+    n_sem = 0
+    if _ADJUDICATIONS_PATH.is_file():
+        adj = json.loads(_ADJUDICATIONS_PATH.read_text(encoding="utf-8"))
+        for r in adj.get("results", []):
+            if not r.get("match"):
+                continue
+            jo_a, jo_b = r["jo_a"], r["jo_b"]
+            disp_a = f"제{jo_a}조" if "의" not in jo_a else "제{}조의{}".format(*jo_a.split("의", 1))
+            disp_b = f"제{jo_b}조" if "의" not in jo_b else "제{}조의{}".format(*jo_b.split("의", 1))
+            common = {
+                "relation_type": r.get("relation_type", "parallel_tax_law"),
+                "confidence": r.get("confidence", "medium"),
+                "source": "semantic_llm",
+                "reason": r.get("reason", ""),
+            }
+            _add(entries, matrix_key(r["law_a"], jo_a),
+                 {"target_law": r["law_b"], "target_article": disp_b, **common})
+            _add(entries, matrix_key(r["law_b"], jo_b),
+                 {"target_law": r["law_a"], "target_article": disp_a, **common})
+            n_sem += 2
+        print(f"  semantic_llm: {n_sem}건 (match {adj.get('match_count', '?')}쌍, "
+              f"model {adj.get('model', '?')})")
+    else:
+        print("  판별 결과 없음 — semantic_llm 레이어 생략")
+
+    # 5·6. 인용 그래프 타법 엣지 (양방향)
     n_cite = n_back = 0
     if _GRAPH_PATH.is_file():
         graph = json.loads(_GRAPH_PATH.read_text(encoding="utf-8"))

@@ -1,5 +1,5 @@
 {
- "built_at": "2026-06-10",
+ "built_at": "2026-06-11",
  "stage": 1,
  "law_versions": {
   "법인세법": {
@@ -53,7 +53,7 @@
    "article_count": 449
   }
  },
- "entry_count": 3472,
+ "entry_count": 3828,
  "entries": {
   "법인세법 시행령|10": [
    {
@@ -105,6 +105,15 @@
    }
   ],
   "법인세법 시행령|104": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제143조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제104조와 소득세법 시행령 제143조는 각각 법인과 개인사업자의 장부 미비 시 추계결정·경정의 기준과 방법을 동일한 취지로 병행 규정하고 있으므로 개정 시 동시에 검토해야 한다.",
+    "validated": true
+   },
    {
     "target_law": "소득세법 시행령",
     "target_article": "제145조",
@@ -171,7 +180,47 @@
     "validated": true
    }
   ],
+  "법인세법 시행령|109": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제177조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 각각 과세표준과 세액을 통지할 때 납부고지서에 계산명세를 첨부하고 필요한 사항을 기재하여 통지하며, 지방국세청장의 결정·경정 사실을 표시하도록 규정한 동일한 취지의 절차 규정이다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제149조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 각각 법인과 개인사업자에 대해 과세표준과 세액 통지의 동일한 정책 목적을 규정하고 있으므로 세법 개정 시 병행 검토 대상입니다.",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|110": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제149조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 결손금 소급공제에 의한 환급세액 계산이라는 동일한 정책 목적을 각각 법인과 개인사업자에 대해 병행으로 규정하고 있으며, 환급신청 절차, 환급취소 시 세액 계산 방식, 이자상당액 산정 등 규정 체계와 취지가 동일합니다.",
+    "validated": true
+   }
+  ],
   "법인세법 시행령|111": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제189조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제111조와 소득세법 시행령 제189조의2는 간접투자회사등으로부터 지급받는 소득에 대한 외국납부세액 공제 시 원천징수세액 계산 방식을 법인과 거주자(개인)에 대해 동일한 취지로 규정하고 있어 병행 개정이 필요한 관계이다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제104조의3제1항",
@@ -230,6 +279,15 @@
   "법인세법 시행령|113": [
    {
     "target_law": "소득세법 시행령",
+    "target_article": "제193조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제113조와 소득세법 시행령 제193조의2는 법인과 거주자/비거주자가 채권등을 보유한 기간의 이자상당액에 대해 동일한 정책 취지(보유기간 동안의 이자상당액 계산)로 원천징수를 규정하고 있으므로 병행 개정 검토 대상이다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
     "target_article": "제22조의2제1항",
     "relation_type": "citation",
     "confidence": "high",
@@ -276,6 +334,15 @@
   ],
   "법인세법 시행령|114의2": [
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 환매조건부채권매매거래에서 보유기간이자등상당액의 귀속자를 결정하고 원천징수 특례를 적용하는 동일한 정책 목적을 각각 법인 및 비거주자에 대해 병행으로 규정하고 있습니다.",
+    "validated": true
+   },
+   {
     "target_law": "소득세법",
     "target_article": "제133조의2",
     "relation_type": "citation",
@@ -285,7 +352,36 @@
     "validated": true
    }
   ],
+  "법인세법 시행령|115": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제186조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 원천징수세액의 반기별 납부 특례를 동일한 정책 목적(소규모 사업자의 납부 부담 경감)으로 각각 법인과 개인사업자에 대해 병행 규정하고 있으며, 상시고용인원 기준, 신청 절차, 승인 기준 등 계산방법과 적용범위가 동일한 취지로 설계되어 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제185조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 원천징수의무자의 납부의무, 신고서 제출의무, 납부처 등 동일한 취지의 원천징수 절차를 각각 법인과 개인에 대해 병행으로 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
   "법인세법 시행령|117": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제193조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제117조 제1항이 소득세법 시행령 제193조를 준용하도록 명시하고 있어, 법인과 개인에 대한 원천징수영수증 교부에 관한 동일 취지의 병행 규정 관계입니다.",
+    "validated": true
+   },
    {
     "target_law": "소득세법",
     "target_article": "제133조",
@@ -362,6 +458,28 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「조세특례제한법」 제104조의10제2항",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|120의20": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제81조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제120조의20은 연결법인의 기부금 손금불산입을, 소득세법 시행령 제81조는 개인사업자의 기부금 필요경비 산입을 각각 규정하고 있으며, 두 조문 모두 기부금의 한도 계산 및 이월 처리라는 동일한 정책 목적을 서로 다른 납세자군에 대해 규율하고 있다.",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|120의21": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제85조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 연결법인 기업업무추진비 손금불산입과 소득세법의 다중사업장 기업업무추진비 한도액이 동일한 정책 목적(기업업무추진비의 배분·한도 산정)을 서로 다른 납세자군(법인 vs 개인사업자)에 대해 규정하고 있으며, 수입금액 기준의 안분 방식과 한도액 계산 방식이 동일한 취지이다.",
     "validated": true
    }
   ],
@@ -460,6 +578,15 @@
   ],
   "법인세법 시행령|129": [
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제57조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제129조 제2항과 소득세법 시행령 제57조가 퇴직급여충당금의 필요경비 계상 요건을 각각 외국법인과 개인사업자에 대해 동일한 취지로 규정하고 있어 병행 개정 검토가 필요하다.",
+    "validated": true
+   },
+   {
     "target_law": "소득세법",
     "target_article": "제37조제1항제3호",
     "relation_type": "citation",
@@ -489,6 +616,17 @@
     "validated": true
    }
   ],
+  "법인세법 시행령|130": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제181조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 외국법인/비거주자의 국내사업장과 본점 등 간 거래에서 정상가격 기준 국내원천소득 계산, 비용·경비 배분, 서류제출 등 동일한 취지의 규정을 각각 법인과 개인에 대해 병행으로 규정하고 있어 함께 개정할 필요가 있다.",
+    "validated": true
+   }
+  ],
   "법인세법 시행령|131": [
    {
     "target_law": "소득세법",
@@ -506,6 +644,17 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「상속세 및 증여세법」 제63조제3항",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|131의2": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제183조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 외국법인(법인세)과 비거주자(소득세)의 장외 유가증권거래에 대해 동일한 취지로 국외특수관계인 간 주식양도가액검토서 제출 의무를 규정하고 있어 병행 개정이 필요한 관계입니다.",
     "validated": true
    }
   ],
@@ -538,7 +687,36 @@
     "validated": true
    }
   ],
+  "법인세법 시행령|132의2": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제179조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 적격외국금융회사등의 승인 요건, 절차, 취소 사유를 동일한 취지로 병행 규정하고 있으므로 세법 개정 시 동일한 정책 목적에 따른 병행 개정을 검토해야 한다.",
+    "validated": true
+   }
+  ],
   "법인세법 시행령|132의4": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제179조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 외국법인/비거주자의 국채등 이자·양도소득에 대한 동일한 취지의 비과세 적용 신청 절차를 각각 규정하고 있으며, 신청서 제출 방법, 기한, 대리인 규정 등 모든 실질적 내용이 동일하게 구성되어 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제132조의4는 외국법인의 국채등 비과세 적용 신청 절차를, 소득세법 시행령 제207조의2는 비거주자의 조세조약상 비과세·면제 적용 신청 절차를 규정하는 것으로, 외국인(외국법인/비거주자)의 국내원천소득에 대한 비과세 신청 절차를 각각의 세목에서 병행 규정하고 있으며 신청서 제출, 대리인 활용, 금융회사 중개, 직접제출 요건 등 기본 구조와 취지가 동일합니다.",
+    "validated": true
+   },
    {
     "target_law": "소득세법 시행령",
     "target_article": "제24조",
@@ -560,12 +738,32 @@
   ],
   "법인세법 시행령|132의5": [
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제179조의5",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 국외투자기구 투자에 따른 국채등 소득의 신고·납부 의무를 각각 내국법인과 거주자에 대해 동일한 취지로 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
     "target_law": "소득세법",
     "target_article": "제17조",
     "relation_type": "citation",
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「소득세법」 제17조",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|133": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제180조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 외국법인과 소득세법의 비거주자에 대해 동일한 정책 목적(국제조세 회피 방지를 위한 대리인 범위 규정)으로 같은 취지의 규정을 병행하고 있으므로, 법령 개정 시 일관성 있는 병행 개정이 필요하다.",
     "validated": true
    }
   ],
@@ -589,7 +787,45 @@
     "validated": true
    }
   ],
+  "법인세법 시행령|135": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제118조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 재해손실세액공제라는 동일한 정책 목적을 법인과 개인사업자에 대해 각각 규정하고 있으며, 두 시행령 조문 모두 대통령령으로 정하는 자산의 범위와 적용 기준을 규정하고 있어 병행 개정 검토 대상입니다.",
+    "validated": true
+   }
+  ],
   "법인세법 시행령|137": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제202조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제137조 제1항이 배당소득 및 기타소득의 지급시기에 관하여 소득세법 규정을 준용하고 있으며, 양쪽 모두 원천징수 대상 소득의 지급시기와 필요경비 공제 등 동일한 취지의 원천징수 계산규정을 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제191조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제137조 제2항이 내국법인의 배당소득 지급시기를 규정하고, 소득세법 시행령 제191조가 개인의 배당소득 원천징수시기를 규정하여 동일한 정책 목적(배당소득 지급기한 도과시 의제지급)을 법인세와 소득세에서 각각 규율하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제137조와 소득세법 시행령 제207조는 외국법인/비거주자에 대한 원천징수 규정으로서 동일한 정책 목적을 법인과 개인에 대해 각각 규정하고 있으며, 가상자산 관련 계산식 및 납부 방식 등 핵심적인 계산방법과 절차를 동일한 취지로 병행 규정하고 있다.",
+    "validated": true
+   },
    {
     "target_law": "소득세법",
     "target_article": "제131조제2항",
@@ -656,6 +892,15 @@
   ],
   "법인세법 시행령|138의2": [
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제183조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 외국법인/비거주자의 유가증권 양도소득에 대한 조세조약 과세기준 미충족 시 원천징수세액 신고·납부 의무를 동일한 취지로 각각 규정하고 있으며, 신고서 양식 및 제출 세무서장 결정 기준까지 동일하게 구성되어 있다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제18조제4항제1호",
     "relation_type": "citation",
@@ -667,6 +912,33 @@
   ],
   "법인세법 시행령|138의3": [
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제193조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의3과 소득세법 시행령 제193조의2는 채권등의 보유기간이자상당액 계산 및 원천징수에 관한 동일한 정책 목적을 법인과 개인사업자/비거주자에 대해 각각 병행 규정하고 있으며, 보유기간 계산방법과 이자상당액 산정 기준을 동일하게 적용하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의3은 외국법인의 채권 이자에 대한 원천징수 절차를, 소득세법 시행령 제207조의8은 비거주자의 조세조약상 제한세율 적용을 위한 원천징수 절차를 규정하는바, 동일한 정책목적(국제조세조약 활용을 통한 이중과세 방지 및 제한세율 적용)을 서로 다른 납세자군(외국법인 vs 비거주자)에 대해 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의3과 소득세법 시행령 제207조의3은 외국법인/비거주자의 채권등 이자에 대한 원천징수 특례를 동일한 취지로 각각 법인과 개인에 대해 병행 규정하고 있으므로 세법 개정 시 동일 취지의 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
+   {
     "target_law": "소득세법",
     "target_article": "제133조의2",
     "relation_type": "citation",
@@ -677,6 +949,51 @@
    }
   ],
   "법인세법 시행령|138의4": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의5",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법상 외국법인의 조세조약상 비과세·면제 신청 절차와 소득세법상 비거주자의 조세조약상 비과세·면제 적용을 위한 경정청구 절차로서, 동일한 정책 목적(조세조약상 혜택 적용)을 다른 납세자군(법인 vs 개인)에 대해 각각 규정하는 병행 규정이다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의4(외국법인의 조세조약상 비과세·면제 적용)와 소득세법 시행령 제207조의8(비거주자의 조세조약상 제한세율 적용)은 동일한 정책 목적(조세조약상 혜택 신청)을 법인세와 소득세 납세자에 대해 각각 규정하고 있으며, 국외투자기구를 통한 소득 지급, 실질귀속자 확인, 신청서 제출 절차 등 동일한 취지의 계산방법과 적용범위를 공유하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의4와 소득세법 시행령 제207조의4는 조세조약상 비과세·면제 적용을 위해 각각 법인과 개인사업자 등이 제출해야 할 거주자증명서, 재무제표 등의 동일한 증명서류와 신청 절차를 병행으로 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제179조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의4와 소득세법 시행령 제179조의4는 외국법인/비거주자의 국내원천소득에 대한 조세조약상 비과세·면제 적용 신청 절차를 각각 규정하는 동일한 정책 목적의 병행 규정으로서, 신청서 제출 시기, 대리인 제출, 소득지급자 미존재 시 직접 제출 등의 공통된 세부 요건들을 동일한 취지로 규율하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 조세조약상 비과세 또는 면제를 적용받기 위한 신청 절차와 요건을 각각 외국법인(법인세)과 비거주자(소득세)에 대해 동일한 취지로 병행 규정하고 있으므로 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
    {
     "target_law": "소득세법",
     "target_article": "제120조",
@@ -693,6 +1010,131 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 시행령 제18조(국제금융거래에 따른 이자소득 등에 대한 법인세 등의 면제)가 이 조문을 인용: 「법인세법 시행령」 제138조의4제15항",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|138의5": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의5는 외국법인의 조세조약상 원천징수 특례 적용을 위한 사전승인 절차를, 소득세법 시행령 제207조의2는 비거주자의 조세조약상 비과세·면제 적용을 위한 신청 절차를 각각 규정하고 있으며, 거주자증명서 제출, 실질귀속자 확인, 신청서류 제출 및 관리 등 동일한 취지의 조세조약 적용 절차를 법인과 개인에 대해 병행 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 조세조약상 비과세·면제·제한세율 적용을 위한 사전승인 절차를 각각 법인과 개인에 대해 동일한 취지로 병행 규정하고 있으므로, 한쪽 법령 개정 시 다른 쪽도 함께 검토되어야 한다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의5와 소득세법 시행령 제207조의8은 조세조약상 제한세율 적용을 위한 사전승인/신청 절차를 각각 법인과 비거주자에 대해 병행으로 규정하고 있으며, 실질귀속자 확인, 신청서 제출, 서류 보관 등 동일한 정책 목적의 제도를 적용하고 있다.",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|138의6": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 조세조약상 비과세·면제 또는 제한세율 적용을 받기 위한 절차를 각각 법인과 비거주자에 대해 병행으로 규정하고 있으며, 경정청구 또는 사전신청 방식으로 실질귀속자 확인을 통해 조약 혜택을 적용받도록 하는 동일한 정책 취지를 담고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의5",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 조세조약상의 비과세·면제 또는 제한세율 적용을 위한 경정청구 절차를 동일한 취지로 각각 법인과 개인사업자에 대해 병행 규정하고 있으며, 경정청구서 제출, 실질귀속자 확인, 보정요구 절차 등 주요 내용이 실질적으로 동일하다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의9",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 조세조약상 제한세율 적용을 위한 경정청구 절차를 각각 법인과 비거주자에 대해 동일한 취지로 규정하고 있으며, 원천징수의무자를 통한 경정청구, 실질귀속자 입증, 한글번역본 제출 등 병행 적용되어야 할 공통 요소를 포함하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령과 소득세법 시행령이 조세조약상의 비과세·면제·제한세율 적용을 받기 위한 절차(경정청구 vs 사전승인)를 각각 법인과 개인사업자에 대해 동일한 취지로 병행 규정하고 있으며, 제출서류의 한글번역본 요건, 보정요구 절차, 보정기간의 산입 제외 등 실질적으로 동일한 정책 목적을 서로 다른 세목과 납세자군에 대해 규율하고 있다.",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|138의7": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 외국법인에 대한 조세조약상 제한세율 적용 절차와 소득세법의 비거주자에 대한 조세조약상 비과세·면제 적용 절차는 동일한 정책 목적(조세조약상 혜택 적용)을 서로 다른 납세자군(외국법인 vs 비거주자)에 대해 병행으로 규정하고 있으며, 국외투자기구를 통한 소득 지급 시 실질귀속자 파악 절차, 신청서 제출 및 보관 의무, 3년 유효 기간 등 동일한 취지의 계산방법과 절차를 공통으로 포함하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 조세조약상 제한세율 적용을 위한 원천징수절차의 동일한 정책목적을 각각 외국법인(법인세)과 비거주자(소득세)에 대해 병행 규정하고 있으며, 제한세율 적용신청서 제출, 국외투자기구 신고서 작성, 실질귀속자 확인 등의 절차와 요건이 거의 동일하게 구성되어 있다.",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|138의8": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의8은 외국법인에 대한 조세조약상 제한세율 적용을 위한 경정청구 절차를 규정하고, 소득세법 시행령 제207조의8은 비거주자에 대한 같은 취지의 원천징수절차 특례를 규정하며, 양자 모두 실질귀속자 입증, 제한세율 적용신청서, 국외투자기구 신고서 등 동일한 요건과 절차를 공통으로 적용하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의9",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 외국법인과 비거주자를 대상으로 동일한 취지의 조세조약상 제한세율 적용을 위한 경정청구 절차를 병행 규정하고 있어, 세법 개정 시 동일한 취지로 병행 개정을 검토해야 하는 관계입니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 조세조약상 제한세율 적용을 받기 위한 절차를 각각 외국법인과 외국인에 대해 동일한 취지로 규정하고 있으며, 거주자증명서 제출, 서류 한글번역 요건 등 핵심 요소들이 병행되어 있어 병행 개정 검토 대상에 해당한다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제207조의5",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 외국인의 조세조약상 제한세율 적용을 위한 경정청구 절차를 각각 규정하고 있으며, 원천징수의무자 관할세무서장 청구, 거주자증명서 첨부, 한글번역 및 영문 제출 선택 등 동일한 취지의 절차 기준을 설정하고 있다.",
     "validated": true
    }
   ],
@@ -726,6 +1168,17 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「부가가치세법 시행령」 제11조",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|155의2": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제208조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 기부금영수증 발급명세의 작성·보관 의무에 관하여 동일한 정책 목적(기부금 투명성 관리)으로 각각 법인과 개인에 대해 병행 규정하고 있으며, 기부자 정보 항목과 기부금 한도액(3억원)을 동일하게 규정하고 있다.",
     "validated": true
    }
   ],
@@ -863,6 +1316,15 @@
   ],
   "법인세법 시행령|162": [
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제213조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제162조는 내국법인이 소득세 대상 소득을 지급할 때 소득세법 시행령 제213조의 지급명세서 규정을 준용하도록 하여, 동일한 지급명세서 제출 의무를 법인세와 소득세 영역에서 병행 규정하고 있으므로 병행 개정 검토 대상이다.",
+    "validated": true
+   },
+   {
     "target_law": "소득세법",
     "target_article": "제127조제1항제1호",
     "relation_type": "citation",
@@ -882,6 +1344,15 @@
    }
   ],
   "법인세법 시행령|162의2": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제216조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 외국법인과 소득세법의 비거주자에 대한 국내원천소득 지급명세서 제출의무 특례를 규정한 조문으로, 동일한 정책 목적(지급명세서 제출 특례)을 서로 다른 세목의 납세자군에 대해 동일한 구조와 요건으로 병행 규정하고 있습니다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제21조제1항",
@@ -918,6 +1389,17 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「부가가치세법 시행령」 제97조",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|163의3": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제216조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 가상자산사업자의 거래내역 제출 의무를 각각 법인과 개인사업자에 대해 동일한 취지로 병행 규정하고 있으며, 제출 대상 서류(거래명세서·집계표)와 제출 방법도 동일하므로 세법 개정 시 동시 개정을 검토해야 한다.",
     "validated": true
    }
   ],
@@ -1039,6 +1521,15 @@
   ],
   "법인세법 시행령|19": [
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제55조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제19조와 소득세법 시행령 제55조는 각각 법인과 개인사업자의 필요경비 범위를 규정하면서 동일한 정책 목적 하에 상품원료비, 판매부대비용, 자산양도가액, 인건비, 출산양육지원금, 제세공과금, 감가상각비 등 많은 항목을 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
     "target_law": "소득세법",
     "target_article": "제127조제1항",
     "relation_type": "citation",
@@ -1101,6 +1592,15 @@
     "confidence": "confirmed",
     "source": "code_hint",
     "reason": "법인세법 시행령 제19조의2의 대손금 인정 사유는 부가가치세법 시행령 제87조의 대손세액 공제 범위와 연쇄 검토 필요",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제56조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제19조의2는 법인의 대손금 손금불산입 요건을, 소득세법 시행령 제56조는 개인사업자의 대손충당금 필요경비계산을 규정하는 것으로, 동일한 정책 목적(채권손실에 대한 세무상 인정)을 법인과 개인사업자에 대해 각각 규율하고 있어 병행 개정 검토 대상에 해당한다.",
     "validated": true
    },
    {
@@ -1324,6 +1824,15 @@
     "validated": true
    },
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제74조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 부가가치세의 매입세액을 각각 법인과 개인사업자에 대해 손금/필요경비로 산입하는 동일한 정책 목적을 규정하고 있으며, 부가가치세법 제39조 제1항 제5호, 제6호 등 동일한 요건을 참조하고 있다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제108조",
     "relation_type": "citation",
@@ -1386,6 +1895,33 @@
     "confidence": "confirmed",
     "source": "code_hint",
     "reason": "법인세법 시행령 제24조의 감가상각자산 범위는 부가가치세법 시행령 제107조의 조기환급 대상 사업 설비와 연쇄 검토 필요",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제63조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제24조는 법인의 감가상각자산 범위를, 소득세법 시행령 제63조의2는 개인사업자의 감가상각 내용연수 특례를 각각 규정하고 있으므로, 동일한 정책목적(감가상각자산의 기준 설정)을 법인과 개인사업자에 대해 병행 규정하는 관계이다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제70조",
+    "relation_type": "definition_scope",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제24조 제3항과 소득세법 시행령 제70조는 감가상각자산의 적용범위에서 유휴설비와 건설중 자산의 취급을 동일한 취지로 규정하고 있어 병행 개정 검토가 필요합니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제63조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제24조와 소득세법 시행령 제63조는 법인과 개인사업자가 각각 감가상각자산에 대해 내용연수를 결정하고 상각률을 적용하는 동일한 정책 취지를 규정하고 있어 병행 개정이 필요한 관계입니다.",
     "validated": true
    },
    {
@@ -1454,6 +1990,15 @@
     "validated": true
    },
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제64조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각자산에 대한 상각방법 선택 및 적용에 관한 동일한 정책 목적(감가상각의 계산방법 규정)을 각각 법인과 개인사업자에 대해 병행으로 규정하고 있으므로 개정 시 취지를 맞춰 함께 검토할 필요가 있다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제9조의2",
     "relation_type": "citation",
@@ -1471,6 +2016,42 @@
     "confidence": "confirmed",
     "source": "golden_manual",
     "reason": "감가상각 병행: 감가상각자산 범위·계상·상각범위액 계산 구조",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제63조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제26조와 소득세법 시행령 제63조는 각각 법인과 개인사업자에 대해 감가상각자산의 내용연수 결정 방식, 상각률 적용, 신고 절차 및 계속적용 원칙을 동일한 취지로 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제66조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각자산의 정률법, 정액법, 생산량비례법의 계산방법을 각각 법인과 개인사업자에 대해 동일한 취지로 규정하고 있으며, 특히 업무용승용차 관련 처리 방식도 동일하게 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제64조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제26조와 소득세법 시행령 제64조는 감가상각자산의 상각방법을 정하는 동일한 취지의 규정으로서, 법인과 개인사업자라는 서로 다른 납세자군에 대해 동일한 자산분류 및 상각방법(정액법, 정률법, 생산량비례법 등)을 병행 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제71조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각자산의 잔존가액 계산 방법에 대해 동일한 정책 목적으로 법인과 개인사업자에게 각각 병행 규정하고 있으며, 정률법 적용 시 취득가액의 5% 기준과 미상각잔액이 5% 이하가 되는 시점의 처리 방식이 완전히 일치한다.",
     "validated": true
    },
    {
@@ -1572,6 +2153,15 @@
     "confidence": "confirmed",
     "source": "golden_manual",
     "reason": "감가상각 병행: 종전·기준 감가상각비, 중고자산, 즉시상각, 의제상각, 잔존가액, 상각시부인",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제55조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제26조의2는 한국채택국제회계기준 도입에 따른 법인의 감가상각비 손금산입 한도를 규정하고, 소득세법 시행령 제55조 제14호는 개인사업자의 사업용 유형자산의 감가상각비를 필요경비로 인정하는 규정으로서, 동일한 정책 목적(감가상각비의 필요경비·손금산입)을 법인과 개인사업자에 대해 각각 규율하는 병행 규정 관계에 있다.",
     "validated": true
    }
   ],
@@ -1752,6 +2342,15 @@
     "validated": true
    },
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제62조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제28조와 소득세법 시행령 제62조는 감가상각자산의 내용연수·상각률 결정 및 상각액 계산이라는 동일한 정책 목적을 법인과 개인사업자에 대해 각각 규정하고 있으므로, 세법 개정 시 동일 취지의 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제25조",
     "relation_type": "citation",
@@ -1806,6 +2405,15 @@
     "source": "golden_manual",
     "reason": "감가상각 병행: 내용연수·상각률·내용연수 특례",
     "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제63조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각자산의 내용연수 특례 인정 요건과 절차를 법인과 개인사업자에 대해 동일한 정책 목적으로 병행 규정하고 있으므로 개정 시 일관성 유지를 위해 함께 검토해야 합니다.",
+    "validated": true
    }
   ],
   "법인세법 시행령|29의2": [
@@ -1852,6 +2460,33 @@
     "confidence": "confirmed",
     "source": "golden_manual",
     "reason": "감가상각 병행: 종전·기준 감가상각비, 중고자산, 즉시상각, 의제상각, 잔존가액, 상각시부인",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제63조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 중고자산의 내용연수 결정에 관하여 동일한 정책 목적(기준내용연수의 50% 이상 경과 자산에 대해 50% 연수 이상 범위에서 선택 가능)을 법인과 개인사업자에 각각 적용하는 병행 규정이다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제63조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제29조의2의 중고자산 수정내용연수 규정과 소득세법 시행령 제63조의 내용연수 규정이 동일한 정책 목적(중고자산 취득 시 기준내용연수의 50% 범위 내에서 내용연수 선택 적용)을 법인과 개인사업자에 대해 각각 규정하는 병행규정 관계이다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제62조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제29조의2와 소득세법 시행령 제62조는 각각 법인과 개인사업자가 감가상각자산의 상각범위액을 계산하는 동일한 정책 목적을 서로 다른 납세자군에 대해 규정하고 있으므로 세법 개정 시 병행 검토가 필요하다.",
     "validated": true
    },
    {
@@ -1940,6 +2575,24 @@
   ],
   "법인세법 시행령|30": [
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제62조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각비의 상각범위액 한도 원칙을 각각 법인과 개인사업자에 대해 동일한 취지로 규정하고 있으므로 병행 개정 대상이다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제68조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 세금 감면·면제 대상자의 감가상각비 계산 방법을 동일한 취지(상각범위액 이내로 계산 강제)로 각각 법인과 개인사업자에게 병행 규정하고 있으므로 병행 개정 검토 대상입니다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제25조",
     "relation_type": "citation",
@@ -1987,6 +2640,15 @@
   ],
   "법인세법 시행령|31": [
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제67조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각자산의 자본적 지출 판단 기준, 수선비 한도, 소액자산 즉시상각 등을 동일한 취지로 법인과 개인사업자에 각각 규정하고 있어 병행 개정을 검토해야 하는 관계입니다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제100조의32",
     "relation_type": "citation",
@@ -2013,6 +2675,15 @@
     "confidence": "confirmed",
     "source": "golden_manual",
     "reason": "감가상각 병행: 상각부인액 처리·감가상각비 명세서",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제62조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제32조와 소득세법 시행령 제62조는 감가상각자산의 상각부인액, 시인부족액, 부분양도 시 계산방법, 평가증과의 병행처리 등 동일한 정책 목적의 감가상각 규정을 법인과 개인사업자에 대해 각각 규정하고 있으므로 병행 개정을 검토해야 하는 관계이다.",
     "validated": true
    },
    {
@@ -2043,6 +2714,15 @@
     "source": "golden_manual",
     "reason": "감가상각 병행: 상각부인액 처리·감가상각비 명세서",
     "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제62조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각비의 손금/필요경비 계산 및 신고 의무를 각각 법인과 개인사업자에 대해 동일한 정책 목적으로 병행 규정하고 있으므로 관련 개정 시 양쪽의 조화로운 개정을 검토해야 한다.",
+    "validated": true
    }
   ],
   "법인세법 시행령|34": [
@@ -2062,6 +2742,84 @@
     "confidence": "confirmed",
     "source": "golden_manual",
     "reason": "감가상각 병행: 상각부인액 처리·감가상각비 명세서",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제71조",
+    "relation_type": "calculation_rule",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각비 계산에서 잔존가액 결정이라는 동일한 취지의 계산방법을 법인과 개인사업자에 대해 각각 규정하고 있으므로 병행 개정 검토가 필요한 관계입니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제62조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제34조와 소득세법 시행령 제62조는 감가상각자산의 감가상각비 계산에 관한 동일한 정책 목적을 법인과 개인사업자에 대해 각각 규정하는 병행 규정으로서, 양 조문 모두 감가상각자산의 범위, 계산방법, 상각범위액 등의 취지를 공유하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제64조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각자산의 상각방법 및 계산에 관한 동일한 정책 목적을 각각 법인과 개인사업자에 대해 병행으로 규정하고 있으므로 동일한 취지의 개정이 필요할 때 함께 검토되어야 한다.",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|35": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제79조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 기부금으로 인정하는 거래의 범위(특수관계인 외의 자와의 자산 양도·매입 거래에서 정상가액 판정 기준)를 동일한 취지로 각각 규정하고 있는 병행 규정이다.",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|36": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제81조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제36조와 소득세법 시행령 제81조는 기부금의 가액 산정, 미지급금·가지급금 처리, 금전 외 자산 기부 시 평가방법 등 동일한 정책 목적을 법인과 개인사업자에 대해 각각 병행 규정하고 있어 개정 시 동시에 검토되어야 하는 관계이다.",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|37": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제81조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제37조와 소득세법 시행령 제81조는 법인과 개인사업자가 지출하는 기부금의 손금(필요경비) 산입 범위와 계산방법을 각각 규정하는 동일 취지의 병행 규정으로서, 세목은 다르지만 기부금 공제 한도 산정 및 적용 기준을 같은 방식으로 구분·운영하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제118조의7",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 기부금의 손금산입 및 세액공제라는 동일한 정책 목적을 법인과 개인사업자/근로자에 대해 각각 규정하고 있으며, 두 조문 모두 기부금명세서 제출 의무와 기부금의 범위 및 한도를 규율하는 병행 규정입니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제79조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제37조와 소득세법 시행령 제79조는 국가·지방자치단체에 대한 기부금(특히 중간 양수인을 거친 기부금)의 손금/필요경비 산입 범위를 각각 법인과 개인사업자에 대해 동일한 취지로 규정하고 있으며, 기부금명세서 제출 의무도 병행 규정하고 있다.",
     "validated": true
    }
   ],
@@ -2334,6 +3092,15 @@
   ],
   "법인세법 시행령|41": [
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제83조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 기업업무추진비의 신용카드 등 사용과 관련하여 동일한 정책 목적(경조금 한도 20만원, 기타 3만원, 국외지역·농어민 지출 예외 등)을 법인과 개인사업자에 대해 병행으로 규정하고 있습니다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제126조의2제1항제4호",
     "relation_type": "citation",
@@ -2353,6 +3120,15 @@
    }
   ],
   "법인세법 시행령|42": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제83조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 기업업무추진비 제도를 각각 법인과 개인사업자에 대해 병행으로 규정하고 있으며, 특히 수입금액 계산기준에 관한 조문들이 동일한 정책 목적으로 양쪽 세법에서 규율되고 있다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제138조제1항",
@@ -2612,6 +3388,15 @@
   ],
   "법인세법 시행령|44의2": [
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제57조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 퇴직급여 관련 비용 처리에 대해 각각 법인과 개인사업자에게 동일한 정책 목적(퇴직급여 적립의 손금·필요경비 산입 제한)으로 병행 규정하고 있으므로 개정 시 동일 취지로 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제26조의2",
     "relation_type": "citation",
@@ -2654,6 +3439,15 @@
   ],
   "법인세법 시행령|50": [
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제78조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인과 개인사업자에 대해 '업무와 관련 없는 지출'의 필요경비 제외 사유를 동일한 취지로 병행 규정하고 있으며, 뇌물·노동법 위반급여 등 구체적 항목도 동일하게 규율하고 있다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제11조",
     "relation_type": "citation",
@@ -2673,6 +3467,24 @@
    }
   ],
   "법인세법 시행령|50의2": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제78조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 업무용승용차 관련비용의 손금/필요경비 불산입 특례에 대해 동일한 정책 목적으로 법인과 개인사업자에 각각 병행 규정하고 있으며, 업무용 사용금액 산정, 업무전용자동차보험 요건, 업무사용비율 계산 등 주요 내용이 동일한 취지로 규율되고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제66조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 업무용승용차의 감가상각비 계산 및 손금(필요경비) 산입 한도를 각각 법인과 개인사업자에 대해 동일한 취지로 규정하고 있으므로 병행 개정이 필요한 관계입니다.",
+    "validated": true
+   },
    {
     "target_law": "부가가치세법 시행령",
     "target_article": "제19조",
@@ -2705,6 +3517,17 @@
     "validated": true
    }
   ],
+  "법인세법 시행령|55": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제78조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 지급이자의 손금·필요경비 불산입에 관하여 동일한 정책 목적(채권자 불명확, 건설자금 등)으로 적용 순서를 규정하고 있어 병행 개정 검토 대상입니다.",
+    "validated": true
+   }
+  ],
   "법인세법 시행령|56": [
    {
     "target_law": "소득세법",
@@ -2734,7 +3557,27 @@
     "validated": true
    }
   ],
+  "법인세법 시행령|60": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제57조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 퇴직급여충당금의 동일한 정책목적(퇴직급여 적립)을 법인과 개인사업자에 대해 각각 병행 규정하고 있으며, 연간 총급여액의 5% 한도, 동일한 연도별 누적액 한도 비율(30→25→20→15→10→5→0%), 동일한 초과금액 환입 제외 규정 등을 공통으로 적용하고 있다.",
+    "validated": true
+   }
+  ],
   "법인세법 시행령|61": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제56조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 대손충당금의 동일한 정책 목적(채권 손실에 대한 충당금 계산)을 법인과 개인사업자에 대해 각각 규정하고 있으며, 채권잔액의 100분의 1 또는 대손실적률 곱셈액 중 큰 금액으로 계산하는 동일한 계산방법을 적용하고 있다.",
+    "validated": true
+   },
    {
     "target_law": "상속세 및 증여세법 시행령",
     "target_article": "제15조",
@@ -2763,7 +3606,27 @@
     "validated": true
    }
   ],
+  "법인세법 시행령|63": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제56조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 구상채권상각충당금 제도와 소득세법의 대손충당금 제도가 각각 법인과 개인사업자에게 동일한 정책 목적(채권 손실에 대비한 충당금 적립)으로 병행 규정되어 있으며, 계산방식도 채권잔액에 일정 비율을 곱하는 동일 취지의 구조를 갖추고 있습니다.",
+    "validated": true
+   }
+  ],
   "법인세법 시행령|64": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제60조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 국고보조금으로 취득한 사업용자산에 대해 동일한 정책 목적(국고보조금 상당액의 손금/필요경비 처리)을 법인과 개인사업자에 대해 각각 병행 규정하고 있으며, 일시상각충당금·압축기장충당금의 계상, 익금/총수입금액 산입 방법, 부득이한 사유 등이 실질적으로 동일하게 구성되어 있다.",
+    "validated": true
+   },
    {
     "target_law": "소득세법 시행령",
     "target_article": "제54조",
@@ -2961,12 +3824,32 @@
   ],
   "법인세법 시행령|76": [
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제97조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인과 개인사업자의 외화자산·부채 평가 및 환율변동분에 따른 손익 처리에 대해 동일한 정책 목적으로 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
     "target_law": "상속세 및 증여세법 시행령",
     "target_article": "제56조",
     "relation_type": "citation",
     "confidence": "high",
     "source": "back_citation",
     "reason": "상속세 및 증여세법 시행령 제56조(1주당 최근 3년간의 순손익액의 계산방법)가 이 조문을 인용: 「법인세법 시행령」 제76조",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|78": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제96조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 재고자산 등의 평가차손에 대해 동일한 정책 목적으로 각각 법인과 개인사업자에게 병행 적용하는 규정으로서, 감액사유(천재지변·화재 등), 평가방법(시가평가), 손비·필요경비 계상 등의 취지가 동일하다.",
     "validated": true
    }
   ],
@@ -3363,6 +4246,17 @@
     "validated": true
    }
   ],
+  "법인세법 시행령|91": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제99조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인과 개인사업자의 국제거래에 대한 소득금액조정 신청절차를 동일한 취지로 병행 규정하고 있으며, 동일한 국제조세조정에 관한 법률 시행령 제21조를 준용하고 있다.",
+    "validated": true
+   }
+  ],
   "법인세법 시행령|91의3": [
    {
     "target_law": "조세특례제한법",
@@ -3376,12 +4270,32 @@
   ],
   "법인세법 시행령|92의10": [
    {
+    "target_law": "소득세법 시행령",
+    "target_article": "제168조의13",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 별장에 해당하지 않는 농어촌주택의 범위를 동일한 정책 목적으로 각각 법인과 개인에 대해 동일한 기준(연면적·부속토지면적·가액·지역)으로 병행 규정하고 있다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제99조의4제1항제1호",
     "relation_type": "citation",
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「조세특례제한법」 제99조의4제1항제1호",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|92의11": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제168조의14",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 동일한 정책 목적인 비사업용 토지 판정기준을 법인과 개인사업자에 대해 각각 병행 규정하고 있으며, 제1항과 제2항의 구조 및 내용이 대체로 일치하므로 개정 시 동일한 취지의 병행 개정이 필요합니다.",
     "validated": true
    }
   ],
@@ -3486,7 +4400,27 @@
     "validated": true
    }
   ],
+  "법인세법 시행령|92의3": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제168조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 비사업용 토지의 양도소득 계산 시 적용되는 보유기간 기준을 동일한 취지로 법인과 개인에 대해 병행 규정하고 있으므로 세법 개정 시 동일한 방향으로 병행 개정을 검토해야 한다.",
+    "validated": true
+   }
+  ],
   "법인세법 시행령|92의8": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제168조의11",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 동일한 정책 목적(사업에 사용되는 토지의 범위 규정)을 법인과 개인사업자에 대해 각각 병행 규정하고 있으며, 구체적 내용과 기준이 거의 동일하므로 세법 개정 시 병행 검토가 필요하다.",
+    "validated": true
+   },
    {
     "target_law": "부가가치세법 시행령",
     "target_article": "제65조제1항",
@@ -3505,6 +4439,28 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「조세특례제한법」 제22조",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|94의2": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제117조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 간접투자회사 등이 납부한 외국법인세액공제 특례에 대해 동일한 정책 목적으로 법인과 거주자에게 각각 동일한 계산구조(A×B, A×B×C)를 적용하고 있어 병행 개정을 검토해야 하는 관계입니다.",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|95": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제118조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 재해손실로 인한 세액공제라는 동일한 정책 목적을 법인과 개인사업자에 대해 각각 규정하고 있으며, 공제 대상 자산의 범위, 손실비율 계산 방법, 신청기한 등 핵심 내용이 실질적으로 동일하므로 병행 개정을 검토해야 한다.",
     "validated": true
    }
   ],
@@ -3536,6 +4492,17 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「소득세법」 제70조의2",
+    "validated": true
+   }
+  ],
+  "법인세법 시행령|98": [
+   {
+    "target_law": "소득세법 시행령",
+    "target_article": "제60조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 일시상각충당금·압축기장충당금 규정과 소득세법의 국고보조금으로 인한 동일 충당금 규정이 동일한 정책 목적(자산 취득 자금의 세무 처리)을 법인과 개인사업자에 대해 각각 규정하는 병행 규정 관계입니다.",
     "validated": true
    }
   ],
@@ -3686,6 +4653,15 @@
   ],
   "법인세법|112의2": [
    {
+    "target_law": "소득세법",
+    "target_article": "제160조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 기부금영수증 발급명세 작성·보관 의무, 제출 의무, 전자기부금영수증 발급 의무 등 동일한 정책 목적을 각각 법인과 개인사업자(거주자·비거주자)에 대해 병행으로 규정하고 있으므로 개정 시 동일한 취지의 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제75조",
     "relation_type": "citation",
@@ -3768,6 +4744,15 @@
     "confidence": "confirmed",
     "source": "code_hint",
     "reason": "법인세법 제116조의 지출증명서류 수취·보관은 부가가치세법 제35조의 수입세금계산서와 연쇄 검토 필요",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제160조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제116조와 소득세법 제160조의2는 법인과 개인사업자가 각각 사업과 관련된 거래의 증명서류를 수취·보관해야 하는 동일한 정책 목적을 서로 다른 납세자군에 대해 규정하고 있으므로 병행 개정을 검토해야 한다.",
     "validated": true
    },
    {
@@ -3971,6 +4956,15 @@
   "법인세법|120의2": [
    {
     "target_law": "소득세법",
+    "target_article": "제164조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제120조의2와 소득세법 제164조의2는 각각 외국법인과 비거주자에 대해 국내원천소득 지급 시 지급명세서 제출의무라는 동일한 정책 목적을 규정하고 있으며, 제출기한, 제외 대상, 준용 규정 등이 병행 구조를 이루고 있어 동일 취지의 병행 개정 관계에 해당한다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
     "target_article": "제164조",
     "relation_type": "citation",
     "confidence": "high",
@@ -3999,6 +4993,15 @@
     "validated": true
    },
    {
+    "target_law": "소득세법",
+    "target_article": "제163조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 부가가치세 세금계산서 관련 동일한 정책 목적으로 매입처별 세금계산서합계표 제출을 각각 법인과 개인사업자에 대해 병행 규정하고 있으며, 제출 기한과 예외 사유도 동일한 취지로 규정되어 있다.",
+    "validated": true
+   },
+   {
     "target_law": "부가가치세법",
     "target_article": "제32조제1항",
     "relation_type": "citation",
@@ -4017,7 +5020,27 @@
     "validated": true
    }
   ],
+  "법인세법|120의4": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제164조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 동일한 정책 목적(가상자산 거래내역 제출 의무)을 각각 법인과 개인사업자에 대해 동일한 제출 기한, 대상자, 절차로 병행 규정하고 있어 개정 시 동시에 검토되어야 한다.",
+    "validated": true
+   }
+  ],
   "법인세법|121": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제163조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제121조와 소득세법 제163조는 법인과 개인사업자라는 서로 다른 납세자 집단에 대해 계산서의 작성·발급·제출 의무에 관한 동일한 정책 목적을 병행으로 규정하고 있으며, 조문의 구조, 내용, 예외 규정이 거의 동일하다.",
+    "validated": true
+   },
    {
     "target_law": "부가가치세법",
     "target_article": "제26조제1항제1호",
@@ -4148,6 +5171,15 @@
    }
   ],
   "법인세법|122": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제170조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인과 개인사업자에 대해 세무조사 권한의 대상자를 동일한 취지로 병행 규정하고 있으며, 질문·조사 대상자의 범위와 권한남용 방지 조항이 실질적으로 동일하다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제100조의27",
@@ -4450,6 +5482,15 @@
   ],
   "법인세법|14": [
    {
+    "target_law": "소득세법",
+    "target_article": "제45조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제14조는 법인의 소득 계산과 결손금·이월결손금을 규정하고, 소득세법 제45조는 개인사업자의 결손금·이월결손금을 규정하여, 동일한 정책 목적(결손금 이월공제)을 서로 다른 납세자군(법인/개인)에 대해 병행으로 규정하고 있다.",
+    "validated": true
+   },
+   {
     "target_law": "상속세 및 증여세법",
     "target_article": "제63조",
     "relation_type": "citation",
@@ -4664,6 +5705,15 @@
    }
   ],
   "법인세법|18": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제26조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제18조와 소득세법 제26조는 각각 법인과 개인사업자에 대해 동일한 정책 목적(세환금 충당, 무상자산 수취, 과오납금 이자, 부가가치세 매출세액 등)으로 소득 계산 시 불산입 항목을 병행 규정하고 있어 동일 취지의 병행 개정이 필요하다.",
+    "validated": true
+   },
    {
     "target_law": "상속세 및 증여세법 시행령",
     "target_article": "제56조",
@@ -4974,12 +6024,43 @@
     "validated": true
    },
    {
+    "target_law": "소득세법",
+    "target_article": "제26조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제21조와 소득세법 제26조는 세금·공과금 성격의 항목을 각각 법인과 개인사업자의 소득금액 계산에서 제외하는 동일한 정책 취지를 규정하고 있으며, 특히 부가가치세 매입세액(법인세법 제21조 제1호), 개별소비세·주세(법인세법 제21조 제2호, 소득세법 제26조 제7호), 부가가치세 매출세액(소득세법 제26조 제9호) 등 구체적인 항목들이 양 법령에서 병행으로 규정되어 있다.",
+    "validated": true
+   },
+   {
     "target_law": "상속세 및 증여세법 시행령",
     "target_article": "제56조",
     "relation_type": "citation",
     "confidence": "high",
     "source": "back_citation",
     "reason": "상속세 및 증여세법 시행령 제56조(1주당 최근 3년간의 순손익액의 계산방법)가 이 조문을 인용: 「법인세법」 제21조제3호",
+    "validated": true
+   }
+  ],
+  "법인세법|21의2": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제33조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제21조의2와 소득세법 제33조 제1항 제15호는 징벌적 손해배상금을 손금/필요경비에서 불산입하는 동일한 정책 목적을 법인과 개인사업자에 대해 병행으로 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
+  "법인세법|22": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제33조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제22조는 법인의 자산평가손실을, 소득세법 제33조 제1항 제7호는 개인사업자의 자산평가차손을 각각 손금·필요경비에서 불산입하는 동일한 정책 취지를 서로 다른 세목의 납세자에게 규정하고 있습니다.",
     "validated": true
    }
   ],
@@ -5430,6 +6511,17 @@
     "validated": true
    }
   ],
+  "법인세법|26": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제33조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제26조와 소득세법 제33조는 각각 법인과 개인사업자의 과다·부당한 경비를 손금/필요경비에서 불산입하는 동일한 정책 목적을 규정하고 있으며, 특히 업무 관련성이 없는 경비 불산입(법인세법 제26조 제5호, 소득세법 제33조 제13호)에서 병행 개정 검토의 필요성이 높다.",
+    "validated": true
+   }
+  ],
   "법인세법|27": [
    {
     "target_law": "소득세법",
@@ -5486,9 +6578,27 @@
     "source": "golden_manual",
     "reason": "소득세법 업무용승용차 서식·세부사항",
     "validated": null
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제81조의14",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제27조의2는 법인의 업무용승용차 관련비용 손금산입 규정이고, 소득세법 제81조의14는 개인사업자의 동일한 업무용승용차 관련비용 필요경비산입 규정에 대한 명세서 제출 불성실 가산세로서, 같은 정책 취지의 비용 규제를 법인과 개인사업자에 대해 각각 규정하고 있어 병행 개정 검토가 필요하다.",
+    "validated": true
    }
   ],
   "법인세법|28": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제33조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제28조와 소득세법 제33조는 지급이자(건설자금 이자, 채권자 불분명 이자 등)의 손금·필요경비 불산입이라는 동일한 정책 목적을 법인과 개인사업자에 대해 각각 규정하고 있으므로 병행 개정 검토가 필요하다.",
+    "validated": true
+   },
    {
     "target_law": "소득세법",
     "target_article": "제16조제1항제1호",
@@ -5613,6 +6723,15 @@
   ],
   "법인세법|33": [
    {
+    "target_law": "소득세법",
+    "target_article": "제29조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 퇴직급여충당금의 손금/필요경비 인정이라는 동일한 정책 목적을 각각 법인과 개인사업자에 대해 병행 규정하고 있으므로 세법 개정 시 동시 검토가 필요합니다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제26조의2",
     "relation_type": "citation",
@@ -5641,6 +6760,15 @@
    }
   ],
   "법인세법|34": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제28조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제34조와 소득세법 제28조는 각각 법인과 개인사업자를 대상으로 동일한 정책 목적(채권의 대손에 충당하기 위한 충당금의 손비/필요경비 인정)을 병행 규정하고 있으며, 충당금 계상의 범위·한도, 대손금 발생 시 상계 처리, 다음 기간 익금/총수입금액 산입 등 규정 취지와 구조가 동일하다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제104조의23",
@@ -5706,6 +6834,17 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 제127조(중복지원의 배제)가 이 조문을 인용: 「법인세법」 제37조제1항",
+    "validated": true
+   }
+  ],
+  "법인세법|38": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제31조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제38조와 소득세법 제31조는 보험차익으로 인한 자산 취득·개량 시 손금/필요경비 산입이라는 동일한 정책 목적을 법인과 개인사업자에 대해 각각 규정하고 있으며, 적용 대상·기간·사용 계획서 제출 등의 주요 요소가 실질적으로 동일하다.",
     "validated": true
    }
   ],
@@ -6396,6 +7535,17 @@
     "validated": true
    }
   ],
+  "법인세법|53": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제42조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제53조와 소득세법 제42조는 조세조약의 상호합의절차를 통해 외국 관련자와의 거래금액을 조정할 수 있도록 하는 동일한 정책 목적을 법인과 거주자라는 서로 다른 납세자군에 대해 병행으로 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
   "법인세법|55": [
    {
     "target_law": "조세특례제한법",
@@ -6555,6 +7705,24 @@
   ],
   "법인세법|57": [
    {
+    "target_law": "소득세법",
+    "target_article": "제57조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 외국에서 납부한 세액을 공제하는 동일한 정책 목적을 법인과 개인사업자(거주자)에 대해 각각 규정하며, 공제한도금액 계산식, 초과액 이월공제, 조세조약 상 감면세액 처리 등 동일한 취지의 계산방법과 범위를 적용하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제118조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 외국납부 법인세액 공제와 소득세법의 국외자산 양도소득에 대한 외국납부세액 공제는 동일한 정책 목적(국제적 이중과세 제거)을 법인과 개인에 대해 각각 규정하고 있으며, 공제한도금액 계산방식도 동일한 구조(A×B/C)로 병행 규정되어 있다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제100조의32",
     "relation_type": "citation",
@@ -6593,6 +7761,15 @@
   ],
   "법인세법|57의2": [
    {
+    "target_law": "소득세법",
+    "target_article": "제57조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 간접투자회사등으로부터 지급받은 소득에 대한 외국법인세액공제 특례를 각각 법인과 거주자(개인)에 대해 동일한 정책 목적과 구조로 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제100조의32",
     "relation_type": "citation",
@@ -6620,9 +7797,45 @@
     "source": "golden_manual",
     "reason": "재해손실 세액공제",
     "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제61조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제58조와 소득세법 제58조(별도 조문)의 재해손실세액공제 제도가 동일한 정책 목적으로 법인과 개인사업자에 대해 병행 규정되어 있으며, 소득세법 제61조 제3항 단서에서 재해손실세액공제의 우선순위를 규정함으로써 상호 연동되는 관계입니다.",
+    "validated": true
    }
   ],
   "법인세법|59": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제61조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제59조와 소득세법 제61조는 감면 및 세액공제액이 산출세액을 초과하는 경우의 적용 순서와 처리 방법을 규정하는 동일한 정책 목적을 법인과 개인에 대해 각각 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제60조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제59조와 소득세법 제60조는 감면과 세액공제의 적용순위를 각각 법인과 개인에 대해 동일한 정책 취지로 규정하는 병행 규정이므로 세법 개정 시 동일한 의도의 개정을 함께 검토해야 한다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제15조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제59조와 소득세법 제15조는 각각 법인세와 소득세에서 감면·세액공제의 적용순서와 계산방법을 규정하는 동일한 정책 목적의 병행 규정으로서, 서로 다른 세목의 납세자(법인 vs 개인)에 대해 같은 취지의 세액 계산 체계를 두고 있다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제100조의32",
@@ -7301,7 +8514,27 @@
     "validated": true
    }
   ],
+  "법인세법|70": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제83조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인과 거주자에 대하여 과세표준과 세액 결정·경정 후 납세자에게 통지하는 동일한 정책 목적의 절차를 병행으로 규정하고 있다.",
+    "validated": true
+   }
+  ],
   "법인세법|72": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제85조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제72조와 소득세법 제85조의2는 중소기업의 결손금 소급공제에 따른 환급이라는 동일한 정책 목적을 법인과 개인사업자에 대해 병행으로 규정하고 있으며, 환급 한도, 신청기한, 환급 결정, 경정에 따른 징수 등 규정 체계와 취지가 동일하다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제8조의4",
@@ -7313,6 +8546,42 @@
    }
   ],
   "법인세법|73": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제130조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제73조와 소득세법 제130조는 동일한 정책목적인 이자소득에 대한 원천징수 제도를 법인세와 소득세라는 서로 다른 세목에서 병행으로 규정하고 있으므로 동일 취지의 세법 개정 시 병행 검토가 필요하다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제133조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제73조는 내국법인의 이자소득 등에 대한 원천징수를, 소득세법 제133조의2는 거주자·비거주자의 채권 이자소득에 대한 원천징수를 규정하고 있어, 동일한 정책 목적(채권 이자소득의 원천징수)을 서로 다른 세목·납세자군에 대해 병행 규정하는 관계입니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제127조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제73조와 소득세법 제127조는 각각 내국법인과 거주자/비거주자에 대해 이자소득 등에 대한 원천징수 의무를 규정하는 동일한 정책 목적의 병행 규정으로, 원천징수의무자의 범위, 대리·위임 관계, 외국법인 채권소득 처리 등 핵심 규정들이 동일한 취지를 담고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제129조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제73조와 소득세법 제129조는 내국법인과 거주자에 대해 동일한 정책 목적(이자소득 원천징수세율)을 각각 적용하되, 비영업대금의 이익에 대한 25% 세율, 온라인투자연계금융업자를 통한 14% 세율 등 동일한 취지의 세율 구조를 병행 규정하고 있다.",
+    "validated": true
+   },
    {
     "target_law": "소득세법",
     "target_article": "제16조제1항제11호",
@@ -7362,6 +8631,15 @@
   "법인세법|73의2": [
    {
     "target_law": "소득세법",
+    "target_article": "제133조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제73조의2는 내국법인의 채권등 매도 시 이자상당액에 대한 원천징수를, 소득세법 제133조의2는 거주자/비거주자의 채권등 매도 시 이자상당액에 대한 원천징수를 규정하여 동일한 정책 목적(채권등 보유기간 이자상당액의 과세)을 법인과 개인이라는 상이한 납세자군에 대해 병행으로 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
     "target_article": "제46조제1항",
     "relation_type": "citation",
     "confidence": "high",
@@ -7370,7 +8648,72 @@
     "validated": true
    }
   ],
+  "법인세법|74": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제133조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 원천징수의무자의 원천징수영수증 발급 의무라는 동일한 정책 목적을 각각 법인과 개인에 대해 병행으로 규정하고 있으므로 세법 개정 시 동일 취지의 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제146조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제74조와 소득세법 제146조는 원천징수의무자가 납세의무자에게 원천징수영수증을 발급하도록 규정하는 동일한 정책 목적을 법인세와 소득세라는 서로 다른 세목에서 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제145조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제74조와 소득세법 제145조는 각각 법인과 개인사업자에 대해 원천징수 후 원천징수영수증 발급의무라는 동일한 정책 취지를 상이한 세목에서 병행으로 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제144조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인 및 개인사업자를 대상으로 원천징수 시 원천징수영수증 발급의무를 동일한 취지로 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제143조의7",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인과 개인에 대해 원천징수 후 원천징수영수증 발급이라는 동일한 정책 목적을 서로 다른 세목에서 병행으로 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
   "법인세법|74의2": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제81조의14",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 업무용승용차 관련비용 명세서 제출 불성실에 대해 동일한 정책 목적(명세서 제출 의무 강제)으로 각각 법인과 개인사업자에 대해 동일한 구조와 비율(100분의 1)의 가산세를 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제33조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제74조의2와 소득세법 제33조의2는 업무용승용차 관련비용에 대해 법인과 개인사업자를 각각 규율하면서 명세서 제출 의무라는 동일한 정책 목적을 병행 규정하고 있어 병행 개정 검토 대상이다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제100조의18",
@@ -7401,6 +8744,15 @@
   ],
   "법인세법|75": [
    {
+    "target_law": "소득세법",
+    "target_article": "제81조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제75조와 소득세법 제81조의2는 성실신고확인서 제출 불성실에 대해 법인과 개인사업자에게 동일한 취지의 가산세를 규정하는 병행 규정으로, 세무서 제출 기한·가산세율(산출세액의 100분의 5, 수입금액의 1만분의 2 중 큰 금액)·산출세액 없는 경우 적용 등이 일치한다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제100조의32",
     "relation_type": "citation",
@@ -7429,6 +8781,17 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「조세특례제한법」 제100조의15",
+    "validated": true
+   }
+  ],
+  "법인세법|75의3": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제81조의5",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 장부 기록·보관 불성실에 대해 동일한 정책 목적(장부의무 준수 강제)으로 각각 법인과 개인사업자에게 100분의 20 기준의 가산세를 병행 규정하고 있으며, 두 조문의 개정 시 동일한 취지의 정책 변화를 반영할 필요가 있다.",
     "validated": true
    }
   ],
@@ -7479,9 +8842,27 @@
     "source": "code_hint",
     "reason": "법인세법 제75조의5의 증명서류 수취 불성실 가산세는 부가가치세법 제35조의 수입세금계산서와 연쇄 검토 필요",
     "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제81조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 동일한 정책 목적(증명서류 미수취 또는 허위 수취 시 가산세)을 법인과 개인사업자에 대해 각각 병행 규정하고 있으며, 가산세율(2%), 적용범위, 제외사유, 산출세액 미생기 시 적용 등이 실질적으로 동일하다.",
+    "validated": true
    }
   ],
   "법인세법|75의6": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제81조의9",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제75조의6과 소득세법 제81조의9는 신용카드 및 현금영수증 발급 불성실에 대한 동일한 정책 목적의 가산세를 법인과 개인사업자에게 각각 병행 규정하고 있으며, 조문 구조·가산세율·판단 기준이 실질적으로 동일하다.",
+    "validated": true
+   },
    {
     "target_law": "부가가치세법",
     "target_article": "제60조",
@@ -7493,6 +8874,15 @@
    }
   ],
   "법인세법|75의7": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제81조의11",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 지급명세서 제출 불성실에 대한 동일한 정책 목적(지급명세서 제출 의무 이행 강제)으로 동일한 가산세 구조와 계산방식을 각각 법인과 개인에 적용하므로 병행 개정을 검토해야 하는 관계이다.",
+    "validated": true
+   },
    {
     "target_law": "소득세법",
     "target_article": "제164조",
@@ -7541,12 +8931,41 @@
     "validated": true
    },
    {
+    "target_law": "소득세법",
+    "target_article": "제81조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인과 개인사업자에 대해 계산서·영수증 등 제출 불성실에 따른 가산세를 동일한 정책 목적으로 병행 규정하고 있으며, 양자 모두 산출세액이 없는 경우에도 가산세를 적용하는 동일한 취지를 담고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제81조의10",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제75조의8과 소득세법 제81조의10은 계산서 미발급, 기재사항 누락, 부정발급 등 동일한 정책 목적의 위반행위에 대해 법인과 개인사업자에게 각각 병행하여 적용하는 가산세 규정으로서 동일 취지의 병행 규정이다.",
+    "validated": true
+   },
+   {
     "target_law": "부가가치세법",
     "target_article": "제60조제2항",
     "relation_type": "citation",
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「부가가치세법」 제60조제2항",
+    "validated": true
+   }
+  ],
+  "법인세법|75의9": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제81조의13",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 국제조세조정법상 특정외국법인의 유보소득 계산 명세서 미제출에 대해 동일한 정책 목적(1천분의 5 가산세)으로 법인과 거주자에 각각 적용하는 병행 규정이므로 개정 시 동시 검토가 필요합니다.",
     "validated": true
    }
   ],
@@ -7636,7 +9055,27 @@
     "validated": true
    }
   ],
+  "법인세법|88": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제83조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 과세표준과 세액 결정·경정 후 납세자에게 통지하는 의무를 각각 법인과 거주자에 대해 동일한 취지로 규정하고 있는 병행 규정이다.",
+    "validated": true
+   }
+  ],
   "법인세법|9": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제7조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제9조 제4항과 소득세법 제7조 제1항은 모두 원천징수세의 납세지를 원천징수의무자의 소재지에 따라 규정하는 동일한 정책 목적을 각각 법인세와 소득세에서 병행 규정한 것으로, 법인세법과 소득세법의 일관성 유지를 위해 동일 취지의 개정을 검토해야 하는 관계입니다.",
+    "validated": true
+   },
    {
     "target_law": "소득세법",
     "target_article": "제164조",
@@ -7666,6 +9105,15 @@
    }
   ],
   "법인세법|91": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제45조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제91조는 외국법인의 국내원천소득에 대한 과세표준 계산 시 결손금 공제를 규정하고, 소득세법 제45조는 개인사업자의 종합소득 계산 시 결손금 공제를 규정하여, 동일한 정책 목적(결손금의 공제 및 이월결손금의 처리)을 서로 다른 납세자군에 대해 병행 규정하고 있습니다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제100조의24",
@@ -7863,6 +9311,15 @@
   "법인세법|93의2": [
    {
     "target_law": "소득세법",
+    "target_article": "제119조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 국외투자기구를 통한 국내원천소득 지급 시 실질귀속자 판정 기준을 동일한 취지로 각각 법인(외국법인)과 개인(비거주자)에 대해 병행 규정하고 있으며, 예외 요건의 구조와 내용도 실질적으로 동일하다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
     "target_article": "제2조제3항",
     "relation_type": "citation",
     "confidence": "high",
@@ -7872,6 +9329,15 @@
    }
   ],
   "법인세법|93의3": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제119조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 외국인의 국채등 이자·양도소득에 대해 동일한 정책 목적(비거주자·외국법인의 국내 국채투자 활성화)으로 병행하여 비과세 규정을 두고 있으며, 조문 구조·내용·요건이 실질적으로 동일하므로 개정 시 함께 검토해야 한다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제21조",
@@ -8080,6 +9546,33 @@
   "법인세법|98": [
    {
     "target_law": "소득세법",
+    "target_article": "제156조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조와 소득세법 제156조는 외국법인/비거주자의 국내원천소득에 대한 원천징수 특례를 각각 규정하며, 동일한 소득 종류(이자, 배당, 임대, 용역, 양도, 사용료 등)에 대해 동일하거나 거의 동일한 원천징수율을 적용하는 병행 규정이다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제129조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조는 외국법인의 국내원천소득에 대한 원천징수세율을, 소득세법 제129조는 거주자의 각종 소득에 대한 원천징수세율을 규정하고 있으며, 이자소득, 배당소득, 사업소득, 기타소득 등 동일한 소득 항목에 대해 서로 다른 납세자군(외국법인 vs 거주자)에 적용되는 병행 규정으로서 개정 시 정책 취지를 동일하게 유지하기 위해 함께 검토해야 한다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제127조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조는 외국법인의 국내원천소득에 대한 원천징수 의무를 규정하고, 소득세법 제127조는 거주자·비거주자의 소득에 대한 원천징수 의무를 규정하므로, 동일한 정책 목적(국내원천소득에 대한 원천징수)을 서로 다른 납세자(외국법인 vs 개인·비거주자)에 대해 병행 규정하는 관계이다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
     "target_article": "제120조",
     "relation_type": "citation",
     "confidence": "high",
@@ -8124,7 +9617,54 @@
     "validated": true
    }
   ],
+  "법인세법|98의2": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의2는 외국법인의 국내원천소득에 대한 원천징수 특례를 규정하고, 소득세법 제156조는 비거주자의 국내원천소득에 대한 원천징수 특례를 규정하여 동일한 정책 목적(비거주 외국인의 국내원천소득에 대한 원천징수)을 각각 법인과 개인에 대해 병행으로 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제126조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의2와 소득세법 제126조의2는 외국법인/비거주자의 유가증권 양도소득에 대한 신고·납부 특례를 동일한 정책 취지로 각각 법인세와 소득세 영역에서 병행 규정하고 있으며, 조세조약 과세기준 충족, 신고기한, 원천징수세액 상당액 납부 등 동일한 계산 구조를 유지하고 있다.",
+    "validated": true
+   }
+  ],
   "법인세법|98의3": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의3은 외국법인의 원천징수대상채권등 이자에 대한 원천징수 특례를 규정하고, 소득세법 제156조는 비거주자의 국내원천소득(이자소득 포함)에 대한 원천징수 특례를 규정하는 것으로, 동일한 정책 목적(비거주자/외국법인의 국내원천소득에 대한 차등 원천징수)을 각각 법인세와 소득세라는 다른 세목에서 병행 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제133조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의3은 외국법인의 원천징수대상채권등에 대한 원천징수를 규정하고, 소득세법 제133조의2는 거주자·비거주자의 채권등에 대한 원천징수를 규정하여, 동일한 정책 목적(채권 이자등에 대한 보유기간 고려 원천징수)을 서로 다른 납세자군(외국법인 vs 거주자·비거주자)에 대해 병행 규정하고 있으므로 개정 시 동일 취지로의 병행 개정 검토가 필요하다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 외국법인에 대한 원천징수 특례와 소득세법의 비거주자에 대한 원천징수 특례가 동일한 정책 목적(채권등의 보유기간을 고려한 차등 원천징수)을 각각 법인세와 소득세 영역에서 병행 규정하고 있습니다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제100조의24",
@@ -8137,12 +9677,166 @@
   ],
   "법인세법|98의4": [
    {
+    "target_law": "소득세법",
+    "target_article": "제156조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 조세조약상 비과세·면제 적용절차를 각각 외국법인(법인세)과 비거주자(소득세)에 대해 동일한 취지로 병행 규정하고 있으므로 개정 시 동일한 정책 목적하에 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 외국법인(법인세)과 비거주자(소득세)에 대해 조세조약상 세율 우대(비과세·면제 vs 제한세율)를 적용받기 위한 동일한 취지의 절차(신청서 제출, 국외투자기구 신고, 보완 요구, 경정청구 등)를 병행 규정하고 있으므로 병행 개정 검토 대상이다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제18조",
     "relation_type": "citation",
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 시행령 제18조(국제금융거래에 따른 이자소득 등에 대한 법인세 등의 면제)가 이 조문을 인용: 「법인세법」 제98조의4제5항",
+    "validated": true
+   }
+  ],
+  "법인세법|98의5": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의5는 특정지역 외국법인의 국내원천소득에 대한 원천징수 특례를, 소득세법 제156조는 비거주자의 국내원천소득에 대한 원천징수 특례를 각각 규정하고 있으며, 동일한 정책 목적(국내원천소득에 대한 원천징수절차 및 조세조약 적용 특례)을 법인세와 소득세라는 서로 다른 세목에서 병행 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 동일한 정책 목적(조세조약상 제한세율 적용을 위한 원천징수 절차)을 각각 외국법인과 비거주자에 대해 병행으로 규정하고 있으며, 경정청구 기한, 세무서장의 경정 처리 기한 등 핵심 절차가 실질적으로 동일하다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 특정지역 외국인(외국법인/비거주자)의 국내원천소득에 대한 원천징수 절차와 경정청구 기한을 동일한 취지로 각각 법인과 개인에 대해 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조의9",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의5와 소득세법 제156조의9는 특정 외국 납세자에 대해 원천징수 절차에서 일단 높은 세율을 먼저 적용하고 이후 조세조약 혜택을 받으려면 경정청구하도록 하는 동일한 정책 취지를 법인세와 소득세라는 서로 다른 세목에서 병행 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
+  "법인세법|98의6": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의6은 외국법인의 조세조약상 제한세율 적용을 위한 원천징수 절차를, 소득세법 제156조는 비거주자의 국내원천소득에 대한 원천징수 특례를 규정하는 것으로, 비거주자/외국법인이라는 다른 납세자군에 대해 조세조약상 혜택을 받기 위한 동일한 정책 목적의 원천징수 절차를 병행 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제119조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의6과 소득세법 제119조의3은 외국법인/비거주자에 대한 조세조약상 제한세율 및 비과세 특례 적용을 위한 실질귀속자 확인, 신청서 제출, 서류 미비시 처리, 경정청구 절차 등을 각각 법인세와 소득세 대상자에 대해 동일한 취지로 병행 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 외국법인과 소득세법의 비거주자에 대해 조세조약상 제한세율 적용을 위한 원천징수 절차를 동일한 취지로 병행 규정하고 있으며, 신청서 제출, 국외투자기구를 통한 지급, 서류 보완, 경정청구 등 주요 절차가 실질적으로 동일하다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의6과 소득세법 제156조의2는 각각 외국법인과 비거주자에 대해 조세조약상 혜택(제한세율 vs 비과세·면제)을 적용받기 위한 동일한 취지의 신청 절차, 국외투자기구 처리, 서류 보완 요구, 경정청구 등을 병행 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
+  "법인세법|98의7": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의7은 외국법인의 이자·배당·사용료소득에 대한 원천징수 세율을, 소득세법 제156조는 비거주자의 동일 소득에 대한 원천징수 세율을 규정하는 것으로 동일한 정책 목적을 법인과 개인에 대해 각각 병행 규정하는 조문이다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의7과 소득세법 제156조의6은 조세조약상 제한세율을 적용받는 외국인/비거주자의 이자·배당·사용료소득에 대해 각각 법인과 개인을 대상으로 동일한 정책 목적(조세조약상 제한세율 적용)을 병행 규정하고 있으므로 개정 시 동일 취지의 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 외국법인 및 비거주자의 이자·배당·사용료소득에 대한 조세조약 적용 시 동일한 정책 목적(제한세율과 조약세율 중 낮은 세율 적용)을 각각 법인과 개인에 대해 병행 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
+  "법인세법|98의8": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의8과 소득세법 제156조의6은 조세조약상 제한세율을 적용받기 위한 원천징수 절차와 경정청구 제도를 각각 외국법인/국외투자기구와 비거주자에 대해 동일한 취지로 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조의9",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 외국인 통합계좌를 통한 국내원천소득의 원천징수 특례에 대해 동일한 정책 목적으로 각각 외국법인·국외투자기구와 비거주자를 대상으로 병행 규정하고 있으므로 개정 시 함께 검토해야 한다.",
+    "validated": true
+   }
+  ],
+  "법인세법|99": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제156조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제99조는 외국법인의 국내원천 인적용역소득에 대한 신고·납부 특례를 규정하고, 소득세법 제156조는 비거주자의 국내원천 인적용역소득에 대한 원천징수 특례를 규정하는 것으로, 동일한 정책 목적(국내원천 인적용역소득의 과세)을 법인과 개인에 대해 각각 규율하는 병행 규정이다.",
     "validated": true
    }
   ],
@@ -12949,6 +14643,37 @@
     "validated": true
    }
   ],
+  "소득세법 시행령|117의2": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제94조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 간접투자회사 등이 납부한 외국법인세액공제 특례에 대해 동일한 정책 목적으로 법인과 거주자에게 각각 동일한 계산구조(A×B, A×B×C)를 적용하고 있어 병행 개정을 검토해야 하는 관계입니다.",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|118": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제135조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 재해손실세액공제라는 동일한 정책 목적을 법인과 개인사업자에 대해 각각 규정하고 있으며, 두 시행령 조문 모두 대통령령으로 정하는 자산의 범위와 적용 기준을 규정하고 있어 병행 개정 검토 대상입니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제95조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 재해손실로 인한 세액공제라는 동일한 정책 목적을 법인과 개인사업자에 대해 각각 규정하고 있으며, 공제 대상 자산의 범위, 손실비율 계산 방법, 신청기한 등 핵심 내용이 실질적으로 동일하므로 병행 개정을 검토해야 한다.",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|118의5": [
    {
     "target_law": "상속세 및 증여세법 시행령",
@@ -12977,6 +14702,17 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "상속세 및 증여세법 시행령 제45조의2(장애인이 증여받은 재산의 과세가액불산입)가 이 조문을 인용: 「소득세법 시행령」 제118조의6제11항",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|118의7": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제37조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 기부금의 손금산입 및 세액공제라는 동일한 정책 목적을 법인과 개인사업자/근로자에 대해 각각 규정하고 있으며, 두 조문 모두 기부금명세서 제출 의무와 기부금의 범위 및 한도를 규율하는 병행 규정입니다.",
     "validated": true
    }
   ],
@@ -13086,6 +14822,15 @@
   ],
   "소득세법 시행령|143": [
    {
+    "target_law": "법인세법 시행령",
+    "target_article": "제104조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제104조와 소득세법 시행령 제143조는 각각 법인과 개인사업자의 장부 미비 시 추계결정·경정의 기준과 방법을 동일한 취지로 병행 규정하고 있으므로 개정 시 동시에 검토해야 한다.",
+    "validated": true
+   },
+   {
     "target_law": "부가가치세법 시행령",
     "target_article": "제42조제1호",
     "relation_type": "citation",
@@ -13161,6 +14906,28 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「부가가치세법」 제32조",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|149": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제109조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 각각 법인과 개인사업자에 대해 과세표준과 세액 통지의 동일한 정책 목적을 규정하고 있으므로 세법 개정 시 병행 검토 대상입니다.",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|149의2": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제110조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 결손금 소급공제에 의한 환급세액 계산이라는 동일한 정책 목적을 각각 법인과 개인사업자에 대해 병행으로 규정하고 있으며, 환급신청 절차, 환급취소 시 세액 계산 방식, 이자상당액 산정 등 규정 체계와 취지가 동일합니다.",
     "validated": true
    }
   ],
@@ -13768,6 +15535,15 @@
   ],
   "소득세법 시행령|168의11": [
    {
+    "target_law": "법인세법 시행령",
+    "target_article": "제92조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 동일한 정책 목적(사업에 사용되는 토지의 범위 규정)을 법인과 개인사업자에 대해 각각 병행 규정하고 있으며, 구체적 내용과 기준이 거의 동일하므로 세법 개정 시 병행 검토가 필요하다.",
+    "validated": true
+   },
+   {
     "target_law": "부가가치세법 시행령",
     "target_article": "제65조제1항",
     "relation_type": "citation",
@@ -13779,12 +15555,43 @@
   ],
   "소득세법 시행령|168의13": [
    {
+    "target_law": "법인세법 시행령",
+    "target_article": "제92조의10",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 별장에 해당하지 않는 농어촌주택의 범위를 동일한 정책 목적으로 각각 법인과 개인에 대해 동일한 기준(연면적·부속토지면적·가액·지역)으로 병행 규정하고 있다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제99조의4제1항제1호",
     "relation_type": "citation",
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「조세특례제한법」 제99조의4제1항제1호",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|168의14": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제92조의11",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 동일한 정책 목적인 비사업용 토지 판정기준을 법인과 개인사업자에 대해 각각 병행 규정하고 있으며, 제1항과 제2항의 구조 및 내용이 대체로 일치하므로 개정 시 동일한 취지의 병행 개정이 필요합니다.",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|168의6": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제92조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 비사업용 토지의 양도소득 계산 시 적용되는 보유기간 기준을 동일한 취지로 법인과 개인에 대해 병행 규정하고 있으므로 세법 개정 시 동일한 방향으로 병행 개정을 검토해야 한다.",
     "validated": true
    }
   ],
@@ -13796,6 +15603,17 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「조세특례제한법 시행령」 제66조제13항",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|177": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제109조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 각각 과세표준과 세액을 통지할 때 납부고지서에 계산명세를 첨부하고 필요한 사항을 기재하여 통지하며, 지방국세청장의 결정·경정 사실을 표시하도록 규정한 동일한 취지의 절차 규정이다.",
     "validated": true
    }
   ],
@@ -13830,7 +15648,36 @@
     "validated": true
    }
   ],
+  "소득세법 시행령|179의2": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제132조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 적격외국금융회사등의 승인 요건, 절차, 취소 사유를 동일한 취지로 병행 규정하고 있으므로 세법 개정 시 동일한 정책 목적에 따른 병행 개정을 검토해야 한다.",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|179의4": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제132조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 외국법인/비거주자의 국채등 이자·양도소득에 대한 동일한 취지의 비과세 적용 신청 절차를 각각 규정하고 있으며, 신청서 제출 방법, 기한, 대리인 규정 등 모든 실질적 내용이 동일하게 구성되어 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의4와 소득세법 시행령 제179조의4는 외국법인/비거주자의 국내원천소득에 대한 조세조약상 비과세·면제 적용 신청 절차를 각각 규정하는 동일한 정책 목적의 병행 규정으로서, 신청서 제출 시기, 대리인 제출, 소득지급자 미존재 시 직접 제출 등의 공통된 세부 요건들을 동일한 취지로 규율하고 있습니다.",
+    "validated": true
+   },
    {
     "target_law": "법인세법",
     "target_article": "제94조",
@@ -13838,6 +15685,17 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「법인세법」 제94조",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|179의5": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제132조의5",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 국외투자기구 투자에 따른 국채등 소득의 신고·납부 의무를 각각 내국법인과 거주자에 대해 동일한 취지로 병행 규정하고 있습니다.",
     "validated": true
    }
   ],
@@ -13892,6 +15750,28 @@
     "validated": true
    }
   ],
+  "소득세법 시행령|180": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제133조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 외국법인과 소득세법의 비거주자에 대해 동일한 정책 목적(국제조세 회피 방지를 위한 대리인 범위 규정)으로 같은 취지의 규정을 병행하고 있으므로, 법령 개정 시 일관성 있는 병행 개정이 필요하다.",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|181의2": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제130조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 외국법인/비거주자의 국내사업장과 본점 등 간 거래에서 정상가격 기준 국내원천소득 계산, 비용·경비 배분, 서류제출 등 동일한 취지의 규정을 각각 법인과 개인에 대해 병행으로 규정하고 있어 함께 개정할 필요가 있다.",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|183": [
    {
     "target_law": "법인세법 시행령",
@@ -13923,7 +15803,27 @@
     "validated": true
    }
   ],
+  "소득세법 시행령|183의3": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제131조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 외국법인(법인세)과 비거주자(소득세)의 장외 유가증권거래에 대해 동일한 취지로 국외특수관계인 간 주식양도가액검토서 제출 의무를 규정하고 있어 병행 개정이 필요한 관계입니다.",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|183의4": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 외국법인/비거주자의 유가증권 양도소득에 대한 조세조약 과세기준 미충족 시 원천징수세액 신고·납부 의무를 동일한 취지로 각각 규정하고 있으며, 신고서 양식 및 제출 세무서장 결정 기준까지 동일하게 구성되어 있다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제18조제4항제1호",
@@ -13986,6 +15886,15 @@
   "소득세법 시행령|185": [
    {
     "target_law": "법인세법 시행령",
+    "target_article": "제115조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 원천징수의무자의 납부의무, 신고서 제출의무, 납부처 등 동일한 취지의 원천징수 절차를 각각 법인과 개인에 대해 병행으로 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
     "target_article": "제137조",
     "relation_type": "citation",
     "confidence": "high",
@@ -13994,7 +15903,27 @@
     "validated": true
    }
   ],
+  "소득세법 시행령|186": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제115조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 원천징수세액의 반기별 납부 특례를 동일한 정책 목적(소규모 사업자의 납부 부담 경감)으로 각각 법인과 개인사업자에 대해 병행 규정하고 있으며, 상시고용인원 기준, 신청 절차, 승인 기준 등 계산방법과 적용범위가 동일한 취지로 설계되어 있다.",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|189의2": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제111조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제111조와 소득세법 시행령 제189조의2는 간접투자회사등으로부터 지급받는 소득에 대한 외국납부세액 공제 시 원천징수세액 계산 방식을 법인과 거주자(개인)에 대해 동일한 취지로 규정하고 있어 병행 개정이 필요한 관계이다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제91조의18제1항",
@@ -14054,6 +15983,15 @@
   ],
   "소득세법 시행령|191": [
    {
+    "target_law": "법인세법 시행령",
+    "target_article": "제137조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제137조 제2항이 내국법인의 배당소득 지급시기를 규정하고, 소득세법 시행령 제191조가 개인의 배당소득 원천징수시기를 규정하여 동일한 정책 목적(배당소득 지급기한 도과시 의제지급)을 법인세와 소득세에서 각각 규율하고 있습니다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제100조의18제1항",
     "relation_type": "citation",
@@ -14063,7 +16001,36 @@
     "validated": true
    }
   ],
+  "소득세법 시행령|193": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제117조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제117조 제1항이 소득세법 시행령 제193조를 준용하도록 명시하고 있어, 법인과 개인에 대한 원천징수영수증 교부에 관한 동일 취지의 병행 규정 관계입니다.",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|193의2": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제113조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제113조와 소득세법 시행령 제193조의2는 법인과 거주자/비거주자가 채권등을 보유한 기간의 이자상당액에 대해 동일한 정책 취지(보유기간 동안의 이자상당액 계산)로 원천징수를 규정하고 있으므로 병행 개정 검토 대상이다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의3과 소득세법 시행령 제193조의2는 채권등의 보유기간이자상당액 계산 및 원천징수에 관한 동일한 정책 목적을 법인과 개인사업자/비거주자에 대해 각각 병행 규정하고 있으며, 보유기간 계산방법과 이자상당액 산정 기준을 동일하게 적용하고 있다.",
+    "validated": true
+   },
    {
     "target_law": "법인세법",
     "target_article": "제2조",
@@ -14201,6 +16168,15 @@
   ],
   "소득세법 시행령|202": [
    {
+    "target_law": "법인세법 시행령",
+    "target_article": "제137조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제137조 제1항이 배당소득 및 기타소득의 지급시기에 관하여 소득세법 규정을 준용하고 있으며, 양쪽 모두 원천징수 대상 소득의 지급시기와 필요경비 공제 등 동일한 취지의 원천징수 계산규정을 규정하고 있다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제100조의18제1항",
     "relation_type": "citation",
@@ -14235,11 +16211,221 @@
   "소득세법 시행령|207": [
    {
     "target_law": "법인세법 시행령",
+    "target_article": "제137조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제137조와 소득세법 시행령 제207조는 외국법인/비거주자에 대한 원천징수 규정으로서 동일한 정책 목적을 법인과 개인에 대해 각각 규정하고 있으며, 가상자산 관련 계산식 및 납부 방식 등 핵심적인 계산방법과 절차를 동일한 취지로 병행 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
     "target_article": "제88조제1항제8호",
     "relation_type": "citation",
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「법인세법 시행령」 제88조제1항제8호",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|207의2": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제132조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제132조의4는 외국법인의 국채등 비과세 적용 신청 절차를, 소득세법 시행령 제207조의2는 비거주자의 조세조약상 비과세·면제 적용 신청 절차를 규정하는 것으로, 외국인(외국법인/비거주자)의 국내원천소득에 대한 비과세 신청 절차를 각각의 세목에서 병행 규정하고 있으며 신청서 제출, 대리인 활용, 금융회사 중개, 직접제출 요건 등 기본 구조와 취지가 동일합니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 조세조약상 비과세 또는 면제를 적용받기 위한 신청 절차와 요건을 각각 외국법인(법인세)과 비거주자(소득세)에 대해 동일한 취지로 병행 규정하고 있으므로 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의5",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의5는 외국법인의 조세조약상 원천징수 특례 적용을 위한 사전승인 절차를, 소득세법 시행령 제207조의2는 비거주자의 조세조약상 비과세·면제 적용을 위한 신청 절차를 각각 규정하고 있으며, 거주자증명서 제출, 실질귀속자 확인, 신청서류 제출 및 관리 등 동일한 취지의 조세조약 적용 절차를 법인과 개인에 대해 병행 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의7",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 외국법인에 대한 조세조약상 제한세율 적용 절차와 소득세법의 비거주자에 대한 조세조약상 비과세·면제 적용 절차는 동일한 정책 목적(조세조약상 혜택 적용)을 서로 다른 납세자군(외국법인 vs 비거주자)에 대해 병행으로 규정하고 있으며, 국외투자기구를 통한 소득 지급 시 실질귀속자 파악 절차, 신청서 제출 및 보관 의무, 3년 유효 기간 등 동일한 취지의 계산방법과 절차를 공통으로 포함하고 있다.",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|207의3": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제114조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 환매조건부채권매매거래에서 보유기간이자등상당액의 귀속자를 결정하고 원천징수 특례를 적용하는 동일한 정책 목적을 각각 법인 및 비거주자에 대해 병행으로 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의3과 소득세법 시행령 제207조의3은 외국법인/비거주자의 채권등 이자에 대한 원천징수 특례를 동일한 취지로 각각 법인과 개인에 대해 병행 규정하고 있으므로 세법 개정 시 동일 취지의 병행 개정을 검토해야 한다.",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|207의4": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의4와 소득세법 시행령 제207조의4는 조세조약상 비과세·면제 적용을 위해 각각 법인과 개인사업자 등이 제출해야 할 거주자증명서, 재무제표 등의 동일한 증명서류와 신청 절차를 병행으로 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의5",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 조세조약상 비과세·면제·제한세율 적용을 위한 사전승인 절차를 각각 법인과 개인에 대해 동일한 취지로 병행 규정하고 있으므로, 한쪽 법령 개정 시 다른 쪽도 함께 검토되어야 한다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령과 소득세법 시행령이 조세조약상의 비과세·면제·제한세율 적용을 받기 위한 절차(경정청구 vs 사전승인)를 각각 법인과 개인사업자에 대해 동일한 취지로 병행 규정하고 있으며, 제출서류의 한글번역본 요건, 보정요구 절차, 보정기간의 산입 제외 등 실질적으로 동일한 정책 목적을 서로 다른 세목과 납세자군에 대해 규율하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 조세조약상 제한세율 적용을 받기 위한 절차를 각각 외국법인과 외국인에 대해 동일한 취지로 규정하고 있으며, 거주자증명서 제출, 서류 한글번역 요건 등 핵심 요소들이 병행되어 있어 병행 개정 검토 대상에 해당한다.",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|207의5": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법상 외국법인의 조세조약상 비과세·면제 신청 절차와 소득세법상 비거주자의 조세조약상 비과세·면제 적용을 위한 경정청구 절차로서, 동일한 정책 목적(조세조약상 혜택 적용)을 다른 납세자군(법인 vs 개인)에 대해 각각 규정하는 병행 규정이다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 조세조약상의 비과세·면제 또는 제한세율 적용을 위한 경정청구 절차를 동일한 취지로 각각 법인과 개인사업자에 대해 병행 규정하고 있으며, 경정청구서 제출, 실질귀속자 확인, 보정요구 절차 등 주요 내용이 실질적으로 동일하다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 외국인의 조세조약상 제한세율 적용을 위한 경정청구 절차를 각각 규정하고 있으며, 원천징수의무자 관할세무서장 청구, 거주자증명서 첨부, 한글번역 및 영문 제출 선택 등 동일한 취지의 절차 기준을 설정하고 있다.",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|207의8": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의3은 외국법인의 채권 이자에 대한 원천징수 절차를, 소득세법 시행령 제207조의8은 비거주자의 조세조약상 제한세율 적용을 위한 원천징수 절차를 규정하는바, 동일한 정책목적(국제조세조약 활용을 통한 이중과세 방지 및 제한세율 적용)을 서로 다른 납세자군(외국법인 vs 비거주자)에 대해 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의4(외국법인의 조세조약상 비과세·면제 적용)와 소득세법 시행령 제207조의8(비거주자의 조세조약상 제한세율 적용)은 동일한 정책 목적(조세조약상 혜택 신청)을 법인세와 소득세 납세자에 대해 각각 규정하고 있으며, 국외투자기구를 통한 소득 지급, 실질귀속자 확인, 신청서 제출 절차 등 동일한 취지의 계산방법과 적용범위를 공유하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의5",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의5와 소득세법 시행령 제207조의8은 조세조약상 제한세율 적용을 위한 사전승인/신청 절차를 각각 법인과 비거주자에 대해 병행으로 규정하고 있으며, 실질귀속자 확인, 신청서 제출, 서류 보관 등 동일한 정책 목적의 제도를 적용하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 조세조약상 비과세·면제 또는 제한세율 적용을 받기 위한 절차를 각각 법인과 비거주자에 대해 병행으로 규정하고 있으며, 경정청구 또는 사전신청 방식으로 실질귀속자 확인을 통해 조약 혜택을 적용받도록 하는 동일한 정책 취지를 담고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의7",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 조세조약상 제한세율 적용을 위한 원천징수절차의 동일한 정책목적을 각각 외국법인(법인세)과 비거주자(소득세)에 대해 병행 규정하고 있으며, 제한세율 적용신청서 제출, 국외투자기구 신고서 작성, 실질귀속자 확인 등의 절차와 요건이 거의 동일하게 구성되어 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제138조의8은 외국법인에 대한 조세조약상 제한세율 적용을 위한 경정청구 절차를 규정하고, 소득세법 시행령 제207조의8은 비거주자에 대한 같은 취지의 원천징수절차 특례를 규정하며, 양자 모두 실질귀속자 입증, 제한세율 적용신청서, 국외투자기구 신고서 등 동일한 요건과 절차를 공통으로 적용하고 있다.",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|207의9": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 조세조약상 제한세율 적용을 위한 경정청구 절차를 각각 법인과 비거주자에 대해 동일한 취지로 규정하고 있으며, 원천징수의무자를 통한 경정청구, 실질귀속자 입증, 한글번역본 제출 등 병행 적용되어야 할 공통 요소를 포함하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제138조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 외국법인과 비거주자를 대상으로 동일한 취지의 조세조약상 제한세율 적용을 위한 경정청구 절차를 병행 규정하고 있어, 세법 개정 시 동일한 취지로 병행 개정을 검토해야 하는 관계입니다.",
     "validated": true
    }
   ],
@@ -14284,6 +16470,15 @@
    }
   ],
   "소득세법 시행령|208의3": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제155조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 기부금영수증 발급명세의 작성·보관 의무에 관하여 동일한 정책 목적(기부금 투명성 관리)으로 각각 법인과 개인에 대해 병행 규정하고 있으며, 기부자 정보 항목과 기부금 한도액(3억원)을 동일하게 규정하고 있다.",
+    "validated": true
+   },
    {
     "target_law": "법인세법 시행령",
     "target_article": "제7조제6항제2호",
@@ -14476,6 +16671,17 @@
     "validated": true
    }
   ],
+  "소득세법 시행령|213": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제162조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제162조는 내국법인이 소득세 대상 소득을 지급할 때 소득세법 시행령 제213조의 지급명세서 규정을 준용하도록 하여, 동일한 지급명세서 제출 의무를 법인세와 소득세 영역에서 병행 규정하고 있으므로 병행 개정 검토 대상이다.",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|213의2": [
    {
     "target_law": "조세특례제한법",
@@ -14499,6 +16705,15 @@
    }
   ],
   "소득세법 시행령|216의2": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제162조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 외국법인과 소득세법의 비거주자에 대한 국내원천소득 지급명세서 제출의무 특례를 규정한 조문으로, 동일한 정책 목적(지급명세서 제출 특례)을 서로 다른 세목의 납세자군에 대해 동일한 구조와 요건으로 병행 규정하고 있습니다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제21조제1항",
@@ -14625,6 +16840,17 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 시행령 제121조의2(신용카드등 사용금액에 대한 소득공제)가 이 조문을 인용: 「소득세법 시행령」 제216조의3",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|216의4": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제163조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 가상자산사업자의 거래내역 제출 의무를 각각 법인과 개인사업자에 대해 동일한 취지로 병행 규정하고 있으며, 제출 대상 서류(거래명세서·집계표)와 제출 방법도 동일하므로 세법 개정 시 동시 개정을 검토해야 한다.",
     "validated": true
    }
   ],
@@ -15101,6 +17327,24 @@
   ],
   "소득세법 시행령|55": [
    {
+    "target_law": "법인세법 시행령",
+    "target_article": "제19조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제19조와 소득세법 시행령 제55조는 각각 법인과 개인사업자의 필요경비 범위를 규정하면서 동일한 정책 목적 하에 상품원료비, 판매부대비용, 자산양도가액, 인건비, 출산양육지원금, 제세공과금, 감가상각비 등 많은 항목을 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제26조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제26조의2는 한국채택국제회계기준 도입에 따른 법인의 감가상각비 손금산입 한도를 규정하고, 소득세법 시행령 제55조 제14호는 개인사업자의 사업용 유형자산의 감가상각비를 필요경비로 인정하는 규정으로서, 동일한 정책 목적(감가상각비의 필요경비·손금산입)을 법인과 개인사업자에 대해 각각 규율하는 병행 규정 관계에 있다.",
+    "validated": true
+   },
+   {
     "target_law": "부가가치세법 시행령",
     "target_article": "제87조",
     "relation_type": "citation",
@@ -15137,6 +17381,84 @@
     "validated": true
    }
   ],
+  "소득세법 시행령|56": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제19조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제19조의2는 법인의 대손금 손금불산입 요건을, 소득세법 시행령 제56조는 개인사업자의 대손충당금 필요경비계산을 규정하는 것으로, 동일한 정책 목적(채권손실에 대한 세무상 인정)을 법인과 개인사업자에 대해 각각 규율하고 있어 병행 개정 검토 대상에 해당한다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제61조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 대손충당금의 동일한 정책 목적(채권 손실에 대한 충당금 계산)을 법인과 개인사업자에 대해 각각 규정하고 있으며, 채권잔액의 100분의 1 또는 대손실적률 곱셈액 중 큰 금액으로 계산하는 동일한 계산방법을 적용하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제63조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 구상채권상각충당금 제도와 소득세법의 대손충당금 제도가 각각 법인과 개인사업자에게 동일한 정책 목적(채권 손실에 대비한 충당금 적립)으로 병행 규정되어 있으며, 계산방식도 채권잔액에 일정 비율을 곱하는 동일 취지의 구조를 갖추고 있습니다.",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|57": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제129조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제129조 제2항과 소득세법 시행령 제57조가 퇴직급여충당금의 필요경비 계상 요건을 각각 외국법인과 개인사업자에 대해 동일한 취지로 규정하고 있어 병행 개정 검토가 필요하다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제44조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 퇴직급여 관련 비용 처리에 대해 각각 법인과 개인사업자에게 동일한 정책 목적(퇴직급여 적립의 손금·필요경비 산입 제한)으로 병행 규정하고 있으므로 개정 시 동일 취지로 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제60조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 퇴직급여충당금의 동일한 정책목적(퇴직급여 적립)을 법인과 개인사업자에 대해 각각 병행 규정하고 있으며, 연간 총급여액의 5% 한도, 동일한 연도별 누적액 한도 비율(30→25→20→15→10→5→0%), 동일한 초과금액 환입 제외 규정 등을 공통으로 적용하고 있다.",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|60": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제64조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 국고보조금으로 취득한 사업용자산에 대해 동일한 정책 목적(국고보조금 상당액의 손금/필요경비 처리)을 법인과 개인사업자에 대해 각각 병행 규정하고 있으며, 일시상각충당금·압축기장충당금의 계상, 익금/총수입금액 산입 방법, 부득이한 사유 등이 실질적으로 동일하게 구성되어 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제98조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 일시상각충당금·압축기장충당금 규정과 소득세법의 국고보조금으로 인한 동일 충당금 규정이 동일한 정책 목적(자산 취득 자금의 세무 처리)을 법인과 개인사업자에 대해 각각 규정하는 병행 규정 관계입니다.",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|62": [
    {
     "target_law": "법인세법 시행령",
@@ -15163,6 +17485,60 @@
     "confidence": "confirmed",
     "source": "golden_manual",
     "reason": "감가상각 병행: 감가상각자산 범위·계상·상각범위액 계산 구조",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제28조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제28조와 소득세법 시행령 제62조는 감가상각자산의 내용연수·상각률 결정 및 상각액 계산이라는 동일한 정책 목적을 법인과 개인사업자에 대해 각각 규정하고 있으므로, 세법 개정 시 동일 취지의 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제29조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제29조의2와 소득세법 시행령 제62조는 각각 법인과 개인사업자가 감가상각자산의 상각범위액을 계산하는 동일한 정책 목적을 서로 다른 납세자군에 대해 규정하고 있으므로 세법 개정 시 병행 검토가 필요하다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제30조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각비의 상각범위액 한도 원칙을 각각 법인과 개인사업자에 대해 동일한 취지로 규정하고 있으므로 병행 개정 대상이다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제32조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제32조와 소득세법 시행령 제62조는 감가상각자산의 상각부인액, 시인부족액, 부분양도 시 계산방법, 평가증과의 병행처리 등 동일한 정책 목적의 감가상각 규정을 법인과 개인사업자에 대해 각각 규정하고 있으므로 병행 개정을 검토해야 하는 관계이다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제33조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각비의 손금/필요경비 계산 및 신고 의무를 각각 법인과 개인사업자에 대해 동일한 정책 목적으로 병행 규정하고 있으므로 관련 개정 시 양쪽의 조화로운 개정을 검토해야 한다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제34조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제34조와 소득세법 시행령 제62조는 감가상각자산의 감가상각비 계산에 관한 동일한 정책 목적을 법인과 개인사업자에 대해 각각 규정하는 병행 규정으로서, 양 조문 모두 감가상각자산의 범위, 계산방법, 상각범위액 등의 취지를 공유하고 있다.",
     "validated": true
    },
    {
@@ -15258,6 +17634,33 @@
     "validated": true
    },
    {
+    "target_law": "법인세법 시행령",
+    "target_article": "제24조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제24조와 소득세법 시행령 제63조는 법인과 개인사업자가 각각 감가상각자산에 대해 내용연수를 결정하고 상각률을 적용하는 동일한 정책 취지를 규정하고 있어 병행 개정이 필요한 관계입니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제26조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제26조와 소득세법 시행령 제63조는 각각 법인과 개인사업자에 대해 감가상각자산의 내용연수 결정 방식, 상각률 적용, 신고 절차 및 계속적용 원칙을 동일한 취지로 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제29조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제29조의2의 중고자산 수정내용연수 규정과 소득세법 시행령 제63조의 내용연수 규정이 동일한 정책 목적(중고자산 취득 시 기준내용연수의 50% 범위 내에서 내용연수 선택 적용)을 법인과 개인사업자에 대해 각각 규정하는 병행규정 관계이다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제2조",
     "relation_type": "citation",
@@ -15312,6 +17715,37 @@
     "validated": true
    }
   ],
+  "소득세법 시행령|63의2": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제24조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제24조는 법인의 감가상각자산 범위를, 소득세법 시행령 제63조의2는 개인사업자의 감가상각 내용연수 특례를 각각 규정하고 있으므로, 동일한 정책목적(감가상각자산의 기준 설정)을 법인과 개인사업자에 대해 병행 규정하는 관계이다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제29조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각자산의 내용연수 특례 인정 요건과 절차를 법인과 개인사업자에 대해 동일한 정책 목적으로 병행 규정하고 있으므로 개정 시 일관성 유지를 위해 함께 검토해야 합니다.",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|63의3": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제29조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 중고자산의 내용연수 결정에 관하여 동일한 정책 목적(기준내용연수의 50% 이상 경과 자산에 대해 50% 연수 이상 범위에서 선택 가능)을 법인과 개인사업자에 각각 적용하는 병행 규정이다.",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|64": [
    {
     "target_law": "법인세법 시행령",
@@ -15320,6 +17754,33 @@
     "confidence": "confirmed",
     "source": "golden_manual",
     "reason": "감가상각 병행: 상각방법 신고·변경·계산",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제25조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각자산에 대한 상각방법 선택 및 적용에 관한 동일한 정책 목적(감가상각의 계산방법 규정)을 각각 법인과 개인사업자에 대해 병행으로 규정하고 있으므로 개정 시 취지를 맞춰 함께 검토할 필요가 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제26조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제26조와 소득세법 시행령 제64조는 감가상각자산의 상각방법을 정하는 동일한 취지의 규정으로서, 법인과 개인사업자라는 서로 다른 납세자군에 대해 동일한 자산분류 및 상각방법(정액법, 정률법, 생산량비례법 등)을 병행 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제34조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각자산의 상각방법 및 계산에 관한 동일한 정책 목적을 각각 법인과 개인사업자에 대해 병행으로 규정하고 있으므로 동일한 취지의 개정이 필요할 때 함께 검토되어야 한다.",
     "validated": true
    },
    {
@@ -15436,6 +17897,24 @@
    },
    {
     "target_law": "법인세법 시행령",
+    "target_article": "제26조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각자산의 정률법, 정액법, 생산량비례법의 계산방법을 각각 법인과 개인사업자에 대해 동일한 취지로 규정하고 있으며, 특히 업무용승용차 관련 처리 방식도 동일하게 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제50조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 업무용승용차의 감가상각비 계산 및 손금(필요경비) 산입 한도를 각각 법인과 개인사업자에 대해 동일한 취지로 규정하고 있으므로 병행 개정이 필요한 관계입니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
     "target_article": "제72조",
     "relation_type": "citation",
     "confidence": "high",
@@ -15471,6 +17950,15 @@
     "source": "golden_manual",
     "reason": "감가상각 병행: 종전·기준 감가상각비, 중고자산, 즉시상각, 의제상각, 잔존가액, 상각시부인",
     "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제31조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각자산의 자본적 지출 판단 기준, 수선비 한도, 소액자산 즉시상각 등을 동일한 취지로 법인과 개인사업자에 각각 규정하고 있어 병행 개정을 검토해야 하는 관계입니다.",
+    "validated": true
    }
   ],
   "소득세법 시행령|68": [
@@ -15499,6 +17987,15 @@
     "confidence": "confirmed",
     "source": "golden_manual",
     "reason": "감가상각 병행: 종전·기준 감가상각비, 중고자산, 즉시상각, 의제상각, 잔존가액, 상각시부인",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제30조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 세금 감면·면제 대상자의 감가상각비 계산 방법을 동일한 취지(상각범위액 이내로 계산 강제)로 각각 법인과 개인사업자에게 병행 규정하고 있으므로 병행 개정 검토 대상입니다.",
     "validated": true
    }
   ],
@@ -15540,6 +18037,15 @@
     "source": "golden_manual",
     "reason": "감가상각 병행: 종전·기준 감가상각비, 중고자산, 즉시상각, 의제상각, 잔존가액, 상각시부인",
     "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제24조",
+    "relation_type": "definition_scope",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제24조 제3항과 소득세법 시행령 제70조는 감가상각자산의 적용범위에서 유휴설비와 건설중 자산의 취급을 동일한 취지로 규정하고 있어 병행 개정 검토가 필요합니다.",
+    "validated": true
    }
   ],
   "소득세법 시행령|71": [
@@ -15568,6 +18074,24 @@
     "confidence": "confirmed",
     "source": "golden_manual",
     "reason": "감가상각 병행: 종전·기준 감가상각비, 중고자산, 즉시상각, 의제상각, 잔존가액, 상각시부인",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제26조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각자산의 잔존가액 계산 방법에 대해 동일한 정책 목적으로 법인과 개인사업자에게 각각 병행 규정하고 있으며, 정률법 적용 시 취득가액의 5% 기준과 미상각잔액이 5% 이하가 되는 시점의 처리 방식이 완전히 일치한다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제34조",
+    "relation_type": "calculation_rule",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 감가상각비 계산에서 잔존가액 결정이라는 동일한 취지의 계산방법을 법인과 개인사업자에 대해 각각 규정하고 있으므로 병행 개정 검토가 필요한 관계입니다.",
     "validated": true
    }
   ],
@@ -15658,6 +18182,15 @@
   ],
   "소득세법 시행령|74": [
    {
+    "target_law": "법인세법 시행령",
+    "target_article": "제22조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 부가가치세의 매입세액을 각각 법인과 개인사업자에 대해 손금/필요경비로 산입하는 동일한 정책 목적을 규정하고 있으며, 부가가치세법 제39조 제1항 제5호, 제6호 등 동일한 요건을 참조하고 있다.",
+    "validated": true
+   },
+   {
     "target_law": "부가가치세법",
     "target_article": "제39조제1항제5호",
     "relation_type": "citation",
@@ -15669,6 +18202,15 @@
   ],
   "소득세법 시행령|78": [
    {
+    "target_law": "법인세법 시행령",
+    "target_article": "제50조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인과 개인사업자에 대해 '업무와 관련 없는 지출'의 필요경비 제외 사유를 동일한 취지로 병행 규정하고 있으며, 뇌물·노동법 위반급여 등 구체적 항목도 동일하게 규율하고 있다.",
+    "validated": true
+   },
+   {
     "target_law": "부가가치세법 시행령",
     "target_article": "제77조",
     "relation_type": "citation",
@@ -15678,7 +18220,27 @@
     "validated": true
    }
   ],
+  "소득세법 시행령|78의2": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제55조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 지급이자의 손금·필요경비 불산입에 관하여 동일한 정책 목적(채권자 불명확, 건설자금 등)으로 적용 순서를 규정하고 있어 병행 개정 검토 대상입니다.",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|78의3": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제50조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 업무용승용차 관련비용의 손금/필요경비 불산입 특례에 대해 동일한 정책 목적으로 법인과 개인사업자에 각각 병행 규정하고 있으며, 업무용 사용금액 산정, 업무전용자동차보험 요건, 업무사용비율 계산 등 주요 내용이 동일한 취지로 규율되고 있습니다.",
+    "validated": true
+   },
    {
     "target_law": "부가가치세법 시행령",
     "target_article": "제19조",
@@ -15699,6 +18261,24 @@
    }
   ],
   "소득세법 시행령|79": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제35조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 기부금으로 인정하는 거래의 범위(특수관계인 외의 자와의 자산 양도·매입 거래에서 정상가액 판정 기준)를 동일한 취지로 각각 규정하고 있는 병행 규정이다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제37조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제37조와 소득세법 시행령 제79조는 국가·지방자치단체에 대한 기부금(특히 중간 양수인을 거친 기부금)의 손금/필요경비 산입 범위를 각각 법인과 개인사업자에 대해 동일한 취지로 규정하고 있으며, 기부금명세서 제출 의무도 병행 규정하고 있다.",
+    "validated": true
+   },
    {
     "target_law": "법인세법",
     "target_article": "제24조제2항제1호",
@@ -15767,6 +18347,33 @@
   ],
   "소득세법 시행령|81": [
    {
+    "target_law": "법인세법 시행령",
+    "target_article": "제120조의20",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제120조의20은 연결법인의 기부금 손금불산입을, 소득세법 시행령 제81조는 개인사업자의 기부금 필요경비 산입을 각각 규정하고 있으며, 두 조문 모두 기부금의 한도 계산 및 이월 처리라는 동일한 정책 목적을 서로 다른 납세자군에 대해 규율하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제36조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제36조와 소득세법 시행령 제81조는 기부금의 가액 산정, 미지급금·가지급금 처리, 금전 외 자산 기부 시 평가방법 등 동일한 정책 목적을 법인과 개인사업자에 대해 각각 병행 규정하고 있어 개정 시 동시에 검토되어야 하는 관계이다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제37조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 시행령 제37조와 소득세법 시행령 제81조는 법인과 개인사업자가 지출하는 기부금의 손금(필요경비) 산입 범위와 계산방법을 각각 규정하는 동일 취지의 병행 규정으로서, 세목은 다르지만 기부금 공제 한도 산정 및 적용 기준을 같은 방식으로 구분·운영하고 있다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제58조",
     "relation_type": "citation",
@@ -15787,12 +18394,41 @@
   ],
   "소득세법 시행령|83": [
    {
+    "target_law": "법인세법 시행령",
+    "target_article": "제41조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 기업업무추진비의 신용카드 등 사용과 관련하여 동일한 정책 목적(경조금 한도 20만원, 기타 3만원, 국외지역·농어민 지출 예외 등)을 법인과 개인사업자에 대해 병행으로 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제42조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 기업업무추진비 제도를 각각 법인과 개인사업자에 대해 병행으로 규정하고 있으며, 특히 수입금액 계산기준에 관한 조문들이 동일한 정책 목적으로 양쪽 세법에서 규율되고 있다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제126조의2제1항제4호",
     "relation_type": "citation",
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「조세특례제한법」 제126조의2제1항제4호",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|85": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제120조의21",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 연결법인 기업업무추진비 손금불산입과 소득세법의 다중사업장 기업업무추진비 한도액이 동일한 정책 목적(기업업무추진비의 배분·한도 산정)을 서로 다른 납세자군(법인 vs 개인사업자)에 대해 규정하고 있으며, 수입금액 기준의 안분 방식과 한도액 계산 방식이 동일한 취지이다.",
     "validated": true
    }
   ],
@@ -15874,6 +18510,28 @@
     "validated": true
    }
   ],
+  "소득세법 시행령|96": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제78조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 재고자산 등의 평가차손에 대해 동일한 정책 목적으로 각각 법인과 개인사업자에게 병행 적용하는 규정으로서, 감액사유(천재지변·화재 등), 평가방법(시가평가), 손비·필요경비 계상 등의 취지가 동일하다.",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|97": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제76조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인과 개인사업자의 외화자산·부채 평가 및 환율변동분에 따른 손익 처리에 대해 동일한 정책 목적으로 병행 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
   "소득세법 시행령|98": [
    {
     "target_law": "부가가치세법 시행령",
@@ -15945,6 +18603,17 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 시행령 제121조의7(금 현물시장에서 거래되는 금지금에 대한 과세특례)가 이 조문을 인용: 「소득세법 시행령」 제98조제1항",
+    "validated": true
+   }
+  ],
+  "소득세법 시행령|99": [
+   {
+    "target_law": "법인세법 시행령",
+    "target_article": "제91조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인과 개인사업자의 국제거래에 대한 소득금액조정 신청절차를 동일한 취지로 병행 규정하고 있으며, 동일한 국제조세조정에 관한 법률 시행령 제21조를 준용하고 있다.",
     "validated": true
    }
   ],
@@ -16402,6 +19071,17 @@
     "validated": true
    }
   ],
+  "소득세법|118의6": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제57조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 외국납부 법인세액 공제와 소득세법의 국외자산 양도소득에 대한 외국납부세액 공제는 동일한 정책 목적(국제적 이중과세 제거)을 법인과 개인에 대해 각각 규정하고 있으며, 공제한도금액 계산방식도 동일한 구조(A×B/C)로 병행 규정되어 있다.",
+    "validated": true
+   }
+  ],
   "소득세법|119": [
    {
     "target_law": "법인세법",
@@ -16455,6 +19135,37 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 시행령 제100조의18(동업기업 소득금액 및 결손금의 계산 및 배분)가 이 조문을 인용: 「소득세법」 제119조",
+    "validated": true
+   }
+  ],
+  "소득세법|119의2": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제93조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 국외투자기구를 통한 국내원천소득 지급 시 실질귀속자 판정 기준을 동일한 취지로 각각 법인(외국법인)과 개인(비거주자)에 대해 병행 규정하고 있으며, 예외 요건의 구조와 내용도 실질적으로 동일하다.",
+    "validated": true
+   }
+  ],
+  "소득세법|119의3": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제93조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 외국인의 국채등 이자·양도소득에 대해 동일한 정책 목적(비거주자·외국법인의 국내 국채투자 활성화)으로 병행하여 비과세 규정을 두고 있으며, 조문 구조·내용·요건이 실질적으로 동일하므로 개정 시 함께 검토해야 한다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의6과 소득세법 제119조의3은 외국법인/비거주자에 대한 조세조약상 제한세율 및 비과세 특례 적용을 위한 실질귀속자 확인, 신청서 제출, 서류 미비시 처리, 경정청구 절차 등을 각각 법인세와 소득세 대상자에 대해 동일한 취지로 병행 규정하고 있다.",
     "validated": true
    }
   ],
@@ -16682,7 +19393,36 @@
     "validated": true
    }
   ],
+  "소득세법|126의2": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의2와 소득세법 제126조의2는 외국법인/비거주자의 유가증권 양도소득에 대한 신고·납부 특례를 동일한 정책 취지로 각각 법인세와 소득세 영역에서 병행 규정하고 있으며, 조세조약 과세기준 충족, 신고기한, 원천징수세액 상당액 납부 등 동일한 계산 구조를 유지하고 있다.",
+    "validated": true
+   }
+  ],
   "소득세법|127": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제73조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제73조와 소득세법 제127조는 각각 내국법인과 거주자/비거주자에 대해 이자소득 등에 대한 원천징수 의무를 규정하는 동일한 정책 목적의 병행 규정으로, 원천징수의무자의 범위, 대리·위임 관계, 외국법인 채권소득 처리 등 핵심 규정들이 동일한 취지를 담고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조는 외국법인의 국내원천소득에 대한 원천징수 의무를 규정하고, 소득세법 제127조는 거주자·비거주자의 소득에 대한 원천징수 의무를 규정하므로, 동일한 정책 목적(국내원천소득에 대한 원천징수)을 서로 다른 납세자(외국법인 vs 개인·비거주자)에 대해 병행 규정하는 관계이다.",
+    "validated": true
+   },
    {
     "target_law": "법인세법",
     "target_article": "제120조",
@@ -16891,6 +19631,24 @@
     "validated": true
    },
    {
+    "target_law": "법인세법",
+    "target_article": "제73조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제73조와 소득세법 제129조는 내국법인과 거주자에 대해 동일한 정책 목적(이자소득 원천징수세율)을 각각 적용하되, 비영업대금의 이익에 대한 25% 세율, 온라인투자연계금융업자를 통한 14% 세율 등 동일한 취지의 세율 구조를 병행 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조는 외국법인의 국내원천소득에 대한 원천징수세율을, 소득세법 제129조는 거주자의 각종 소득에 대한 원천징수세율을 규정하고 있으며, 이자소득, 배당소득, 사업소득, 기타소득 등 동일한 소득 항목에 대해 서로 다른 납세자군(외국법인 vs 거주자)에 적용되는 병행 규정으로서 개정 시 정책 취지를 동일하게 유지하기 위해 함께 검토해야 한다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제26조의2",
     "relation_type": "citation",
@@ -17010,6 +19768,15 @@
   ],
   "소득세법|130": [
    {
+    "target_law": "법인세법",
+    "target_article": "제73조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제73조와 소득세법 제130조는 동일한 정책목적인 이자소득에 대한 원천징수 제도를 법인세와 소득세라는 서로 다른 세목에서 병행으로 규정하고 있으므로 동일 취지의 세법 개정 시 병행 검토가 필요하다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제91조의18",
     "relation_type": "citation",
@@ -17041,6 +19808,15 @@
   ],
   "소득세법|133": [
    {
+    "target_law": "법인세법",
+    "target_article": "제74조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 원천징수의무자의 원천징수영수증 발급 의무라는 동일한 정책 목적을 각각 법인과 개인에 대해 병행으로 규정하고 있으므로 세법 개정 시 동일 취지의 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
+   {
     "target_law": "법인세법 시행령",
     "target_article": "제117조",
     "relation_type": "citation",
@@ -17051,6 +19827,33 @@
    }
   ],
   "소득세법|133의2": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제73조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제73조는 내국법인의 이자소득 등에 대한 원천징수를, 소득세법 제133조의2는 거주자·비거주자의 채권 이자소득에 대한 원천징수를 규정하고 있어, 동일한 정책 목적(채권 이자소득의 원천징수)을 서로 다른 세목·납세자군에 대해 병행 규정하는 관계입니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제73조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제73조의2는 내국법인의 채권등 매도 시 이자상당액에 대한 원천징수를, 소득세법 제133조의2는 거주자/비거주자의 채권등 매도 시 이자상당액에 대한 원천징수를 규정하여 동일한 정책 목적(채권등 보유기간 이자상당액의 과세)을 법인과 개인이라는 상이한 납세자군에 대해 병행으로 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의3은 외국법인의 원천징수대상채권등에 대한 원천징수를 규정하고, 소득세법 제133조의2는 거주자·비거주자의 채권등에 대한 원천징수를 규정하여, 동일한 정책 목적(채권 이자등에 대한 보유기간 고려 원천징수)을 서로 다른 납세자군(외국법인 vs 거주자·비거주자)에 대해 병행 규정하고 있으므로 개정 시 동일 취지로의 병행 개정 검토가 필요하다.",
+    "validated": true
+   },
    {
     "target_law": "법인세법 시행령",
     "target_article": "제114조의2",
@@ -17321,6 +20124,28 @@
     "validated": true
    }
   ],
+  "소득세법|143의7": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제74조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인과 개인에 대해 원천징수 후 원천징수영수증 발급이라는 동일한 정책 목적을 서로 다른 세목에서 병행으로 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
+  "소득세법|144": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제74조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인 및 개인사업자를 대상으로 원천징수 시 원천징수영수증 발급의무를 동일한 취지로 병행 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
   "소득세법|144의2": [
    {
     "target_law": "조세특례제한법 시행령",
@@ -17329,6 +20154,17 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 시행령 제94조(혼인에 대한 세액공제)가 이 조문을 인용: 「소득세법」 제144조의2",
+    "validated": true
+   }
+  ],
+  "소득세법|145": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제74조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제74조와 소득세법 제145조는 각각 법인과 개인사업자에 대해 원천징수 후 원천징수영수증 발급의무라는 동일한 정책 취지를 상이한 세목에서 병행으로 규정하고 있습니다.",
     "validated": true
    }
   ],
@@ -17349,6 +20185,28 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「법인세법」 제67조",
+    "validated": true
+   }
+  ],
+  "소득세법|146": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제74조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제74조와 소득세법 제146조는 원천징수의무자가 납세의무자에게 원천징수영수증을 발급하도록 규정하는 동일한 정책 목적을 법인세와 소득세라는 서로 다른 세목에서 병행 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
+  "소득세법|15": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제59조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제59조와 소득세법 제15조는 각각 법인세와 소득세에서 감면·세액공제의 적용순서와 계산방법을 규정하는 동일한 정책 목적의 병행 규정으로서, 서로 다른 세목의 납세자(법인 vs 개인)에 대해 같은 취지의 세액 계산 체계를 두고 있다.",
     "validated": true
    }
   ],
@@ -17384,6 +20242,69 @@
    }
   ],
   "소득세법|156": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조와 소득세법 제156조는 외국법인/비거주자의 국내원천소득에 대한 원천징수 특례를 각각 규정하며, 동일한 소득 종류(이자, 배당, 임대, 용역, 양도, 사용료 등)에 대해 동일하거나 거의 동일한 원천징수율을 적용하는 병행 규정이다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의2는 외국법인의 국내원천소득에 대한 원천징수 특례를 규정하고, 소득세법 제156조는 비거주자의 국내원천소득에 대한 원천징수 특례를 규정하여 동일한 정책 목적(비거주 외국인의 국내원천소득에 대한 원천징수)을 각각 법인과 개인에 대해 병행으로 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의3은 외국법인의 원천징수대상채권등 이자에 대한 원천징수 특례를 규정하고, 소득세법 제156조는 비거주자의 국내원천소득(이자소득 포함)에 대한 원천징수 특례를 규정하는 것으로, 동일한 정책 목적(비거주자/외국법인의 국내원천소득에 대한 차등 원천징수)을 각각 법인세와 소득세라는 다른 세목에서 병행 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의5",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의5는 특정지역 외국법인의 국내원천소득에 대한 원천징수 특례를, 소득세법 제156조는 비거주자의 국내원천소득에 대한 원천징수 특례를 각각 규정하고 있으며, 동일한 정책 목적(국내원천소득에 대한 원천징수절차 및 조세조약 적용 특례)을 법인세와 소득세라는 서로 다른 세목에서 병행 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의6은 외국법인의 조세조약상 제한세율 적용을 위한 원천징수 절차를, 소득세법 제156조는 비거주자의 국내원천소득에 대한 원천징수 특례를 규정하는 것으로, 비거주자/외국법인이라는 다른 납세자군에 대해 조세조약상 혜택을 받기 위한 동일한 정책 목적의 원천징수 절차를 병행 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의7",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의7은 외국법인의 이자·배당·사용료소득에 대한 원천징수 세율을, 소득세법 제156조는 비거주자의 동일 소득에 대한 원천징수 세율을 규정하는 것으로 동일한 정책 목적을 법인과 개인에 대해 각각 병행 규정하는 조문이다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제99조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제99조는 외국법인의 국내원천 인적용역소득에 대한 신고·납부 특례를 규정하고, 소득세법 제156조는 비거주자의 국내원천 인적용역소득에 대한 원천징수 특례를 규정하는 것으로, 동일한 정책 목적(국내원천 인적용역소득의 과세)을 법인과 개인에 대해 각각 규율하는 병행 규정이다.",
+    "validated": true
+   },
    {
     "target_law": "부가가치세법 시행령",
     "target_article": "제95조",
@@ -17432,12 +20353,99 @@
   ],
   "소득세법|156의2": [
    {
+    "target_law": "법인세법",
+    "target_article": "제98조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 조세조약상 비과세·면제 적용절차를 각각 외국법인(법인세)과 비거주자(소득세)에 대해 동일한 취지로 병행 규정하고 있으므로 개정 시 동일한 정책 목적하에 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의6과 소득세법 제156조의2는 각각 외국법인과 비거주자에 대해 조세조약상 혜택(제한세율 vs 비과세·면제)을 적용받기 위한 동일한 취지의 신청 절차, 국외투자기구 처리, 서류 보완 요구, 경정청구 등을 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제100조의24",
     "relation_type": "citation",
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 제100조의24(비거주자 또는 외국법인인 동업자에 대한 원천징수)가 이 조문을 인용: 「소득세법」 제156조의2",
+    "validated": true
+   }
+  ],
+  "소득세법|156의3": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 외국법인에 대한 원천징수 특례와 소득세법의 비거주자에 대한 원천징수 특례가 동일한 정책 목적(채권등의 보유기간을 고려한 차등 원천징수)을 각각 법인세와 소득세 영역에서 병행 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
+  "소득세법|156의4": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의5",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 특정지역 외국인(외국법인/비거주자)의 국내원천소득에 대한 원천징수 절차와 경정청구 기한을 동일한 취지로 각각 법인과 개인에 대해 병행 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
+  "소득세법|156의6": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 외국법인(법인세)과 비거주자(소득세)에 대해 조세조약상 세율 우대(비과세·면제 vs 제한세율)를 적용받기 위한 동일한 취지의 절차(신청서 제출, 국외투자기구 신고, 보완 요구, 경정청구 등)를 병행 규정하고 있으므로 병행 개정 검토 대상이다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의5",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 동일한 정책 목적(조세조약상 제한세율 적용을 위한 원천징수 절차)을 각각 외국법인과 비거주자에 대해 병행으로 규정하고 있으며, 경정청구 기한, 세무서장의 경정 처리 기한 등 핵심 절차가 실질적으로 동일하다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법의 외국법인과 소득세법의 비거주자에 대해 조세조약상 제한세율 적용을 위한 원천징수 절차를 동일한 취지로 병행 규정하고 있으며, 신청서 제출, 국외투자기구를 통한 지급, 서류 보완, 경정청구 등 주요 절차가 실질적으로 동일하다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의7",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의7과 소득세법 제156조의6은 조세조약상 제한세율을 적용받는 외국인/비거주자의 이자·배당·사용료소득에 대해 각각 법인과 개인을 대상으로 동일한 정책 목적(조세조약상 제한세율 적용)을 병행 규정하고 있으므로 개정 시 동일 취지의 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의8과 소득세법 제156조의6은 조세조약상 제한세율을 적용받기 위한 원천징수 절차와 경정청구 제도를 각각 외국법인/국외투자기구와 비거주자에 대해 동일한 취지로 병행 규정하고 있습니다.",
     "validated": true
    }
   ],
@@ -17449,6 +20457,37 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「조세특례제한법」 제18조의2제2항",
+    "validated": true
+   }
+  ],
+  "소득세법|156의8": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의7",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 외국법인 및 비거주자의 이자·배당·사용료소득에 대한 조세조약 적용 시 동일한 정책 목적(제한세율과 조약세율 중 낮은 세율 적용)을 각각 법인과 개인에 대해 병행 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
+  "소득세법|156의9": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의5",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제98조의5와 소득세법 제156조의9는 특정 외국 납세자에 대해 원천징수 절차에서 일단 높은 세율을 먼저 적용하고 이후 조세조약 혜택을 받으려면 경정청구하도록 하는 동일한 정책 취지를 법인세와 소득세라는 서로 다른 세목에서 병행 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제98조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 외국인 통합계좌를 통한 국내원천소득의 원천징수 특례에 대해 동일한 정책 목적으로 각각 외국법인·국외투자기구와 비거주자를 대상으로 병행 규정하고 있으므로 개정 시 함께 검토해야 한다.",
     "validated": true
    }
   ],
@@ -17656,6 +20695,15 @@
   ],
   "소득세법|160의2": [
    {
+    "target_law": "법인세법",
+    "target_article": "제116조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제116조와 소득세법 제160조의2는 법인과 개인사업자가 각각 사업과 관련된 거래의 증명서류를 수취·보관해야 하는 동일한 정책 목적을 서로 다른 납세자군에 대해 규정하고 있으므로 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
+   {
     "target_law": "부가가치세법 시행령",
     "target_article": "제73조",
     "relation_type": "citation",
@@ -17729,6 +20777,15 @@
    }
   ],
   "소득세법|160의3": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제112조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 기부금영수증 발급명세 작성·보관 의무, 제출 의무, 전자기부금영수증 발급 의무 등 동일한 정책 목적을 각각 법인과 개인사업자(거주자·비거주자)에 대해 병행으로 규정하고 있으므로 개정 시 동일한 취지의 병행 개정을 검토해야 한다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제75조",
@@ -17885,6 +20942,15 @@
   "소득세법|163": [
    {
     "target_law": "법인세법",
+    "target_article": "제121조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제121조와 소득세법 제163조는 법인과 개인사업자라는 서로 다른 납세자 집단에 대해 계산서의 작성·발급·제출 의무에 관한 동일한 정책 목적을 병행으로 규정하고 있으며, 조문의 구조, 내용, 예외 규정이 거의 동일하다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
     "target_article": "제25조",
     "relation_type": "citation",
     "confidence": "high",
@@ -18011,6 +21077,15 @@
    }
   ],
   "소득세법|163의2": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제120조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 부가가치세 세금계산서 관련 동일한 정책 목적으로 매입처별 세금계산서합계표 제출을 각각 법인과 개인사업자에 대해 병행 규정하고 있으며, 제출 기한과 예외 사유도 동일한 취지로 규정되어 있다.",
+    "validated": true
+   },
    {
     "target_law": "부가가치세법",
     "target_article": "제32조제1항",
@@ -18180,6 +21255,15 @@
   ],
   "소득세법|164의2": [
    {
+    "target_law": "법인세법",
+    "target_article": "제120조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제120조의2와 소득세법 제164조의2는 각각 외국법인과 비거주자에 대해 국내원천소득 지급 시 지급명세서 제출의무라는 동일한 정책 목적을 규정하고 있으며, 제출기한, 제외 대상, 준용 규정 등이 병행 구조를 이루고 있어 동일 취지의 병행 개정 관계에 해당한다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제100조의24",
     "relation_type": "citation",
@@ -18233,6 +21317,17 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 제104조의5(지급명세서등에 대한 세액공제)가 이 조문을 인용: 「소득세법」 제164조의3제1항제1호",
+    "validated": true
+   }
+  ],
+  "소득세법|164의4": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제120조의4",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 동일한 정책 목적(가상자산 거래내역 제출 의무)을 각각 법인과 개인사업자에 대해 동일한 제출 기한, 대상자, 절차로 병행 규정하고 있어 개정 시 동시에 검토되어야 한다.",
     "validated": true
    }
   ],
@@ -18655,6 +21750,17 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 시행령 제104조의16(대학재정건전화를 위한 과세특례)가 이 조문을 인용: 「소득세법」 제17조제1항제5호",
+    "validated": true
+   }
+  ],
+  "소득세법|170": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제122조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인과 개인사업자에 대해 세무조사 권한의 대상자를 동일한 취지로 병행 규정하고 있으며, 질문·조사 대상자의 범위와 권한남용 방지 조항이 실질적으로 동일하다.",
     "validated": true
    }
   ],
@@ -19290,6 +22396,24 @@
   ],
   "소득세법|26": [
    {
+    "target_law": "법인세법",
+    "target_article": "제18조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제18조와 소득세법 제26조는 각각 법인과 개인사업자에 대해 동일한 정책 목적(세환금 충당, 무상자산 수취, 과오납금 이자, 부가가치세 매출세액 등)으로 소득 계산 시 불산입 항목을 병행 규정하고 있어 동일 취지의 병행 개정이 필요하다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제21조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제21조와 소득세법 제26조는 세금·공과금 성격의 항목을 각각 법인과 개인사업자의 소득금액 계산에서 제외하는 동일한 정책 취지를 규정하고 있으며, 특히 부가가치세 매입세액(법인세법 제21조 제1호), 개별소비세·주세(법인세법 제21조 제2호, 소득세법 제26조 제7호), 부가가치세 매출세액(소득세법 제26조 제9호) 등 구체적인 항목들이 양 법령에서 병행으로 규정되어 있다.",
+    "validated": true
+   },
+   {
     "target_law": "조세특례제한법",
     "target_article": "제106조의2제2항",
     "relation_type": "citation",
@@ -19310,7 +22434,27 @@
     "validated": true
    }
   ],
+  "소득세법|28": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제34조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제34조와 소득세법 제28조는 각각 법인과 개인사업자를 대상으로 동일한 정책 목적(채권의 대손에 충당하기 위한 충당금의 손비/필요경비 인정)을 병행 규정하고 있으며, 충당금 계상의 범위·한도, 대손금 발생 시 상계 처리, 다음 기간 익금/총수입금액 산입 등 규정 취지와 구조가 동일하다.",
+    "validated": true
+   }
+  ],
   "소득세법|29": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제33조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 퇴직급여충당금의 손금/필요경비 인정이라는 동일한 정책 목적을 각각 법인과 개인사업자에 대해 병행 규정하고 있으므로 세법 개정 시 동시 검토가 필요합니다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법 시행령",
     "target_article": "제26조의2",
@@ -19347,6 +22491,17 @@
     "confidence": "high",
     "source": "back_citation",
     "reason": "조세특례제한법 제100조의16(동업기업 및 동업자의 납세의무)가 이 조문을 인용: 「소득세법」 제3조",
+    "validated": true
+   }
+  ],
+  "소득세법|31": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제38조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제38조와 소득세법 제31조는 보험차익으로 인한 자산 취득·개량 시 손금/필요경비 산입이라는 동일한 정책 목적을 법인과 개인사업자에 대해 각각 규정하고 있으며, 적용 대상·기간·사용 계획서 제출 등의 주요 요소가 실질적으로 동일하다.",
     "validated": true
    }
   ],
@@ -19496,6 +22651,42 @@
     "source": "golden_manual",
     "reason": "감가상각 연쇄: 상각부인액 처리·감가상각비 명세서",
     "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제21조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제21조의2와 소득세법 제33조 제1항 제15호는 징벌적 손해배상금을 손금/필요경비에서 불산입하는 동일한 정책 목적을 법인과 개인사업자에 대해 병행으로 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제22조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제22조는 법인의 자산평가손실을, 소득세법 제33조 제1항 제7호는 개인사업자의 자산평가차손을 각각 손금·필요경비에서 불산입하는 동일한 정책 취지를 서로 다른 세목의 납세자에게 규정하고 있습니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제26조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제26조와 소득세법 제33조는 각각 법인과 개인사업자의 과다·부당한 경비를 손금/필요경비에서 불산입하는 동일한 정책 목적을 규정하고 있으며, 특히 업무 관련성이 없는 경비 불산입(법인세법 제26조 제5호, 소득세법 제33조 제13호)에서 병행 개정 검토의 필요성이 높다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제28조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제28조와 소득세법 제33조는 지급이자(건설자금 이자, 채권자 불분명 이자 등)의 손금·필요경비 불산입이라는 동일한 정책 목적을 법인과 개인사업자에 대해 각각 규정하고 있으므로 병행 개정 검토가 필요하다.",
+    "validated": true
    }
   ],
   "소득세법|33의2": [
@@ -19543,6 +22734,15 @@
     "source": "golden_manual",
     "reason": "법인세법 업무용승용차 서식·세부사항",
     "validated": null
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제74조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제74조의2와 소득세법 제33조의2는 업무용승용차 관련비용에 대해 법인과 개인사업자를 각각 규율하면서 명세서 제출 의무라는 동일한 정책 목적을 병행 규정하고 있어 병행 개정 검토 대상이다.",
+    "validated": true
    }
   ],
   "소득세법|33항1호13": [
@@ -19692,6 +22892,17 @@
     "validated": true
    }
   ],
+  "소득세법|42": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제53조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제53조와 소득세법 제42조는 조세조약의 상호합의절차를 통해 외국 관련자와의 거래금액을 조정할 수 있도록 하는 동일한 정책 목적을 법인과 거주자라는 서로 다른 납세자군에 대해 병행으로 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
   "소득세법|43": [
    {
     "target_law": "조세특례제한법 시행령",
@@ -19711,6 +22922,24 @@
     "confidence": "confirmed",
     "source": "golden_manual",
     "reason": "결손금·이월결손금 공제 구조 병행 검토",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제14조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제14조는 법인의 소득 계산과 결손금·이월결손금을 규정하고, 소득세법 제45조는 개인사업자의 결손금·이월결손금을 규정하여, 동일한 정책 목적(결손금 이월공제)을 서로 다른 납세자군(법인/개인)에 대해 병행으로 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제91조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제91조는 외국법인의 국내원천소득에 대한 과세표준 계산 시 결손금 공제를 규정하고, 소득세법 제45조는 개인사업자의 종합소득 계산 시 결손금 공제를 규정하여, 동일한 정책 목적(결손금의 공제 및 이월결손금의 처리)을 서로 다른 납세자군에 대해 병행 규정하고 있습니다.",
     "validated": true
    },
    {
@@ -19971,7 +23200,27 @@
     "validated": true
    }
   ],
+  "소득세법|57": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제57조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 외국에서 납부한 세액을 공제하는 동일한 정책 목적을 법인과 개인사업자(거주자)에 대해 각각 규정하며, 공제한도금액 계산식, 초과액 이월공제, 조세조약 상 감면세액 처리 등 동일한 취지의 계산방법과 범위를 적용하고 있다.",
+    "validated": true
+   }
+  ],
   "소득세법|57의2": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제57조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 간접투자회사등으로부터 지급받은 소득에 대한 외국법인세액공제 특례를 각각 법인과 거주자(개인)에 대해 동일한 정책 목적과 구조로 병행 규정하고 있습니다.",
+    "validated": true
+   },
    {
     "target_law": "법인세법",
     "target_article": "제5조제2항",
@@ -20109,7 +23358,36 @@
     "validated": true
    }
   ],
+  "소득세법|60": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제59조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제59조와 소득세법 제60조는 감면과 세액공제의 적용순위를 각각 법인과 개인에 대해 동일한 정책 취지로 규정하는 병행 규정이므로 세법 개정 시 동일한 의도의 개정을 함께 검토해야 한다.",
+    "validated": true
+   }
+  ],
   "소득세법|61": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제58조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제58조와 소득세법 제58조(별도 조문)의 재해손실세액공제 제도가 동일한 정책 목적으로 법인과 개인사업자에 대해 병행 규정되어 있으며, 소득세법 제61조 제3항 단서에서 재해손실세액공제의 우선순위를 규정함으로써 상호 연동되는 관계입니다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제59조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제59조와 소득세법 제61조는 감면 및 세액공제액이 산출세액을 초과하는 경우의 적용 순서와 처리 방법을 규정하는 동일한 정책 목적을 법인과 개인에 대해 각각 규정하고 있습니다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제95조의2",
@@ -20192,6 +23470,15 @@
    }
   ],
   "소득세법|7": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제9조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제9조 제4항과 소득세법 제7조 제1항은 모두 원천징수세의 납세지를 원천징수의무자의 소재지에 따라 규정하는 동일한 정책 목적을 각각 법인세와 소득세에서 병행 규정한 것으로, 법인세법과 소득세법의 일관성 유지를 위해 동일 취지의 개정을 검토해야 하는 관계입니다.",
+    "validated": true
+   },
    {
     "target_law": "법인세법 시행령",
     "target_article": "제7조",
@@ -20603,7 +23890,27 @@
     "validated": true
    }
   ],
+  "소득세법|81": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제75조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인과 개인사업자에 대해 계산서·영수증 등 제출 불성실에 따른 가산세를 동일한 정책 목적으로 병행 규정하고 있으며, 양자 모두 산출세액이 없는 경우에도 가산세를 적용하는 동일한 취지를 담고 있다.",
+    "validated": true
+   }
+  ],
   "소득세법|81의10": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제75조의8",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제75조의8과 소득세법 제81조의10은 계산서 미발급, 기재사항 누락, 부정발급 등 동일한 정책 목적의 위반행위에 대해 법인과 개인사업자에게 각각 병행하여 적용하는 가산세 규정으로서 동일 취지의 병행 규정이다.",
+    "validated": true
+   },
    {
     "target_law": "부가가치세법",
     "target_article": "제54조",
@@ -20624,6 +23931,15 @@
    }
   ],
   "소득세법|81의11": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제75조의7",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 지급명세서 제출 불성실에 대한 동일한 정책 목적(지급명세서 제출 의무 이행 강제)으로 동일한 가산세 구조와 계산방식을 각각 법인과 개인에 적용하므로 병행 개정을 검토해야 하는 관계이다.",
+    "validated": true
+   },
    {
     "target_law": "법인세법",
     "target_article": "제120조",
@@ -20651,6 +23967,70 @@
     "confidence": "high",
     "source": "citation",
     "reason": "명시 인용: 「부가가치세법」 제8조제1항",
+    "validated": true
+   }
+  ],
+  "소득세법|81의13": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제75조의9",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 국제조세조정법상 특정외국법인의 유보소득 계산 명세서 미제출에 대해 동일한 정책 목적(1천분의 5 가산세)으로 법인과 거주자에 각각 적용하는 병행 규정이므로 개정 시 동시 검토가 필요합니다.",
+    "validated": true
+   }
+  ],
+  "소득세법|81의14": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제27조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제27조의2는 법인의 업무용승용차 관련비용 손금산입 규정이고, 소득세법 제81조의14는 개인사업자의 동일한 업무용승용차 관련비용 필요경비산입 규정에 대한 명세서 제출 불성실 가산세로서, 같은 정책 취지의 비용 규제를 법인과 개인사업자에 대해 각각 규정하고 있어 병행 개정 검토가 필요하다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제74조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 업무용승용차 관련비용 명세서 제출 불성실에 대해 동일한 정책 목적(명세서 제출 의무 강제)으로 각각 법인과 개인사업자에 대해 동일한 구조와 비율(100분의 1)의 가산세를 병행 규정하고 있습니다.",
+    "validated": true
+   }
+  ],
+  "소득세법|81의2": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제75조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제75조와 소득세법 제81조의2는 성실신고확인서 제출 불성실에 대해 법인과 개인사업자에게 동일한 취지의 가산세를 규정하는 병행 규정으로, 세무서 제출 기한·가산세율(산출세액의 100분의 5, 수입금액의 1만분의 2 중 큰 금액)·산출세액 없는 경우 적용 등이 일치한다.",
+    "validated": true
+   }
+  ],
+  "소득세법|81의5": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제75조의3",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 장부 기록·보관 불성실에 대해 동일한 정책 목적(장부의무 준수 강제)으로 각각 법인과 개인사업자에게 100분의 20 기준의 가산세를 병행 규정하고 있으며, 두 조문의 개정 시 동일한 취지의 정책 변화를 반영할 필요가 있다.",
+    "validated": true
+   }
+  ],
+  "소득세법|81의6": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제75조의5",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 동일한 정책 목적(증명서류 미수취 또는 허위 수취 시 가산세)을 법인과 개인사업자에 대해 각각 병행 규정하고 있으며, 가산세율(2%), 적용범위, 제외사유, 산출세액 미생기 시 적용 등이 실질적으로 동일하다.",
     "validated": true
    }
   ],
@@ -20685,6 +24065,15 @@
   ],
   "소득세법|81의9": [
    {
+    "target_law": "법인세법",
+    "target_article": "제75조의6",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제75조의6과 소득세법 제81조의9는 신용카드 및 현금영수증 발급 불성실에 대한 동일한 정책 목적의 가산세를 법인과 개인사업자에게 각각 병행 규정하고 있으며, 조문 구조·가산세율·판단 기준이 실질적으로 동일하다.",
+    "validated": true
+   },
+   {
     "target_law": "부가가치세법",
     "target_article": "제60조",
     "relation_type": "citation",
@@ -20712,7 +24101,36 @@
     "validated": true
    }
   ],
+  "소득세법|83": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제70조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법이 각각 법인과 거주자에 대하여 과세표준과 세액 결정·경정 후 납세자에게 통지하는 동일한 정책 목적의 절차를 병행으로 규정하고 있다.",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제88조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법과 소득세법에서 과세표준과 세액 결정·경정 후 납세자에게 통지하는 의무를 각각 법인과 거주자에 대해 동일한 취지로 규정하고 있는 병행 규정이다.",
+    "validated": true
+   }
+  ],
   "소득세법|85의2": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제72조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "high",
+    "source": "semantic_llm",
+    "reason": "법인세법 제72조와 소득세법 제85조의2는 중소기업의 결손금 소급공제에 따른 환급이라는 동일한 정책 목적을 법인과 개인사업자에 대해 병행으로 규정하고 있으며, 환급 한도, 신청기한, 환급 결정, 경정에 따른 징수 등 규정 체계와 취지가 동일하다.",
+    "validated": true
+   },
    {
     "target_law": "조세특례제한법",
     "target_article": "제6조제1항",
