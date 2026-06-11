@@ -22,7 +22,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
 
-from core.citation_parser import parse_citations  # noqa: E402
+from core.citation_parser import effective_law_name, parse_citations  # noqa: E402
 from core.law_api import get_law_text, search_laws  # noqa: E402
 
 _SCOPE_PHASE1 = ("소득세법", "소득세법 시행령")
@@ -101,7 +101,7 @@ def build_edges(law_api_key: str, source_laws: tuple[str, ...]) -> list[dict]:
             src_title = str(article.get("제목", ""))
             content = str(article.get("내용", ""))
             for cite in parse_citations(content):
-                target_law = cite.law_name or law_name
+                target_law = effective_law_name(cite, law_name)
                 if cite.relative in ("같은법", "같은조"):
                     target_law = law_name
                 if not _in_scope(target_law, scope):

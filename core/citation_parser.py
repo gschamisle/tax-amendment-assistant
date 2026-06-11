@@ -11,6 +11,9 @@ _NAMED_LAW = r'([가-힣][가-힣\sㆍ·]{1,40}(?:법률|법|영|령|규칙))\s*
 _SAME_LAW = r'(같은\s*(?:법|령|영|규칙))\s*제(\d+)조(?:의(\d+))?(?:제(\d+)항)?(?:제(\d+)호)?(?:제(\d+)목)?'
 # 같은 조 인용: 같은 조 제X항...
 _SAME_JO = r'(같은\s*조)\s*(?:제(\d+)항)?(?:제(\d+)호)?(?:제(\d+)목)?'
+# 지시적 법령 인용: "법 제X조"(시행령·시행규칙→모법), "영 제X조"(시행규칙→시행령),
+# "이 법/이 영/이 규칙 제X조"(자기 참조). 법령명 끝글자 오인 방지를 위해 직전 한글 금지.
+_DEICTIC_LAW = r'(?<![가-힣ㆍ·」])(이\s*법|이\s*영|이\s*규칙|법|영|규칙)\s*제(\d+)조(?:의(\d+))?(?:제(\d+)항)?(?:제(\d+)호)?(?:제(\d+)목)?'
 # 조 번호를 포함한 직접 인용: 제X조, 제X조의Y, 제X조제Y항, ...
 _DIRECT = r"제(\d+)조(?:의(\d+))?(?:제(\d+)항)?(?:제(\d+)호)?(?:제(\d+)목)?"
 # 항/호/목 범위 인용: 제X항부터 제Y항까지
@@ -26,6 +29,7 @@ CROSS_LAW_RE = re.compile(_CROSS_LAW)
 NAMED_LAW_RE = re.compile(_NAMED_LAW)
 SAME_LAW_RE = re.compile(_SAME_LAW)
 SAME_JO_RE = re.compile(_SAME_JO)
+DEICTIC_LAW_RE = re.compile(_DEICTIC_LAW)
 DIRECT_RE = re.compile(_DIRECT)
 RANGE_RE = re.compile(_RANGE)
 ARTICLE_RANGE_RE = re.compile(_ARTICLE_RANGE)
@@ -48,6 +52,45 @@ class Citation:
     range_end_jo_sub: str = ""
     span: tuple[int, int] = field(default_factory=lambda: (0, 0))
     relative: str = ""         # "같은법", "같은조" 등 문장 내 선행 참조 해석용
+
+
+# Citation.relative에 기록되는 지시적 참조 토큰 (공백 제거 정규화)
+_DEICTIC_TOKENS = ("이법", "이영", "이규칙", "법", "영", "규칙")
+
+
+def _norm_law(name: str) -> str:
+    return str(name).replace(" ", "").replace("ㆍ", "").replace("·", "").strip()
+
+
+def base_law_name(law_name: str) -> str:
+    """시행령·시행규칙 명칭에서 모법 명칭을 얻는다. 모법이면 그대로 반환."""
+    name = str(law_name).strip()
+    for suffix in ("시행규칙", "시행령"):
+        if name.endswith(suffix):
+            return name[: -len(suffix)].strip()
+    return name
+
+
+def resolve_deictic_law(token: str, source_law_name: str) -> str:
+    """'법 제X조'류 지시적 참조를 source 법령 기준 절대 법령명으로 해석한다."""
+    t = str(token).replace(" ", "")
+    base = base_law_name(source_law_name)
+    if not base:
+        return source_law_name
+    if t in ("법", "이법"):
+        return base
+    if t in ("영", "이영"):
+        return f"{base} 시행령"
+    if t in ("규칙", "이규칙"):
+        return f"{base} 시행규칙"
+    return source_law_name
+
+
+def effective_law_name(citation: "Citation", source_law_name: str) -> str:
+    """인용이 가리키는 법령명을 source 법령 기준으로 해석해 반환한다."""
+    if citation.relative in _DEICTIC_TOKENS:
+        return resolve_deictic_law(citation.relative, source_law_name)
+    return citation.law_name or source_law_name
 
 
 def _sentence_start(text: str, pos: int) -> int:
@@ -109,8 +152,9 @@ def parse_citations(text: str) -> list[Citation]:
     for m in NAMED_LAW_RE.finditer(text):
         if m.span() in seen or _is_inside(m.span(), seen):
             continue
-        # "같은 법" 계열은 SAME_LAW_RE가 처리한다.
-        if "같은" in m.group(1).replace(" ", ""):
+        # "같은 법" 계열은 SAME_LAW_RE가, "이 법/영/규칙"은 DEICTIC_LAW_RE가 처리한다.
+        name_norm = m.group(1).replace(" ", "")
+        if "같은" in name_norm or name_norm in ("이법", "이영", "이규칙"):
             continue
         seen.add(m.span())
         results.append(Citation(
@@ -158,6 +202,24 @@ def parse_citations(text: str) -> list[Citation]:
             mok=m.group(4) or "",
             span=m.span(),
             relative="같은조",
+        ))
+
+    # 2.7. 지시적 법령 인용: 법/영/규칙 제X조 (시행령→모법 등)
+    for m in DEICTIC_LAW_RE.finditer(text):
+        if m.span() in seen or _is_inside(m.span(), seen):
+            continue
+        seen.add(m.span())
+        token = m.group(1).replace(" ", "")
+        results.append(Citation(
+            raw=m.group(0),
+            law_name=token,
+            jo=m.group(2),
+            jo_sub=m.group(3) or "",
+            hang=m.group(4) or "",
+            ho=m.group(5) or "",
+            mok=m.group(6) or "",
+            span=m.span(),
+            relative=token,
         ))
 
     # 3. 조문 범위: 제X조부터 제Y조까지
@@ -271,6 +333,7 @@ def find_back_citations(
         [{"조번호": ..., "제목": ..., "인용": [raw_str, ...]}]
     """
     full_jo = f"{target_jo}의{target_jo_sub}" if target_jo_sub else target_jo
+    source_law = str(law_data.get("법령명", "")).strip()
     results: list[dict] = []
 
     for article in law_data.get("조문목록", []):
@@ -280,6 +343,11 @@ def find_back_citations(
         seen_cites: set = set()
         matching = []
         for c in citations:
+            if source_law:
+                cite_law = effective_law_name(c, source_law)
+                # 미해석 '같은 법' 계열은 종전대로 동일 법령으로 간주
+                if not cite_law.startswith("같은") and _norm_law(cite_law) != _norm_law(source_law):
+                    continue
             if c.jo != target_jo:
                 continue
             if target_jo_sub and c.jo_sub != target_jo_sub:

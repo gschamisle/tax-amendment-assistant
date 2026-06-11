@@ -5,7 +5,7 @@ import functools
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from config import LAW_API_KEY, PARALLEL_LAWS
-from core.citation_parser import Citation, parse_citations
+from core.citation_parser import Citation, effective_law_name, parse_citations
 from core.law_api import get_law_text, list_all_laws, search_laws
 
 
@@ -71,7 +71,7 @@ def _citation_matches(
     target_jo_sub: str = "",
     target_hang: str = "",
 ) -> bool:
-    cite_law = citation.law_name or source_law_name
+    cite_law = effective_law_name(citation, source_law_name)
     if normalize_law_name(cite_law) != normalize_law_name(target_law_name):
         return False
 
