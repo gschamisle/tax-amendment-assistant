@@ -54,7 +54,8 @@ if _freshness:
     st.warning(
         f"저장된 법령 스냅샷과 현행본이 다릅니다: {_names}{_more}. "
         "터미널에서 `uv run python scripts/check_law_freshness.py --update-manifest` 후 "
-        "`uv run python scripts/build_special_tax_links.py` 실행을 권장합니다."
+        "`uv run python scripts/build_special_tax_links.py`, "
+        "`uv run python scripts/build_parallel_matrix.py` 실행을 권장합니다."
     )
 
 # ── 탭 ────────────────────────────────────────────────────────────────────────

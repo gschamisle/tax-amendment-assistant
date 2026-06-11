@@ -319,11 +319,22 @@ def main() -> int:
         }
         for row in manifest.get("laws", [])
     }
+    # 의미 판별이 전수 수행된 법령쌍 — 런타임이 이 쌍에서는 라이브 LLM을 생략한다
+    semantic_pairs: list[list[str]] = []
+    if _ADJUDICATIONS_PATH.is_file():
+        adj = json.loads(_ADJUDICATIONS_PATH.read_text(encoding="utf-8"))
+        seen_pairs = {
+            tuple(sorted((r["law_a"], r["law_b"])))
+            for r in adj.get("results", [])
+        }
+        semantic_pairs = sorted([list(p) for p in seen_pairs])
+
     entry_count = sum(len(v) for v in entries.values())
     payload = {
         "built_at": date.today().isoformat(),
-        "stage": 1,
+        "stage": 3 if semantic_pairs else 1,
         "law_versions": law_versions,
+        "semantic_pairs": semantic_pairs,
         "entry_count": entry_count,
         "entries": {k: entries[k] for k in sorted(entries)},
     }

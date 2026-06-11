@@ -7,7 +7,9 @@ core/
 ├── law_api.py            법제처 Open API 클라이언트
 ├── amendment_agent.py    GPT-4o 개정 초안 생성 + 섹션 파서
 ├── citation_parser.py    인용·준용 규정 regex 파싱
-├── cross_ref_checker.py  병행법령 GPT 의미 매칭
+├── cross_ref_checker.py  병행법령 매트릭스 조회 + 라이브 의미 매칭 폴백
+├── parallel_matrix.py    사전 빌드 병행 매트릭스 런타임 조회
+├── parallel_golden.py    병행개정 매뉴얼 골든 매핑 (빌드 주입 + recall 검증)
 └── hwpx_writer.py        HWPX 문서 생성
 
 ui/
@@ -86,16 +88,38 @@ ui/
 
 ### cross_ref_checker.py
 
-**역할**: 개정 조문과 동일 취지의 병행 법령 조문을 GPT-4o-nano로 탐색.
+**역할**: 개정 조문과 동일 취지의 병행 법령 조문 탐색.
 
-**흐름**:
-1. `config.py`의 `PARALLEL_LAWS`에서 후보 법령 목록 조회.
-2. 후보 법령의 조문목록 조회 후 키워드 필터링 (`_filter_articles`, 최대 20개).
-3. GPT-4o-nano에 A 법령 개정 조문 + B 법령 후보 조문 전달, match 여부 판단.
-4. **컨센서스 방식**: 동일 프롬프트로 2회 호출, 둘 다 `match: true`일 때만 채택.
-5. Hallucination 필터: GPT가 반환한 조문 번호가 실제 존재하지 않으면 no-match.
+**흐름** (우선순위 순):
+1. **사전 빌드 매트릭스 조회** (`_matrix_match_result`): `data/parallel-law-matrix.json`에서
+   확정 매핑·LLM 전수 판별 결과를 조회. 적중 시 LLM 호출 없이 즉시 반환.
+2. **전수 판별 쌍 차단**: 매트릭스가 전 조문쌍을 판별한 법령쌍(`semantic_pair_covered`)은
+   매트릭스 미등재 = 동일 취지 아님 → 라이브 LLM 생략하고 no-match.
+3. 매트릭스 범위 밖 법령만 폴백: 코드 매핑 힌트 → 키워드 필터(`_filter_articles`, 최대 20개)
+   → LLM 의미 판단 (컨센서스 2회 + hallucination 필터).
 
 **한계 및 확장** → [parallel-law-detection.md](parallel-law-detection.md) 참조.
+
+---
+
+### parallel_matrix.py + 사전 빌드 파이프라인
+
+**역할**: 병행·연관 검토 대상을 사전 계산해 런타임 LLM 비용을 데이터 갱신 시점으로 이전.
+
+**파이프라인** (법령 개정 시 재실행):
+
+| 단계 | 스크립트 | LLM | 내용 |
+|------|----------|-----|------|
+| 0 | `build_parallel_matrix.py` | 없음 | 법령 스냅샷 (`data/law-snapshots/`, content_hash 재사용) |
+| 1 | `build_parallel_matrix.py` | 없음 | 골든 매핑(`parallel_golden.py`) + 코드 힌트 + 인용 그래프 타법 엣지 양방향 |
+| 2 | `build_parallel_candidates.py` | 없음 | 전 조문쌍 스코어링 (동의어 정규화·제목/본문 교차·앵커 인접성). 골든 recall 보정 내장 |
+| 3 | `adjudicate_parallel_pairs.py` | Haiku + Batches | 후보쌍 쌍별 판별 (structured outputs). 조문이 입력으로 주어져 hallucination 불가 |
+
+**빌드 검증**: 매뉴얼 골든 매핑 누락 시 빌드 실패(assert). 조문 존재 검증.
+오프라인 테스트(`test_parallel_matrix.py`)가 커밋된 매트릭스의 골든 recall을 CI에서 재검증.
+
+**소스 우선순위**: golden_manual → code_hint → related_hint → semantic_llm → citation → back_citation.
+citation/back_citation은 인용 관계라 병행 제안에서 제외하고 2단계 UI가 담당.
 
 ---
 
@@ -190,8 +214,11 @@ charPr XML 구조:
 |------|------|
 | HWPX 색상을 ZIP 후처리로 주입 | `python-hwpx` 라이브러리 API가 charPr 생성을 지원하지 않음 |
 | GPT 섹션 구분에 `===SECTION:XXX===` 토큰 사용 | 키워드 방식은 GPT 출력 형식 변동에 취약, 부칙 누락 발생 |
-| 병행법령 컨센서스 2회 방식 | 1회 판단 시 false positive 너무 많음 |
-| Hallucination 필터 (조문 번호 존재 확인) | GPT가 없는 조문 번호를 날조하는 케이스 발생 |
+| 병행법령 컨센서스 2회 방식 | 1회 판단 시 false positive 너무 많음 (라이브 폴백 경로에만 잔존) |
+| Hallucination 필터 (조문 번호 존재 확인) | GPT가 없는 조문 번호를 날조하는 케이스 발생 (라이브 폴백 경로에만 잔존) |
+| 병행 매칭을 사전 배치 매트릭스로 전환 | 런타임 키워드 상한 20개의 구조적 누락 제거 + 사용자 수와 무관한 비용 구조 (검사 기능 무료 배포 가능) |
+| 쌍별 판별(discriminative) 프롬프트 | 두 조문을 입력으로 주고 yes/no만 판단 — hallucination 원천 차단, 컨센서스 중복 호출 불필요 |
+| 상증세법은 citation 레이어만 연결 | 법인세·소득세와 유사취지 병행이 아닌 인용·준용 관계 (시가평가·특수관계인 등) |
 | `@st.cache_data(ttl=3600)` UI 레이어 캐시 | `get_law_text` 내부 OCR 순차 호출로 20~60초 소요, 재조회 시 즉시 반환 필요 |
 | `_img_cache` 300개 상한 | 무제한 dict → 장시간 운영 시 메모리 증가 |
 | `BUCHIK_TYPES` 삭제 | 영문 코드 매핑값이 어디서도 참조되지 않는 dead code |

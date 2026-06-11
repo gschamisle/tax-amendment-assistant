@@ -42,6 +42,7 @@ def _load() -> tuple[dict[str, list[dict]], dict]:
         "built_at": data.get("built_at", ""),
         "stage": data.get("stage", 0),
         "law_versions": data.get("law_versions", {}),
+        "semantic_pairs": data.get("semantic_pairs", []),
         "entry_count": data.get("entry_count", 0),
     }
     return data.get("entries", {}), meta
@@ -67,3 +68,14 @@ def covered_laws() -> list[str]:
     """매트릭스가 커버하는 기준 법령 목록."""
     _, meta = _load()
     return sorted(meta.get("law_versions", {}).keys())
+
+
+def semantic_pair_covered(law_a: str, law_b: str) -> bool:
+    """두 법령 쌍이 3단계 LLM 전수 판별을 거쳤는지.
+
+    True면 런타임 병행 검사에서 라이브 LLM 호출이 불필요하다 —
+    매트릭스에 없는 조합은 판별 결과 '동일 취지 아님'을 의미한다.
+    """
+    _, meta = _load()
+    want = tuple(sorted((str(law_a).strip(), str(law_b).strip())))
+    return any(tuple(sorted(p)) == want for p in meta.get("semantic_pairs", []))

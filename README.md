@@ -25,7 +25,7 @@
 |------|------|
 | **1단계** | 법령 검색 → 개정할 조문 선택 → OpenAI API 기반 개정 초안 생성 |
 | **1단계** | 항별 변경 확인·선택, 연관 항 검토 제안, 부칙 적용 기준·조문별 적용례 자동 작성 |
-| **1단계** | 병행 법령 동일 취지 검사 (법인세법 ↔ 소득세법 및 하위법령 등), 병행법령 초안 항 번호 자동 보정 |
+| **1단계** | 병행 법령 동일 취지 검사 — 사전 빌드 병행 매트릭스(확정 매핑 + LLM 전수 판별) 우선 조회, 매트릭스 범위 내에서는 런타임 LLM 호출 없음 |
 | **2단계** | 개정안 내 인용·준용 규정 파싱 및 링크 제공 |
 | **2단계** | 조문 번호 밀림 검사 (조문 신설 시 기존 인용 번호 영향) |
 | **2단계** | 역방향 인용 검사 (이 조문을 인용하는 다른 조항 탐색) |
@@ -92,8 +92,9 @@ streamlit run app.py
    - 변경된 항별 체크박스로 적용 여부 선택.
    - 연관 항 검토 제안 확인.
    - 현행/개정안 텍스트 직접 수정 가능.
-7. **병행 법령 검사**: "병행 법령 검사" 클릭 → 코드 매핑·키워드 후보 검색·OpenAI 의미 판단을 조합해 병행 개정 필요 조문 탐색.
-   - 법인세법/소득세법 및 시행령·시행규칙 등 관련·하위 법령군을 함께 검토.
+7. **병행 법령 검사**: "병행 법령 검사" 클릭 → 사전 빌드된 병행 매트릭스(`data/parallel-law-matrix.json`)를 우선 조회.
+   - 매트릭스가 전수 판별한 법령쌍(법인세법↔소득세법, 양 시행령, 법인세법↔부가가치세법, 양 시행령)은 **런타임 LLM 호출 없이 즉시 응답**.
+   - 매트릭스 범위 밖 법령만 코드 매핑·키워드 후보 검색·OpenAI 의미 판단 조합으로 폴백.
    - 병행 법령 초안 생성 시 해당 법령의 실제 항 번호로 개정지시문 자동 보정.
 
 ### 2단계: 인용·준용 규정 확인
@@ -192,4 +193,23 @@ uv run python -m scripts.test_outline_intent
 uv run python scripts/check_law_freshness.py
 uv run python scripts/check_law_freshness.py --update-manifest
 uv run python scripts/build_special_tax_links.py
+```
+
+### 병행 매트릭스 갱신 (법령 개정 시)
+
+```bash
+# 0~1단계: 스냅샷 + 결정적 레이어 (API 비용 없음)
+uv run python scripts/build_law_citation_graph.py --all
+uv run python scripts/build_parallel_matrix.py
+
+# 2단계: 후보쌍 생성 (API 비용 없음, 골든 recall 보정 내장)
+uv run python scripts/build_parallel_candidates.py
+
+# 3단계: LLM 쌍별 판별 (ANTHROPIC_API_KEY 필요, Batches 50% 할인 — 전체 약 $3)
+uv run python scripts/adjudicate_parallel_pairs.py --sample 20   # 품질 확인
+uv run python scripts/adjudicate_parallel_pairs.py --submit
+uv run python scripts/adjudicate_parallel_pairs.py --fetch
+
+# 판별 결과 병합
+uv run python scripts/build_parallel_matrix.py
 ```

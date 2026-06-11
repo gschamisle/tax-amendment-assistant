@@ -58,8 +58,41 @@ def main() -> int:
     # 조번호 표기 정규화 조회 ("제27조의2"로도 동일 결과)
     assert parallel_hits("법인세법", "제27조의2") == sample
 
+    # 3단계 이후: semantic_llm 레이어 + 전수 판별 쌍 메타
+    n_semantic = 0
+    if meta.get("stage", 0) >= 3:
+        from core.parallel_matrix import semantic_pair_covered
+
+        assert semantic_pair_covered("법인세법", "소득세법")
+        assert semantic_pair_covered("소득세법", "법인세법")  # 방향 무관
+        assert not semantic_pair_covered("법인세법", "상속세 및 증여세법")
+        from core.parallel_matrix import _load
+        entries, _ = _load()
+        n_semantic = sum(
+            1 for items in entries.values() for e in items
+            if e.get("source") == "semantic_llm"
+        )
+        assert n_semantic > 0, "semantic_llm 엔트리 없음"
+
+        # 런타임 매트릭스 조회 (LLM·API 없이 가짜 법령 데이터로 검증)
+        from core.cross_ref_checker import _matrix_match_result
+
+        fake_parallel_data = {
+            "조문목록": [
+                {"조번호": "33의2", "제목": "업무용승용차 관련 경비 등의 필요경비 불산입 특례",
+                 "내용": "① 성실신고확인대상사업자가..."},
+            ],
+        }
+        r = _matrix_match_result(
+            "법인세법",
+            "제27조의2(업무용승용차 관련비용의 손금불산입 특례) ① 내국법인이...",
+            "소득세법",
+            fake_parallel_data,
+        )
+        assert r and r["match"] == "true" and "제33조의2" in r["article"], r
+
     print(f"ALL OK (golden={checked}, entry_count={meta['entry_count']}, "
-          f"stage={meta.get('stage')})")
+          f"semantic={n_semantic}, stage={meta.get('stage')})")
     return 0
 
 

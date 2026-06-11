@@ -7,6 +7,7 @@ from openai import OpenAI
 from config import LAW_API_KEY, OPENAI_API_KEY, KEYWORD_SYNONYMS
 from core.law_api import get_law_text
 from core.law_network import all_law_scope_entries, related_law_names, resolve_law_entries
+from core.parallel_matrix import parallel_hits, semantic_pair_covered
 from core.special_tax_hints import article_ref_to_lookup_keys, citation_hints_for
 
 # "제33조의2" (표준) 또는 "제33의2조" (법령 API 형식) 모두 파싱
@@ -766,6 +767,50 @@ def _cached_get_law_text(mst: str, law_api_key: str) -> dict:
     return get_law_text(mst, law_api_key, "")
 
 
+# 매트릭스 소스 중 '동일 취지 병행' 제안에 쓰는 것들 (우선순위 순).
+# citation/back_citation은 인용 관계라 병행 제안에서 제외 — 2단계 UI가 담당.
+_MATRIX_PARALLEL_SOURCES: tuple[str, ...] = (
+    "golden_manual", "code_hint", "related_hint", "semantic_llm",
+)
+
+
+def _matrix_match_result(
+    law_name: str,
+    article_text: str,
+    parallel_law_name: str,
+    parallel_data: dict,
+) -> dict[str, str] | None:
+    """사전 빌드된 병행 매트릭스 조회. 적중 시 LLM 호출 불필요."""
+    ref = _article_ref_from_text(article_text)
+    parts = _extract_article_ref_parts(ref)
+    if not parts:
+        return None
+    jo, jo_sub, _hang, _ho = parts
+    jo_key = f"{jo}의{jo_sub}" if jo_sub else jo
+
+    hits = [
+        h for h in parallel_hits(law_name, jo_key)
+        if h.get("target_law") == parallel_law_name
+        and h.get("source") in _MATRIX_PARALLEL_SOURCES
+    ]
+    if not hits:
+        return None
+    prio = {s: i for i, s in enumerate(_MATRIX_PARALLEL_SOURCES)}
+    hits.sort(key=lambda h: prio.get(h.get("source", ""), 99))
+    for h in hits:
+        content = _extract_article_content(parallel_data, h.get("target_article", ""))
+        if not content:
+            continue
+        label = "사전 의미 판별" if h.get("source") == "semantic_llm" else "확정 매핑"
+        return {
+            "match": "true",
+            "article": h.get("target_article", ""),
+            "reason": f"[{label}] {h.get('reason', '')}",
+            "내용": content,
+        }
+    return None
+
+
 def find_parallel_articles(
     law_name: str,
     article_text: str,
@@ -785,6 +830,18 @@ def find_parallel_articles(
     parallel_data: dict = {}
     try:
         parallel_data = _cached_get_law_text(parallel_law_mst, l_key)
+
+        # 0순위: 사전 빌드 매트릭스 (확정 매핑 + LLM 전수 판별 결과)
+        matrix_result = _matrix_match_result(
+            law_name, article_text, parallel_law_name, parallel_data
+        )
+        if matrix_result:
+            return matrix_result
+        if semantic_pair_covered(law_name, parallel_law_name):
+            # 이 법령쌍은 전 조문쌍이 사전 판별됨 — 매트릭스 미등재 = 동일 취지 아님.
+            # 라이브 LLM 호출 생략 (비용 0, 즉시 응답).
+            return _no_match
+
         keywords = _extract_keywords(article_text)
         hints = _known_parallel_hints(law_name, article_text, parallel_law_name)
         hint_result = _hint_match_result(parallel_data, hints)
