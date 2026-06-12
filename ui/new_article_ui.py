@@ -113,6 +113,112 @@ def _forward_section(external: list[dict], internal: list[dict]) -> None:
             )
 
 
+_CATEGORY_STYLE = {
+    "누락": ("❌", "누락 — 개정 반영 필요"),
+    "판단필요": ("⚠️", "판단 필요"),
+    "조치불요": ("✅", "조치 불요 (검토 완료)"),
+}
+
+
+def _render_llm_layer(cmp: dict) -> None:
+    """AI 검토 — ①종합의견 ②삼분류 ③HWPX 의견서."""
+    llm = st.session_state.get("na_llm")
+
+    if not llm:
+        with st.container(border=True):
+            st.markdown('<div class="mofe-subheader">🤖 Claude 검토의견</div>', unsafe_allow_html=True)
+            st.caption(
+                "미반영 후보를 누락/판단필요/조치불요로 삼분류하고 종합 검토의견을 생성합니다. "
+                "Claude API 과금(검토 1회당 수백 원 수준), 30초~2분 소요."
+            )
+            if st.button("Claude 검토의견 생성", key="na_llm_run"):
+                from core.llm_review import run_llm_review
+
+                try:
+                    with st.spinner("Claude가 개정안 구조를 해석하고 항목을 판별하는 중..."):
+                        st.session_state["na_llm"] = run_llm_review(
+                            cmp, st.session_state.get("na_body", "")
+                        )
+                    st.rerun()
+                except Exception as exc:
+                    st.error(f"LLM 검토 실패: {exc}")
+        return
+
+    structure = llm.get("구조", {})
+    review = llm.get("검토", {})
+
+    # ── 1단: 종합 검토의견 ───────────────────────────────────────────────────
+    with st.container(border=True):
+        st.markdown('<div class="mofe-subheader">🤖 종합 검토의견</div>', unsafe_allow_html=True)
+        if structure.get("제도명"):
+            st.markdown(f"**신설 제도**: {structure['제도명']}")
+        st.markdown(str(review.get("종합의견", "")))
+        with st.expander("개정안 구조 해석 (AI)"):
+            st.markdown(f"**제도 요약**: {structure.get('제도_요약', '')}")
+            st.markdown(
+                "**신설 조번호**: "
+                + ", ".join(_format_jo_label(j) for j in structure.get("신설_조번호", []))
+            )
+            if structure.get("비고"):
+                st.caption(structure["비고"])
+            detected = {f"{jo}의{sub}" if sub else jo for jo, sub in cmp["jo_list"]}
+            inferred = set(structure.get("신설_조번호", []))
+            if inferred and inferred != detected:
+                st.warning(
+                    f"입력한 범위({', '.join(sorted(detected))})와 AI 추론 범위"
+                    f"({', '.join(sorted(inferred))})가 다릅니다. 범위를 확인하세요."
+                )
+
+    # ── 2단: 삼분류 ──────────────────────────────────────────────────────────
+    order = {"누락": 0, "판단필요": 1, "조치불요": 2}
+    items = sorted(
+        review.get("항목", []),
+        key=lambda x: (order.get(x["구분"], 9), x["확신도"] != "높음"),
+    )
+    with st.container(border=True):
+        st.markdown('<div class="mofe-subheader">항목별 판정</div>', unsafe_allow_html=True)
+        for category in ("누락", "판단필요", "조치불요"):
+            group = [it for it in items if it["구분"] == category]
+            if not group:
+                continue
+            icon, label = _CATEGORY_STYLE[category]
+            if category == "누락":
+                st.error(f"{icon} {label} — {len(group)}건")
+            elif category == "판단필요":
+                st.warning(f"{icon} {label} — {len(group)}건")
+            else:
+                st.success(f"{icon} {label} — {len(group)}건")
+            for it in group:
+                expanded = category == "누락"
+                title = f"{it['법령명']} {_format_jo_label(it['조번호'])} [확신도 {it['확신도']}]"
+                with st.expander(title, expanded=expanded):
+                    st.markdown(f"**쟁점**: {it['쟁점']}")
+                    st.markdown(f"**권고 조치**: {it['권고조치']}")
+                    url = _law_url(it["법령명"], it["조번호"])
+                    st.markdown(f"[📄 법령 원문 바로가기]({url})")
+
+    # ── 3단: 검토의견서 다운로드 ─────────────────────────────────────────────
+    with st.container(border=True):
+        st.markdown('<div class="mofe-subheader">검토의견서 출력</div>', unsafe_allow_html=True)
+        if st.button("검토의견서 HWPX 생성", key="na_report"):
+            from core.review_report import build_review_report_hwpx
+
+            out = _UPLOAD_DIR / "검토의견서.hwpx"
+            _UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+            build_review_report_hwpx(
+                cmp["law_name"], cmp, llm, str(out), source_file=cmp.get("file", "")
+            )
+            st.session_state["na_report_bytes"] = out.read_bytes()
+        if st.session_state.get("na_report_bytes"):
+            st.download_button(
+                "📥 검토의견서 다운로드",
+                data=st.session_state["na_report_bytes"],
+                file_name=f"검토의견서_{cmp['law_name']}_신설조문.hwpx",
+                mime="application/octet-stream",
+                key="na_report_dl",
+            )
+
+
 def _render_comparison(cmp: dict) -> None:
     """업로드 개정안 vs 스캐너 대조 결과 렌더링."""
     jo_labels = ", ".join(
@@ -122,6 +228,8 @@ def _render_comparison(cmp: dict) -> None:
     manual = cmp["manual_targets"]
     with st.expander(f"수기 병행개정 대상 {len(manual)}건 (지시문 기준)"):
         st.write(", ".join(_format_jo_label(j) for j in manual))
+
+    _render_llm_layer(cmp)
 
     with st.container(border=True):
         st.markdown('<div class="mofe-subheader">① 신설 본문이 인용하는 조문</div>', unsafe_allow_html=True)
@@ -212,7 +320,10 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                     )
                     cmp["file"] = payload["file"]
                     st.session_state["na_cmp"] = cmp
+                    st.session_state["na_body"] = payload["body"]
                     st.session_state.pop("na_result", None)
+                    st.session_state.pop("na_llm", None)
+                    st.session_state.pop("na_report_bytes", None)
             else:
                 st.session_state["na_result"] = review_new_articles(
                     law_name_input.strip(), jo_range_text, draft_text, proxy_text,
