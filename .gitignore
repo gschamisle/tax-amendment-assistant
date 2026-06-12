@@ -21,3 +21,10 @@ docs/*.pdf
 docs/법령검색목록_법령.csv
 *.pptx
 presentation.html
+
+# 내부자료 — 업로드된 개정안 원문·분석 산출물 (절대 커밋 금지)
+data/uploads/
+data/uploaded_draft.txt
+data/draft_report.txt
+*.hwp
+*.hwpx
