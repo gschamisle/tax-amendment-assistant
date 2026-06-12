@@ -3,7 +3,7 @@ import base64
 import os
 import streamlit as st
 from config import LAW_API_KEY, OPENAI_API_KEY
-from ui import stage1_draft, stage2_crossref, stage3_output
+from ui import new_article_ui, stage1_draft, stage2_crossref, stage3_output
 from ui.styles import inject_global_css
 
 st.set_page_config(
@@ -59,7 +59,7 @@ if _freshness:
     )
 
 # ── 탭 ────────────────────────────────────────────────────────────────────────
-tab1, tab2, tab3 = st.tabs(["1️⃣ 초안 작성", "2️⃣ 인용·준용 확인", "3️⃣ HWPX 출력"])
+tab1, tab2, tab3, tab4 = st.tabs(["1️⃣ 초안 작성", "2️⃣ 인용·준용 확인", "3️⃣ HWPX 출력", "🆕 신설 조문 검토"])
 
 with tab1:
     stage1_draft.render(law_api_key, openai_api_key)
@@ -69,3 +69,6 @@ with tab2:
 
 with tab3:
     stage3_output.render(law_api_key, openai_api_key)
+
+with tab4:
+    new_article_ui.render(law_api_key, openai_api_key)
