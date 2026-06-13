@@ -15,8 +15,10 @@ import json
 
 from config import ANTHROPIC_API_KEY
 
-STRUCTURE_MODEL = "claude-fable-5"     # 구조 해석: 검토 빈도 낮고 정확도 결정적
-ADJUDICATE_MODEL = "claude-sonnet-4-6"  # 항목 판별: 항목 수 많고 패턴 정형적
+# 모델은 우선순위 목록. 앞에서부터 시도하고, 그 모델을 쓸 수 없을 때만(404/403)
+# 다음 후보로 폴백한다. Fable 5가 막혀도 Opus 4.8로 자동 대체되어 앱이 안 깨진다.
+STRUCTURE_MODELS = ["claude-fable-5", "claude-opus-4-8"]  # 구조 해석: 정확도 결정적, Fable 5 우선
+ADJUDICATE_MODELS = ["claude-sonnet-4-6"]                 # 항목 판별: 항목 수 많고 패턴 정형적
 
 _STRUCTURE_SCHEMA = {
     "type": "object",
@@ -108,8 +110,8 @@ def _client(api_key: str = ""):
     return Anthropic(api_key=key)
 
 
-def _structured_call(model: str, system: str, user_text: str, schema: dict, api_key: str = "") -> dict:
-    with _client(api_key).messages.stream(
+def _call_one(client, model: str, system: str, user_text: str, schema: dict) -> dict:
+    with client.messages.stream(
         model=model,
         max_tokens=64000,  # adaptive thinking 토큰 포함 — 빠듯하면 JSON이 잘린다 (Sonnet 스트리밍 상한)
         thinking={"type": "adaptive"},
@@ -121,9 +123,37 @@ def _structured_call(model: str, system: str, user_text: str, schema: dict, api_
     text = "".join(b.text for b in response.content if b.type == "text")
     if response.stop_reason != "end_turn" or not text.strip():
         raise RuntimeError(
-            f"LLM 응답 비정상 (stop_reason={response.stop_reason}, text_len={len(text)})"
+            f"LLM 응답 비정상 (model={model}, stop_reason={response.stop_reason}, text_len={len(text)})"
         )
     return json.loads(text)
+
+
+def _structured_call(
+    models, system: str, user_text: str, schema: dict, api_key: str = ""
+) -> dict:
+    """models 목록을 순서대로 시도. 모델 사용 불가(404/403)일 때만 다음 후보로 폴백한다.
+
+    스키마 오류·레이트리밋 등 모델 가용성과 무관한 에러는 폴백하지 않고 그대로 올린다.
+    """
+    import anthropic
+
+    if isinstance(models, str):
+        models = [models]
+    client = _client(api_key)
+    last_unavailable: Exception | None = None
+
+    for model in models:
+        try:
+            return _call_one(client, model, system, user_text, schema)
+        except (anthropic.NotFoundError, anthropic.PermissionDeniedError) as exc:
+            # 이 모델은 이 API 키로 쓸 수 없음 — 다음 후보로 폴백
+            last_unavailable = exc
+            continue
+
+    raise RuntimeError(
+        f"사용 가능한 모델이 없습니다 (시도: {', '.join(models)}). "
+        f"마지막 오류: {last_unavailable}"
+    )
 
 
 def analyze_bill_structure(body: str, api_key: str = "") -> dict:
@@ -132,7 +162,7 @@ def analyze_bill_structure(body: str, api_key: str = "") -> dict:
         "다음 일부개정법률안 개정문을 분석해 신설 제도가 차지하는 조번호 범위를 판별하라.\n\n"
         f"<개정문>\n{body[:60000]}\n</개정문>"
     )
-    return _structured_call(STRUCTURE_MODEL, _STRUCTURE_SYSTEM, user, _STRUCTURE_SCHEMA, api_key)
+    return _structured_call(STRUCTURE_MODELS, _STRUCTURE_SYSTEM, user, _STRUCTURE_SCHEMA, api_key)
 
 
 def review_missing_items(
@@ -160,7 +190,7 @@ def review_missing_items(
         f"<신설_조문_본문>\n{new_block[:30000]}\n</신설_조문_본문>\n\n"
         f"<검토_자료>\n{json.dumps(payload, ensure_ascii=False, indent=1)}\n</검토_자료>"
     )
-    return _structured_call(ADJUDICATE_MODEL, _REVIEW_SYSTEM, user, _REVIEW_SCHEMA, api_key)
+    return _structured_call(ADJUDICATE_MODELS, _REVIEW_SYSTEM, user, _REVIEW_SCHEMA, api_key)
 
 
 def run_llm_review(cmp_result: dict, body: str, api_key: str = "") -> dict:
