@@ -256,7 +256,7 @@ def _render_comparison(cmp: dict) -> None:
         st.markdown('<div class="mofe-subheader">③ 유사 제도 체크리스트 — 수기 개정과 대조</div>', unsafe_allow_html=True)
         px = cmp["proxy"]
         if not (px["missing"] or px["covered"]):
-            st.info("유사 기존 제도 조문을 입력하면 체크리스트를 대조합니다. (예: 통합투자세액공제 = 24)")
+            st.info("유사 기존 제도 조문을 입력하면 체크리스트를 대조합니다.")
         else:
             if px["missing"]:
                 st.warning(f"⚠️ 수기 개정안에 없는 체크리스트 조문 {len(px['missing'])}건 — 신설 조번호 추가 여부 검토")
@@ -278,17 +278,15 @@ def render(law_api_key: str, openai_api_key: str) -> None:
     with st.container(border=True):
         col1, col2, col3 = st.columns([2, 1, 1])
         with col1:
-            law_name_input = st.text_input("신설 대상 법령", value="조세특례제한법", key="na_law")
+            law_name_input = st.text_input("신설 대상 법령", value="", key="na_law")
         with col2:
             jo_range_text = st.text_input(
                 "신설 조번호 범위", value="", key="na_range",
-                placeholder="예: 29, 29의2, 29의3",
-                help="쉼표 나열(29, 29의2) 또는 범위(29~29의8)",
+                help="쉼표로 나열하거나 범위로 입력합니다. 가지번호는 '의'로 표기합니다.",
             )
         with col3:
             proxy_text = st.text_input(
                 "유사 기존 제도 조문(선택)", value="", key="na_proxy",
-                placeholder="예: 24",
                 help="성격이 비슷한 기존 제도의 조번호. 그 제도를 인용하는 열거형 조문이 검토 대상이 됩니다.",
             )
 
@@ -303,7 +301,6 @@ def render(law_api_key: str, openai_api_key: str) -> None:
             "신설 조문안 직접 입력 (파일 업로드 시 무시됨)",
             height=240,
             key="na_draft",
-            placeholder="제29조(○○세액공제) ① 내국인이 ...",
         )
 
         if st.button("신설 검토 실행", key="na_run", type="primary"):
@@ -383,7 +380,7 @@ def render(law_api_key: str, openai_api_key: str) -> None:
         proxies = parse_jo_tokens(st.session_state.get("na_proxy", ""))
         proxy_rows = result["proxy"]
         if not proxies:
-            st.info("유사 기존 제도 조문을 입력하면 체크리스트를 생성합니다. (예: 통합투자세액공제 = 24)")
+            st.info("유사 기존 제도 조문을 입력하면 체크리스트를 생성합니다.")
         elif not result["graph_ok"]:
             st.info("그래프 빌드 후 사용 가능합니다.")
         elif not proxy_rows:

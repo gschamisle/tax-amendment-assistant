@@ -26,5 +26,6 @@ presentation.html
 data/uploads/
 data/uploaded_draft.txt
 data/draft_report.txt
+data/golden_review_expected.json
 *.hwp
 *.hwpx
