@@ -101,12 +101,35 @@ def _parallel_rows(law_name: str, jo: str) -> list[dict]:
     return sorted(rows, key=lambda r: (r["법령명"], r["조문"]))
 
 
-def analyze_article_relations(law_name: str, jo: str, article_text: str) -> dict:
-    """개정 대상 조문의 연관 조문을 4분류로 반환."""
+def _target_label(jo: str, hang: str = "", ho: str = "", mok: str = "") -> str:
+    """조·항·호·목을 '제10조제1항제2호' 형태의 표기로 합친다 (표기·기록용)."""
+    parts = []
+    base, sub = _split_jo(jo)
+    if base:
+        parts.append(f"제{base}조" + (f"의{sub}" if sub else ""))
+    if str(hang).strip():
+        parts.append(f"제{str(hang).strip()}항")
+    if str(ho).strip():
+        parts.append(f"제{str(ho).strip()}호")
+    if str(mok).strip():
+        parts.append(f"{str(mok).strip()}목")
+    return "".join(parts)
+
+
+def analyze_article_relations(
+    law_name: str, jo: str, article_text: str,
+    hang: str = "", ho: str = "", mok: str = "",
+) -> dict:
+    """개정 대상 조문의 연관 조문을 4분류로 반환.
+
+    항·호·목은 분석 대상 '표기'와 포워드 분석 범위 명확화를 위한 것이며,
+    역인용·병행 매칭은 조 단위로 수행한다(설계상 그게 더 안전·적절).
+    """
     cited, junyong = _forward_rows(article_text, law_name)
     return {
         "law_name": law_name,
         "jo": jo,
+        "target_label": _target_label(jo, hang, ho, mok),
         "graph_ok": graph_available(),
         "matrix_ok": matrix_available(),
         "cited": cited,

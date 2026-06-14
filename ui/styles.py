@@ -336,5 +336,81 @@ pre {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0);    }
 }
+
+/* ─── TEXT CONTRAST (light mode base) ────────────────────────────────────── */
+/* 위젯 라벨·라디오/체크박스·일반 마크다운 본문은 라이트 모드에서 어두운 글씨 */
+[data-testid="stWidgetLabel"] p,
+[data-testid="stWidgetLabel"] label,
+.stRadio label, .stCheckbox label, [role="radiogroup"] label,
+[data-testid="stMarkdownContainer"] > p,
+[data-testid="stMarkdownContainer"] li {
+    color: #1e293b !important;
+}
+
+/* ─── DARK MODE (시스템 다크모드 시 어두운 배경 + 밝은 글씨로 일관) ──────────── */
+@media (prefers-color-scheme: dark) {
+    [data-testid="stAppViewContainer"],
+    [data-testid="stMain"] {
+        background: linear-gradient(145deg, #0b1220 0%, #111a2e 55%, #0e1525 100%) !important;
+    }
+    .mofe-header-card {
+        background: linear-gradient(135deg, rgba(30,41,59,0.97) 0%, rgba(15,23,42,0.94) 100%);
+        border-color: rgba(51,65,85,0.85);
+        box-shadow: 0 4px 24px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.3);
+    }
+    .mofe-app-title h1, .mofe-section-header { color: #f1f5f9 !important; }
+    .mofe-app-title p { color: #94a3b8 !important; }
+    .mofe-section-header { border-bottom-color: #334155 !important; }
+    .mofe-subheader { color: #93c5fd !important; }
+
+    [data-testid="stVerticalBlockBorderWrapper"] {
+        background: #1e293b !important;
+        border-color: #334155 !important;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.35) !important;
+    }
+    [data-testid="stVerticalBlockBorderWrapper"]:hover {
+        box-shadow: 0 6px 28px rgba(0,0,0,0.45) !important;
+    }
+
+    [data-testid="stWidgetLabel"] p,
+    [data-testid="stWidgetLabel"] label,
+    .stRadio label, .stCheckbox label, [role="radiogroup"] label,
+    [data-testid="stMarkdownContainer"] > p,
+    [data-testid="stMarkdownContainer"] li,
+    [data-testid="stMarkdownContainer"] strong {
+        color: #e2e8f0 !important;
+    }
+    [data-testid="stCaptionContainer"], .stCaption { color: #94a3b8 !important; }
+
+    .stTextInput input, .stTextArea textarea, .stNumberInput input {
+        background: #0f172a !important;
+        color: #f1f5f9 !important;
+        border-color: #334155 !important;
+    }
+    .stTextInput input:focus, .stTextArea textarea:focus, .stNumberInput input:focus {
+        background: #111a2e !important;
+    }
+    .stTextInput input::placeholder, .stTextArea textarea::placeholder { color: #64748b !important; }
+    .stSelectbox [data-baseweb="select"] > div:first-child {
+        background: #0f172a !important;
+        border-color: #334155 !important;
+    }
+
+    [data-testid="stTabs"] [data-baseweb="tab-list"] {
+        background: #1e293b !important;
+        border-color: #334155 !important;
+    }
+    [data-testid="stTabs"] [data-baseweb="tab"] { color: #94a3b8 !important; }
+
+    details[data-testid="stExpander"], .streamlit-expander {
+        background: #1e293b !important;
+        border-color: #334155 !important;
+    }
+    details[data-testid="stExpander"] summary { color: #e2e8f0 !important; }
+
+    ::-webkit-scrollbar-track { background: #1e293b; }
+    ::-webkit-scrollbar-thumb { background: #475569; }
+    ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+}
 </style>
 """, unsafe_allow_html=True)

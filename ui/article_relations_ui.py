@@ -7,6 +7,22 @@ from core.article_relations import analyze_article_relations
 
 _JO_URL_RE = re.compile(r"제(\d+)조(?:의(\d+))?")
 
+# 줄머리 열거기호: ①-⑳, "제N항/호/목", "2.", "2)", "가.", "가)" 등
+_ENUM_PREFIX_RE = re.compile(
+    r"^[\s]*(?:[①-⑳]|제\s*\d+\s*[항호목]|\d+\s*[.)]|[가-힣]\s*[.)])\s*"
+)
+
+
+def _strip_enum_prefix(text: str) -> str:
+    """개정 내용 앞에 붙은 조·항·호·목 열거기호를 제거한다.
+
+    '2. 블라블라'와 '블라블라'가 동일하게 처리되도록 — 위치는 위 칸에서 받는다.
+    """
+    lines = text.split("\n")
+    if lines:
+        lines[0] = _ENUM_PREFIX_RE.sub("", lines[0], count=1)
+    return "\n".join(lines)
+
 
 def _law_url(law_name: str, jo_ref: str = "") -> str:
     base = f"https://www.law.go.kr/법령/{law_name}"
@@ -60,30 +76,46 @@ def render(law_api_key: str, openai_api_key: str) -> None:
     default_text = str(sel_article.get("내용", "")) if isinstance(sel_article, dict) else ""
 
     with st.container(border=True):
-        col1, col2 = st.columns([3, 1])
-        with col1:
+        c_law, c_jo = st.columns([3, 1])
+        with c_law:
             law_name = st.text_input("법령명", value=default_law, key="ar_law")
-        with col2:
-            jo = st.text_input("조번호", value=default_jo, key="ar_jo", help="예: 127 또는 27의2")
+        with c_jo:
+            jo = st.text_input("조", value=default_jo, key="ar_jo", help="예: 10 또는 27의2")
+        c_hang, c_ho, c_mok = st.columns(3)
+        with c_hang:
+            hang = st.text_input("항(선택)", value="", key="ar_hang", help="예: 1")
+        with c_ho:
+            ho = st.text_input("호(선택)", value="", key="ar_ho", help="예: 2")
+        with c_mok:
+            mok = st.text_input("목(선택)", value="", key="ar_mok", help="예: 가")
         article_text = st.text_area(
-            "개정 조문 본문 (선택한 조문이 있으면 자동 채워집니다 — 개정안으로 수정 가능)",
+            "개정하려는 조문 내용",
             value=default_text,
             height=220,
             key="ar_text",
+        )
+        st.caption(
+            "조·항·호·목 번호는 위 칸에 입력하고, 여기에는 개정 내용만 작성하세요. "
+            "(번호를 함께 붙여 넣어도 자동으로 제거됩니다.) "
+            "변경되는 부분만 입력하면 인용·준용 분석이 그 범위로 정밀해집니다."
         )
         if st.button("연관 조문 분석", key="ar_run", type="primary"):
             if not law_name.strip() or not jo.strip():
                 st.error("법령명과 조번호를 입력하세요.")
             else:
                 st.session_state["ar_result"] = analyze_article_relations(
-                    law_name.strip(), jo.strip(), article_text
+                    law_name.strip(), jo.strip(), _strip_enum_prefix(article_text),
+                    hang=hang, ho=ho, mok=mok,
                 )
 
     result = st.session_state.get("ar_result")
     if not result:
         return
 
-    st.markdown(f"**분석 대상**: {result['law_name']} {_fmt_jo(result['jo'])}")
+    target = result.get("target_label") or _fmt_jo(result["jo"])
+    st.markdown(f"**분석 대상**: {result['law_name']} {target}")
+    if result.get("target_label") and any(c in target for c in ("항", "호", "목")):
+        st.caption("역인용·병행개정은 조 단위로 검색합니다(과소포착 방지). 인용·준용은 입력한 내용 범위로 분석합니다.")
     if not result["graph_ok"]:
         st.warning("인용 그래프가 없어 역인용을 건너뜁니다. `build_law_citation_graph.py --all` 후 재시도.")
     if not result["matrix_ok"]:

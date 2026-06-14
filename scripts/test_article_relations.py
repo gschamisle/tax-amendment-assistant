@@ -46,6 +46,26 @@ def test_parallel_real_matrix() -> None:
     assert all(x.get("근거") for x in r["parallel"])
 
 
+def test_target_label() -> None:
+    r = analyze_article_relations("소득세법", "10", "", hang="1", ho="2")
+    assert r["target_label"] == "제10조제1항제2호", r["target_label"]
+    r2 = analyze_article_relations("조세특례제한법", "27의2", "")
+    assert r2["target_label"] == "제27조의2", r2["target_label"]
+
+
+def test_enum_prefix_strip() -> None:
+    from ui.article_relations_ui import _strip_enum_prefix
+
+    assert _strip_enum_prefix("2. 블라블라") == "블라블라"
+    assert _strip_enum_prefix("② 블라블라") == "블라블라"
+    assert _strip_enum_prefix("가. 블라블라") == "블라블라"
+    assert _strip_enum_prefix("제2호 블라블라") == "블라블라"
+    # 번호 없이 내용만 — 그대로
+    assert _strip_enum_prefix("블라블라") == "블라블라"
+    # 본문 중간의 숫자는 건드리지 않음
+    assert _strip_enum_prefix("「소득세법」 제19조에 따른") == "「소득세법」 제19조에 따른"
+
+
 def test_empty_text_no_forward() -> None:
     r = analyze_article_relations("소득세법", "55", "")
     assert r["cited"] == [] and r["junyong"] == []
@@ -57,6 +77,8 @@ def main() -> int:
     test_forward_split_cited_vs_junyo()
     test_back_citation_real_graph()
     test_parallel_real_matrix()
+    test_target_label()
+    test_enum_prefix_strip()
     test_empty_text_no_forward()
     print("ALL OK")
     return 0
