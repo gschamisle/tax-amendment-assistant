@@ -101,9 +101,9 @@ def build_edges(law_api_key: str, source_laws: tuple[str, ...]) -> list[dict]:
             src_title = str(article.get("제목", ""))
             content = str(article.get("내용", ""))
             for cite in parse_citations(content):
+                # effective_law_name이 '같은 법/같은 조'의 선행 법령 해석까지 처리한다.
+                # (선행 법령을 못 찾았을 때만 출처법령으로 폴백)
                 target_law = effective_law_name(cite, law_name)
-                if cite.relative in ("같은법", "같은조"):
-                    target_law = law_name
                 if not _in_scope(target_law, scope):
                     continue
                 if not cite.jo:

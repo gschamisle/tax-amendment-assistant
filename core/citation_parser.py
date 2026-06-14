@@ -87,10 +87,19 @@ def resolve_deictic_law(token: str, source_law_name: str) -> str:
 
 
 def effective_law_name(citation: "Citation", source_law_name: str) -> str:
-    """인용이 가리키는 법령명을 source 법령 기준으로 해석해 반환한다."""
+    """인용이 가리키는 법령명을 source 법령 기준으로 해석해 반환한다.
+
+    '같은 법/같은 조'는 _resolve_relative_citations에서 같은 문장의 선행 명시 법령으로
+    이미 해석되어 law_name에 실제 법령명이 들어온다(예: 「법인세법」 → "법인세법").
+    선행 법령을 못 찾아 미해석으로 남은 경우(law_name이 '같은…'으로 시작)에만
+    source 법령으로 폴백한다.
+    """
     if citation.relative in _DEICTIC_TOKENS:
         return resolve_deictic_law(citation.relative, source_law_name)
-    return citation.law_name or source_law_name
+    name = citation.law_name
+    if not name or name.startswith("같은"):
+        return source_law_name
+    return name
 
 
 def _sentence_start(text: str, pos: int) -> int:
@@ -104,6 +113,27 @@ def _is_inside(span: tuple[int, int], seen: set[tuple[int, int]]) -> bool:
     return any(s[0] <= span[0] and span[1] <= s[1] for s in seen)
 
 
+def _preceded_by_buchik(text: str, pos: int, window: int = 8) -> bool:
+    """제X조 바로 앞에 '부칙'이 있으면 본문 조문이 아니라 부칙(경과규정) 참조다.
+
+    예: '법률 제6538호 부칙 제29조' → 옛 법률의 부칙 제29조이며 본문 제29조와 무관.
+    앱은 부칙 조문을 모델링하지 않으므로 본문 인용으로 잡지 않는다.
+    """
+    return "부칙" in text[max(0, pos - window):pos]
+
+
+_BRACKET_LAW_RE = re.compile(r"「([^」]+(?:법률|법|령|규칙))」")
+
+
+def _last_bracket_law(text: str, start: int, end: int) -> str:
+    """text[start:end]에서 마지막으로 등장한 낫표 법령명(「…법」)을 반환한다.
+
+    조번호 없이 쓰인 선행 법령(예: 「법인세법」(같은 법 …))도 잡기 위함.
+    """
+    matches = list(_BRACKET_LAW_RE.finditer(text, start, end))
+    return matches[-1].group(1) if matches else ""
+
+
 def _resolve_relative_citations(citations: list[Citation], text: str) -> None:
     """'같은 법/영/칙/조'를 같은 문장 앞쪽의 명시 인용으로 해석한다."""
     for idx, cite in enumerate(citations):
@@ -114,17 +144,21 @@ def _resolve_relative_citations(citations: list[Citation], text: str) -> None:
             c for c in citations[:idx]
             if c.span[0] >= sent_start and c.jo
         ]
-        if not previous:
-            continue
         if cite.relative == "같은조":
-            anchor = previous[-1]
-            cite.jo = anchor.jo
-            cite.jo_sub = anchor.jo_sub
-            cite.law_name = anchor.law_name
+            if previous:
+                anchor = previous[-1]
+                cite.jo = anchor.jo
+                cite.jo_sub = anchor.jo_sub
+                cite.law_name = anchor.law_name
         elif cite.law_name.startswith("같은"):
             explicit_laws = [c for c in previous if c.law_name and not c.relative]
             if explicit_laws:
                 cite.law_name = explicit_laws[-1].law_name
+            else:
+                # 조번호 없이 쓰인 선행 낫표 법령명도 선행 법령으로 인정
+                bracket = _last_bracket_law(text, sent_start, cite.span[0])
+                if bracket:
+                    cite.law_name = bracket
 
 
 def parse_citations(text: str) -> list[Citation]:
@@ -226,6 +260,8 @@ def parse_citations(text: str) -> list[Citation]:
     for m in ARTICLE_RANGE_RE.finditer(text):
         if m.span() in seen:
             continue
+        if _preceded_by_buchik(text, m.start()):
+            continue  # '부칙 제X조부터 …' — 본문 조문 아님
         seen.add(m.span())
         results.append(Citation(
             raw=m.group(0),
@@ -279,6 +315,8 @@ def parse_citations(text: str) -> list[Citation]:
             continue
         if any(s[0] <= m.start() and m.end() <= s[1] for s in seen):
             continue
+        if _preceded_by_buchik(text, m.start()):
+            continue  # '부칙 제X조' — 본문 조문 아님
         seen.add(m.span())
         results.append(Citation(
             raw=m.group(0),
