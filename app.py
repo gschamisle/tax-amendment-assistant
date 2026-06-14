@@ -2,7 +2,7 @@
 import base64
 import os
 import streamlit as st
-from config import LAW_API_KEY, OPENAI_API_KEY
+from config import LAW_API_KEY, OPENAI_API_KEY, ENABLE_HWPX_OUTPUT
 from ui import new_article_ui, stage1_draft, stage2_crossref, stage3_output
 from ui.styles import inject_global_css
 
@@ -59,7 +59,8 @@ if _freshness:
     )
 
 # ── 탭 ────────────────────────────────────────────────────────────────────────
-tab1, tab2, tab3, tab4 = st.tabs(["1️⃣ 초안 작성", "2️⃣ 인용·준용 확인", "3️⃣ HWPX 출력", "🆕 신설 조문 검토"])
+_tab3_label = "3️⃣ HWPX 출력" if ENABLE_HWPX_OUTPUT else "3️⃣ HWPX 출력 (준비 중)"
+tab1, tab2, tab3, tab4 = st.tabs(["1️⃣ 초안 작성", "2️⃣ 인용·준용 확인", _tab3_label, "🆕 신설 조문 검토"])
 
 with tab1:
     stage1_draft.render(law_api_key, openai_api_key)
@@ -68,7 +69,14 @@ with tab2:
     stage2_crossref.render(law_api_key, openai_api_key)
 
 with tab3:
-    stage3_output.render(law_api_key, openai_api_key)
+    if ENABLE_HWPX_OUTPUT:
+        stage3_output.render(law_api_key, openai_api_key)
+    else:
+        st.markdown('<div class="mofe-section-header">3단계: HWPX 출력</div>', unsafe_allow_html=True)
+        st.info(
+            "🛠️ HWPX 출력 기능은 베타 테스트 기간 동안 비활성화되어 있습니다. "
+            "1·2단계와 신설 조문 검토 기능을 이용해 주세요. 정식 제공 시 안내드리겠습니다."
+        )
 
 with tab4:
     new_article_ui.render(law_api_key, openai_api_key)

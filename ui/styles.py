@@ -347,6 +347,15 @@ pre {
     color: #1e293b !important;
 }
 
+/* 버튼 라벨은 위 텍스트 규칙(마크다운 p)에 덮이지 않도록 명시 — 진한 버튼엔 흰 글씨 */
+.stButton button p, .stButton button span, .stButton button div,
+.stFormSubmitButton button p, .stFormSubmitButton button span, .stFormSubmitButton button div {
+    color: #ffffff !important;
+}
+.stDownloadButton button p, .stDownloadButton button span, .stDownloadButton button div {
+    color: #2563eb !important;
+}
+
 /* ─── DARK MODE (시스템 다크모드 시 어두운 배경 + 밝은 글씨로 일관) ──────────── */
 @media (prefers-color-scheme: dark) {
     [data-testid="stAppViewContainer"],

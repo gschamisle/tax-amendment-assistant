@@ -10,6 +10,11 @@ LAW_API_KEY = os.getenv("LAW_API_KEY", "")
 LAW_SEARCH_URL = "https://www.law.go.kr/DRF/lawSearch.do"
 LAW_SERVICE_URL = "https://www.law.go.kr/DRF/lawService.do"
 
+# 기능 플래그 ───────────────────────────────────────────────────────────────
+# 3단계 HWPX 출력: 베타 기간 동안 비활성화(코드는 보존, 탭은 안내문구만 노출).
+# 재활성화하려면 True로 바꾸거나 .env에 ENABLE_HWPX_OUTPUT=1 설정.
+ENABLE_HWPX_OUTPUT = os.getenv("ENABLE_HWPX_OUTPUT", "0") == "1"
+
 # 세법 동의어 매핑: 법인세법 ↔ 소득세법 개념 대응
 # 병행 법령 검색 시 키워드 확장에 사용
 KEYWORD_SYNONYMS: dict[str, list[str]] = {
