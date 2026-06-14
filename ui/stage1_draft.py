@@ -514,6 +514,20 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                     st.text(selected_article["내용"])
                 st.session_state["s1_article"] = selected_article
 
+    # ── 입력 방식 선택 ────────────────────────────────────────────────────────
+    mode = st.radio(
+        "입력 방식",
+        ["개정 요강 입력 (GPT 초안 생성)", "개정 조문 직접 입력 (연관 조문 구조화)"],
+        key="s1_input_mode",
+        horizontal=True,
+        help="요강 방식은 GPT가 초안을 만들고, 직접 입력 방식은 조문을 파싱해 인용·준용·역인용·병행개정만 찾습니다.",
+    )
+    if mode.startswith("개정 조문 직접"):
+        from ui import article_relations_ui
+
+        article_relations_ui.render(law_api_key, openai_api_key)
+        return
+
     # ── 개정 요강 + GPT 생성 ─────────────────────────────────────────────────
     with st.container(border=True):
         st.markdown('<div class="mofe-subheader">개정 요강</div>', unsafe_allow_html=True)

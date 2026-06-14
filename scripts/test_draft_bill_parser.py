@@ -71,12 +71,15 @@ def test_compare_review() -> None:
     assert ("법인세법", "제64조") in ext_refs
     assert ("조세특례제한법", "제24조") in ext_refs
 
-    # 잔존 인용: 제144조는 수기 개정에 포함됨(covered) — 제29조 인용 조문 중
+    # 잔존 인용: 제146조의2는 조특법 제29조를 인용하며 수기 개정에 없으므로 missing
     covered = {row["조번호"] for row in r["stale"]["covered"]}
     missing = {row["조번호"] for row in r["stale"]["missing"]}
     assert "144" in covered or "144" not in missing
-    # 제106조(같은 법 제29조제1항 인용)는 수기에 없음 → missing
-    assert "106" in missing, missing
+    assert "146의2" in missing, missing
+    # 상대참조 해석 수정(2026-06-13) 후: 제106조(온실가스법 '같은 법')·제104조의7/제74조
+    # (법인세법)·제133조(부칙)는 조특법 제29조 인용이 아니므로 missing에서 제외되어야 한다
+    for false_positive in ("106", "104의7", "74", "133"):
+        assert false_positive not in missing, f"{false_positive} 오탐 재발: {missing}"
     # 시행령 잔존은 별도 분류
     assert all(row["법령명"] != "조세특례제한법" for row in r["stale"]["decree"])
 

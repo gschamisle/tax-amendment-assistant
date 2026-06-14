@@ -52,6 +52,7 @@ class Citation:
     range_end_jo_sub: str = ""
     span: tuple[int, int] = field(default_factory=lambda: (0, 0))
     relative: str = ""         # "같은법", "같은조" 등 문장 내 선행 참조 해석용
+    is_junyo: bool = False     # "준용한다"로 끌어쓴 인용(준용)인지 — 단순 인용과 구분
 
 
 # Citation.relative에 기록되는 지시적 참조 토큰 (공백 제거 정규화)
@@ -350,7 +351,30 @@ def parse_citations(text: str) -> list[Citation]:
 
     results.sort(key=lambda c: c.span[0])
     _resolve_relative_citations(results, text)
+    _tag_junyo(results, text)
     return results
+
+
+_SENT_END_RE = re.compile(r"[.?!\n;]")
+
+
+def _tag_junyo(citations: list[Citation], text: str) -> None:
+    """'준용'을 가장 가까운 선행 인용에 귀속시켜 is_junyo를 설정한다.
+
+    각 인용의 끝부터 (다음 인용 시작 또는 문장 끝, 최대 25자) 사이에 '준용'이 있으면
+    그 인용을 준용으로 본다 — '제27조를 준용한다', '제27조부터 제29조까지를 준용한다' 등.
+    한계: '제1항 및 제2항을 준용한다'의 나열형에서는 마지막 인용만 잡힐 수 있다.
+    """
+    for idx, cite in enumerate(citations):
+        start = cite.span[1]
+        nxt = citations[idx + 1].span[0] if idx + 1 < len(citations) else len(text)
+        window_end = min(nxt, start + 25)
+        segment = text[start:window_end]
+        sent = _SENT_END_RE.search(segment)
+        if sent:
+            segment = segment[:sent.start()]
+        if "준용" in segment:
+            cite.is_junyo = True
 
 
 def find_back_citations(
