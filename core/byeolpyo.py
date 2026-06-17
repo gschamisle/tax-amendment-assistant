@@ -50,3 +50,18 @@ def related_byeolpyo(
 def byeolpyo_label(bp: dict[str, Any]) -> str:
     """'별표 1' / '서식 2의3' 형태의 표기."""
     return f"{bp.get('구분', '별표')} {bp.get('번호', '')}".strip()
+
+
+def cited_byeolpyo(text: str) -> list[str]:
+    """조문 본문이 인용하는 별표·별지서식 표기 목록 (forward, 중복 제거).
+
+    예: '별표 1에 따른 …, 별지 제40호서식으로 신고' → ['별표 1', '별지 제40호서식'].
+    별표 개정 시 이 조문이 영향을 받는다 / 신설 조문이 별표를 동반하는지 판단에 쓴다.
+    """
+    from core.citation_parser import parse_citations
+
+    out: list[str] = []
+    for c in parse_citations(text):
+        if c.byeolpyo and c.byeolpyo not in out:
+            out.append(c.byeolpyo)
+    return out

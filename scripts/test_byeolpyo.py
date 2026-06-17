@@ -61,9 +61,27 @@ def test_related_byeolpyo() -> None:
     assert len(related_byeolpyo(law_data2, "118", "15")) == 1
 
 
+def test_byeolpyo_forward_parsing() -> None:
+    from core.byeolpyo import cited_byeolpyo
+    from core.citation_parser import parse_citations
+
+    text = "제5조에 따른 소득은 별표 1에 따라 계산하고 별지 제40호서식으로 신고하며 별표 2의3을 준용한다."
+    labels = cited_byeolpyo(text)
+    assert labels == ["별표 1", "별지 제40호서식", "별표 2의3"], labels
+
+    # 조문 인용(제5조)은 그대로 살아 있다
+    cites = parse_citations(text)
+    assert any(c.jo == "5" for c in cites), [(c.raw, c.jo, c.byeolpyo) for c in cites]
+    # '별지 제40호서식'의 '제40호'가 호 인용으로 오탐되지 않는다
+    assert not any(c.ho == "40" for c in cites), [(c.raw, c.ho) for c in cites]
+    # 중복 제거
+    assert cited_byeolpyo("별표 1, 별표 1, 별표 1") == ["별표 1"]
+
+
 def main() -> int:
     test_extract_byeolpyo()
     test_related_byeolpyo()
+    test_byeolpyo_forward_parsing()
     print("ALL OK")
     return 0
 

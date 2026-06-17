@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import re
 
+from core.byeolpyo import cited_byeolpyo
 from core.citation_graph import back_citation_hits, graph_available, graph_meta
 from core.citation_parser import effective_law_name, parse_citations
 
@@ -254,5 +255,6 @@ def review_new_articles(
         "forward": forward_citations(draft_text, law_name, jo_list) if draft_text.strip() else [],
         "stale": stale_citation_conflicts(law_name, jo_list) if graph_ok else [],
         "byeolpyo": stale_byeolpyo(law_name, jo_list) if graph_ok else [],
+        "cited_byeolpyo": cited_byeolpyo(draft_text) if draft_text.strip() else [],
         "proxy": proxy_checklist(law_name, proxies) if (graph_ok and proxies) else [],
     }

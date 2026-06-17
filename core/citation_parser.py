@@ -26,6 +26,8 @@ _ARTICLE_HANG_RANGE = r"제(\d+)조(?:의(\d+))?제(\d+)항\s*(?:부터|에서)\
 _ARTICLE_RANGE_NAEJI = r"제(\d+)조(?:의(\d+))?\s*내지\s*제(\d+)조(?:의(\d+))?"
 # 구식 항·호·목 범위 표현 '내지': 제X항 내지 제Y항
 _RANGE_NAEJI = r"제(\d+)(항|호|목)\s*내지\s*제(\d+)(항|호|목)"
+# 별표·별지서식 인용: "별표 1", "별표 1의2", "별표 제2호", "별지 제40호서식", "[별표 3]"
+_BYEOLPYO = r"(별표|별지)\s*(?:제\s*)?(\d+)(?:\s*의\s*(\d+))?\s*(?:호\s*서식|호|서식)?"
 # 동일 조 내 단독 항·호 인용: "제3항", "제2항과 제3항", "각 호" 등
 _INTRA = r"제(\d+)(항|호|목)(?!까지)"
 
@@ -40,6 +42,7 @@ ARTICLE_RANGE_RE = re.compile(_ARTICLE_RANGE)
 ARTICLE_HANG_RANGE_RE = re.compile(_ARTICLE_HANG_RANGE)
 ARTICLE_RANGE_NAEJI_RE = re.compile(_ARTICLE_RANGE_NAEJI)
 RANGE_NAEJI_RE = re.compile(_RANGE_NAEJI)
+BYEOLPYO_RE = re.compile(_BYEOLPYO)
 INTRA_RE = re.compile(_INTRA)
 
 
@@ -59,6 +62,7 @@ class Citation:
     span: tuple[int, int] = field(default_factory=lambda: (0, 0))
     relative: str = ""         # "같은법", "같은조" 등 문장 내 선행 참조 해석용
     is_junyo: bool = False     # "준용한다"로 끌어쓴 인용(준용)인지 — 단순 인용과 구분
+    byeolpyo: str = ""         # 별표·별지서식 인용 시 표기(예: "별표 1", "별지 제40호서식")
 
 
 # Citation.relative에 기록되는 지시적 참조 토큰 (공백 제거 정규화)
@@ -166,6 +170,13 @@ def _resolve_relative_citations(citations: list[Citation], text: str) -> None:
                 bracket = _last_bracket_law(text, sent_start, cite.span[0])
                 if bracket:
                     cite.law_name = bracket
+
+
+def _byeolpyo_label(kind: str, num: str, sub: str) -> str:
+    """별표/별지 인용을 표준 표기로. 별지는 'N호서식', 별표는 'N(의M)'."""
+    if kind == "별지":
+        return f"별지 제{num}호서식"
+    return f"별표 {num}" + (f"의{sub}" if sub else "")
 
 
 def parse_citations(text: str) -> list[Citation]:
@@ -366,6 +377,18 @@ def parse_citations(text: str) -> list[Citation]:
             hang=m.group(3) or "",
             ho=m.group(4) or "",
             mok=m.group(5) or "",
+            span=m.span(),
+        ))
+
+    # 5.7. 별표·별지서식 인용 (INTRA보다 먼저 — '별지 제40호서식'의 '제40호' 오탐 방지)
+    for m in BYEOLPYO_RE.finditer(text):
+        if m.span() in seen or _is_inside(m.span(), seen):
+            continue
+        seen.add(m.span())
+        results.append(Citation(
+            raw=m.group(0).strip(),
+            jo="",
+            byeolpyo=_byeolpyo_label(m.group(1), m.group(2), m.group(3) or ""),
             span=m.span(),
         ))
 

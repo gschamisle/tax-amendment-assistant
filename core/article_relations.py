@@ -13,6 +13,7 @@ LLM 교차검증은 별도 단계(선택)로 둔다.
 """
 from __future__ import annotations
 
+from core.byeolpyo import cited_byeolpyo
 from core.citation_graph import back_citation_hits, graph_available
 from core.citation_parser import effective_law_name, parse_citations
 from core.parallel_matrix import matrix_available, normalize_jo, parallel_hits
@@ -161,4 +162,5 @@ def analyze_article_relations(
         "back_cited": _back_rows(law_name, jo),
         "parallel": _parallel_rows(law_name, jo),
         "byeolpyo": _byeolpyo_rows(law_name, jo),
+        "cited_byeolpyo": cited_byeolpyo(article_text),
     }

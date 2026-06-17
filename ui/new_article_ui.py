@@ -376,14 +376,18 @@ def render(law_api_key: str, openai_api_key: str) -> None:
             _stale_expanders(stale)
 
     with st.container(border=True):
-        st.markdown('<div class="mofe-subheader">②-2 재사용 조번호를 관련 조문으로 둔 별표</div>', unsafe_allow_html=True)
+        st.markdown('<div class="mofe-subheader">②-2 별표 연관</div>', unsafe_allow_html=True)
+        cited_bp = result.get("cited_byeolpyo", [])
+        if cited_bp:
+            st.markdown("**신설 조문안이 인용하는 별표**: " + ", ".join(f"`{b}`" for b in cited_bp))
         bps = result.get("byeolpyo", [])
         if not result["graph_ok"]:
-            st.info("그래프 빌드 후 사용 가능합니다.")
+            st.info("그래프 빌드 후 재사용 번호 관련 별표 조회가 가능합니다.")
         elif not bps:
-            st.success("재사용 번호를 관련 조문으로 둔 별표 없음")
+            if not cited_bp:
+                st.success("재사용 번호를 관련 조문으로 둔 별표 없음")
         else:
-            st.warning(f"⚠️ 별표 {len(bps)}건 — 신설 제도에 맞춰 별표 동반 개정 여부 검토")
+            st.warning(f"⚠️ 재사용 번호를 '관련 조문'으로 둔 별표 {len(bps)}건 — 신설 제도에 맞춰 별표 동반 개정 검토")
             for bp in bps:
                 st.markdown(f"- **{bp['별표']}** {bp['제목']}  ({bp['법령명']}) — 대상: {', '.join(bp['대상'])}")
 

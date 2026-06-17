@@ -183,13 +183,17 @@ def render(law_api_key: str, openai_api_key: str) -> None:
 
     # ── ⑤ 관련 별표 ──────────────────────────────────────────────────────────
     with st.container(border=True):
-        st.markdown('<div class="mofe-subheader">📑 ⑤ 관련 별표 (이 조문을 \'관련 조문\'으로 둔 별표)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="mofe-subheader">📑 ⑤ 관련 별표</div>', unsafe_allow_html=True)
+        cited_bp = result.get("cited_byeolpyo", [])
+        if cited_bp:
+            st.markdown("**이 조문이 인용하는 별표** (별표 개정 시 이 조문 영향): "
+                        + ", ".join(f"`{b}`" for b in cited_bp))
         byeolpyo = result.get("byeolpyo", [])
         if not result["graph_ok"]:
-            st.info("그래프 빌드 후 사용 가능합니다.")
+            st.info("그래프 빌드 후 역방향(이 조문을 관련조문으로 둔 별표) 조회가 가능합니다.")
         elif byeolpyo:
-            st.warning(f"⚠️ {len(byeolpyo)}건 — 조문 개정 시 별표 동반 개정 여부를 검토하세요")
+            st.warning(f"⚠️ 이 조문을 '관련 조문'으로 둔 별표 {len(byeolpyo)}건 — 조문 개정 시 별표 동반 개정 검토")
             for bp in byeolpyo:
                 st.markdown(f"- **{bp['별표']}** {bp['제목']}  ({bp['법령명']})")
-        else:
+        elif not cited_bp:
             st.success("관련 별표 없음")
