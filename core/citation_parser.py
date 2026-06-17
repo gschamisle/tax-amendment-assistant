@@ -22,6 +22,10 @@ _RANGE = r"제(\d+)(항|호|목)(?:부터|에서)\s*제(\d+)(항|호|목)까지"
 _ARTICLE_RANGE = r"제(\d+)조(?:의(\d+))?(?:부터|에서)\s*제(\d+)조(?:의(\d+))?까지"
 # 조 내 항 범위 인용: 제X조의Y제A항부터 제B항까지 (항·부터 사이 선택적 공백 허용)
 _ARTICLE_HANG_RANGE = r"제(\d+)조(?:의(\d+))?제(\d+)항\s*(?:부터|에서)\s*제(\d+)항까지"
+# 구식 조 범위 표현 '내지': 제X조 내지 제Y조 (= 제X조부터 제Y조까지)
+_ARTICLE_RANGE_NAEJI = r"제(\d+)조(?:의(\d+))?\s*내지\s*제(\d+)조(?:의(\d+))?"
+# 구식 항·호·목 범위 표현 '내지': 제X항 내지 제Y항
+_RANGE_NAEJI = r"제(\d+)(항|호|목)\s*내지\s*제(\d+)(항|호|목)"
 # 동일 조 내 단독 항·호 인용: "제3항", "제2항과 제3항", "각 호" 등
 _INTRA = r"제(\d+)(항|호|목)(?!까지)"
 
@@ -34,6 +38,8 @@ DIRECT_RE = re.compile(_DIRECT)
 RANGE_RE = re.compile(_RANGE)
 ARTICLE_RANGE_RE = re.compile(_ARTICLE_RANGE)
 ARTICLE_HANG_RANGE_RE = re.compile(_ARTICLE_HANG_RANGE)
+ARTICLE_RANGE_NAEJI_RE = re.compile(_ARTICLE_RANGE_NAEJI)
+RANGE_NAEJI_RE = re.compile(_RANGE_NAEJI)
 INTRA_RE = re.compile(_INTRA)
 
 
@@ -274,11 +280,45 @@ def parse_citations(text: str) -> list[Citation]:
             span=m.span(),
         ))
 
+    # 3.5. 구식 조 범위: 제X조 내지 제Y조 (= 제X조부터 제Y조까지)
+    for m in ARTICLE_RANGE_NAEJI_RE.finditer(text):
+        if m.span() in seen or _is_inside(m.span(), seen):
+            continue
+        if _preceded_by_buchik(text, m.start()):
+            continue
+        seen.add(m.span())
+        results.append(Citation(
+            raw=m.group(0),
+            jo=m.group(1),
+            jo_sub=m.group(2) or "",
+            is_range=True,
+            range_end_jo=m.group(3),
+            range_end_jo_sub=m.group(4) or "",
+            span=m.span(),
+        ))
+
     # 4. 항/호/목 범위
     for m in RANGE_RE.finditer(text):
         if m.span() in seen:
             continue
         if any(s[0] <= m.start() and m.end() <= s[1] for s in seen):
+            continue
+        seen.add(m.span())
+        is_hang = m.group(2) == "항"
+        results.append(Citation(
+            raw=m.group(0),
+            jo="",
+            hang=m.group(1) if is_hang else "",
+            hang_end=m.group(3) if is_hang else "",
+            ho=m.group(1) if m.group(2) == "호" else "",
+            mok=m.group(1) if m.group(2) == "목" else "",
+            is_range=True,
+            span=m.span(),
+        ))
+
+    # 4.3. 구식 항·호·목 범위: 제X항 내지 제Y항 (= 제X항부터 제Y항까지)
+    for m in RANGE_NAEJI_RE.finditer(text):
+        if m.span() in seen or _is_inside(m.span(), seen):
             continue
         seen.add(m.span())
         is_hang = m.group(2) == "항"
@@ -377,6 +417,41 @@ def _tag_junyo(citations: list[Citation], text: str) -> None:
             cite.is_junyo = True
 
 
+def _article_range_covers(c: "Citation", target_jo: str, target_jo_sub: str = "") -> bool:
+    """조문 범위 인용(c)이 target 조(·가지번호)를 포함하는지 판정.
+
+    - 동일 기준조의 가지번호 범위(예: 제3조의2 내지 제3조의5)면 jo_sub 범위로 판정.
+    - 그 밖(기준조 단위 범위, 예: 제2조 내지 제8조)은 조 단위로 start<=tgt<=end 판정하며
+      그 사이의 가지번호 조문(제5조의2 등)도 포함으로 본다.
+    원칙: 애매하면 포함하고 호출부에서 via_range 플래그로 사람 검토를 유도한다.
+    """
+    if not (c.is_range and c.range_end_jo):
+        return False
+    try:
+        start_jo = int(c.jo)
+        end_jo = int(c.range_end_jo)
+        tgt_jo = int(target_jo)
+    except (ValueError, TypeError):
+        return False
+
+    # 동일 기준조의 가지번호 범위: 제N조의A ~ 제N조의B
+    if start_jo == end_jo and (c.jo_sub or c.range_end_jo_sub):
+        if tgt_jo != start_jo:
+            return False
+        if not target_jo_sub:
+            return True  # 기준조 자체는 의도가 모호 — 포함으로 본다
+        try:
+            a = int(c.jo_sub) if c.jo_sub else 0
+            b = int(c.range_end_jo_sub) if c.range_end_jo_sub else a
+            t = int(target_jo_sub)
+        except ValueError:
+            return True
+        return a <= t <= b
+
+    # 기준조 단위 범위: 가지번호 조문도 두 기준조 사이면 포함
+    return start_jo <= tgt_jo <= end_jo
+
+
 def find_back_citations(
     law_data: dict,
     target_jo: str,
@@ -410,10 +485,17 @@ def find_back_citations(
                 # 미해석 '같은 법' 계열은 종전대로 동일 법령으로 간주
                 if not cite_law.startswith("같은") and _norm_law(cite_law) != _norm_law(source_law):
                     continue
-            if c.jo != target_jo:
-                continue
-            if target_jo_sub and c.jo_sub != target_jo_sub:
-                continue
+            via_range = False
+            if c.is_range and c.range_end_jo:
+                # 조문 범위 인용(제X조부터/내지 제Y조)은 펼쳐서 포함 여부 판정
+                if not _article_range_covers(c, target_jo, target_jo_sub):
+                    continue
+                via_range = True
+            else:
+                if c.jo != target_jo:
+                    continue
+                if target_jo_sub and c.jo_sub != target_jo_sub:
+                    continue
             if target_hang and c.hang:
                 if c.hang_end:
                     # 항 범위 인용: target_hang이 [hang, hang_end] 안에 있는지 확인
@@ -435,6 +517,7 @@ def find_back_citations(
                 "jo_sub": c.jo_sub,
                 "hang": c.hang,
                 "hang_end": c.hang_end,
+                "via_range": via_range,
             })
         if matching:
             results.append({

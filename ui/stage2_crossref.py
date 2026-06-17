@@ -223,6 +223,8 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                                 hang_label = f" **(제{hang}항 인용)**"
                             else:
                                 hang_label = ""
+                            if isinstance(cite, dict) and cite.get("via_range"):
+                                hang_label += " 🔎 **범위 인용 전개 — 포함 검토 필요**"
                             if jo_cite:
                                 cite_url = _law_url(law_name_back, f"제{jo_cite}조")
                             else:

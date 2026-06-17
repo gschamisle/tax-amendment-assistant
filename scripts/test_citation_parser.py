@@ -5,6 +5,7 @@ import sys
 
 from core.citation_parser import (
     Citation,
+    _article_range_covers,
     base_law_name,
     effective_law_name,
     find_back_citations,
@@ -98,11 +99,81 @@ def test_find_back_citations_deictic() -> None:
     assert [h["조번호"] for h in hits] == ["144"], hits
 
 
+def test_naeji_range_parsing() -> None:
+    # 구식 조 범위 '내지' — 단일 범위 인용으로 파싱되고 양끝 조문은 따로 안 잡힘
+    cites = parse_citations("제2조 내지 제8조의 규정을 준용한다.")
+    ranges = [c for c in cites if c.is_range and c.range_end_jo]
+    assert len(ranges) == 1, [(c.raw, c.jo, c.range_end_jo) for c in cites]
+    r = ranges[0]
+    assert (r.jo, r.range_end_jo) == ("2", "8"), (r.jo, r.range_end_jo)
+    # 끝점이 DIRECT로 중복 포착되지 않음 (범위 1건뿐)
+    assert len([c for c in cites if c.jo in ("2", "8")]) == 1
+
+    # 가지번호 내지: 제3조의2 내지 제3조의5
+    c = _one("제3조의2 내지 제3조의5까지 적용한다.", jo="3", is_range=True)
+    assert (c.jo_sub, c.range_end_jo, c.range_end_jo_sub) == ("2", "3", "5")
+
+    # 항 범위 내지: 제1항 내지 제3항 → hang/hang_end
+    c = _one("제127조제1항 제2호 및 제1항 내지 제3항", hang="1", hang_end="3")
+    assert c.is_range and c.hang == "1" and c.hang_end == "3"
+
+    # 부칙 앞 '내지' 범위는 본문 조문으로 잡지 않음
+    assert not any(
+        c.is_range and c.range_end_jo
+        for c in parse_citations("법률 제6538호 부칙 제2조 내지 제8조")
+    )
+
+
+def test_article_range_covers() -> None:
+    # 기준조 단위 범위: 제2조~제8조는 제5조, 그 사이 가지번호(제5조의2)도 포함
+    r = Citation(raw="", jo="2", is_range=True, range_end_jo="8")
+    assert _article_range_covers(r, "5")
+    assert _article_range_covers(r, "5", "2")   # 제5조의2도 사이값 → 포함
+    assert not _article_range_covers(r, "9")
+    assert not _article_range_covers(r, "1")
+
+    # 동일 기준조 가지번호 범위: 제3조의2~제3조의5
+    sub = Citation(raw="", jo="3", jo_sub="2", is_range=True,
+                   range_end_jo="3", range_end_jo_sub="5")
+    assert _article_range_covers(sub, "3", "3")
+    assert not _article_range_covers(sub, "3", "6")
+    assert not _article_range_covers(sub, "4")
+
+    # 범위가 아니면 False
+    assert not _article_range_covers(Citation(raw="", jo="2"), "2")
+
+
+def test_range_expansion_back_citations() -> None:
+    law = {
+        "법령명": "조세특례제한법",
+        "조문목록": [
+            {"조번호": "10", "제목": "부터까지", "내용": "제2조부터 제8조까지의 규정에 따른다."},
+            {"조번호": "11", "제목": "내지", "내용": "제2조 내지 제8조를 준용한다."},
+            {"조번호": "12", "제목": "무관", "내용": "제20조에 따른다."},
+        ],
+    }
+    # target 제5조는 두 범위(부터까지·내지) 안에 있으므로 10·11이 잡혀야 한다
+    hits = find_back_citations(law, "5")
+    nums = sorted(h["조번호"] for h in hits)
+    assert nums == ["10", "11"], nums
+    # 범위로 잡힌 건 via_range 플래그가 선다
+    for h in hits:
+        assert any(cite["via_range"] for cite in h["인용"]), h
+
+    # target 제20조는 단일 인용(12)만, 범위(10·11)에는 미포함
+    hits20 = find_back_citations(law, "20")
+    assert [h["조번호"] for h in hits20] == ["12"], hits20
+    assert not hits20[0]["인용"][0]["via_range"]
+
+
 def main() -> int:
     test_deictic_parsing()
     test_deictic_resolution()
     test_citation_matches_cross_law()
     test_find_back_citations_deictic()
+    test_naeji_range_parsing()
+    test_article_range_covers()
+    test_range_expansion_back_citations()
     print("ALL OK")
     return 0
 
