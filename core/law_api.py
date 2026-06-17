@@ -7,6 +7,7 @@ import requests
 import xml.etree.ElementTree as ET
 from typing import Any
 from config import LAW_API_KEY, LAW_SEARCH_URL, LAW_SERVICE_URL, OPENAI_API_KEY
+from core.citation_parser import parse_citations
 
 _IMG_SRC_RE = re.compile(r'<img[^>]*src="([^"]*flDownload[^"]*)"[^>]*>', re.IGNORECASE)
 _IMG_RE = re.compile(r'<img[^>]*alt="([^"]*)"[^>]*>', re.IGNORECASE)
@@ -178,6 +179,8 @@ def get_law_text(law_mst: str, api_key: str = "", openai_key: str = "") -> dict[
             "제목": title,
             "내용": "\n".join(parts),
         })
+
+    byeolpyo = _extract_byeolpyo(root)
     digest = hashlib.sha256(
         "\n".join(
             f"{a['조번호']}|{a['제목']}|{a['내용']}"
@@ -190,9 +193,49 @@ def get_law_text(law_mst: str, api_key: str = "", openai_key: str = "") -> dict[
         "시행일자": (root.findtext("기본정보/시행일자", "") or "").strip(),
         "공포일자": (root.findtext("기본정보/공포일자", "") or "").strip(),
         "조문목록": articles,
+        "별표목록": byeolpyo,
         "article_count": len(articles),
         "content_hash": digest,
     }
+
+
+def _byeolpyo_number(no: str, sub: str) -> str:
+    """별표번호('0001')·가지번호('00') → '1' / '1의2' 형태로 정규화."""
+    try:
+        base = str(int(no))
+    except (ValueError, TypeError):
+        base = str(no).strip()
+    try:
+        sub_n = int(sub)
+    except (ValueError, TypeError):
+        sub_n = 0
+    return f"{base}의{sub_n}" if sub_n else base
+
+
+def _extract_byeolpyo(root: "ET.Element") -> list[dict[str, Any]]:
+    """법령 XML의 별표단위 → 별표 목록.
+
+    별표제목에 '(제7조제4호 관련)'처럼 관련 조문이 명시돼 있어, parse_citations로
+    관련 조문을 추출한다(OCR 불필요). 본문 표는 파일 링크로만 보관한다(Tier 2 영역).
+    """
+    items: list[dict[str, Any]] = []
+    for unit in root.findall(".//별표단위"):
+        title = (unit.findtext("별표제목") or "").strip()
+        related = [
+            {"jo": c.jo, "jo_sub": c.jo_sub, "hang": c.hang, "ho": c.ho, "law_name": c.law_name}
+            for c in parse_citations(title)
+            if c.jo
+        ]
+        items.append({
+            "번호": _byeolpyo_number(unit.findtext("별표번호") or "", unit.findtext("별표가지번호") or ""),
+            "구분": (unit.findtext("별표구분") or "별표").strip(),
+            "제목": title,
+            "관련조문": related,
+            "hwp": (unit.findtext("별표서식파일링크") or "").strip(),
+            "pdf": (unit.findtext("별표서식PDF파일링크") or "").strip(),
+            "img": (unit.findtext("별표서식이미지파일링크") or "").strip(),
+        })
+    return items
 
 
 def get_article(law_mst: str, jo_no: str, api_key: str = "", openai_key: str = "") -> str:

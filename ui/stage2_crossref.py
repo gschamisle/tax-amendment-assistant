@@ -3,6 +3,7 @@ import re
 import streamlit as st
 from core.citation_parser import Citation, parse_citations, detect_number_shift, find_back_citations
 from core.law_network import all_law_scope_entries, candidate_scope_entries, scan_back_citations
+from core.byeolpyo import related_byeolpyo, byeolpyo_label
 
 _JO_URL_RE = re.compile(r"제(?:(\d+)의(\d+)조|(\d+)조(?:의(\d+))?)")
 
@@ -200,6 +201,8 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                         )
                         st.session_state["s2_scan_errors"] = scan_errors
                 st.session_state["s2_back_citations"] = back
+                # 관련 별표: 별표제목에 '(제X조 관련)'으로 이 조문을 둔 별표 (현재 법령 기준)
+                st.session_state["s2_byeolpyo"] = related_byeolpyo(law_data, jo, jo_sub)
 
         if "s2_back_citations" in st.session_state:
             scan_errors = st.session_state.get("s2_scan_errors", [])
@@ -245,3 +248,23 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                                 f"**인용 구문**: `{raw}`{hang_label} &nbsp; "
                                 f"[원문 확인]({cite_url})"
                             )
+
+        byeolpyo = st.session_state.get("s2_byeolpyo", [])
+        if byeolpyo:
+            st.warning(
+                f"📑 관련 별표 {len(byeolpyo)}건 — 이 조문을 '관련 조문'으로 둔 별표입니다. "
+                "조문 개정 시 별표 동반 개정 여부를 검토하세요."
+            )
+            for bp in byeolpyo:
+                related = ", ".join(
+                    "제{jo}조{sub}".format(jo=r["jo"], sub=(f"의{r['jo_sub']}" if r.get("jo_sub") else ""))
+                    + (f"제{r['ho']}호" if r.get("ho") else "")
+                    for r in bp.get("관련", [])
+                )
+                links = []
+                if bp.get("hwp"):
+                    links.append(f"[HWP](https://www.law.go.kr{bp['hwp']})")
+                if bp.get("pdf"):
+                    links.append(f"[PDF](https://www.law.go.kr{bp['pdf']})")
+                link_str = (" &nbsp; " + " · ".join(links)) if links else ""
+                st.markdown(f"- **{byeolpyo_label(bp)}** {bp.get('제목','')}  〔관련: {related}〕{link_str}")
