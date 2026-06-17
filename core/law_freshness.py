@@ -15,7 +15,13 @@ def monitored_law_names() -> list[str]:
     names: set[str] = set(PARALLEL_LAWS.keys())
     for vals in PARALLEL_LAWS.values():
         names.update(vals)
-    return sorted(names)
+    # 별표 다수가 시행규칙에 있으므로(인용 그래프 별표 스코프), 각 법률의 시행규칙도
+    # 추적·그래프 스코프에 포함한다. PARALLEL_LAWS는 병행 의미라 시행규칙을 두지 않는다.
+    rules = {
+        f"{n} 시행규칙" for n in names
+        if not (n.endswith("시행령") or n.endswith("시행규칙"))
+    }
+    return sorted(names | rules)
 
 
 def _resolve_mst(law_name: str, law_api_key: str) -> str:

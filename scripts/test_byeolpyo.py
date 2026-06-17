@@ -61,6 +61,20 @@ def test_related_byeolpyo() -> None:
     assert len(related_byeolpyo(law_data2, "118", "15")) == 1
 
 
+def test_byeolpyo_deictic_resolution() -> None:
+    # 시행규칙 별표제목의 '법 제55조 관련' → 모법(소득세법)으로 해석
+    xml = ("<법령><별표단위><별표번호>0003</별표번호><별표가지번호>00</별표가지번호>"
+           "<별표구분>별표</별표구분><별표제목>세율표(법 제55조 관련)</별표제목></별표단위></법령>")
+    r = _extract_byeolpyo(ET.fromstring(xml), "소득세법 시행규칙")[0]["관련조문"][0]
+    assert (r["jo"], r["law_name"]) == ("55", "소득세법"), r
+
+    # 같은 법(시행규칙 자신) 인용은 빈 문자열로 남겨 동일법 매칭 유지
+    xml2 = ("<법령><별표단위><별표번호>0001</별표번호><별표가지번호>00</별표가지번호>"
+            "<별표구분>별표</별표구분><별표제목>의료취약지역(제7조 관련)</별표제목></별표단위></법령>")
+    r2 = _extract_byeolpyo(ET.fromstring(xml2), "소득세법 시행규칙")[0]["관련조문"][0]
+    assert r2["law_name"] == "", r2
+
+
 def test_byeolpyo_forward_parsing() -> None:
     from core.byeolpyo import cited_byeolpyo
     from core.citation_parser import parse_citations
@@ -81,6 +95,7 @@ def test_byeolpyo_forward_parsing() -> None:
 def main() -> int:
     test_extract_byeolpyo()
     test_related_byeolpyo()
+    test_byeolpyo_deictic_resolution()
     test_byeolpyo_forward_parsing()
     print("ALL OK")
     return 0
