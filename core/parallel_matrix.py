@@ -29,8 +29,13 @@ def normalize_jo(jo_no: str) -> str:
     return f"{jo}의{sub}" if sub else jo
 
 
+def _normalize_law(name: str) -> str:
+    """법령명 비교용 정규화 (공백·ㆍ·· 제거) — law_network와 동일 규칙."""
+    return str(name).replace(" ", "").replace("ㆍ", "").replace("·", "").strip()
+
+
 def matrix_key(law_name: str, jo_no: str) -> str:
-    return f"{str(law_name).strip()}|{normalize_jo(jo_no)}"
+    return f"{_normalize_law(law_name)}|{normalize_jo(jo_no)}"
 
 
 @functools.lru_cache(maxsize=1)
@@ -45,7 +50,14 @@ def _load() -> tuple[dict[str, list[dict]], dict]:
         "semantic_pairs": data.get("semantic_pairs", []),
         "entry_count": data.get("entry_count", 0),
     }
-    return data.get("entries", {}), meta
+    # 저장 키의 법령명 표기(공백 포함)와 조회 표기 차이로 매칭이 비는 것을 막기 위해
+    # 로드 시 법령명 부분을 정규화해 재키잉한다.
+    raw_entries = data.get("entries", {})
+    entries: dict[str, list[dict]] = {}
+    for key, value in raw_entries.items():
+        law, sep, jo = key.rpartition("|")
+        entries[f"{_normalize_law(law)}|{jo}" if sep else key] = value
+    return entries, meta
 
 
 def matrix_available() -> bool:

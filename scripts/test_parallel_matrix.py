@@ -58,6 +58,18 @@ def main() -> int:
     # 조번호 표기 정규화 조회 ("제27조의2"로도 동일 결과)
     assert parallel_hits("법인세법", "제27조의2") == sample
 
+    # P1②: 법령명 표기(공백·ㆍ) 정규화 — despace 조회도 동일 키
+    from core.parallel_matrix import _load, _normalize_law, matrix_key
+    assert matrix_key("상속세 및 증여세법", "45") == matrix_key("상속세및증여세법", "45")
+    entries, _ = _load()
+    sang_prefix = _normalize_law("상속세 및 증여세법") + "|"
+    sang_keys = [k for k in entries if k.startswith(sang_prefix)]
+    if sang_keys:
+        jo = sang_keys[0].split("|", 1)[1]
+        spaced = parallel_hits("상속세 및 증여세법", jo)
+        assert spaced, jo
+        assert parallel_hits("상속세및증여세법", jo) == spaced
+
     # 3단계 이후: semantic_llm 레이어 + 전수 판별 쌍 메타
     n_semantic = 0
     if meta.get("stage", 0) >= 3:

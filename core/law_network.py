@@ -5,7 +5,12 @@ import functools
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from config import LAW_API_KEY, PARALLEL_LAWS
-from core.citation_parser import Citation, effective_law_name, parse_citations
+from core.citation_parser import (
+    Citation,
+    _article_range_covers,
+    effective_law_name,
+    parse_citations,
+)
 from core.law_api import get_law_text, list_all_laws, search_laws
 
 
@@ -27,11 +32,23 @@ def subordinate_law_names(law_name: str) -> list[str]:
     return [f"{name} 시행령", f"{name} 시행규칙"]
 
 
+def _parallel_law_names(law_name: str) -> list[str]:
+    """PARALLEL_LAWS에서 병행 법령군을 정규화 매칭으로 찾는다.
+
+    설정 키와 입력 법령명의 공백·ㆍ 표기 차이로 병행 스코프가 통째 비는 것을 막는다.
+    """
+    target = normalize_law_name(law_name)
+    for key, parallels in PARALLEL_LAWS.items():
+        if normalize_law_name(key) == target:
+            return parallels
+    return []
+
+
 def related_law_names(law_name: str) -> list[str]:
     """기준 법령, 병행 법령, 각 하위법령을 포함한 후보 법령군."""
     names: list[str] = [law_name]
     names.extend(subordinate_law_names(law_name))
-    for parallel in PARALLEL_LAWS.get(law_name, []):
+    for parallel in _parallel_law_names(law_name):
         names.append(parallel)
         names.extend(subordinate_law_names(parallel))
     return list(dict.fromkeys(n for n in names if n))
@@ -75,18 +92,16 @@ def _citation_matches(
     if normalize_law_name(cite_law) != normalize_law_name(target_law_name):
         return False
 
-    if citation.jo != target_jo:
-        try:
-            if not (
-                citation.range_end_jo
-                and int(citation.jo) <= int(target_jo) <= int(citation.range_end_jo)
-            ):
-                return False
-        except ValueError:
+    if citation.is_range and citation.range_end_jo:
+        # 조문 범위는 가지번호 포함까지 펼쳐 판정 (find_back_citations와 동일 규칙).
+        # 통조 범위(제2조~제8조)는 그 사이 가지번호 조문(제5조의2)도 포함한다.
+        if not _article_range_covers(citation, target_jo, target_jo_sub):
             return False
-
-    if target_jo_sub and citation.jo_sub != target_jo_sub:
-        return False
+    else:
+        if citation.jo != target_jo:
+            return False
+        if target_jo_sub and citation.jo_sub != target_jo_sub:
+            return False
 
     if target_hang and citation.hang:
         if citation.hang_end:
@@ -138,6 +153,7 @@ def scan_back_citations(
                     "jo_sub": c.jo_sub,
                     "hang": c.hang,
                     "hang_end": c.hang_end,
+                    "via_range": bool(c.is_range and c.range_end_jo),
                 }
                 for c in citations
                 if _citation_matches(c, law_name, target_law_name, target_jo, target_jo_sub, target_hang)

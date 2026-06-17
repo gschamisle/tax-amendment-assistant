@@ -12,7 +12,7 @@ from core.citation_parser import (
     parse_citations,
     resolve_deictic_law,
 )
-from core.law_network import _citation_matches
+from core.law_network import _citation_matches, related_law_names
 
 
 def _one(text: str, **attrs) -> Citation:
@@ -166,6 +166,30 @@ def test_range_expansion_back_citations() -> None:
     assert not hits20[0]["인용"][0]["via_range"]
 
 
+def test_citation_matches_range_subarticle() -> None:
+    # P1①: 통조 범위(제2조~제8조)가 가지번호 타깃(제5조의2)도 포함 — law_network 일관성
+    c = parse_citations("제2조부터 제8조까지를 준용한다.")[0]
+    assert _citation_matches(c, "소득세법", "소득세법", "5", "2")
+    assert _citation_matches(c, "소득세법", "소득세법", "5")
+    assert not _citation_matches(c, "소득세법", "소득세법", "9")
+    # 내지 표현도 동일하게 동작
+    c2 = parse_citations("제2조 내지 제8조")[0]
+    assert _citation_matches(c2, "소득세법", "소득세법", "5", "2")
+    # 비범위 단일 인용은 정확 일치만
+    c3 = parse_citations("제5조")[0]
+    assert _citation_matches(c3, "소득세법", "소득세법", "5")
+    assert not _citation_matches(c3, "소득세법", "소득세법", "5", "2")
+
+
+def test_related_law_names_normalized() -> None:
+    # P1③: 공백 없는 법령명 표기로도 병행 법령군이 채워진다
+    rel = {n.replace(" ", "") for n in related_law_names("상속세및증여세법")}
+    assert "법인세법" in rel and "소득세법" in rel, rel
+    # 정상 표기도 동일하게 동작
+    rel2 = {n.replace(" ", "") for n in related_law_names("상속세 및 증여세법")}
+    assert "법인세법" in rel2 and "소득세법" in rel2, rel2
+
+
 def main() -> int:
     test_deictic_parsing()
     test_deictic_resolution()
@@ -174,6 +198,8 @@ def main() -> int:
     test_naeji_range_parsing()
     test_article_range_covers()
     test_range_expansion_back_citations()
+    test_citation_matches_range_subarticle()
+    test_related_law_names_normalized()
     print("ALL OK")
     return 0
 
