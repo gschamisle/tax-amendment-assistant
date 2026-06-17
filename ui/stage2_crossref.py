@@ -182,11 +182,13 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                         back = find_back_citations(law_data, jo, jo_sub, target_hang)
                         for item in back:
                             item["법령명"] = law_name
+                        st.session_state["s2_scan_errors"] = []
                     else:
                         if scope_label == "전체 법령목록":
                             entries = all_law_scope_entries(law_api_key, max_pages=int(max_all_pages))
                         else:
                             entries = candidate_scope_entries(law_name, law_api_key)
+                        scan_errors: list[dict] = []
                         back = scan_back_citations(
                             entries,
                             target_law_name=law_name,
@@ -194,10 +196,20 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                             target_jo_sub=jo_sub,
                             target_hang=target_hang,
                             law_api_key=law_api_key,
+                            errors=scan_errors,
                         )
+                        st.session_state["s2_scan_errors"] = scan_errors
                 st.session_state["s2_back_citations"] = back
 
         if "s2_back_citations" in st.session_state:
+            scan_errors = st.session_state.get("s2_scan_errors", [])
+            if scan_errors:
+                names = ", ".join(e.get("법령명", "?") for e in scan_errors[:5])
+                more = f" 외 {len(scan_errors) - 5}건" if len(scan_errors) > 5 else ""
+                st.error(
+                    f"⚠️ {len(scan_errors)}개 법령 조회 실패({names}{more}) — "
+                    "해당 법령의 인용은 검색에서 빠졌습니다. 잠시 후 다시 검색하세요."
+                )
             back = st.session_state["s2_back_citations"]
             if not back:
                 st.success("이 조문을 인용하는 다른 조항 없음")

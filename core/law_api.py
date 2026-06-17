@@ -2,6 +2,7 @@
 import base64
 import hashlib
 import re
+import time
 import requests
 import xml.etree.ElementTree as ET
 from typing import Any
@@ -129,9 +130,21 @@ def get_law_text(law_mst: str, api_key: str = "", openai_key: str = "") -> dict[
         "MST": law_mst,
         "type": "XML",
     }
-    resp = requests.get(LAW_SERVICE_URL, params=params, timeout=15)
-    resp.raise_for_status()
-    root = ET.fromstring(resp.content)
+    # 일시적 API 오류로 법령이 통째 누락되는 것을 막기 위해 가벼운 재시도.
+    last_exc: Exception | None = None
+    root = None
+    for attempt in range(3):
+        try:
+            resp = requests.get(LAW_SERVICE_URL, params=params, timeout=15)
+            resp.raise_for_status()
+            root = ET.fromstring(resp.content)
+            break
+        except Exception as exc:
+            last_exc = exc
+            if attempt < 2:
+                time.sleep(1.5 * (attempt + 1))
+    if root is None:
+        raise last_exc if last_exc else RuntimeError("법령 조회 실패")
 
     law_name = root.findtext("기본정보/법령명_한글", "")
     articles: list[dict[str, str]] = []

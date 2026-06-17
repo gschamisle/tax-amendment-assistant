@@ -107,8 +107,13 @@ def scan_back_citations(
     target_hang: str = "",
     law_api_key: str = "",
     max_workers: int = 6,
+    errors: list[dict] | None = None,
 ) -> list[dict]:
-    """여러 법령에서 target 조문을 인용하는 조항을 찾는다."""
+    """여러 법령에서 target 조문을 인용하는 조항을 찾는다.
+
+    조회에 실패한 법령은 조용히 빠뜨리지 않고 errors(전달 시)에 기록한다 —
+    누락 방지 도구에서 'API 실패'가 '인용 없음'으로 오인되는 것을 막는다.
+    """
     if not law_entries:
         return []
 
@@ -118,7 +123,9 @@ def scan_back_citations(
         law_name = entry.get("법령명", "")
         try:
             data = _cached_law_text(entry["MST"], law_api_key or LAW_API_KEY)
-        except Exception:
+        except Exception as exc:
+            if errors is not None:
+                errors.append({"법령명": law_name, "MST": entry.get("MST", ""), "error": str(exc)})
             return []
         found: list[dict] = []
         for article in data.get("조문목록", []):

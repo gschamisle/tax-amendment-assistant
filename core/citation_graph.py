@@ -110,7 +110,8 @@ def back_citation_hits(
                 "법령명": src_law,
                 "조번호": src_jo,
                 "제목": edge.get("source_title", ""),
-                "인용": [{"raw": edge.get("cite_raw", "")}],
+                "인용": [{"raw": edge.get("cite_raw", ""), "via_range": bool(edge.get("via_range"))}],
                 "graph_source": True,
+                "via_range": bool(edge.get("via_range")),
             })
     return merged

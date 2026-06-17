@@ -63,6 +63,46 @@ def _format_target_ref(cite) -> str:
     return "".join(parts)
 
 
+# 한 인용에서 전개할 최대 조문 수 (병적으로 큰 범위 방어)
+_RANGE_EXPAND_CAP = 80
+
+
+def _expand_target_refs(cite) -> list[tuple[str, bool]]:
+    """인용을 (target_ref, via_range) 목록으로 전개한다.
+
+    조문 범위 인용(제X조부터/내지 제Y조)은 펼쳐서 조문별 ref를 만든다 —
+    그래프가 시작 조번호만 기록해 중간 조문 역인용을 놓치던 누락을 막는다.
+    비범위 인용은 종전대로 단일 ref.
+    """
+    base_ref = _format_target_ref(cite)
+    if not (cite.is_range and cite.range_end_jo):
+        return [(base_ref, False)]
+    try:
+        start_jo = int(cite.jo)
+        end_jo = int(cite.range_end_jo)
+    except (ValueError, TypeError):
+        return [(base_ref, False)]
+
+    # 동일 기준조의 가지번호 범위: 제N조의A ~ 제N조의B
+    if start_jo == end_jo and (cite.jo_sub or cite.range_end_jo_sub):
+        try:
+            a = int(cite.jo_sub) if cite.jo_sub else 2  # 가지번호는 '의2'부터
+            b = int(cite.range_end_jo_sub) if cite.range_end_jo_sub else a
+        except ValueError:
+            return [(base_ref, False)]
+        refs: list[tuple[str, bool]] = []
+        if not cite.jo_sub:
+            refs.append((f"제{start_jo}조", True))
+        for s in range(a, b + 1):
+            refs.append((f"제{start_jo}조의{s}", True))
+        return refs or [(base_ref, False)]
+
+    # 기준조 단위 범위: 제A조 ~ 제B조 (각 본조를 edge로; 중간 가지번호는 별도 한계)
+    if end_jo < start_jo or (end_jo - start_jo) > _RANGE_EXPAND_CAP:
+        return [(base_ref, False)]
+    return [(f"제{j}조", True) for j in range(start_jo, end_jo + 1)]
+
+
 def _resolve_mst(law_name: str, law_api_key: str) -> str:
     if _MANIFEST.is_file():
         data = json.loads(_MANIFEST.read_text(encoding="utf-8"))
@@ -108,15 +148,17 @@ def build_edges(law_api_key: str, source_laws: tuple[str, ...]) -> list[dict]:
                     continue
                 if not cite.jo:
                     continue
-                edges.append({
-                    "source_law": law_name,
-                    "source_jo": src_jo,
-                    "source_title": src_title,
-                    "target_law": target_law,
-                    "target_ref": _format_target_ref(cite),
-                    "cite_raw": cite.raw,
-                    "type": "direct",
-                })
+                for target_ref, via_range in _expand_target_refs(cite):
+                    edges.append({
+                        "source_law": law_name,
+                        "source_jo": src_jo,
+                        "source_title": src_title,
+                        "target_law": target_law,
+                        "target_ref": target_ref,
+                        "cite_raw": cite.raw,
+                        "type": "direct",
+                        "via_range": via_range,
+                    })
     return edges
 
 
