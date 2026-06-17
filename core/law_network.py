@@ -54,8 +54,26 @@ def related_law_names(law_name: str) -> list[str]:
     return list(dict.fromkeys(n for n in names if n))
 
 
+def _choose_entry(results: list[dict], name: str) -> tuple[dict | None, bool]:
+    """검색 결과에서 법령명 정확매칭을 고른다.
+
+    정확매칭이 없으면 첫 결과를 쓰되 fuzzy=True로 표시 — 호출부가 '엉뚱한 법령을
+    말없이 스캔'하지 않도록 경고할 수 있게 한다. 반환: (선택 결과 or None, fuzzy 여부).
+    """
+    exact = next((r for r in results if r.get("법령명") == name), None)
+    if exact:
+        return exact, False
+    if results:
+        return results[0], True
+    return None, False
+
+
 def resolve_law_entries(law_names: list[str], law_api_key: str = "") -> list[dict[str, str]]:
-    """법령명을 실제 MST가 포함된 검색 결과로 해석한다."""
+    """법령명을 실제 MST가 포함된 검색 결과로 해석한다.
+
+    정확매칭 실패로 유사 법령으로 대체한 항목은 entry['_fuzzy_from']에 요청 법령명을
+    남긴다(호출부가 사용자에게 매칭 주의를 표시할 수 있도록).
+    """
     entries: list[dict[str, str]] = []
     seen: set[str] = set()
     for name in law_names:
@@ -63,14 +81,15 @@ def resolve_law_entries(law_names: list[str], law_api_key: str = "") -> list[dic
             results = search_laws(name, law_api_key)
         except Exception:
             continue
-        exact = next((r for r in results if r.get("법령명") == name), None)
-        chosen = exact or (results[0] if results else None)
+        chosen, fuzzy = _choose_entry(results, name)
         if not chosen:
             continue
         key = chosen.get("MST") or chosen.get("법령명", "")
         if not key or key in seen:
             continue
         seen.add(key)
+        if fuzzy:
+            chosen = {**chosen, "_fuzzy_from": name}
         entries.append(chosen)
     return entries
 
@@ -136,11 +155,15 @@ def scan_back_citations(
 
     def _scan_one(entry: dict[str, str]) -> list[dict]:
         law_name = entry.get("법령명", "")
+        if entry.get("_fuzzy_from") and errors is not None:
+            errors.append({
+                "유형": "법령매칭주의", "법령명": law_name, "요청": entry["_fuzzy_from"],
+            })
         try:
             data = _cached_law_text(entry["MST"], law_api_key or LAW_API_KEY)
         except Exception as exc:
             if errors is not None:
-                errors.append({"법령명": law_name, "MST": entry.get("MST", ""), "error": str(exc)})
+                errors.append({"유형": "조회실패", "법령명": law_name, "MST": entry.get("MST", ""), "error": str(exc)})
             return []
         found: list[dict] = []
         for article in data.get("조문목록", []):

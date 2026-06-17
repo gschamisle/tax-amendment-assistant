@@ -206,12 +206,20 @@ def render(law_api_key: str, openai_api_key: str) -> None:
 
         if "s2_back_citations" in st.session_state:
             scan_errors = st.session_state.get("s2_scan_errors", [])
-            if scan_errors:
-                names = ", ".join(e.get("법령명", "?") for e in scan_errors[:5])
-                more = f" 외 {len(scan_errors) - 5}건" if len(scan_errors) > 5 else ""
+            fails = [e for e in scan_errors if e.get("유형") != "법령매칭주의"]
+            fuzzy = [e for e in scan_errors if e.get("유형") == "법령매칭주의"]
+            if fails:
+                names = ", ".join(e.get("법령명", "?") for e in fails[:5])
+                more = f" 외 {len(fails) - 5}건" if len(fails) > 5 else ""
                 st.error(
-                    f"⚠️ {len(scan_errors)}개 법령 조회 실패({names}{more}) — "
+                    f"⚠️ {len(fails)}개 법령 조회 실패({names}{more}) — "
                     "해당 법령의 인용은 검색에서 빠졌습니다. 잠시 후 다시 검색하세요."
+                )
+            if fuzzy:
+                pairs = ", ".join(f"{e.get('요청', '?')}→{e.get('법령명', '?')}" for e in fuzzy[:5])
+                st.warning(
+                    f"🔎 법령명 정확매칭 실패 {len(fuzzy)}건 — 유사 법령으로 대체 검색했습니다. "
+                    f"결과 법령이 맞는지 확인하세요({pairs})."
                 )
             back = st.session_state["s2_back_citations"]
             if not back:

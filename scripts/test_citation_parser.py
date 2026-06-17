@@ -12,7 +12,7 @@ from core.citation_parser import (
     parse_citations,
     resolve_deictic_law,
 )
-from core.law_network import _citation_matches, related_law_names
+from core.law_network import _choose_entry, _citation_matches, related_law_names
 
 
 def _one(text: str, **attrs) -> Citation:
@@ -190,6 +190,18 @@ def test_related_law_names_normalized() -> None:
     assert "법인세법" in rel2 and "소득세법" in rel2, rel2
 
 
+def test_choose_entry_fuzzy() -> None:
+    # P2: 정확매칭이 있으면 fuzzy=False
+    results = [{"법령명": "소득세법 시행령", "MST": "1"}, {"법령명": "소득세법", "MST": "2"}]
+    chosen, fuzzy = _choose_entry(results, "소득세법")
+    assert chosen["MST"] == "2" and fuzzy is False
+    # 정확매칭이 없으면 첫 결과를 쓰되 fuzzy=True (침묵 폴백 방지 신호)
+    chosen, fuzzy = _choose_entry(results, "없는법")
+    assert chosen["MST"] == "1" and fuzzy is True
+    # 결과 없음
+    assert _choose_entry([], "x") == (None, False)
+
+
 def main() -> int:
     test_deictic_parsing()
     test_deictic_resolution()
@@ -200,6 +212,7 @@ def main() -> int:
     test_range_expansion_back_citations()
     test_citation_matches_range_subarticle()
     test_related_law_names_normalized()
+    test_choose_entry_fuzzy()
     print("ALL OK")
     return 0
 
