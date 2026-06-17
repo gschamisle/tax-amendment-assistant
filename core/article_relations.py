@@ -63,6 +63,8 @@ def _back_rows(law_name: str, jo: str) -> list[dict]:
     rows: list[dict] = []
     seen: set[tuple[str, str]] = set()
     for hit in back_citation_hits(law_name, base, sub):
+        if hit.get("type") == "byeolpyo":
+            continue  # 별표는 _byeolpyo_rows에서 따로 다룬다
         ident = (str(hit.get("법령명", "")), str(hit.get("조번호", "")))
         if ident == (law_name, normalize_jo(jo)):
             continue  # 자기 자신
@@ -77,6 +79,28 @@ def _back_rows(law_name: str, jo: str) -> list[dict]:
             "인용": raws[:2],
         })
     return sorted(rows, key=lambda r: (r["법령명"], r["조번호"]))
+
+
+def _byeolpyo_rows(law_name: str, jo: str) -> list[dict]:
+    """관련 별표 — 별표제목에 이 조문을 '(제X조 관련)'으로 둔 별표 (그래프)."""
+    if not graph_available():
+        return []
+    base, sub = _split_jo(jo)
+    rows: list[dict] = []
+    seen: set[tuple[str, str]] = set()
+    for hit in back_citation_hits(law_name, base, sub):
+        if hit.get("type") != "byeolpyo":
+            continue
+        ident = (str(hit.get("법령명", "")), str(hit.get("조번호", "")))
+        if ident in seen:
+            continue
+        seen.add(ident)
+        rows.append({
+            "법령명": ident[0],
+            "별표": ident[1],          # 예: "별표 1"
+            "제목": str(hit.get("제목", "")),
+        })
+    return sorted(rows, key=lambda r: (r["법령명"], r["별표"]))
 
 
 def _parallel_rows(law_name: str, jo: str) -> list[dict]:
@@ -136,4 +160,5 @@ def analyze_article_relations(
         "junyong": junyong,
         "back_cited": _back_rows(law_name, jo),
         "parallel": _parallel_rows(law_name, jo),
+        "byeolpyo": _byeolpyo_rows(law_name, jo),
     }

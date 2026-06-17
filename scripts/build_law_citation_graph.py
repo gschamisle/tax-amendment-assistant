@@ -159,6 +159,29 @@ def build_edges(law_api_key: str, source_laws: tuple[str, ...]) -> list[dict]:
                         "type": "direct",
                         "via_range": via_range,
                     })
+
+        # 별표 → 조문 edge: 별표제목의 '(제X조 관련)'을 역인용처럼 그래프에 싣는다.
+        # 조문 개정 시 직접입력 4분류·신설탭이 관련 별표를 자동 포착하게 한다.
+        for bp in data.get("별표목록", []):
+            bp_label = f"{bp.get('구분', '별표')} {bp.get('번호', '')}".strip()
+            bp_title = str(bp.get("제목", ""))
+            for r in bp.get("관련조문", []):
+                if not r.get("jo"):
+                    continue
+                target_law = (r.get("law_name") or "").strip() or law_name
+                if not _in_scope(target_law, scope):
+                    continue
+                ref = f"제{r['jo']}조" + (f"의{r['jo_sub']}" if r.get("jo_sub") else "")
+                edges.append({
+                    "source_law": law_name,
+                    "source_jo": bp_label,
+                    "source_title": bp_title,
+                    "target_law": target_law,
+                    "target_ref": ref,
+                    "cite_raw": bp_title,
+                    "type": "byeolpyo",
+                    "via_range": False,
+                })
     return edges
 
 

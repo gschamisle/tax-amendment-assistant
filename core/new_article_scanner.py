@@ -135,6 +135,8 @@ def stale_citation_conflicts(
 
     for jo, sub in jo_list:
         for hit in back_citation_hits(law_name, jo, sub):
+            if hit.get("type") == "byeolpyo":
+                continue  # 별표는 stale_byeolpyo에서 따로 다룬다
             src_law = str(hit.get("법령명", ""))
             src_jo = str(hit.get("조번호", ""))
             if src_law == law_name and src_jo in range_keys:
@@ -175,6 +177,8 @@ def proxy_checklist(
     for jo, sub in proxy_list:
         proxy_label = _format_jo(jo, sub)
         for hit in back_citation_hits(law_name, jo, sub):
+            if hit.get("type") == "byeolpyo":
+                continue  # 별표는 조문 체크리스트에 섞지 않는다
             src_law = str(hit.get("법령명", ""))
             src_jo = str(hit.get("조번호", ""))
             if src_law == law_name and src_jo in proxy_keys:
@@ -203,6 +207,36 @@ def proxy_checklist(
     )
 
 
+def stale_byeolpyo(
+    law_name: str,
+    jo_list: list[tuple[str, str]],
+) -> list[dict]:
+    """재사용할 조번호를 '관련 조문'으로 둔 별표 (그래프 기반).
+
+    구 조문 번호가 별표제목의 '(제X조 관련)'에 남아 있으면, 같은 번호에 새 제도가
+    들어갈 때 그 별표도 동반 검토 대상이 된다.
+    """
+    by_byeolpyo: dict[tuple[str, str], dict] = {}
+    for jo, sub in jo_list:
+        target_label = _format_jo(jo, sub)
+        for hit in back_citation_hits(law_name, jo, sub):
+            if hit.get("type") != "byeolpyo":
+                continue
+            ident = (str(hit.get("법령명", "")), str(hit.get("조번호", "")))
+            entry = by_byeolpyo.get(ident)
+            if entry is None:
+                entry = {
+                    "법령명": ident[0],
+                    "별표": ident[1],
+                    "제목": str(hit.get("제목", "")),
+                    "대상": [],
+                }
+                by_byeolpyo[ident] = entry
+            if target_label not in entry["대상"]:
+                entry["대상"].append(target_label)
+    return sorted(by_byeolpyo.values(), key=lambda r: (r["법령명"], r["별표"]))
+
+
 def review_new_articles(
     law_name: str,
     jo_range_text: str,
@@ -219,5 +253,6 @@ def review_new_articles(
         "jo_list": jo_list,
         "forward": forward_citations(draft_text, law_name, jo_list) if draft_text.strip() else [],
         "stale": stale_citation_conflicts(law_name, jo_list) if graph_ok else [],
+        "byeolpyo": stale_byeolpyo(law_name, jo_list) if graph_ok else [],
         "proxy": proxy_checklist(law_name, proxies) if (graph_ok and proxies) else [],
     }

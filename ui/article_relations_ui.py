@@ -180,3 +180,16 @@ def render(law_api_key: str, openai_api_key: str) -> None:
             )
         else:
             st.success("병행개정 대상 없음")
+
+    # ── ⑤ 관련 별표 ──────────────────────────────────────────────────────────
+    with st.container(border=True):
+        st.markdown('<div class="mofe-subheader">📑 ⑤ 관련 별표 (이 조문을 \'관련 조문\'으로 둔 별표)</div>', unsafe_allow_html=True)
+        byeolpyo = result.get("byeolpyo", [])
+        if not result["graph_ok"]:
+            st.info("그래프 빌드 후 사용 가능합니다.")
+        elif byeolpyo:
+            st.warning(f"⚠️ {len(byeolpyo)}건 — 조문 개정 시 별표 동반 개정 여부를 검토하세요")
+            for bp in byeolpyo:
+                st.markdown(f"- **{bp['별표']}** {bp['제목']}  ({bp['법령명']})")
+        else:
+            st.success("관련 별표 없음")

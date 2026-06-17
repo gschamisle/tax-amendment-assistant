@@ -81,6 +81,9 @@ def test_stale_conflicts() -> None:
     sample = next(r for r in rows if str(r["조번호"]) == "127")
     assert sample["대상"] and sample["인용"], sample
 
+    # 별표는 조문 잔존 인용 목록에 섞이지 않는다 (stale_byeolpyo로 분리)
+    assert not any(str(r["조번호"]).startswith(("별표", "서식")) for r in rows), rows
+
 
 def test_proxy_checklist() -> None:
     rows = proxy_checklist("조세특례제한법", parse_jo_tokens("24"))
@@ -98,6 +101,7 @@ def test_review_bundle() -> None:
     assert result["graph_ok"]
     assert len(result["jo_list"]) == 8
     assert result["forward"] and result["stale"] and result["proxy"]
+    assert isinstance(result["byeolpyo"], list)  # 별표 동반검토 (없을 수도 있음)
     # 조문안·프록시 미입력 시에도 죽지 않는다
     empty = review_new_articles("조세특례제한법", "29", "", "")
     assert empty["forward"] == [] and empty["proxy"] == []

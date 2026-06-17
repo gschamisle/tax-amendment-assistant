@@ -44,6 +44,11 @@ def main() -> int:
         laws = {h.get("법령명") for h in hits}
         assert "소득세법" in laws or "소득세법 시행령" in laws, hits
 
+    # 별표 edge: 소득세법 시행령 별표 1 '(제9조제1항제1호 관련)' → 제9조 역연관
+    bp = [h for h in back_citation_hits("소득세법 시행령", "9") if h.get("type") == "byeolpyo"]
+    assert bp, "별표 edge 미생성 — build_law_citation_graph 재빌드 필요"
+    assert all(str(h["조번호"]).startswith(("별표", "서식")) for h in bp), bp
+
     print(f"ALL OK (edges={meta.get('edge_count')}, back_hits_129={len(hits)})")
     return 0
 

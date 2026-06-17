@@ -113,5 +113,6 @@ def back_citation_hits(
                 "인용": [{"raw": edge.get("cite_raw", ""), "via_range": bool(edge.get("via_range"))}],
                 "graph_source": True,
                 "via_range": bool(edge.get("via_range")),
+                "type": edge.get("type", "direct"),
             })
     return merged

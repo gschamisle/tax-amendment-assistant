@@ -36,6 +36,16 @@ def test_back_citation_real_graph() -> None:
     )
 
 
+def test_byeolpyo_real_graph() -> None:
+    # 소득세법 시행령 별표 1 '농가부업규모…(제9조제1항제1호 관련)' → 제9조 관련 별표
+    r = analyze_article_relations("소득세법 시행령", "9", "")
+    assert r["graph_ok"]
+    assert r["byeolpyo"], "제9조 관련 별표가 잡혀야 한다 — 별표 edge 그래프 재빌드 확인"
+    assert all("별표" in b["별표"] or "서식" in b["별표"] for b in r["byeolpyo"]), r["byeolpyo"]
+    # 역인용 박스에는 별표가 섞이지 않는다
+    assert not any(str(x["조번호"]).startswith(("별표", "서식")) for x in r["back_cited"])
+
+
 def test_parallel_real_matrix() -> None:
     r = analyze_article_relations("소득세법", "127", "")
     assert r["matrix_ok"]
@@ -76,6 +86,7 @@ def test_empty_text_no_forward() -> None:
 def main() -> int:
     test_forward_split_cited_vs_junyo()
     test_back_citation_real_graph()
+    test_byeolpyo_real_graph()
     test_parallel_real_matrix()
     test_target_label()
     test_enum_prefix_strip()
