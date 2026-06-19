@@ -7,6 +7,7 @@ from core.draft_bill_parser import (
     compare_review,
     find_amendment_body,
     manual_amendment_targets,
+    new_article_targets,
     new_range_block,
 )
 from core.new_article_scanner import parse_jo_tokens
@@ -88,11 +89,41 @@ def test_compare_review() -> None:
     assert ("조세특례제한법", "127") in px_missing, px_missing
 
 
+def test_new_article_targets() -> None:
+    body = (
+        "제134조를 다음과 같이 신설한다.\n"
+        "제134조(감면한도) ① ...\n"
+        "제29조의2부터 제29조의5까지를 다음과 같이 신설한다.\n"
+        "제2조제1항에 제10호의4를 다음과 같이 신설한다.\n"   # 호 신설 → 제외
+        "제29조 앞에 절 번호 및 제목을 다음과 같이 신설한다.\n"  # 절 신설 → 제외
+    )
+    got = new_article_targets(body)
+    assert ("134", "") in got, got
+    assert ("29", "2") in got and ("29", "5") in got, got   # 범위 전개
+    assert ("2", "") not in got, got                          # 호 신설 제외
+
+
+def test_compare_review_auto_and_mismatch() -> None:
+    _, body = find_amendment_body(TEMPLATE)
+    # 범위 미입력 → 감지된 개정 대상 전체 자동 적용, 일치 True
+    auto = compare_review("조세특례제한법", "", body, "")
+    assert auto["auto_range"] and auto["range_matched"], auto
+    keys = {f"{j}의{s}" if s else j for j, s in auto["jo_list"]}
+    assert keys == set(auto["manual_targets"]), (keys, auto["manual_targets"])
+    assert auto["forward"]["external"], "자동 범위로도 forward가 잡혀야 한다"
+
+    # 엉뚱한 범위 → 불일치 플래그(가짜 정상 방지)
+    bad = compare_review("조세특례제한법", "999", body, "")
+    assert not bad["range_matched"], bad
+
+
 def main() -> int:
     test_find_body()
     test_manual_targets()
     test_new_range_block()
     test_compare_review()
+    test_new_article_targets()
+    test_compare_review_auto_and_mismatch()
     print("ALL OK")
     return 0
 

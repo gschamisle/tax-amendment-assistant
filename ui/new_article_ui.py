@@ -224,7 +224,25 @@ def _render_comparison(cmp: dict) -> None:
     jo_labels = ", ".join(
         f"제{jo}조의{sub}" if sub else f"제{jo}조" for jo, sub in cmp["jo_list"]
     )
-    st.markdown(f"**검토 대상**: {cmp['law_name']} {jo_labels} (파일: {cmp.get('file', '')})")
+    st.markdown(f"**검토 대상**: {cmp['law_name']} (파일: {cmp.get('file', '')})")
+
+    # 범위 불일치 = 가짜 정상 방지: 입력 범위가 개정안과 안 맞으면 결과가 비어도 경고
+    if not cmp.get("range_matched", True):
+        st.error(
+            "⚠️ 입력한 신설 조번호 범위가 개정안 지시문과 **하나도 일치하지 않습니다.** "
+            "아래 결과가 비어 있어도 '문제 없음'이 아니라 **범위 불일치**입니다 — "
+            "범위 칸을 비우면 개정안에서 자동 감지합니다."
+        )
+    elif cmp.get("auto_range"):
+        st.caption(f"🔎 범위 미입력 → 감지된 개정 대상 전체를 자동 적용: {jo_labels}")
+    else:
+        st.caption(f"적용 범위: {jo_labels}")
+
+    new_articles = cmp.get("new_articles", [])
+    if new_articles:
+        labels = ", ".join(f"제{jo}조의{sub}" if sub else f"제{jo}조" for jo, sub in new_articles)
+        st.caption(f"🆕 '조 신설'로 감지된 조문: {labels} (제목 변경·항 재구성으로 재사용된 번호는 별도 — 잔존 인용 확인)")
+
     manual = cmp["manual_targets"]
     with st.expander(f"수기 병행개정 대상 {len(manual)}건 (지시문 기준)"):
         st.write(", ".join(_format_jo_label(j) for j in manual))
@@ -304,9 +322,8 @@ def render(law_api_key: str, openai_api_key: str) -> None:
         )
 
         if st.button("신설 검토 실행", key="na_run", type="primary"):
-            if not jo_range_text.strip():
-                st.error("신설 조번호 범위를 입력하세요.")
-            elif uploaded is not None:
+            if uploaded is not None:
+                # 업로드 모드: 범위 미입력 시 개정안에서 자동 감지
                 with st.spinner("파일 추출·파싱 중..."):
                     payload = _ingest_upload(uploaded)
                 if not payload:
@@ -321,6 +338,8 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                     st.session_state.pop("na_result", None)
                     st.session_state.pop("na_llm", None)
                     st.session_state.pop("na_report_bytes", None)
+            elif not jo_range_text.strip():
+                st.error("신설 조번호 범위를 입력하세요. (파일 업로드 시에는 자동 감지됩니다.)")
             else:
                 st.session_state["na_result"] = review_new_articles(
                     law_name_input.strip(), jo_range_text, draft_text, proxy_text,

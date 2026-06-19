@@ -29,6 +29,18 @@ _OPENING_RE = re.compile(
 _TABLE_MARKERS = ("신ㆍ구조문대비표", "신·구조문대비표", "신구조문대비표")
 _DIRECTIVE_RE = re.compile(r"^제(\d+)조(?:의(\d+))?")
 _VERBS = ("신설한다", "개정한다", "삭제한다", "로 한다", "같이 한다", "각각 한다")
+# 조(條) 자체를 신설하는 지시문: "제134조를 다음과 같이 신설" / "제29조의2부터 …까지를 … 신설".
+# 조번호 뒤에 항·호 없이 바로 (를/을 … 신설)이 와야 한다(항·호 신설은 기존 조 개정).
+_NEW_ARTICLE_RE = re.compile(
+    r"^제\d+조(?:의\d+)?(?:\s*(?:부터|에서|내지)\s*제\d+조(?:의\d+)?까지)?(?:를|을)\s*(?:다음과\s*같이\s*)?신설"
+)
+
+
+def _key_to_token(key: str) -> tuple[str, str]:
+    if "의" in key:
+        jo, sub = key.split("의", 1)
+        return jo, sub
+    return key, ""
 
 
 def find_amendment_body(text: str) -> tuple[str, str]:
@@ -76,6 +88,25 @@ def manual_amendment_targets(body: str) -> list[str]:
     return targets
 
 
+def new_article_targets(body: str) -> list[tuple[str, str]]:
+    """'제X조를 …신설한다' 형태로 조(條) 자체를 신설하는 조번호(범위 전개 포함).
+
+    항·호·절 신설은 기존 조 개정이므로 제외한다. 표시·참고용.
+    """
+    out: list[tuple[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    for line in body.splitlines():
+        s = line.strip()
+        if not _NEW_ARTICLE_RE.match(s):
+            continue
+        spec = s.split("신설", 1)[0]
+        for tok in parse_jo_tokens(spec):
+            if tok not in seen:
+                seen.add(tok)
+                out.append(tok)
+    return out
+
+
 def new_range_block(body: str, jo_list: list[tuple[str, str]]) -> str:
     """신설 범위 조문을 대상으로 하는 지시문 블록(지시문~다음 지시문 직전)만 모은다."""
     range_keys = {f"{jo}의{sub}" if sub else jo for jo, sub in jo_list}
@@ -109,10 +140,19 @@ def compare_review(
           "proxy": {"covered": [...], "missing": [...]},
         }
     """
-    jo_list = parse_jo_tokens(jo_range_text)
-    range_keys = {f"{jo}의{sub}" if sub else jo for jo, sub in jo_list}
     manual = manual_amendment_targets(body)
     manual_set = set(manual)
+    new_articles = new_article_targets(body)
+
+    # 범위 미입력 시: 감지된 개정 대상 전체를 검토 범위로 자동 적용(아무것도 빠뜨리지 않기).
+    auto_range = not jo_range_text.strip()
+    if auto_range:
+        jo_list = [_key_to_token(k) for k in manual]
+    else:
+        jo_list = parse_jo_tokens(jo_range_text)
+    range_keys = {f"{jo}의{sub}" if sub else jo for jo, sub in jo_list}
+    # 입력 범위가 개정안 지시문과 하나도 안 맞으면 결과가 비는데, 그건 '문제 없음'이 아니다.
+    range_matched = bool(range_keys & manual_set)
 
     block = new_range_block(body, jo_list)
     fwd = forward_citations(block, law_name, jo_list)
@@ -145,6 +185,9 @@ def compare_review(
         "law_name": law_name,
         "jo_list": jo_list,
         "manual_targets": manual,
+        "new_articles": new_articles,
+        "auto_range": auto_range,
+        "range_matched": range_matched,
         "forward": forward,
         "stale": stale,
         "proxy": proxy,
