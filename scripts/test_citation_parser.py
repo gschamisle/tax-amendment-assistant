@@ -209,6 +209,60 @@ def test_range_inherits_cross_law_name() -> None:
     assert find_back_citations(law, "24") == []
 
 
+def test_enumerated_cross_law_name() -> None:
+    # 회귀: '「부가가치세법」 제9조 및 제10조'의 제10조가 source(조특법)로 새면 안 됨
+    text = "「부가가치세법」 제9조 및 제10조에 따른 재화의 공급으로 보지 아니한다."
+    c10 = _one(text, jo="10")
+    assert effective_law_name(c10, "조세특례제한법") == "부가가치세법", c10.law_name
+
+    # 콤마·및 혼합 연쇄 전파: 제20조·제21조 모두 소득세법
+    cites = parse_citations("「소득세법」 제19조, 제20조 및 제21조")
+    for jo in ("19", "20", "21"):
+        c = next(x for x in cites if x.jo == jo)
+        assert effective_law_name(c, "조세특례제한법") == "소득세법", (jo, c.law_name)
+
+    # 지시참조도 전파: 시행령 '법 제9조 및 제10조' → 둘 다 모법
+    c = _one("법 제9조 및 제10조", jo="10")
+    assert effective_law_name(c, "소득세법 시행령") == "소득세법"
+
+    # 연결어 앞에 위치어(본문·전단·후단·단서·각 호)가 껴도 전파한다
+    c = _one("「부가가치세법」 제48조제3항 본문 및 제66조제1항", jo="66")
+    assert effective_law_name(c, "조세특례제한법") == "부가가치세법", c.law_name
+    c = _one("「소득세법」 제162조의2제4항 후단ㆍ제162조의3제6항", jo="162", jo_sub="3")
+    assert effective_law_name(c, "조세특례제한법") == "소득세법", c.law_name
+
+    # 중간에 항 열거('제3항ㆍ제4항')가 껴도 jo 앵커를 건너짚어 전파한다
+    c = _one("법 제33조제3항ㆍ제4항 및 제34조제4항", jo="34")
+    assert effective_law_name(c, "법인세법 시행령") == "법인세법", c.law_name
+    c = _one("「부가가치세법」 제32조제1항ㆍ제7항 및 제35조제1항", jo="35")
+    assert effective_law_name(c, "조세특례제한법") == "부가가치세법", c.law_name
+
+    # 범위 인용 뒤 콤마 열거도 전파 ('제64조제2항부터 제4항까지, 제66조')
+    c = _one("「소득세법 시행령」 제62조제1항 후단, 제64조제2항부터 제4항까지, 제66조", jo="66")
+    assert effective_law_name(c, "조세특례제한법 시행령") == "소득세법 시행령", c.law_name
+
+    # 자기 법령 정의 참조 '(이하 이 조 및 제95조의2에서 같다)'는 전파 안 함(산문)
+    c = _one("분양권(이하 이 조 및 제95조의2에서 같다)", jo="95", jo_sub="2")
+    assert effective_law_name(c, "법인세법") == "법인세법", c.law_name
+
+    # 연결어가 아니라 다른 텍스트가 끼면 전파하지 않는다(과탐 방지)
+    c = _one("「소득세법」 제19조에 따른 사업소득 및 제20조", jo="20")
+    assert effective_law_name(c, "조세특례제한법") == "조세특례제한법", c.law_name
+    c = _one("「소득세법」 제19조에 따른 본문 및 제20조", jo="20")
+    assert effective_law_name(c, "조세특례제한법") == "조세특례제한법", c.law_name
+
+    # find_back_citations: 타법 열거의 뒤 조문은 동일법 역인용으로 잡히면 안 됨
+    law = {
+        "법령명": "조세특례제한법",
+        "조문목록": [
+            {"조번호": "104의7", "제목": "정비사업조합",
+             "내용": "「부가가치세법」 제9조 및 제10조에 따른 재화의 공급으로 보지 아니한다."},
+        ],
+    }
+    assert find_back_citations(law, "10") == []
+    assert find_back_citations(law, "9") == []
+
+
 def test_related_law_names_normalized() -> None:
     # P1③: 공백 없는 법령명 표기로도 병행 법령군이 채워진다
     rel = {n.replace(" ", "") for n in related_law_names("상속세및증여세법")}
@@ -240,6 +294,7 @@ def main() -> int:
     test_range_expansion_back_citations()
     test_citation_matches_range_subarticle()
     test_range_inherits_cross_law_name()
+    test_enumerated_cross_law_name()
     test_related_law_names_normalized()
     test_choose_entry_fuzzy()
     print("ALL OK")

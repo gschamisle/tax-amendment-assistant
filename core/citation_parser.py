@@ -198,6 +198,52 @@ def _resolve_range_law_names(citations: list[Citation]) -> None:
                 break
 
 
+# 조문 열거 연결어와, 그 사이에 끼는 '부스러기'(앞 인용에 딸린 항·호·목·위치어).
+# '「A법」 제9조 및 제10조', '제33조제3항ㆍ제4항 및 제34조', '제61조제1항 본문 및 제62조'
+# 처럼 두 조문 사이가 '연결어 + (항/호/목·전단/후단/단서/본문/각 호)뿐'이면 같은 법으로 본다.
+_CONN_RE = re.compile(r"및|와|과|또는|,|ㆍ|·")
+_CONN_FILLER_RE = re.compile(
+    r"제\s*\d+\s*(?:항|호|목)|전단|후단|단서|본문|각\s*호|각\s*목|항|호|목|\s"
+)
+
+
+def _is_connective(gap: str) -> bool:
+    """두 인용 사이 텍스트가 '연결어 + 항/호/목·위치어 부스러기'뿐이면 True.
+
+    실질 어구(명사·서술)가 끼면 False — 그 경우 뒤 조문은 별개 맥락일 수 있어
+    법령명을 전파하지 않는다(과탐 방지). 연결어가 하나도 없어도 False.
+    """
+    if not _CONN_RE.search(gap):
+        return False
+    rest = _CONN_FILLER_RE.sub("", _CONN_RE.sub("", gap))
+    return rest == ""
+
+
+def _resolve_enumerated_law_names(citations: list[Citation], text: str) -> None:
+    """'「A법」 제9조 및 제10조' 열거에서 뒤따르는 맨 조번호에 앞 법령명을 전파한다.
+
+    CROSS_LAW/NAMED_LAW는 첫 조문에만 법령명을 붙이고, 연결어(및·와·,·ㆍ·또는)로
+    이어진 다음 조번호는 law_name이 비어 source 법령으로 오귀속된다('부가세법 제9조 및
+    제10조'의 제10조 → 조특법 오인). 두 인용 사이가 순수 연결어뿐일 때만 앞 인용의
+    법령명(·relative)을 물려준다 — 다른 텍스트가 끼면 전파하지 않는다(과탐 방지).
+    좌→우로 처리해 '제9조, 제10조 및 제11조'의 연쇄 전파도 자연히 이어진다.
+    _resolve_relative_citations 이후 실행해 '같은 법'·지시참조가 해석된 법령명을 쓴다.
+    """
+    for idx in range(1, len(citations)):
+        cur = citations[idx]
+        if cur.law_name or cur.relative or cur.byeolpyo or not cur.jo:
+            continue
+        # 앵커 = jo를 가진 가장 가까운 앞 인용. 중간의 jo 없는 항·호 인용
+        # ('제3항ㆍ제4항'의 '제4항' 등)은 건너뛰어 열거 체인이 끊기지 않게 한다.
+        prev = next((p for p in reversed(citations[:idx]) if p.jo), None)
+        if prev is None or not prev.law_name or prev.law_name.startswith("같은"):
+            continue
+        if not _is_connective(text[prev.span[1]:cur.span[0]]):
+            continue
+        cur.law_name = prev.law_name
+        cur.relative = prev.relative
+
+
 def _byeolpyo_label(kind: str, num: str, sub: str) -> str:
     """별표/별지 인용을 표준 표기로. 별지는 'N호서식', 별표는 'N(의M)'."""
     if kind == "별지":
@@ -334,6 +380,24 @@ def parse_citations(text: str) -> list[Citation]:
             span=m.span(),
         ))
 
+    # 3.7. 조 내 항 범위: 제X조의Y제A항부터 제B항까지 (RANGE_RE보다 먼저 — 전체 span을
+    #      선점해 내부 '제A항부터 제B항까지'가 항범위로 중복 포착되지 않게 한다)
+    for m in ARTICLE_HANG_RANGE_RE.finditer(text):
+        if m.span() in seen:
+            continue
+        if any(s[0] <= m.start() and m.end() <= s[1] for s in seen):
+            continue
+        seen.add(m.span())
+        results.append(Citation(
+            raw=m.group(0),
+            jo=m.group(1),
+            jo_sub=m.group(2) or "",
+            hang=m.group(3),
+            hang_end=m.group(4),
+            is_range=True,
+            span=m.span(),
+        ))
+
     # 4. 항/호/목 범위
     for m in RANGE_RE.finditer(text):
         if m.span() in seen:
@@ -366,23 +430,6 @@ def parse_citations(text: str) -> list[Citation]:
             hang_end=m.group(3) if is_hang else "",
             ho=m.group(1) if m.group(2) == "호" else "",
             mok=m.group(1) if m.group(2) == "목" else "",
-            is_range=True,
-            span=m.span(),
-        ))
-
-    # 4.5. 조 내 항 범위: 제X조의Y제A항부터 제B항까지 (DIRECT_RE보다 먼저 처리)
-    for m in ARTICLE_HANG_RANGE_RE.finditer(text):
-        if m.span() in seen:
-            continue
-        if any(s[0] <= m.start() and m.end() <= s[1] for s in seen):
-            continue
-        seen.add(m.span())
-        results.append(Citation(
-            raw=m.group(0),
-            jo=m.group(1),
-            jo_sub=m.group(2) or "",
-            hang=m.group(3),
-            hang_end=m.group(4),
             is_range=True,
             span=m.span(),
         ))
@@ -441,6 +488,7 @@ def parse_citations(text: str) -> list[Citation]:
     results.sort(key=lambda c: c.span[0])
     _resolve_range_law_names(results)
     _resolve_relative_citations(results, text)
+    _resolve_enumerated_law_names(results, text)
     _tag_junyo(results, text)
     return results
 
