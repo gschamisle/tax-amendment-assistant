@@ -181,6 +181,34 @@ def test_citation_matches_range_subarticle() -> None:
     assert not _citation_matches(c3, "소득세법", "소득세법", "5", "2")
 
 
+def test_range_inherits_cross_law_name() -> None:
+    # 회귀: '「법인세법」 제13조부터 제54조까지'의 범위가 source 법령(조특법)으로
+    # 오귀속되면 안 됨 — 조특법 제104조의10(해운기업) 잔존인용 오탐 사례.
+    text = "비해운소득에 대해서는 「법인세법」 제13조부터 제54조까지의 규정에 따라 계산한 금액"
+    rng = _one(text, is_range=True, range_end_jo="54")
+    assert rng.law_name == "법인세법", rng.law_name
+    assert effective_law_name(rng, "조세특례제한법") == "법인세법"
+
+    # 법령명이 없는 범위는 종전대로 source 법령으로 해석(과소포착 방지)
+    plain = parse_citations("제3조부터 제9조까지의 규정에도 불구하고")[0]
+    assert plain.law_name == "" and effective_law_name(plain, "조세특례제한법") == "조세특례제한법"
+
+    # '같은 법' 범위는 relative를 물려받아 선행 명시 법령으로 해석된다
+    same = _one("「소득세법」 제20조 및 같은 법 제5조부터 제8조까지", is_range=True)
+    assert same.relative == "같은법" and same.law_name == "소득세법"
+
+    # find_back_citations: 타법 범위는 동일법령 역인용으로 잡히면 안 됨
+    law = {
+        "법령명": "조세특례제한법",
+        "조문목록": [
+            {"조번호": "104의10", "제목": "해운기업",
+             "내용": "「법인세법」 제13조부터 제54조까지의 규정에 따라 계산한 금액"},
+        ],
+    }
+    assert find_back_citations(law, "29") == []
+    assert find_back_citations(law, "24") == []
+
+
 def test_related_law_names_normalized() -> None:
     # P1③: 공백 없는 법령명 표기로도 병행 법령군이 채워진다
     rel = {n.replace(" ", "") for n in related_law_names("상속세및증여세법")}
@@ -211,6 +239,7 @@ def main() -> int:
     test_article_range_covers()
     test_range_expansion_back_citations()
     test_citation_matches_range_subarticle()
+    test_range_inherits_cross_law_name()
     test_related_law_names_normalized()
     test_choose_entry_fuzzy()
     print("ALL OK")

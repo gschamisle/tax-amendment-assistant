@@ -172,6 +172,32 @@ def _resolve_relative_citations(citations: list[Citation], text: str) -> None:
                     cite.law_name = bracket
 
 
+def _resolve_range_law_names(citations: list[Citation]) -> None:
+    """조문 범위 인용('제X조부터 제Y조까지')에 선행 명시 법령명을 전파한다.
+
+    '「법인세법」 제13조부터 제54조까지'에서 CROSS_LAW/NAMED_LAW는 '「법인세법」 제13조'만
+    잡고, 범위 인용 자체는 law_name이 비어 source 법령(예: 조특법)으로 오귀속된다.
+    범위의 시작 조번호와 일치하며 범위 시작('제13조')을 span으로 덮는 직전 명시 인용의
+    법령명(·relative)을 물려받아 _resolve_relative_citations·effective_law_name이
+    올바른 법령으로 해석하도록 한다.
+    """
+    for cite in citations:
+        if not (cite.is_range and cite.range_end_jo):
+            continue
+        if cite.law_name or cite.relative:
+            continue
+        for other in citations:
+            if other is cite or not other.law_name:
+                continue
+            if other.jo != cite.jo or other.jo_sub != cite.jo_sub:
+                continue
+            # other가 범위 시작 토큰('제13조')을 덮고 있어야 함 (span 겹침)
+            if other.span[0] <= cite.span[0] < other.span[1]:
+                cite.law_name = other.law_name
+                cite.relative = other.relative
+                break
+
+
 def _byeolpyo_label(kind: str, num: str, sub: str) -> str:
     """별표/별지 인용을 표준 표기로. 별지는 'N호서식', 별표는 'N(의M)'."""
     if kind == "별지":
@@ -413,6 +439,7 @@ def parse_citations(text: str) -> list[Citation]:
         ))
 
     results.sort(key=lambda c: c.span[0])
+    _resolve_range_law_names(results)
     _resolve_relative_citations(results, text)
     _tag_junyo(results, text)
     return results
