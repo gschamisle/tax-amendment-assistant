@@ -121,6 +121,21 @@ def forward_citations(
     return rows
 
 
+def _cited_hangs(raw: str, via_range: bool, jo: str, sub: str) -> set[str]:
+    """raw 인용이 target 조(가지번호)를 가리킬 때의 항 집합.
+
+    ''(빈 문자열) = 항 미지정(조 전체 인용)이거나 범위 인용 — 항 단위로 좁힐 수 없음.
+    누락 방지: target을 명확히 못 짚으면 ''로 둬서 조 단위 검토를 유지한다.
+    """
+    if via_range:
+        return {""}
+    found: set[str] = set()
+    for c in parse_citations(raw):
+        if c.jo == jo and (c.jo_sub or "") == (sub or ""):
+            found.add(c.hang or "")
+    return found or {""}
+
+
 def stale_citation_conflicts(
     law_name: str,
     jo_list: list[tuple[str, str]],
@@ -130,11 +145,15 @@ def stale_citation_conflicts(
     구 조문이 삭제됐어도 이월공제·경과규정 때문에 인용이 남아 있으면,
     같은 번호에 새 제도가 들어가는 순간 그 인용이 신설 조문을 가리키게 된다.
     신설 범위 내부 조문끼리의 상호 인용은 전면 대체되므로 제외한다.
+
+    각 행에 '항인용'(대상 조별로 인용된 항 집합, '' = 항 미지정/범위)을 부착해
+    호출부(compare_review)가 개정되는 항만 추려 검토 범위를 좁힐 수 있게 한다.
     """
     range_keys = {_jo_key(jo, sub) for jo, sub in jo_list}
     by_source: dict[tuple[str, str], dict] = {}
 
     for jo, sub in jo_list:
+        target_key = _jo_key(jo, sub)
         for hit in back_citation_hits(law_name, jo, sub):
             if hit.get("type") == "byeolpyo":
                 continue  # 별표는 stale_byeolpyo에서 따로 다룬다
@@ -144,7 +163,7 @@ def stale_citation_conflicts(
                 continue  # 신설 범위 내부 상호 인용
             ident = (src_law, src_jo)
             target_label = _format_jo(jo, sub)
-            raws = [str(r.get("raw", "")) for r in hit.get("인용", [])]
+            cites = hit.get("인용", [])
             entry = by_source.get(ident)
             if entry is None:
                 entry = {
@@ -153,13 +172,17 @@ def stale_citation_conflicts(
                     "제목": hit.get("제목", ""),
                     "대상": [],
                     "인용": [],
+                    "항인용": {},  # target_key -> set(항), '' = 항 미지정/범위
                 }
                 by_source[ident] = entry
             if target_label not in entry["대상"]:
                 entry["대상"].append(target_label)
-            for raw in raws:
+            hangs = entry["항인용"].setdefault(target_key, set())
+            for c in cites:
+                raw = str(c.get("raw", ""))
                 if raw and raw not in entry["인용"]:
                     entry["인용"].append(raw)
+                hangs |= _cited_hangs(raw, bool(c.get("via_range")), jo, sub)
 
     return sorted(
         by_source.values(),

@@ -88,6 +88,86 @@ def manual_amendment_targets(body: str) -> list[str]:
     return targets
 
 
+# 따옴표 안 치환 텍스트("제12항"을 "제8항"으로) 제거용 — 항 번호 오추출 방지
+_QUOTED_RE = re.compile(r"[“”‘’\"'](.*?)[“”‘’\"']")
+_HANG_RE = re.compile(r"제(\d+)항")
+# 항 삭제/신설 = 그 번호 '이상'의 항이 밀린다(번호 밀림 경계)
+_HANG_DEL_RANGE_RE = re.compile(r"제(\d+)항부터\s*제\d+항까지를?\s*(?:각각\s*)?삭제")
+_HANG_DEL_RE = re.compile(r"제(\d+)항을?\s*삭제")
+_HANG_INS_RE = re.compile(r"제(\d+)항(?:을|를|부터)[^.]*?신설")
+
+
+def amended_scope(body: str) -> dict[str, dict]:
+    """개정안 지시문에서 조별 개정 범위를 항 단위로 추출한다.
+
+    반환: jo_key -> {"hangs": set[str], "shift_from": int|None, "whole": bool}
+      - hangs: 지시문이 명시한 항번호(내용개정·삭제·신설로 직접 거론된 항)
+      - shift_from: 항 삭제·신설로 번호가 밀리기 시작하는 최소 항번호.
+                    이 번호 '이상'의 항은 번호가 바뀔 수 있어 인용 정비 대상.
+                    None이면 번호 밀림 없음(순수 내용개정).
+      - whole: 항을 하나도 못 짚는 조 전체·제목 개정 → 조 단위로 검토 유지
+
+    원칙(누락 방지): 삭제·신설 경계 아래(번호 안 밀리고 개정도 안 된 항)만 안전으로
+    보고, 경계 이상·명시된 항·조 전체 개정은 전부 검토 대상으로 남긴다.
+    예) '제63조제9항부터 제12항까지 삭제 + 제13항 내용개정' → shift_from=9, hangs={9,12,13}
+        → 제63조제3항 인용은 안전(3<9, 미개정), 제13항 인용은 검토 대상.
+    """
+    scope: dict[str, dict] = {}
+    for line in body.splitlines():
+        parsed = _is_directive(line)
+        if not parsed:
+            continue
+        jo, sub = parsed
+        key = f"{jo}의{sub}" if sub else jo
+        entry = scope.setdefault(key, {"hangs": set(), "shift_from": None, "whole": False})
+        s = _QUOTED_RE.sub(" ", line.strip())  # 치환 텍스트 제거
+        hang_nums = [m.group(1) for m in _HANG_RE.finditer(s)]
+        if not hang_nums:
+            entry["whole"] = True  # 항 미지정 = 조 전체/제목 개정
+            continue
+        entry["hangs"].update(hang_nums)
+        shift: list[int] = []
+        for rx in (_HANG_DEL_RANGE_RE, _HANG_DEL_RE, _HANG_INS_RE):
+            shift += [int(m.group(1)) for m in rx.finditer(s)]
+        # 삭제·신설 키워드가 있는데 시작 항을 못 짚으면 보수적으로 최소 항을 경계로
+        if not shift and any(v in s for v in ("삭제", "신설")):
+            shift = [min(int(n) for n in hang_nums)]
+        if shift:
+            sf = min(shift)
+            entry["shift_from"] = sf if entry["shift_from"] is None else min(entry["shift_from"], sf)
+    return scope
+
+
+def _only_unamended_hang(row: dict, scope: dict) -> bool:
+    """행이 인용한 모든 대상에서 '개정되지 않고 번호도 안 밀리는 항'만 인용하면 True.
+
+    하나라도 ①조 전체/범위 인용('') ②항을 좁힐 수 없는 조(scope 없음·whole)
+    ③명시된 개정 항 ④번호 밀림 경계(shift_from) 이상의 항을 인용하면
+    False(확인 필요로 유지). 누락 방지: 애매하면 False.
+    """
+    hang_map = row.get("항인용") or {}
+    if not hang_map:
+        return False
+    for target_key, cited in hang_map.items():
+        if "" in cited:
+            return False  # 조 전체/범위 인용 → 항으로 좁힐 수 없음
+        sc = scope.get(target_key)
+        if not sc or sc.get("whole"):
+            return False  # 항 정보 없음 / 조 전체 개정 → 조 단위 유지
+        hangs = sc.get("hangs", set())
+        shift_from = sc.get("shift_from")
+        for h in cited:
+            if h in hangs:
+                return False  # 명시된 개정 항
+            if shift_from is not None:
+                try:
+                    if int(h) >= shift_from:
+                        return False  # 번호 밀림 영향권
+                except ValueError:
+                    return False
+    return True
+
+
 def new_article_targets(body: str) -> list[tuple[str, str]]:
     """'제X조를 …신설한다' 형태로 조(條) 자체를 신설하는 조번호(범위 전개 포함).
 
@@ -136,7 +216,7 @@ def compare_review(
         {
           "law_name", "jo_list", "manual_targets",
           "forward": {"external": [...], "internal": [...]},
-          "stale": {"covered": [...], "missing": [...], "decree": [...]},
+          "stale": {"covered": [...], "missing": [...], "missing_hang": [...], "decree": [...]},
           "proxy": {"covered": [...], "missing": [...]},
         }
     """
@@ -161,13 +241,16 @@ def compare_review(
         "internal": [r for r in fwd if r["신설범위내"]],
     }
 
+    scope = amended_scope(body)
     stale_rows = stale_citation_conflicts(law_name, jo_list)
-    stale = {"covered": [], "missing": [], "decree": []}
+    stale = {"covered": [], "missing": [], "missing_hang": [], "decree": []}
     for r in stale_rows:
         if r["법령명"] != law_name:
             stale["decree"].append(r)
         elif r["조번호"] in manual_set:
             stale["covered"].append(r)
+        elif _only_unamended_hang(r, scope):
+            stale["missing_hang"].append(r)  # 개정 대상 외 항만 인용 — 참고
         else:
             stale["missing"].append(r)
 

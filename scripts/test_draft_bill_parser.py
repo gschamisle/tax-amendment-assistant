@@ -4,6 +4,8 @@ from __future__ import annotations
 import sys
 
 from core.draft_bill_parser import (
+    _only_unamended_hang,
+    amended_scope,
     compare_review,
     find_amendment_body,
     manual_amendment_targets,
@@ -103,6 +105,65 @@ def test_new_article_targets() -> None:
     assert ("2", "") not in got, got                          # 호 신설 제외
 
 
+def test_amended_scope() -> None:
+    # 내용개정(항 명시) → 그 항만 좁히기 가능, 번호 밀림 없음
+    sc = amended_scope('제63조제1항 중 "100분의 10"을 "100분의 15"로 한다.')
+    assert sc["63"]["hangs"] == {"1"} and sc["63"]["shift_from"] is None, sc
+    assert sc["63"]["whole"] is False
+
+    # 조 전체/제목 개정(항 미지정) → whole
+    sc = amended_scope("제63조를 다음과 같이 한다.")
+    assert sc["63"]["whole"] is True, sc
+
+    # 항 신설 → 그 번호 이상 밀림(shift_from)
+    sc = amended_scope("제63조에 제4항을 다음과 같이 신설한다.")
+    assert sc["63"]["shift_from"] == 4 and sc["63"]["whole"] is False, sc
+
+    # 실제 케이스: 제9항~제12항 삭제 + 제13항 내용개정 (따옴표 치환텍스트 무시)
+    sc = amended_scope(
+        '제63조제9항부터 제12항까지를 각각 삭제하고, 같은 조 제13항 중 "제12항"을 "제8항"으로 한다.'
+    )
+    assert sc["63"]["shift_from"] == 9, sc
+    assert "13" in sc["63"]["hangs"] and "8" not in sc["63"]["hangs"], sc  # 따옴표 속 8 제외
+
+
+def test_only_unamended_hang() -> None:
+    # 제9항부터 삭제 → shift_from=9, 명시항 {9,12,13}
+    scope = {"63": {"hangs": {"9", "12", "13"}, "shift_from": 9, "whole": False}}
+    # 삭제 경계 아래의 미개정 항(3항) 인용 → 강등(True)
+    assert _only_unamended_hang({"항인용": {"63": {"3"}}}, scope) is True
+    # 경계 이상(번호 밀림) 항(10항) → 유지(False)
+    assert _only_unamended_hang({"항인용": {"63": {"10"}}}, scope) is False
+    # 명시된 개정 항(13항) → 유지
+    assert _only_unamended_hang({"항인용": {"63": {"13"}}}, scope) is False
+    # 조 전체 인용('') → 유지
+    assert _only_unamended_hang({"항인용": {"63": {""}}}, scope) is False
+
+    # 순수 내용개정(shift 없음): 제1항만 개정
+    content = {"63": {"hangs": {"1"}, "shift_from": None, "whole": False}}
+    assert _only_unamended_hang({"항인용": {"63": {"3"}}}, content) is True   # 3항 안전
+    assert _only_unamended_hang({"항인용": {"63": {"1"}}}, content) is False  # 1항 개정
+
+    # scope에 없는 조 / whole / 다중대상 / 빈 항인용 → 유지(보수적)
+    assert _only_unamended_hang({"항인용": {"99": {"3"}}}, content) is False
+    assert _only_unamended_hang(
+        {"항인용": {"63": {"3"}}}, {"63": {"hangs": set(), "shift_from": None, "whole": True}}
+    ) is False
+    assert _only_unamended_hang({"항인용": {"63": {"3"}, "10": {""}}}, content) is False
+    assert _only_unamended_hang({}, content) is False
+
+
+def test_compare_review_hang_split() -> None:
+    # 제29조는 '신설' 지시문 포함 → whole → 잔존 인용 조 단위 유지(146의2 missing)
+    _, body = find_amendment_body(TEMPLATE)
+    r = compare_review("조세특례제한법", "29", body, "24")
+    assert "missing_hang" in r["stale"]
+    missing = {row["조번호"] for row in r["stale"]["missing"]}
+    hang_only = {row["조번호"] for row in r["stale"]["missing_hang"]}
+    # 신설로 whole이므로 146의2는 정식 missing(항 강등 아님)
+    assert "146의2" in missing and "146의2" not in hang_only, (missing, hang_only)
+
+
 def test_compare_review_auto_and_mismatch() -> None:
     _, body = find_amendment_body(TEMPLATE)
     # 범위 미입력 → 감지된 개정 대상 전체 자동 적용, 일치 True
@@ -123,6 +184,9 @@ def main() -> int:
     test_new_range_block()
     test_compare_review()
     test_new_article_targets()
+    test_amended_scope()
+    test_only_unamended_hang()
+    test_compare_review_hang_split()
     test_compare_review_auto_and_mismatch()
     print("ALL OK")
     return 0

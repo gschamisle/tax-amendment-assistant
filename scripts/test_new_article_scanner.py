@@ -9,6 +9,7 @@ import sys
 
 from core.citation_graph import graph_available
 from core.new_article_scanner import (
+    _cited_hangs,
     forward_citations,
     parse_jo_tokens,
     proxy_checklist,
@@ -80,9 +81,24 @@ def test_stale_conflicts() -> None:
     # 대상·인용 구문이 채워져 있다
     sample = next(r for r in rows if str(r["조번호"]) == "127")
     assert sample["대상"] and sample["인용"], sample
+    # 항 단위 좁히기용 '항인용'(대상 조별 인용 항 집합)이 부착된다
+    assert sample.get("항인용"), sample
 
     # 별표는 조문 잔존 인용 목록에 섞이지 않는다 (stale_byeolpyo로 분리)
     assert not any(str(r["조번호"]).startswith(("별표", "서식")) for r in rows), rows
+
+
+def test_cited_hangs() -> None:
+    # 특정 항 인용 → 그 항
+    assert _cited_hangs("제63조제3항", False, "63", "") == {"3"}
+    # 항 미지정(조 전체) → ''
+    assert _cited_hangs("제63조", False, "63", "") == {""}
+    # 범위 인용 → 항으로 좁힐 수 없음(''), via_range 우선
+    assert _cited_hangs("제13조부터 제54조까지", True, "13", "") == {""}
+    # target과 안 맞는 raw → 보수적으로 ''(조 단위 유지)
+    assert _cited_hangs("제99조제1항", False, "63", "") == {""}
+    # 가지번호 일치 + 항
+    assert _cited_hangs("제63조의2제5항", False, "63", "2") == {"5"}
 
 
 def test_proxy_checklist() -> None:
@@ -111,6 +127,7 @@ def main() -> int:
     test_parse_jo_tokens()
     test_forward_citations()
     test_stale_conflicts()
+    test_cited_hangs()
     test_proxy_checklist()
     test_review_bundle()
     print("ALL OK")

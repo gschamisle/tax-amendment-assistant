@@ -256,11 +256,22 @@ def _render_comparison(cmp: dict) -> None:
     with st.container(border=True):
         st.markdown('<div class="mofe-subheader">② 재사용 조번호 잔존 인용 — 수기 개정과 대조</div>', unsafe_allow_html=True)
         s = cmp["stale"]
+        hang_only = s.get("missing_hang", [])
         if s["missing"]:
             st.warning(f"⚠️ 수기 개정안에 없는 잔존 인용 {len(s['missing'])}건 — 정비 또는 부칙 경과조치 검토")
             _stale_expanders(s["missing"])
+        elif hang_only:
+            st.success("개정되는 항을 인용하는 잔존 인용은 없습니다 (아래 '개정 대상 외 항' 참고).")
         else:
             st.success("수기 개정안이 잔존 인용을 모두 다루고 있습니다")
+        if hang_only:
+            with st.expander(f"ℹ️ 개정 대상 외 항만 인용 {len(hang_only)}건 (참고 — 항 신설·삭제로 번호가 밀리면 재검토)"):
+                st.caption(
+                    "개정안이 해당 조의 특정 항만 고치는데, 이 조문들은 그 조의 "
+                    "**다른(개정되지 않는) 항**을 인용합니다. 보통 정비가 불필요하나, "
+                    "개정으로 항 번호가 밀리는 경우엔 확인하세요."
+                )
+                _stale_expanders(hang_only)
         if s["covered"]:
             with st.expander(f"✅ 수기 개정에 이미 반영된 잔존 인용 {len(s['covered'])}건"):
                 for row in s["covered"]:
