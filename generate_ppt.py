@@ -108,7 +108,7 @@ def add_title_slide(prs):
 
     # 날짜
     add_shape_with_text(slide, Inches(3), Inches(6.5), Inches(4), Inches(0.5),
-                        "2025년 기획재정부 AI 업무혁신 프로젝트",
+                        "2025년 재정경제부 AI 업무혁신 프로젝트",
                         font_size=12, color=MEDIUM_GRAY, align=PP_ALIGN.CENTER)
 
 
