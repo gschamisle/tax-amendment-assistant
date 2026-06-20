@@ -294,6 +294,29 @@ def _render_comparison(cmp: dict) -> None:
                 with st.expander(f"✅ 수기 개정에 이미 반영 {len(px['covered'])}건"):
                     _proxy_table(px["covered"])
 
+    # ── 검토결과 HWPX 내보내기 (LLM 무관 · 외부 전송 0 · 무과금) ───────────────
+    with st.container(border=True):
+        st.markdown('<div class="mofe-subheader">검토결과 내보내기</div>', unsafe_allow_html=True)
+        st.caption(
+            "위 결정적 분석 결과(①순방향 ②잔존 인용 ③체크리스트)를 HWPX로 떨굽니다. "
+            "외부 LLM·전송 없이 무과금으로 내부망에서 바로 쓸 수 있습니다."
+        )
+        if st.button("검토결과 HWPX 생성", key="na_cmp_report"):
+            from core.review_report import build_compare_report_hwpx
+
+            _UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+            out = _UPLOAD_DIR / "연동검토결과.hwpx"
+            build_compare_report_hwpx(cmp, str(out))
+            st.session_state["na_cmp_report_bytes"] = out.read_bytes()
+        if st.session_state.get("na_cmp_report_bytes"):
+            st.download_button(
+                "📥 검토결과 다운로드",
+                data=st.session_state["na_cmp_report_bytes"],
+                file_name=f"연동검토결과_{cmp['law_name']}.hwpx",
+                mime="application/octet-stream",
+                key="na_cmp_report_dl",
+            )
+
 
 def render(law_api_key: str, openai_api_key: str) -> None:
     st.markdown('<div class="mofe-section-header">신설 조문 검토</div>', unsafe_allow_html=True)
@@ -349,6 +372,7 @@ def render(law_api_key: str, openai_api_key: str) -> None:
                     st.session_state.pop("na_result", None)
                     st.session_state.pop("na_llm", None)
                     st.session_state.pop("na_report_bytes", None)
+                    st.session_state.pop("na_cmp_report_bytes", None)
             elif not jo_range_text.strip():
                 st.error("신설 조번호 범위를 입력하세요. (파일 업로드 시에는 자동 감지됩니다.)")
             else:
