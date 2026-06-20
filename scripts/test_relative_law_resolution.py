@@ -73,6 +73,17 @@ def test_same_law_across_lines_and_table() -> None:
     assert laws_24 and all(law == "법인세법" for law in laws_24), pairs
 
 
+def test_same_jo_through_deictic_anchor() -> None:
+    # '같은 조'가 지시참조(영/법) 뒤에 오면 모법/시행령으로 해석돼야(누락 방지)
+    pairs = _eff("영 제186조에 따른 금액으로 하되, 같은 조 제2항을 적용한다", "법인세법 시행규칙")
+    laws_186 = [law for jo, law in pairs if jo == "186"]
+    assert laws_186 and all(law == "법인세법 시행령" for law in laws_186), pairs
+
+    pairs = _eff("법 제51조의2제1항을 적용하는 경우 같은 조 제3항에 따라", "법인세법 시행령")
+    laws = [law for jo, law in pairs if jo == "51"]
+    assert laws and all(law == "법인세법" for law in laws), pairs
+
+
 def test_same_law_falls_back_when_no_antecedent() -> None:
     # 선행 명시 법령이 없으면 출처 법령으로 폴백 (기존 동작 유지)
     text = "같은 법 제29조에 따라 공제한다."
@@ -86,6 +97,7 @@ def main() -> int:
     test_same_law_in_parenthetical()
     test_same_jo_resolves_to_antecedent_law()
     test_same_law_across_lines_and_table()
+    test_same_jo_through_deictic_anchor()
     test_buchik_reference_excluded()
     test_same_law_falls_back_when_no_antecedent()
     print("ALL OK")

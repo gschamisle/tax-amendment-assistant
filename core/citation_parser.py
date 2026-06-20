@@ -167,6 +167,9 @@ def _resolve_relative_citations(citations: list[Citation], text: str) -> None:
                 cite.jo = anchor.jo
                 cite.jo_sub = anchor.jo_sub
                 cite.law_name = anchor.law_name
+                # 앵커가 지시참조(영/법)·같은법이면 그 relative도 물려받아 effective가
+                # 모법·시행령으로 해석하게 한다('영 제186조 … 같은 조 제2항' 누락 방지)
+                cite.relative = anchor.relative
         elif cite.law_name.startswith("같은"):
             # 조문 전체에서 가장 최근의 명시 법령(낫표·낫표없는 타법). 지시참조(법/영)·
             # 미해석 '같은…'은 제외.
@@ -287,6 +290,11 @@ def parse_citations(text: str) -> list[Citation]:
         # "같은 법" 계열은 SAME_LAW_RE가, "이 법/영/규칙"은 DEICTIC_LAW_RE가 처리한다.
         name_norm = m.group(1).replace(" ", "")
         if "같은" in name_norm or name_norm in ("이법", "이영", "이규칙"):
+            continue
+        # '이 경우 법', '이란 법', '항 및 영'처럼 산문 뒤 단독 지시어(법/영/령/규칙)는
+        # 명시 법령명이 아니라 지시참조 → DEICTIC_LAW_RE가 모법으로 해석하도록 건너뛴다.
+        # (실제 법령명은 '증여세법'처럼 지시어 앞에 내용 음절이 붙는다)
+        if re.search(r"(?:^|\s)(?:법|영|령|규칙)$", m.group(1).strip()):
             continue
         seen.add(m.span())
         results.append(Citation(

@@ -41,6 +41,17 @@ def test_deictic_parsing() -> None:
     assert c.law_name == "소득세법" and c.relative == "", (c.law_name, c.relative)
     assert not any(x.relative == "법" for x in parse_citations("소득세법 제127조"))
 
+    # 산문 뒤 단독 지시어(이 경우 법 / 이란 법 / 및 영)는 명시 법령명이 아니라 지시참조
+    c = _one("이 경우 법 제5조를 적용한다", jo="5")
+    assert c.relative == "법" and effective_law_name(c, "법인세법 시행령") == "법인세법", c.law_name
+    c = _one('"외국법인"이란 법 제2조에 따른', jo="2")
+    assert c.relative == "법" and effective_law_name(c, "소득세법 시행령") == "소득세법"
+    c = _one("제3항 및 영 제5조", jo="5")
+    assert c.relative == "영" and effective_law_name(c, "법인세법") == "법인세법 시행령"
+    # 진짜 법령명(지시어 앞에 내용 음절)은 그대로 명시 인용
+    c = _one("상속세 및 증여세법 제60조", jo="60")
+    assert c.law_name == "상속세 및 증여세법" and c.relative == ""
+
     # 낫표 인용도 그대로
     c = _one("「부가가치세법」 제26조제1항제5호 ...", jo="26")
     assert c.law_name == "부가가치세법" and c.relative == ""
