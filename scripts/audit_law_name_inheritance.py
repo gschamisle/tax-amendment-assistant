@@ -70,6 +70,27 @@ def audit_article(text: str, source_law: str) -> list[dict]:
     return flags
 
 
+def audit_same_law(text: str, source_law: str) -> list[dict]:
+    """'같은 법'류가 source로 귀속됐는데 같은 조문에 선행 타법 명시가 있으면 누락 후보.
+
+    수정 후엔 0이어야 정상('같은 법'은 조문 전체에서 최근 명시 법령을 가리키므로).
+    """
+    cites = parse_citations(text)
+    flags: list[dict] = []
+    for idx, cur in enumerate(cites):
+        if not cur.jo or not str(cur.law_name).startswith("같은"):
+            continue
+        if _norm_law(effective_law_name(cur, source_law)) != _norm_law(source_law):
+            continue  # 이미 타법으로 해석됨 — 정상
+        # 같은 조문에 선행 명시 타법이 있었나
+        for p in cites[:idx]:
+            pl = effective_law_name(p, source_law)
+            if p.law_name and not p.relative and _norm_law(pl) != _norm_law(source_law):
+                flags.append({"cur": cur.raw, "antecedent": p.raw, "antecedent_law": pl})
+                break
+    return flags
+
+
 def main() -> int:
     from config import LAW_API_KEY
 
@@ -78,6 +99,7 @@ def main() -> int:
 
     kinds: dict[str, int] = {}
     actionable: list[dict] = []  # 스코프 내 타법 + 연결어/연결어+위치어 = 진짜 누락 후보
+    same_law_miss: list[dict] = []  # '같은 법'이 선행 타법을 못 물려받음
 
     for law_name in _manifest_law_names():
         mst = _resolve_mst(law_name, LAW_API_KEY)
@@ -86,20 +108,28 @@ def main() -> int:
             continue
         data = get_law_text(mst, LAW_API_KEY)
         for art in data.get("조문목록", []):
-            for f in audit_article(str(art.get("내용", "")), law_name):
+            content = str(art.get("내용", ""))
+            for f in audit_article(content, law_name):
                 kinds[f["kind"]] = kinds.get(f["kind"], 0) + 1
                 in_scope = _norm_law(f["prev_law"]) in scope
                 if in_scope and f["kind"] != "산문(정상 추정)":
                     f["law"] = law_name
                     f["jo"] = art.get("조번호")
                     actionable.append(f)
+            for f in audit_same_law(content, law_name):
+                f["law"] = law_name
+                f["jo"] = art.get("조번호")
+                same_law_miss.append(f)
 
     print("\n=== gap 유형별 후보 수 (전체) ===")
     for k, n in sorted(kinds.items(), key=lambda x: -x[1]):
         print(f"  {n:5}  {k}")
-    print(f"\n=== 조치 가능 후보(스코프 내 타법 + 연결어류) {len(actionable)}건 ===")
+    print(f"\n=== 조치 가능 후보(맨 조번호 + 연결어류) {len(actionable)}건 ===")
     for s in actionable:
         print(f"  [{s['kind']}] {s['law']} 제{s['jo']}조: {s['prev']}({s['prev_law']}) ‖{re.sub(chr(10),' ',s['gap'])!r}‖ {s['cur']}")
+    print(f"\n=== '같은 법' 선행 타법 누락 {len(same_law_miss)}건 (0이어야 정상) ===")
+    for s in same_law_miss[:40]:
+        print(f"  {s['law']} 제{s['jo']}조: {s['antecedent']}({s['antecedent_law']}) … {s['cur']}")
     return 0
 
 

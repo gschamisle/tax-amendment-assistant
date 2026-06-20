@@ -146,28 +146,36 @@ def _last_bracket_law(text: str, start: int, end: int) -> str:
 
 
 def _resolve_relative_citations(citations: list[Citation], text: str) -> None:
-    """'같은 법/영/칙/조'를 같은 문장 앞쪽의 명시 인용으로 해석한다."""
+    """'같은 조'는 같은 문장 앞 조문으로, '같은 법'은 조문 전체에서 가장 최근 명시
+    법령으로 해석한다.
+
+    '같은 조'는 근접 참조라 문장(줄바꿈) 경계를 지킨다. 반면 '같은 법'은 줄·문장,
+    심지어 계산식 표(셀이 줄바꿈으로 분리)를 넘어 같은 조문에서 직전에 명시된 법령을
+    가리키므로 검색 범위를 조문 전체로 넓힌다(표 안 '「법인세법」… 같은 법 …' 누락 방지).
+    """
     for idx, cite in enumerate(citations):
         if not cite.relative:
             continue
-        sent_start = _sentence_start(text, cite.span[0])
-        previous = [
-            c for c in citations[:idx]
-            if c.span[0] >= sent_start and c.jo
-        ]
         if cite.relative == "같은조":
+            sent_start = _sentence_start(text, cite.span[0])
+            previous = [
+                c for c in citations[:idx]
+                if c.span[0] >= sent_start and c.jo
+            ]
             if previous:
                 anchor = previous[-1]
                 cite.jo = anchor.jo
                 cite.jo_sub = anchor.jo_sub
                 cite.law_name = anchor.law_name
         elif cite.law_name.startswith("같은"):
-            explicit_laws = [c for c in previous if c.law_name and not c.relative]
+            # 조문 전체에서 가장 최근의 명시 법령(낫표·낫표없는 타법). 지시참조(법/영)·
+            # 미해석 '같은…'은 제외.
+            explicit_laws = [c for c in citations[:idx] if c.law_name and not c.relative]
             if explicit_laws:
                 cite.law_name = explicit_laws[-1].law_name
             else:
                 # 조번호 없이 쓰인 선행 낫표 법령명도 선행 법령으로 인정
-                bracket = _last_bracket_law(text, sent_start, cite.span[0])
+                bracket = _last_bracket_law(text, 0, cite.span[0])
                 if bracket:
                     cite.law_name = bracket
 

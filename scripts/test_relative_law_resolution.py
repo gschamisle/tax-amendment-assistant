@@ -62,6 +62,17 @@ def test_buchik_reference_excluded() -> None:
     assert "33" in jos and "43" in jos and "70" in jos, jos
 
 
+def test_same_law_across_lines_and_table() -> None:
+    # 계산식 표: 「법인세법」 제24조… 다음 셀(줄바꿈)의 '같은 법 제24조'도 법인세법
+    text = (
+        "A: 「법인세법」 제24조제2항제2호에 따른 기준소득금액\n"
+        "이월결손금 공제를 적용받는 법인은 같은 법 제24조제2항제2호에 따른 금액"
+    )
+    pairs = _eff(text, "조세특례제한법")
+    laws_24 = [law for jo, law in pairs if jo == "24"]
+    assert laws_24 and all(law == "법인세법" for law in laws_24), pairs
+
+
 def test_same_law_falls_back_when_no_antecedent() -> None:
     # 선행 명시 법령이 없으면 출처 법령으로 폴백 (기존 동작 유지)
     text = "같은 법 제29조에 따라 공제한다."
@@ -74,6 +85,7 @@ def main() -> int:
     test_same_law_resolves_to_antecedent()
     test_same_law_in_parenthetical()
     test_same_jo_resolves_to_antecedent_law()
+    test_same_law_across_lines_and_table()
     test_buchik_reference_excluded()
     test_same_law_falls_back_when_no_antecedent()
     print("ALL OK")
