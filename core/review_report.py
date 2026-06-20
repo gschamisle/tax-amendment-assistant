@@ -138,6 +138,7 @@ def build_compare_report_hwpx(
     hang = s.get("missing_hang", [])
     covered = s.get("covered", [])
     decree = s.get("decree", [])
+    other_law = s.get("other_law", [])
     p("② 재사용 조번호 잔존 인용 — 수기 개정과 대조")
     p(f"  ❌ 수기 개정안에 없는 잔존 인용 {len(missing)}건 (정비 또는 부칙 경과조치 검토)")
     for row in missing:
@@ -146,6 +147,12 @@ def build_compare_report_hwpx(
             p(f"        인용 구문: {raw}")
     if not missing:
         p("    - 해당 없음")
+    if other_law:
+        p(f"  ⚠ 타법 잔존 인용 {len(other_law)}건 (위임법령 아님 — 이 법률과 함께 병행개정 여부 검토)")
+        for row in other_law:
+            p(f"    - {row['법령명']} {_jo_label(row['조번호'])} {row.get('제목', '')}  대상: {', '.join(row.get('대상', []))}")
+            for raw in row.get("인용", []):
+                p(f"        인용 구문: {raw}")
     if hang:
         p(f"  ℹ 개정 대상 외 항만 인용 {len(hang)}건 (참고 — 항 신설·삭제로 번호가 밀리면 재검토)")
         for row in hang:
@@ -155,7 +162,7 @@ def build_compare_report_hwpx(
         for row in covered:
             p(f"    - {_jo_label(row['조번호'])} {row.get('제목', '')}  대상: {', '.join(row.get('대상', []))}")
     if decree:
-        p(f"  📋 시행령 잔존 인용 {len(decree)}건 (법률 공포 후 시행령 개정에 반영)")
+        p(f"  📋 위임법령(시행령·시행규칙) 잔존 인용 {len(decree)}건 (법률 공포 후 후속 개정에 반영)")
         for row in decree:
             p(f"    - {row['법령명']} {_jo_label(row['조번호'])} {row.get('제목', '')}  대상: {', '.join(row.get('대상', []))}")
     p()

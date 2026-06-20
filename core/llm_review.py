@@ -214,6 +214,19 @@ def run_llm_review(cmp_result: dict, body: str, api_key: str = "") -> dict:
             "인용_구문": row.get("인용", [])[:3],
             "출처": "잔존 인용 (재사용 조번호를 현행법이 인용 중)",
         })
+    for row in cmp_result["stale"].get("other_law", []):
+        key = (row["법령명"], str(row["조번호"]))
+        if key in seen:
+            continue
+        seen.add(key)
+        items.append({
+            "법령명": row["법령명"],
+            "조번호": str(row["조번호"]),
+            "제목": row.get("제목", ""),
+            "재사용_번호_인용": row.get("대상", []),
+            "인용_구문": row.get("인용", [])[:3],
+            "출처": "타법 잔존 인용 (타법률이 재사용 조번호를 인용 중 — 병행개정 검토)",
+        })
     for row in cmp_result["proxy"]["missing"]:
         key = (row["법령명"], str(row["조번호"]))
         if key in seen:

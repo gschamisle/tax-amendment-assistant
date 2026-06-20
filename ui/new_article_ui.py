@@ -272,12 +272,18 @@ def _render_comparison(cmp: dict) -> None:
                     "개정으로 항 번호가 밀리는 경우엔 확인하세요."
                 )
                 _stale_expanders(hang_only)
+        if s.get("other_law"):
+            st.warning(
+                f"⚠️ 타법 잔존 인용 {len(s['other_law'])}건 — 위임법령이 아니라 "
+                "**이 법률과 함께 병행개정 여부를 검토**해야 합니다 (공포 후 시행령 단계로 미루면 안 됨)."
+            )
+            _stale_expanders(s["other_law"])
         if s["covered"]:
             with st.expander(f"✅ 수기 개정에 이미 반영된 잔존 인용 {len(s['covered'])}건"):
                 for row in s["covered"]:
                     st.write(f"{_format_jo_label(row['조번호'])} {row['제목']} — 대상: {', '.join(row['대상'])}")
         if s["decree"]:
-            with st.expander(f"📋 시행령 잔존 인용 {len(s['decree'])}건 (법률 공포 후 시행령 개정에 반영)"):
+            with st.expander(f"📋 위임법령(시행령·시행규칙) 잔존 인용 {len(s['decree'])}건 (법률 공포 후 후속 개정에 반영)"):
                 for row in s["decree"]:
                     st.write(f"{row['법령명']} {_format_jo_label(row['조번호'])} {row['제목']} — 대상: {', '.join(row['대상'])}")
 

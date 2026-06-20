@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import re
 
+from core.citation_parser import base_law_name
 from core.new_article_scanner import (
     forward_citations,
     parse_jo_tokens,
@@ -216,7 +217,9 @@ def compare_review(
         {
           "law_name", "jo_list", "manual_targets",
           "forward": {"external": [...], "internal": [...]},
-          "stale": {"covered": [...], "missing": [...], "missing_hang": [...], "decree": [...]},
+          "stale": {"covered": [...], "missing": [...], "missing_hang": [...],
+                    "decree": [...],      # 같은 모법의 시행령·시행규칙(위임법령)
+                    "other_law": [...]},  # 타법률 본법 + 타법 시행령·규칙(병행개정 검토)
           "proxy": {"covered": [...], "missing": [...]},
         }
     """
@@ -243,9 +246,14 @@ def compare_review(
 
     scope = amended_scope(body)
     stale_rows = stale_citation_conflicts(law_name, jo_list)
-    stale = {"covered": [], "missing": [], "missing_hang": [], "decree": []}
+    amended_base = base_law_name(law_name)
+    stale = {"covered": [], "missing": [], "missing_hang": [], "decree": [], "other_law": []}
     for r in stale_rows:
-        if r["법령명"] != law_name:
+        if base_law_name(r["법령명"]) != amended_base:
+            # 타법(타법률 본법 + 타법 시행령·시행규칙) — 위임법령이 아니라 병행개정 검토 대상
+            stale["other_law"].append(r)
+        elif r["법령명"] != law_name:
+            # 같은 모법의 시행령·시행규칙 = 위임법령 → 법률 공포 후 후속 개정
             stale["decree"].append(r)
         elif r["조번호"] in manual_set:
             stale["covered"].append(r)
