@@ -17,6 +17,7 @@ MODULES: tuple[str, ...] = (
     "scripts.test_article_relations",
     "scripts.test_new_article_scanner",
     "scripts.test_draft_bill_parser",
+    "scripts.test_renumber_scan",
     "scripts.test_llm_fallback",
     "scripts.test_outline_intent",
     "scripts.test_related_article_129",
