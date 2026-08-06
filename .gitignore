@@ -18,6 +18,10 @@ data/law-snapshots/
 
 # Local reference materials (keep on disk, not in git)
 docs/*.pdf
+docs/입법예고/
+
+# 도구 상태 디렉터리 (bkit 플러그인)
+.bkit/
 docs/법령검색목록_법령.csv
 *.pptx
 presentation.html
