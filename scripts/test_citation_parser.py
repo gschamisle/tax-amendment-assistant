@@ -274,6 +274,50 @@ def test_enumerated_cross_law_name() -> None:
     assert find_back_citations(law, "9") == []
 
 
+def test_enumeration_chain_survives_fillers() -> None:
+    """열거 체인이 부스러기(항·호 범위, 괄호 한정, 호 가지번호)에서 끊기면 안 된다.
+
+    끊기면 뒤 조문이 출처법으로 오귀속돼, 존재하지도 않는 자기 조문을 가리키는
+    유령 엣지가 인용 그래프에 실린다 (농어촌특별세법 시행령 제4조에서 실제 발생).
+    """
+    # ① 앞 인용에 딸린 호 범위('제93조제4호부터 제7호까지')를 건너뛴다
+    text = ("「관세법」 제88조, 제92조, 제93조제4호부터 제7호까지 및 "
+            "제9호부터 제14호까지, 제94조, 제96조부터 제101조까지의 규정")
+    for jo in ("92", "94", "96"):
+        c = _one(text, jo=jo)
+        assert effective_law_name(c, "농어촌특별세법 시행령") == "관세법", (jo, c.law_name)
+
+    # ② 괄호·대괄호 한정어구를 건너뛴다
+    text = ("「조세특례제한법」 제66조부터 제70조까지, "
+            "제72조제1항(제1호, 제5호 및 제8호의 법인은 제외한다), "
+            "제77조[「조세특례제한법」 제69조제1항 본문에 따른 토지로 한정한다] 및 제102조")
+    for jo in ("77", "102"):
+        c = _one(text, jo=jo)
+        assert effective_law_name(c, "농어촌특별세법 시행령") == "조세특례제한법", (jo, c.law_name)
+
+    # ③ 호 가지번호 꼬리('제1호의2')를 건너뛴다
+    text = "「지방세특례제한법」 제13조제2항제1호의2, 제15조제2항, 제16조제1항, 제17조"
+    for jo in ("15", "16", "17"):
+        c = _one(text, jo=jo)
+        assert effective_law_name(c, "농어촌특별세법 시행령") == "지방세특례제한법", (jo, c.law_name)
+
+    # ④ 항 범위 인용 자체도 법령명을 물려받고, 뒤 열거의 앵커가 된다
+    text = "「지방세법」 제9조제3항부터 제5항까지, 제15조제1항제1호부터 제4호까지 및 제26조제2항"
+    for jo in ("9", "15", "26"):
+        c = _one(text, jo=jo)
+        assert effective_law_name(c, "농어촌특별세법 시행령") == "지방세법", (jo, c.law_name)
+
+    # ⑤ '각 호 외의 부분'도 부스러기
+    c = _one("「법인세법」 제10조제1항 각 호 외의 부분 및 제20조", jo="20")
+    assert effective_law_name(c, "소득세법 시행령") == "법인세법", c.law_name
+
+    # ⑥ 과탐 방지는 유지 — 실질 어구가 끼면 전파하지 않는다
+    c = _one("「법인세법」 제10조를 적용할 때 상시근로자의 범위 및 제20조", jo="20")
+    assert effective_law_name(c, "소득세법 시행령") == "소득세법 시행령", c.law_name
+    c = _one("「법인세법」 제10조에 따른 소득과 이 영 제20조에 따른 금액", jo="20")
+    assert effective_law_name(c, "소득세법 시행령") == "소득세법 시행령", c.law_name
+
+
 def test_related_law_names_normalized() -> None:
     # P1③: 공백 없는 법령명 표기로도 병행 법령군이 채워진다
     rel = {n.replace(" ", "") for n in related_law_names("상속세및증여세법")}

@@ -184,16 +184,20 @@ def _resolve_relative_citations(citations: list[Citation], text: str) -> None:
 
 
 def _resolve_range_law_names(citations: list[Citation]) -> None:
-    """조문 범위 인용('제X조부터 제Y조까지')에 선행 명시 법령명을 전파한다.
+    """범위 인용에 선행 명시 법령명을 전파한다.
 
     '「법인세법」 제13조부터 제54조까지'에서 CROSS_LAW/NAMED_LAW는 '「법인세법」 제13조'만
     잡고, 범위 인용 자체는 law_name이 비어 source 법령(예: 조특법)으로 오귀속된다.
     범위의 시작 조번호와 일치하며 범위 시작('제13조')을 span으로 덮는 직전 명시 인용의
     법령명(·relative)을 물려받아 _resolve_relative_citations·effective_law_name이
     올바른 법령으로 해석하도록 한다.
+
+    조 범위뿐 아니라 항·호 범위('「지방세법」 제9조제3항부터 제5항까지')도 같다.
+    이 경우 range_end_jo는 비고 hang_end/ho만 채워지는데, 전파를 빠뜨리면 그 인용이
+    출처법 자기참조가 될 뿐 아니라 뒤따르는 열거 체인의 앵커까지 무력화된다.
     """
     for cite in citations:
-        if not (cite.is_range and cite.range_end_jo):
+        if not cite.is_range or not cite.jo:
             continue
         if cite.law_name or cite.relative:
             continue
@@ -212,10 +216,21 @@ def _resolve_range_law_names(citations: list[Citation]) -> None:
 # 조문 열거 연결어와, 그 사이에 끼는 '부스러기'(앞 인용에 딸린 항·호·목·위치어).
 # '「A법」 제9조 및 제10조', '제33조제3항ㆍ제4항 및 제34조', '제61조제1항 본문 및 제62조'
 # 처럼 두 조문 사이가 '연결어 + (항/호/목·전단/후단/단서/본문/각 호)뿐'이면 같은 법으로 본다.
+#
+# '부터·까지·내지'도 부스러기다. 앞 인용에 딸린 항·호 범위('제93조제4호부터 제7호까지')가
+# 끼면 열거 체인이 거기서 끊겨 뒤 조문이 출처법으로 오귀속됐다
+# (농특세법 시행령 제4조: 「관세법」 제88조 … 제94조, 제96조부터 제101조까지 → 제94조 이후 단절).
 _CONN_RE = re.compile(r"및|와|과|또는|,|ㆍ|·")
 _CONN_FILLER_RE = re.compile(
-    r"제\s*\d+\s*(?:항|호|목)|전단|후단|단서|본문|각\s*호|각\s*목|항|호|목|\s"
+    r"제\s*\d+\s*(?:항|호|목)|전단|후단|단서|본문|각\s*호|각\s*목|외의\s*부분|"
+    r"부터|까지|내지|항|호|목|\s"
 )
+
+
+# 앞 인용에 딸린 호·목 가지번호 꼬리. 파서가 '제1호의2'를 '제1호'까지만 잡아
+# '의2'가 간격에 남고, 그 때문에 열거 체인이 끊긴다
+# (농특세령 제4조: 「지방세특례제한법」 제13조제2항제1호의2, 제15조제2항 … → 제15조 이후 단절).
+_TRAILING_SUB_RE = re.compile(r"^\s*의\s*\d+")
 
 
 def _is_connective(gap: str) -> bool:
@@ -224,10 +239,37 @@ def _is_connective(gap: str) -> bool:
     실질 어구(명사·서술)가 끼면 False — 그 경우 뒤 조문은 별개 맥락일 수 있어
     법령명을 전파하지 않는다(과탐 방지). 연결어가 하나도 없어도 False.
     """
+    gap = _TRAILING_SUB_RE.sub("", gap)
     if not _CONN_RE.search(gap):
         return False
     rest = _CONN_FILLER_RE.sub("", _CONN_RE.sub("", gap))
     return rest == ""
+
+
+def _bracket_mask(text: str) -> tuple[str, list[tuple[int, int]]]:
+    """괄호·대괄호 안을 공백으로 지운 텍스트와 그 구간 목록.
+
+    열거 중간의 괄호는 앞 조문에 딸린 한정어구다
+    ('제72조제1항(제1호…의 법인은 제외한다), 제77조'). 안의 서술이 실질 어구로 읽혀
+    열거 체인을 끊고, 안에 든 인용이 앵커로 잡혀 간격 판정을 망친다.
+    「」는 법령명 표기라 마스킹하지 않는다.
+    """
+    spans: list[tuple[int, int]] = []
+    stack: list[int] = []
+    for i, ch in enumerate(text):
+        if ch in "([":
+            stack.append(i)
+        elif ch in ")]" and stack:
+            start = stack.pop()
+            if not stack:                       # 최외곽 괄호만 기록
+                spans.append((start, i + 1))
+    if not spans:
+        return text, spans
+    chars = list(text)
+    for a, b in spans:
+        for i in range(a, b):
+            chars[i] = " "
+    return "".join(chars), spans
 
 
 def _resolve_enumerated_law_names(citations: list[Citation], text: str) -> None:
@@ -240,16 +282,25 @@ def _resolve_enumerated_law_names(citations: list[Citation], text: str) -> None:
     좌→우로 처리해 '제9조, 제10조 및 제11조'의 연쇄 전파도 자연히 이어진다.
     _resolve_relative_citations 이후 실행해 '같은 법'·지시참조가 해석된 법령명을 쓴다.
     """
+    masked, spans = _bracket_mask(text)
+
+    def _in_bracket(pos: int) -> bool:
+        return any(a <= pos < b for a, b in spans)
+
     for idx in range(1, len(citations)):
         cur = citations[idx]
         if cur.law_name or cur.relative or cur.byeolpyo or not cur.jo:
             continue
         # 앵커 = jo를 가진 가장 가까운 앞 인용. 중간의 jo 없는 항·호 인용
-        # ('제3항ㆍ제4항'의 '제4항' 등)은 건너뛰어 열거 체인이 끊기지 않게 한다.
-        prev = next((p for p in reversed(citations[:idx]) if p.jo), None)
+        # ('제3항ㆍ제4항'의 '제4항' 등)과 괄호 속 인용은 건너뛰어 열거 체인을 잇는다.
+        prev = next(
+            (p for p in reversed(citations[:idx]) if p.jo and not _in_bracket(p.span[0])),
+            None,
+        )
         if prev is None or not prev.law_name or prev.law_name.startswith("같은"):
             continue
-        if not _is_connective(text[prev.span[1]:cur.span[0]]):
+        # 괄호 속 한정어구는 공백으로 지운 텍스트로 간격을 본다
+        if not _is_connective(masked[prev.span[1]:cur.span[0]]):
             continue
         cur.law_name = prev.law_name
         cur.relative = prev.relative
