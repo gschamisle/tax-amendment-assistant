@@ -182,4 +182,5 @@ uv run python scripts/build_special_tax_links.py
 | [docs/citation-parsing.md](docs/citation-parsing.md) | 인용 파싱 지원 패턴·한계·확장 |
 | [docs/parallel-law-detection.md](docs/parallel-law-detection.md) | 병행법령 탐지 로직·한계·확장 |
 | [docs/opinion-clustering.md](docs/opinion-clustering.md) | 입법예고 의견 수집·군집화·요약 파이프라인 |
+| [docs/handoff-입법예고-의견분석.md](docs/handoff-입법예고-의견분석.md) | 위 도구의 작업 인계 노트 — 판단 근거·실측 결과·남은 작업 |
 | [docs/manual-test-scenarios.md](docs/manual-test-scenarios.md) | 수동 테스트 시나리오·알려진 한계 |
