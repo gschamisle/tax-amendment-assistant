@@ -190,6 +190,12 @@ def test_tagging() -> None:
     tags = issue_tags("1세대 1주택자의 공정시장가액비율을 인하해 주십시오.")
     assert "1세대 1주택" in tags and "공정시장가액비율" in tags, tags
 
+    # 한글은 어절 경계가 없다 — '이중과세'가 '중과'/'중과세'에 부분일치하면 안 된다
+    double_tax = issue_tags("재산세와의 이중과세이므로 1주택자는 제외해야 합니다.")
+    assert "이중과세" in double_tax, double_tax
+    assert "다주택 중과" not in double_tax, double_tax
+    assert "다주택 중과" in issue_tags("다주택자 중과세율은 유지되어야 합니다."), "정상 매칭까지 막으면 안 된다"
+
     label = deterministic_label("종합부동산세는 폐지되어야 합니다. 부당합니다.", ["종부세", "폐지"])
     assert "폐지" in label and "[" in label, label
     print("  tagging OK")

@@ -88,6 +88,37 @@ def build_views(
     return views
 
 
+GENERIC_TAG_SHARE = 0.80  # 이 비율 이상 붙는 태그는 변별력이 없어 표에서 뺀다
+
+
+def topic_rollup(
+    views: Sequence[ClusterView],
+    issue_totals: Counter[str],
+    total: int,
+) -> list[tuple[str, int, int]]:
+    """쟁점별 언급 집계 → [(쟁점, 의견수, 이 쟁점이 걸린 군집수)] 내림차순.
+
+    유사도는 표면형을 보므로, 같은 주장을 완전히 다른 말로 쓴 의견은 별개 군집으로 갈린다
+    (실측: '1주택 종부세 폐지' 400건이 5개 군집으로). 건수 순 상위 목록만 보면 같은 주제가
+    여러 번 나와 실제 규모를 놓치므로, 주제 단위 집계를 함께 낸다.
+
+    한 의견이 여러 쟁점을 담으면 각 쟁점에 모두 센다(합계가 총 의견수를 넘는다). 군집마다
+    대표 쟁점 하나를 고르는 방식은 '1세대 1주택'과 '이중과세'처럼 동점일 때 자의적이 되어
+    오히려 주제를 쪼갰기 때문에, 중복 집계를 택했다.
+    """
+    cluster_counts: Counter[str] = Counter()
+    for view in views:
+        for tag, _ in view.issues:
+            cluster_counts[tag] += 1
+
+    out: list[tuple[str, int, int]] = []
+    for tag, size in issue_totals.most_common():
+        if total and size / total >= GENERIC_TAG_SHARE:
+            continue  # 거의 모든 의견에 붙는 태그(예: '종부세 자체')는 정보가 없다
+        out.append((tag, size, cluster_counts.get(tag, 0)))
+    return out
+
+
 def attach_summaries(views: Sequence[ClusterView], summaries: dict[int, dict[str, Any]]) -> None:
     for view in views:
         summary = summaries.get(view.rank)
@@ -165,6 +196,25 @@ def render_markdown(
         f"| 많이 언급된 쟁점 | {_bullet_counts(issue_total.most_common(8))} |",
         "",
     ]
+
+    # 쟁점별 합계 — 표면형이 달라 갈린 같은 주제를 한 줄로 모아 본다
+    rollup = topic_rollup(views, issue_total, total)
+    if rollup:
+        lines += [
+            "## 쟁점별 합계",
+            "",
+            "유사도는 표현을 보므로 같은 주장도 말이 다르면 군집이 갈립니다. 주제의 실제 "
+            "규모는 이 표로 봅니다. 한 의견이 여러 쟁점을 담으면 각각에 세므로 합계는 "
+            "총 의견수를 넘습니다.",
+            "",
+            "| 쟁점 | 의견수 | 비율 | 걸린 군집수 |",
+            "|------|-------:|-----:|-----------:|",
+        ]
+        for topic, size, clusters in rollup[:12]:
+            lines.append(
+                f"| {topic} | {size:,} | {_fmt_pct(size / total if total else 0)} | {clusters} |"
+            )
+        lines.append("")
 
     # 상위 군집 요약표
     lines += [
