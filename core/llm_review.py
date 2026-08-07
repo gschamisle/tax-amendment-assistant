@@ -156,6 +156,11 @@ def _structured_call(
     )
 
 
+def structured_call(models, system: str, user_text: str, schema: dict, api_key: str = "") -> dict:
+    """다른 모듈이 재사용하는 공개 진입점 — 모델 폴백 + JSON 스키마 강제를 한 곳에 둔다."""
+    return _structured_call(models, system, user_text, schema, api_key)
+
+
 def analyze_bill_structure(body: str, api_key: str = "") -> dict:
     """개정문 본문에서 신설 제도와 조번호 범위를 추론한다."""
     user = (

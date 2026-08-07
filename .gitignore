@@ -26,6 +26,9 @@ docs/법령검색목록_법령.csv
 *.pptx
 presentation.html
 
+# 수집한 입법예고 의견 원문·요약 캐시 (개인 작성 글 — 커밋 금지)
+data/opinions/
+
 # 내부자료 — 업로드된 개정안 원문·분석 산출물 (절대 커밋 금지)
 data/uploads/
 data/uploaded_draft.txt

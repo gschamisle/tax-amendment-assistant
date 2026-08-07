@@ -45,6 +45,40 @@
 
 ---
 
+## 입법예고 의견 분석 (CLI)
+
+입법예고에 달린 의견을 **같은 취지끼리 묶어 건수 순으로 정렬**하고, 상위 X개 군집의
+주요내용을 보고서로 뽑습니다. 종합부동산세법(1,600건+)·소득세법처럼 의견이 대량으로
+달리는 입법예고에서 여론 지형을 한 장으로 보기 위한 도구입니다.
+
+```bash
+# 0) 사이트 구조 확인 (최초 1회) — 1페이지 원문 HTML을 저장
+uv run python scripts/fetch_opinions.py --bill 87936 --probe
+
+# 1) 수집 (요청 간격 1초, robots.txt 확인, 작성자 실명은 저장하지 않음)
+uv run python scripts/fetch_opinions.py --bill 87936
+
+#    크롤링이 막히면 — 브라우저에서 저장한 HTML/CSV로 대체
+uv run python scripts/fetch_opinions.py --bill 87936 --from-files saved/*.html
+
+# 2) 군집화·리포트
+uv run python scripts/analyze_opinions.py --bill 87936 --law 종합부동산세법 --top 20
+uv run python scripts/analyze_opinions.py --bill 87936 --top 20 --no-llm   # API 키 없이
+
+# (선택) 실제 수집 전 시험 — 정답 라벨이 붙은 합성 코퍼스로 파이프라인을 돌려본다
+uv run python scripts/make_demo_opinions.py
+```
+
+산출물(`output/`): 보고서 `opinions-{bill}.md`, 군집 요약 `…-clusters.csv`,
+전 건의 군집 배정 `…-members.csv`(판정 감사용).
+
+**군집·건수는 결정적 레이어가 정하고, Claude는 상위 X개 군집의 문장 정리에만 관여합니다**
+— 실행할 때마다 통계가 달라지지 않고, `--no-llm`이면 API 호출 없이 같은 구조의 리포트가
+나옵니다. 자세한 내용·임계값 조정·사이트 개편 대응은
+[docs/opinion-clustering.md](docs/opinion-clustering.md).
+
+---
+
 ## 설치
 
 Python 3.13+ 및 [uv](https://github.com/astral-sh/uv).
@@ -103,6 +137,10 @@ TaxLawAmend/
 │   ├── byeolpyo.py             # 별표 ↔ 조문 양방향 연관
 │   ├── law_network.py          # 법령군 스코프·역인용 스캔
 │   ├── llm_review.py           # Claude 검토 레이어 (삼분류)
+│   ├── opinion_source.py       # 입법예고 의견 수집 (크롤링 + 파일 폴백)
+│   ├── opinion_cluster.py      # 의견 군집화 (완전중복·근사중복·TF-IDF 코사인)
+│   ├── opinion_tagging.py      # 관련 조문·찬반·쟁점 태깅 (citation_parser 재사용)
+│   ├── opinion_summary.py      # 상위 군집 Claude 요약 (보조)
 │   ├── amendment_agent.py      # 개정 초안 생성 (보조)
 │   ├── hwpx_writer.py          # HWPX 생성 (준비 중)
 │   └── law_api.py              # 법제처 Open API 클라이언트
@@ -146,4 +184,6 @@ uv run python scripts/build_special_tax_links.py
 | [docs/architecture.md](docs/architecture.md) | 전체 아키텍처·모듈 설계·구현 이력 |
 | [docs/citation-parsing.md](docs/citation-parsing.md) | 인용 파싱 지원 패턴·한계·확장 |
 | [docs/parallel-law-detection.md](docs/parallel-law-detection.md) | 병행법령 탐지 로직·한계·확장 |
+| [docs/opinion-clustering.md](docs/opinion-clustering.md) | 입법예고 의견 수집·군집화·요약 파이프라인 |
+| [docs/handoff-입법예고-의견분석.md](docs/handoff-입법예고-의견분석.md) | 위 도구의 작업 인계 노트 — 판단 근거·실측 결과·남은 작업 |
 | [docs/manual-test-scenarios.md](docs/manual-test-scenarios.md) | 수동 테스트 시나리오·알려진 한계 |
