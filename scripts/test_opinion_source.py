@@ -11,9 +11,11 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 from core.opinion_source import (  # noqa: E402
+    DEFAULT_SELECTORS,
     OpinionRecord,
     author_fingerprint,
     dedupe_records,
+    fetch_opinions,
     load_from_files,
     mask_author,
     parse_generic_html,
@@ -26,7 +28,10 @@ FIXTURES = ROOT / "data" / "opinion-fixtures"
 
 def test_selector_parsing() -> None:
     html = (FIXTURES / "sample-list.html").read_text(encoding="utf-8")
-    records = parse_list_html(html, "87936")
+    # DEFAULT_SELECTORS를 명시한다. 인자를 비우면 load_selectors()가
+    # data/opinion-selectors.json(실사이트 설정)을 읽어, 픽스처와 무관한
+    # 로컬 설정에 테스트 결과가 좌우된다.
+    records = parse_list_html(html, "87936", DEFAULT_SELECTORS)
 
     assert len(records) == 4, f"expected 4 records, got {len(records)}"
     ids = [r.opinion_id for r in records]
@@ -47,7 +52,7 @@ def test_selector_parsing() -> None:
 
 def test_author_is_never_stored() -> None:
     html = (FIXTURES / "sample-list.html").read_text(encoding="utf-8")
-    records = parse_list_html(html, "87936")
+    records = parse_list_html(html, "87936", DEFAULT_SELECTORS)
 
     assert records[0].author_masked == "홍*동", records[0].author_masked
     assert records[1].author_masked == "김*수", records[1].author_masked
@@ -120,6 +125,62 @@ def test_dedupe_and_empty() -> None:
     print("  dedupe / empty input OK")
 
 
+def test_target_items_merge_on_dedupe() -> None:
+    """사이트는 의견 1건을 대상 개정항목마다 한 행씩 내려준다.
+
+    접지 않으면 한 사람 의견이 여러 번 집계되고, 그냥 접으면 어느 항목에 달린
+    의견인지가 사라진다 — 접되 대상은 합쳐야 한다.
+    """
+    def rec(oid: str, title: str) -> OpinionRecord:
+        return OpinionRecord(opinion_id=oid, bill_id="87936", body="반대합니다", title=title)
+
+    merged = dedupe_records([
+        rec("a", "가. 납세의무자 조정"),
+        rec("a", "나. 기본공제금액 조정"),
+        rec("a", "가. 납세의무자 조정"),   # 같은 대상 반복은 한 번만
+        rec("b", "다. 세율 조정"),
+    ])
+    assert len(merged) == 2, merged
+    assert merged[0].title == "가. 납세의무자 조정 ; 나. 기본공제금액 조정", merged[0].title
+    assert merged[1].title == "다. 세율 조정", merged[1].title
+    print("  대상 개정항목 병합 OK")
+
+
+def test_incremental_stops_at_known() -> None:
+    """증분 수집: 이미 가진 의견에 닿으면 멈추고, 새 의견만 돌려준다."""
+    page = (FIXTURES / "sample-list.html").read_text(encoding="utf-8")
+    known = parse_list_html(page, "87936", DEFAULT_SELECTORS)
+    assert known, "픽스처 파싱 실패"
+
+    calls: list[int] = []
+
+    class _Resp:
+        status_code = 200
+        headers = {"Content-Type": "text/html"}
+        text = page
+
+    class _Sess:
+        def get(self, url, **kw):
+            calls.append(1)
+            return _Resp()
+
+    report = fetch_opinions(
+        "87936", session=_Sess(), check_robots=False, delay=0,
+        selectors=DEFAULT_SELECTORS, known=known, max_pages=10,
+    )
+    assert report.records == [], report.records          # 전부 아는 의견
+    assert len(calls) == 1, f"1페이지에서 멈춰야 하는데 {len(calls)}회 요청"
+    assert "기존 수집분에 도달" in report.stopped_reason, report.stopped_reason
+
+    # known이 비면 종전대로 전량 수집한다
+    fresh = fetch_opinions(
+        "87936", session=_Sess(), check_robots=False, delay=0,
+        selectors=DEFAULT_SELECTORS, max_pages=10,
+    )
+    assert len(fresh.records) == len(known), fresh.records
+    print("  증분 수집 조기 중단 OK")
+
+
 def main() -> int:
     print("opinion_source tests")
     test_selector_parsing()
@@ -127,6 +188,8 @@ def main() -> int:
     test_generic_fallback()
     test_csv_and_rows()
     test_dedupe_and_empty()
+    test_target_items_merge_on_dedupe()
+    test_incremental_stops_at_known()
     print("ALL PASSED")
     return 0
 

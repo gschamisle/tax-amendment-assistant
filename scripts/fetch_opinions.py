@@ -54,7 +54,11 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--probe", action="store_true", help="1페이지 원문만 저장하고 종료")
     parser.add_argument("--from-files", nargs="+", metavar="PATH", help="저장한 HTML/CSV/JSON에서 읽기")
     parser.add_argument("--no-robots", action="store_true", help="robots.txt 확인 생략")
-    parser.add_argument("--append", action="store_true", help="기존 수집 결과에 이어 붙이기")
+    parser.add_argument(
+        "--append", action="store_true",
+        help="증분 수집 — 이미 가진 의견은 건너뛰고, 아는 지점에 닿으면 멈춘다"
+             " (접수기간 중 반복 실행용)",
+    )
     return parser.parse_args(argv)
 
 
@@ -87,11 +91,24 @@ def main(argv: list[str] | None = None) -> int:
             print("파싱 결과 0건입니다. 저장한 HTML 구조가 예상과 다를 수 있습니다.", file=sys.stderr)
             print("→ data/opinion-selectors.json 에 XPath를 지정해 보세요.", file=sys.stderr)
             return 1
+        if args.append and cache_path(bill_id).exists():
+            from core.opinion_source import load_records
+
+            records = dedupe_records(load_records(bill_id) + records)
+            print(f"기존 수집분과 병합 — 누적 {len(records):,}건")
     else:
         selectors = load_selectors(args.selectors) if args.selectors else load_selectors()
 
         def on_page(page: int, fresh: int, total: int) -> None:
             print(f"  page {page:>3}: +{fresh:>3}건 (누적 {total:,}건)")
+
+        # 증분 수집: 이미 가진 의견을 깔고 시작해 아는 지점에서 멈춘다
+        previous: list = []
+        if args.append and cache_path(bill_id).exists():
+            from core.opinion_source import load_records
+
+            previous = load_records(bill_id)
+            print(f"기존 수집분 {len(previous):,}건 — 새 의견만 받아옵니다")
 
         print(f"수집 시작: {list_url(bill_id, 1, page_param=args.page_param)}")
         try:
@@ -103,6 +120,7 @@ def main(argv: list[str] | None = None) -> int:
                 selectors=selectors,
                 check_robots=not args.no_robots,
                 on_page=on_page,
+                known=previous,
             )
         except Exception as exc:
             print(f"수집 실패: {exc}", file=sys.stderr)
@@ -112,15 +130,15 @@ def main(argv: list[str] | None = None) -> int:
         source_note = f"http:{report.pages_fetched}pages"
         if report.stopped_reason:
             print(f"중단 사유: {report.stopped_reason}")
-        if not records:
+        print(f"새 의견 {len(records):,}건")
+        if not records and not previous:
             print("수집된 의견이 0건입니다.", file=sys.stderr)
             print("→ `--probe`로 1페이지 HTML을 저장해 셀렉터를 확인하세요.", file=sys.stderr)
             return 1
-
-    if args.append and cache_path(bill_id).exists():
-        from core.opinion_source import load_records
-
-        records = dedupe_records(load_records(bill_id) + records)
+        if previous:
+            # previous를 known으로 넘겼으므로 대상 개정항목은 이미 병합돼 있다
+            records = dedupe_records(previous + records)
+            print(f"누적 {len(records):,}건")
 
     for warning in warnings:
         print(f"[경고] {warning}", file=sys.stderr)

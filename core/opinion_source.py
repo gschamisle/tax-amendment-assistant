@@ -38,9 +38,11 @@ BASE_URL = "https://opinion.lawmaking.go.kr"
 # --page-param으로 바꿀 수 있다(전자정부 프레임워크 관행상 pageIndex가 기본).
 LIST_URL_TEMPLATE = "{base}/gcom/ogLmPp/{bill_id}/myOpn?opnOpYn=Y&{page_param}={page}"
 
+# HTTP 헤더는 latin-1로만 인코딩된다 — 한글을 넣으면 요청 자체가 실패한다
+# (UnicodeEncodeError: 'latin-1' codec can't encode characters).
 USER_AGENT = (
     "tax-amendment-assistant/0.1 (legislative-opinion-analysis; "
-    "contact: 재정경제부 세제실 담당자)"
+    "contact: MOEF Tax Policy Bureau)"
 )
 DEFAULT_DELAY = 1.0
 DEFAULT_MAX_PAGES = 200
@@ -156,8 +158,23 @@ def _normalize_date(value: str) -> str:
 
 
 def _synthetic_id(bill_id: str, posted_at: str, body: str) -> str:
-    seed = f"{bill_id}|{posted_at}|{_clean_text(body)[:120]}"
-    return "auto-" + hashlib.sha256(seed.encode("utf-8")).hexdigest()[:10]
+    """DOM에 의견 ID가 없을 때 쓰는 대체 식별자.
+
+    두 실패를 동시에 피해야 한다.
+
+    ① 과소집계 — 복붙 캠페인이 절반을 차지하는 게 정상인데, 같은 문구를 낸 서로 다른
+      제출이 같은 ID를 받으면 수집 단계에서 버려진다. 군집화가 세어야 할 건수가
+      그 전에 사라진다. (날짜만 쓰면 같은 날 같은 문구가 전부 1건으로 접힌다.)
+    ② 과대집계 — 목록은 최신순이고 예고 마감일에는 수집 중에도 새 의견이 올라와
+      기존 의견이 뒤 페이지로 밀린다. 페이지 내 위치를 ID에 넣으면 밀려서 다시 만난
+      같은 의견이 매번 새 ID를 받아 한 건이 십수 번 잡힌다(실측: 1건이 13회).
+
+    그래서 위치는 빼고 **제출시각(분까지) + 본문 전체**로만 만든다. 같은 분에 같은
+    문구를 낸 서로 다른 사람은 한 건으로 접히지만, 그 손실은 ②의 배수 과대집계보다
+    훨씬 작다. posted_at에는 정규화 전 원문(시:분 포함)을 넘겨야 한다.
+    """
+    seed = f"{bill_id}|{posted_at}|{_clean_text(body)}"
+    return "auto-" + hashlib.sha256(seed.encode("utf-8")).hexdigest()[:12]
 
 
 def _extract_id(raw: str) -> str:
@@ -216,10 +233,11 @@ def parse_list_html(
         if not body and not title:
             continue
         author = _xpath_text(row, sel.author)
-        posted_at = _normalize_date(_xpath_text(row, sel.posted_at))
+        raw_posted = _xpath_text(row, sel.posted_at)   # 분까지 있는 원문 — ID 재료
+        posted_at = _normalize_date(raw_posted)
         opinion_id = _extract_id(_xpath_text(row, sel.opinion_id))
         record = OpinionRecord(
-            opinion_id=opinion_id or _synthetic_id(bill_id, posted_at, body or title),
+            opinion_id=opinion_id or _synthetic_id(bill_id, raw_posted, body or title),
             bill_id=str(bill_id),
             body=body or title,
             title=title if body else "",
@@ -418,14 +436,38 @@ def load_from_files(paths: Iterable[Path | str], bill_id: str = "") -> list[Opin
     return dedupe_records(records)
 
 
+TITLE_SEP = " ; "
+
+
+def merge_title(kept: OpinionRecord, other: OpinionRecord) -> None:
+    """접힌 중복이 달고 있던 '대상 개정항목'을 살아남는 레코드에 합친다.
+
+    사이트는 의견 1건을 **그 의견이 지정한 개정항목마다 한 행씩** 렌더링한다
+    (실측: 1페이지 20행 = 고유 의견 8건, 한 의견이 13행). 그래서 목록의
+    '입법의견건수'는 의견 수가 아니라 (의견 × 대상항목) 행 수다.
+
+    본문 기준으로 접지 않으면 한 사람의 의견이 열세 번 집계되고, 그냥 접으면
+    어느 개정항목에 달린 의견인지가 사라진다 — 분류에서 가장 쓸모 있는 축이다.
+    그래서 접되 대상만 합쳐 둔다.
+    """
+    if not other.title or other.title == kept.title:
+        return
+    parts = kept.title.split(TITLE_SEP) if kept.title else []
+    if other.title not in parts:
+        parts.append(other.title)
+        kept.title = TITLE_SEP.join(parts)
+
+
 def dedupe_records(records: Iterable[OpinionRecord]) -> list[OpinionRecord]:
-    """의견 ID 기준 중복 제거 (수집 순서 유지)."""
-    seen: set[str] = set()
+    """의견 ID 기준 중복 제거 (수집 순서 유지, 대상 개정항목은 합침)."""
+    index: dict[str, OpinionRecord] = {}
     out: list[OpinionRecord] = []
     for r in records:
-        if r.opinion_id in seen:
+        kept = index.get(r.opinion_id)
+        if kept is not None:
+            merge_title(kept, r)
             continue
-        seen.add(r.opinion_id)
+        index[r.opinion_id] = r
         out.append(r)
     return out
 
@@ -535,11 +577,17 @@ def fetch_opinions(
     session=None,
     check_robots: bool = True,
     on_page=None,
+    known: Iterable[OpinionRecord] | None = None,
 ) -> FetchReport:
     """목록 페이지를 순회하며 의견을 수집한다.
 
     페이지 파라미터가 사이트와 맞지 않으면 매 페이지가 같은 내용을 돌려준다. 새 의견이
     하나도 없으면 즉시 멈춰서 같은 페이지를 수백 번 긁는 사고를 막는다.
+
+    known을 주면(증분 수집) 이미 가진 의견을 처음부터 '본 것'으로 깔고 시작한다.
+    목록이 최신순이라 새 의견은 앞 페이지에 쌓이므로, 아는 의견만 나오는 페이지에
+    닿으면 그 뒤는 전부 아는 것이다 — 거기서 멈춘다. 접수기간 중 매일 돌려도
+    새로 올라온 몫만 받아 온다. report.records에는 **새 의견만** 담긴다.
     """
     report = FetchReport(bill_id=str(bill_id))
     sess = session or _build_session()
@@ -554,7 +602,8 @@ def fetch_opinions(
             report.stopped_reason = "robots.txt 금지"
             return report
 
-    seen: set[str] = set()
+    seen: dict[str, OpinionRecord] = {r.opinion_id: r for r in (known or [])}
+    known_count = len(seen)
     for page in range(1, max_pages + 1):
         url = list_url(bill_id, page, page_param=page_param, base=base)
         resp = sess.get(url, timeout=20)
@@ -569,17 +618,29 @@ def fetch_opinions(
         else:
             page_records = parse_list_html(resp.text, bill_id, sel, source_url=urljoin(base, url))
 
-        fresh = [r for r in page_records if r.opinion_id not in seen]
+        # 같은 의견이 대상 개정항목마다 한 행씩 나온다 → 접되 대상은 합친다
+        fresh: list[OpinionRecord] = []
+        for r in page_records:
+            kept = seen.get(r.opinion_id)
+            if kept is not None:
+                merge_title(kept, r)
+                continue
+            seen[r.opinion_id] = r
+            fresh.append(r)
         if not fresh:
-            report.stopped_reason = (
-                "새 의견 없음 — 마지막 페이지이거나 페이지 파라미터가 맞지 않습니다"
-                if page_records
-                else "파싱 결과 0건 — 셀렉터 확인 필요(--probe)"
-            )
+            if not page_records:
+                report.stopped_reason = "파싱 결과 0건 — 셀렉터 확인 필요(--probe)"
+            elif known_count:
+                # 최신순이라 이 뒤는 전부 이미 가진 의견이다
+                report.stopped_reason = (
+                    f"기존 수집분에 도달 (page {page}) — 여기부터는 이미 가진 의견입니다"
+                )
+            else:
+                report.stopped_reason = (
+                    "새 의견 없음 — 마지막 페이지이거나 페이지 파라미터가 맞지 않습니다"
+                )
             break
 
-        for r in fresh:
-            seen.add(r.opinion_id)
         report.records.extend(fresh)
         if on_page:
             on_page(page, len(fresh), len(report.records))
