@@ -64,6 +64,9 @@ uv run python scripts/fetch_opinions.py --bill 87936 --from-files saved/*.html
 # 2) 군집화·리포트
 uv run python scripts/analyze_opinions.py --bill 87936 --law 종합부동산세법 --top 20
 uv run python scripts/analyze_opinions.py --bill 87936 --top 20 --no-llm   # API 키 없이
+
+# (선택) 실제 수집 전 시험 — 정답 라벨이 붙은 합성 코퍼스로 파이프라인을 돌려본다
+uv run python scripts/make_demo_opinions.py
 ```
 
 산출물(`output/`): 보고서 `opinions-{bill}.md`, 군집 요약 `…-clusters.csv`,

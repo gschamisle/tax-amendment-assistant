@@ -245,3 +245,21 @@ uv run python -m scripts.run_offline_tests      # 전체 (위 2개 포함)
 
 픽스처는 `data/opinion-fixtures/`의 **합성 데이터**다. 실제 사이트 HTML은 개인이 작성한
 글이므로 저장소에 넣지 않는다.
+
+### 실제 규모로 시험·보정하기
+
+`scripts/make_demo_opinions.py`가 실제 분포 특성(복붙 캠페인·표현 변형·인사말·롱테일)을
+흉내낸 합성 코퍼스를 만든다. **`테마` 열이 정답 라벨**이라 군집 결과와 대조해 순도를
+실측할 수 있다 — 위 임계값 표와 성능 수치가 이걸로 나왔다.
+
+```bash
+uv run python scripts/make_demo_opinions.py                    # 1,670건
+uv run python scripts/make_demo_opinions.py --scale 3          # 5,000건 (성능 시험)
+uv run python scripts/analyze_opinions.py --bill DEMO --law 종합부동산세법 \
+    --top 12 --no-llm --from-files output/demo-opinions.csv
+```
+
+임계값이나 사전(`ISSUE_LEXICON`·`ABBREVIATIONS`)을 바꾼 뒤에는 이걸로 순도가 나빠지지
+않았는지 확인하고 나서 실제 데이터에 적용한다.
+
+> ⚠️ 생성물은 합성 데이터다. 리포트 숫자를 정책 근거로 인용해서는 안 된다.

@@ -160,11 +160,16 @@ uv run python scripts/analyze_opinions.py --bill 87936 --law 종합부동산세�
 실제 호출은 확인 안 됐습니다. 키 설정 후 `--top 3`으로 한 번 돌려 스키마와 캐시 동작을
 확인하세요. 실패해도 결정적 라벨로 리포트는 완성됩니다.
 
-### (3) 합성 코퍼스 생성기 — 저장소에 없음
-위 실측에 쓴 생성기(`make_demo_corpus.py`)는 작업 세션의 임시 폴더에만 있었고 **커밋하지
-않았습니다.** 실제 수집 전 도구 시험이나 임계값 재보정에 유용하므로, 필요하면 다시 만들어야
-합니다. 사양: 테마 11종(정답 라벨 포함) × 복붙 비율 35~55% × 표현 변형 2~5종 + 인사말 40% +
-롱테일 120건, 시드 고정.
+### (3) 합성 코퍼스 생성기 — 커밋됨
+위 실측에 쓴 생성기를 `scripts/make_demo_opinions.py`로 넣어 뒀습니다. 테마 11종(정답
+라벨 `테마` 열 포함) × 복붙 비율 35~55% × 표현 변형 2~5종 + 인사말 40% + 롱테일 120건,
+시드 고정. 임계값이나 사전을 바꾼 뒤 순도가 나빠지지 않았는지 확인하는 데 쓰세요.
+
+```bash
+uv run python scripts/make_demo_opinions.py --scale 3          # 건수 배율 조정 가능
+uv run python scripts/analyze_opinions.py --bill DEMO --law 종합부동산세법 \
+    --top 12 --no-llm --from-files output/demo-opinions.csv
+```
 
 ### (4) 범위 밖으로 합의한 것
 - **Streamlit 탭** — CLI 확정 후 별건
