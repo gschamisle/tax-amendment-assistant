@@ -96,6 +96,10 @@ def compare_with_manifest(law_api_key: str = "") -> list[dict]:
                 "detail": f"MST {current['mst']}, hash {current['content_hash']}",
             })
             continue
+        if str(prev.get("시행일", "")) > str(current.get("시행일", "")):
+            # 검색 API가 기록보다 이른 시행일 판을 돌려준 경우다(실측 사례 있음).
+            # refresh_manifest가 후퇴를 막으므로 갱신해도 바뀌지 않는다 — 알릴 변경이 아니다.
+            continue
         diffs: list[str] = []
         if prev.get("mst") != current["mst"]:
             diffs.append(f"MST {prev.get('mst')} → {current['mst']}")

@@ -3,7 +3,7 @@ import base64
 import os
 import streamlit as st
 from config import LAW_API_KEY, OPENAI_API_KEY, ENABLE_HWPX_OUTPUT
-from ui import new_article_ui, stage1_draft, stage2_crossref, stage3_output
+from ui import new_article_ui, opinion_ui, stage1_draft, stage2_crossref, stage3_output
 from ui.styles import inject_global_css
 
 st.set_page_config(
@@ -35,32 +35,54 @@ openai_api_key = OPENAI_API_KEY
 
 if not law_api_key or not openai_api_key:
     st.warning(".env 파일에 LAW_API_KEY, OPENAI_API_KEY를 설정하세요.")
-elif law_api_key and "law_freshness_changes" not in st.session_state:
-    try:
-        from core.law_freshness import compare_with_manifest, load_manifest
 
-        _mf = load_manifest()
-        if _mf.get("laws"):
-            st.session_state["law_freshness_changes"] = compare_with_manifest(law_api_key)
-        else:
+# 현행본 대조는 추적 법령(32건) 전체를 API로 조회해 1분 넘게 걸린다.
+# 기동 때 자동으로 돌리면 그동안 화면이 백지라, 사용자가 원할 때만 실행한다.
+_fresh_col, _btn_col = st.columns([5, 1])
+with _btn_col:
+    _check = st.button("현행본 대조", width="stretch",
+                       help="추적 중인 법령 32건의 현행본을 조회해 저장된 스냅샷과 비교합니다 (약 1분)")
+if _check and law_api_key:
+    with _fresh_col, st.spinner("법제처에서 현행본을 조회하는 중... (약 1분)"):
+        try:
+            from core.law_freshness import compare_with_manifest, load_manifest
+
+            _mf = load_manifest()
+            st.session_state["law_freshness_changes"] = (
+                compare_with_manifest(law_api_key) if _mf.get("laws") else []
+            )
+            st.session_state["law_freshness_done"] = True
+        except Exception as _exc:
             st.session_state["law_freshness_changes"] = []
-    except Exception:
-        st.session_state["law_freshness_changes"] = []
+            st.session_state["law_freshness_error"] = str(_exc)
 
-_freshness = st.session_state.get("law_freshness_changes", [])
-if _freshness:
-    _names = ", ".join(c["name"] for c in _freshness[:5])
-    _more = f" 외 {len(_freshness) - 5}건" if len(_freshness) > 5 else ""
-    st.warning(
-        f"저장된 법령 스냅샷과 현행본이 다릅니다: {_names}{_more}. "
-        "터미널에서 `uv run python scripts/check_law_freshness.py --update-manifest` 후 "
-        "`uv run python scripts/build_special_tax_links.py`, "
-        "`uv run python scripts/build_parallel_matrix.py` 실행을 권장합니다."
-    )
+with _fresh_col:
+    _freshness = st.session_state.get("law_freshness_changes", [])
+    if st.session_state.get("law_freshness_error"):
+        st.warning(f"현행본 대조 실패: {st.session_state['law_freshness_error']}")
+    elif _freshness:
+        _names = ", ".join(c["name"] for c in _freshness[:5])
+        _more = f" 외 {len(_freshness) - 5}건" if len(_freshness) > 5 else ""
+        st.warning(
+            f"저장된 법령 스냅샷과 현행본이 다릅니다: {_names}{_more}. "
+            "터미널에서 `uv run python scripts/check_law_freshness.py --update-manifest` 후 "
+            "`uv run python scripts/build_law_citation_graph.py --all`, "
+            "`uv run python scripts/build_parallel_matrix.py` 실행을 권장합니다."
+        )
+    elif st.session_state.get("law_freshness_done"):
+        st.success("저장된 법령 스냅샷이 현행본과 일치합니다.")
 
 # ── 탭 ────────────────────────────────────────────────────────────────────────
-_tab3_label = "3️⃣ HWPX 출력" if ENABLE_HWPX_OUTPUT else "3️⃣ HWPX 출력 (준비 중)"
-tab1, tab2, tab3, tab4 = st.tabs(["1️⃣ 초안 작성", "2️⃣ 인용·준용 확인", _tab3_label, "🆕 신설 조문 검토"])
+# 탭 아이콘은 Material Symbols(:material/…:)를 쓴다. 이모지는 OS·글꼴마다
+# 모양과 폭이 달라 정렬이 흔들리고 디자인 토큰으로 색을 맞출 수 없다.
+_tab3_label = ":material/description: HWPX 출력" + ("" if ENABLE_HWPX_OUTPUT else " (준비 중)")
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    ":material/edit_note: 초안 작성",
+    ":material/link: 인용·준용 확인",
+    _tab3_label,
+    ":material/add_circle: 신설 조문 검토",
+    ":material/forum: 입법예고 의견 분석",
+])
 
 with tab1:
     stage1_draft.render(law_api_key, openai_api_key)
@@ -80,3 +102,6 @@ with tab3:
 
 with tab4:
     new_article_ui.render(law_api_key, openai_api_key)
+
+with tab5:
+    opinion_ui.render(law_api_key, openai_api_key)
