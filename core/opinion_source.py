@@ -660,7 +660,13 @@ def fetch_opinions(
                     time.sleep(delay)
                 continue
             if not page_records:
-                report.stopped_reason = "파싱 결과 0건 — 셀렉터 확인 필요(--probe)"
+                # 목록 끝을 지나면 사이트가 빈 목록을 돌려준다 — 이미 받아 둔 게
+                # 있으면 정상 종료다. 한 건도 못 받았을 때만 셀렉터를 의심한다.
+                report.stopped_reason = (
+                    f"목록 끝 (page {page} 이후 의견 없음)"
+                    if report.records
+                    else "파싱 결과 0건 — 셀렉터 확인 필요(--probe)"
+                )
             elif known_count:
                 # 최신순이라 이 뒤는 전부 이미 가진 의견이다
                 report.stopped_reason = (
