@@ -306,6 +306,30 @@ def _resolve_enumerated_law_names(citations: list[Citation], text: str) -> None:
         cur.relative = prev.relative
 
 
+def trim_law_name(name: str) -> str:
+    """낫표 없이 쓰인 법령명에서 앞에 붙은 산문을 걷어낸다.
+
+    _NAMED_LAW의 `[가-힣\\s]{1,40}` 부분이 공백을 포함해 탐욕적으로 잡히는 탓에
+    '하지만 헌법 제38조'에서 법령명이 '하지만 헌법'으로 나온다. 의견 본문처럼
+    산문이 섞인 글에서 특히 자주 나타난다.
+
+    한국 법령명은 실제로 셋 중 하나다 — ①한 낱말('헌법', '조세특례제한법')
+    ②'X에 관한 법률' ③'A 및 B법'. 앞에서부터 한 낱말씩 떼며 이 형태가 되는
+    첫 지점을 법령명으로 본다.
+    """
+    toks = str(name).split()
+    for i in range(len(toks)):
+        rest = toks[i:]
+        if len(rest) == 1:
+            return rest[0]
+        if len(rest) == 3 and rest[1] == "관한" and rest[0].endswith("에"):
+            return " ".join(rest)                       # 국제조세조정에 관한 법률
+        if len(rest) == 3 and rest[1] == "및" and not rest[0].endswith(("법", "법률")):
+            return " ".join(rest)                       # 상속세 및 증여세법
+        # 'A법 및 B법'이면 뒤엣것이 이 인용의 법령명이다 → 계속 떼어 낸다
+    return toks[-1] if toks else ""
+
+
 def _byeolpyo_label(kind: str, num: str, sub: str) -> str:
     """별표/별지 인용을 표준 표기로. 별지는 'N호서식', 별표는 'N(의M)'."""
     if kind == "별지":
@@ -350,7 +374,7 @@ def parse_citations(text: str) -> list[Citation]:
         seen.add(m.span())
         results.append(Citation(
             raw=m.group(0),
-            law_name=m.group(1).strip(),
+            law_name=trim_law_name(m.group(1)),
             jo=m.group(2),
             jo_sub=m.group(3) or "",
             hang=m.group(4) or "",

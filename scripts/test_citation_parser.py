@@ -11,6 +11,7 @@ from core.citation_parser import (
     find_back_citations,
     parse_citations,
     resolve_deictic_law,
+    trim_law_name,
 )
 from core.law_network import _choose_entry, _citation_matches, related_law_names
 
@@ -318,6 +319,27 @@ def test_enumeration_chain_survives_fillers() -> None:
     assert effective_law_name(c, "소득세법 시행령") == "소득세법 시행령", c.law_name
 
 
+def test_law_name_trims_leading_prose() -> None:
+    """낫표 없는 법령명이 앞말을 끌어오면 안 된다.
+
+    _NAMED_LAW의 공백 허용 부분이 탐욕적이라 '하지만 헌법 제38조'에서 법령명이
+    '하지만 헌법'으로 잡혔다(입법예고 의견처럼 산문이 섞인 글에서 자주 나온다).
+    """
+    for raw, expected in [
+        ("하지만 헌법", "헌법"),
+        ("헌법", "헌법"),
+        ("그런데 조세특례제한법", "조세특례제한법"),
+        ("상속세 및 증여세법", "상속세 및 증여세법"),          # 진짜 두 낱말 법령명
+        ("하지만 국제조세조정에 관한 법률", "국제조세조정에 관한 법률"),
+        ("민간임대주택에 관한 특별법", "민간임대주택에 관한 특별법"),
+        ("소득세법 및 종합부동산세법", "종합부동산세법"),      # 열거의 뒤엣것이 대상
+    ]:
+        assert trim_law_name(raw) == expected, (raw, trim_law_name(raw))
+
+    c = _one("하지만 헌법 제38조에 따라", jo="38")
+    assert effective_law_name(c, "종합부동산세법") == "헌법", c.law_name
+
+
 def test_related_law_names_normalized() -> None:
     # P1③: 공백 없는 법령명 표기로도 병행 법령군이 채워진다
     rel = {n.replace(" ", "") for n in related_law_names("상속세및증여세법")}
@@ -340,19 +362,13 @@ def test_choose_entry_fuzzy() -> None:
 
 
 def main() -> int:
-    test_deictic_parsing()
-    test_deictic_resolution()
-    test_citation_matches_cross_law()
-    test_find_back_citations_deictic()
-    test_naeji_range_parsing()
-    test_article_range_covers()
-    test_range_expansion_back_citations()
-    test_citation_matches_range_subarticle()
-    test_range_inherits_cross_law_name()
-    test_enumerated_cross_law_name()
-    test_related_law_names_normalized()
-    test_choose_entry_fuzzy()
-    print("ALL OK")
+    # 목록을 손으로 유지하면 새 테스트를 등록하는 걸 잊는다(실제로 놓친 적 있음).
+    # 모듈 안의 test_* 를 전부 찾아 돌린다.
+    tests = [fn for name, fn in sorted(globals().items())
+             if name.startswith("test_") and callable(fn)]
+    for fn in tests:
+        fn()
+    print(f"ALL OK ({len(tests)} tests)")
     return 0
 
 
