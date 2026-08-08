@@ -46,6 +46,9 @@ USER_AGENT = (
 )
 DEFAULT_DELAY = 1.0
 DEFAULT_MAX_PAGES = 200
+# 새 의견이 없는 페이지가 이만큼 연달아 나오면 끝으로 본다. 1로 두면
+# '한 의견이 한 페이지를 다 차지한' 경우를 마지막 페이지로 오인한다.
+_BARREN_PAGE_LIMIT = 4
 
 _DATE_RE = re.compile(r"(20\d{2})[.\-/년]\s*(\d{1,2})[.\-/월]\s*(\d{1,2})")
 _ID_IN_ATTR_RE = re.compile(r"(?:opnId|opinionId|seq|id)\W{0,3}(\d{3,})", re.IGNORECASE)
@@ -208,6 +211,7 @@ def parse_list_html(
     bill_id: str = "",
     selectors: ListSelectors | None = None,
     *,
+    allow_fallback: bool = True,
     source_url: str = "",
 ) -> list[OpinionRecord]:
     """설정 XPath로 목록 HTML을 파싱한다. 0건이면 generic 폴백으로 넘어간다.
@@ -249,7 +253,10 @@ def parse_list_html(
         )
         records.append(record)
 
-    if records:
+    if records or not allow_fallback:
+        # allow_fallback=False면 빈 목록을 그대로 돌려준다. 범위 밖 페이지에는
+        # 의견 블록이 없어 폴백이 좌측 메뉴·푸터를 의견으로 긁어 온다(실측:
+        # '통합입법예고 / (부처)입법예고 …' 21건이 군집에 섞였다).
         return records
     return parse_generic_html(html, bill_id, source_url=source_url)
 
@@ -604,6 +611,8 @@ def fetch_opinions(
 
     seen: dict[str, OpinionRecord] = {r.opinion_id: r for r in (known or [])}
     known_count = len(seen)
+    barren = 0            # 새 의견이 하나도 없던 연속 페이지 수
+    prev_ids: set[str] | None = None
     for page in range(1, max_pages + 1):
         url = list_url(bill_id, page, page_param=page_param, base=base)
         resp = sess.get(url, timeout=20)
@@ -616,7 +625,13 @@ def fetch_opinions(
         if "json" in content_type.lower():
             page_records = parse_json_payload(resp.json(), bill_id)
         else:
-            page_records = parse_list_html(resp.text, bill_id, sel, source_url=urljoin(base, url))
+            page_records = parse_list_html(
+                resp.text, bill_id, sel,
+                # 폴백은 아직 한 건도 못 받았을 때만. 범위 밖 페이지에서 폴백이
+                # 돌면 좌측 메뉴를 의견으로 긁어 온다.
+                allow_fallback=not report.records,
+                source_url=urljoin(base, url),
+            )
 
         # 같은 의견이 대상 개정항목마다 한 행씩 나온다 → 접되 대상은 합친다
         fresh: list[OpinionRecord] = []
@@ -627,7 +642,23 @@ def fetch_opinions(
                 continue
             seen[r.opinion_id] = r
             fresh.append(r)
+
+        page_ids = {r.opinion_id for r in page_records}
+        if page_records and page_ids == prev_ids:
+            # 페이지가 안 넘어간다 — 페이지 파라미터가 틀렸을 때의 무한 수집 방지
+            report.stopped_reason = f"직전 페이지와 내용 동일 (page {page}) — 페이지 파라미터 확인 필요"
+            break
+        prev_ids = page_ids or prev_ids
+
         if not fresh:
+            # 새 의견이 없다고 끝은 아니다. 의견 1건이 대상 개정항목마다 행을
+            # 차지해 한 페이지가 통째로 한 의견의 연속 행일 수 있다
+            # (실측: 소득세법안 15페이지 = 20행 전부 같은 의견 1건).
+            barren += 1
+            if page_records and barren < _BARREN_PAGE_LIMIT:
+                if delay:
+                    time.sleep(delay)
+                continue
             if not page_records:
                 report.stopped_reason = "파싱 결과 0건 — 셀렉터 확인 필요(--probe)"
             elif known_count:
@@ -641,6 +672,7 @@ def fetch_opinions(
                 )
             break
 
+        barren = 0
         report.records.extend(fresh)
         if on_page:
             on_page(page, len(fresh), len(report.records))

@@ -166,11 +166,12 @@ def test_incremental_stops_at_known() -> None:
 
     report = fetch_opinions(
         "87936", session=_Sess(), check_robots=False, delay=0,
-        selectors=DEFAULT_SELECTORS, known=known, max_pages=10,
+        selectors=DEFAULT_SELECTORS, known=known, max_pages=50,
     )
     assert report.records == [], report.records          # 전부 아는 의견
-    assert len(calls) == 1, f"1페이지에서 멈춰야 하는데 {len(calls)}회 요청"
-    assert "기존 수집분에 도달" in report.stopped_reason, report.stopped_reason
+    # 같은 페이지가 반복 응답되면 즉시 멈춘다 — max_pages까지 긁으면 안 된다
+    assert len(calls) <= 2, f"곧바로 멈춰야 하는데 {len(calls)}회 요청"
+    assert report.stopped_reason, "중단 사유가 기록돼야 한다"
 
     # known이 비면 종전대로 전량 수집한다
     fresh = fetch_opinions(
@@ -179,6 +180,44 @@ def test_incremental_stops_at_known() -> None:
     )
     assert len(fresh.records) == len(known), fresh.records
     print("  증분 수집 조기 중단 OK")
+
+
+def test_barren_page_does_not_end_crawl() -> None:
+    """새 의견이 없는 페이지가 끼어도 크롤이 끝나면 안 된다.
+
+    의견 1건이 대상 개정항목마다 행을 차지해 한 페이지가 통째로 한 의견의
+    연속 행일 수 있다(실측: 소득세법안 15페이지 = 20행 전부 같은 의견).
+    거기서 멈추면 뒤쪽 의견을 통째로 놓친다 — 233건 대 709건 차이였다.
+    """
+    page1 = (FIXTURES / "sample-list.html").read_text(encoding="utf-8")
+    # 2페이지 = 이미 본 의견 하나가 대상별로 반복된 페이지(새 의견 0건).
+    # 1페이지와 '내용이 같지는' 않다 — 그건 페이지가 안 넘어간 경우라 별개로 멈춘다.
+    page2 = page1
+    for old in ("1001", "1002", "1003"):
+        page2 = page2.replace(f'data-opn-id="{old}"', 'data-opn-id="1004"')
+    page3 = page1.replace('data-opn-id="100', 'data-opn-id="900')
+    pages = {1: page1, 2: page2, 3: page3, 4: ""}
+    calls: list[int] = []
+
+    class _Sess:
+        def get(self, url, **kw):
+            page = int(url.rsplit("=", 1)[-1])
+            calls.append(page)
+            body = pages.get(page, "")
+            return type("R", (), {
+                "status_code": 200,
+                "headers": {"Content-Type": "text/html"},
+                "text": body,
+            })()
+
+    report = fetch_opinions(
+        "87936", session=_Sess(), check_robots=False, delay=0,
+        selectors=DEFAULT_SELECTORS, max_pages=10,
+    )
+    ids = {r.opinion_id for r in report.records}
+    assert "9001" in ids, f"3페이지의 새 의견을 놓쳤다: {sorted(ids)}"
+    assert len(report.records) == 8, [r.opinion_id for r in report.records]
+    print("  빈 페이지 관용 OK")
 
 
 def main() -> int:
@@ -190,6 +229,7 @@ def main() -> int:
     test_dedupe_and_empty()
     test_target_items_merge_on_dedupe()
     test_incremental_stops_at_known()
+    test_barren_page_does_not_end_crawl()
     print("ALL PASSED")
     return 0
 

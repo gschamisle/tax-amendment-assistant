@@ -109,15 +109,27 @@ def main() -> int:
     staged.write_text(transform(src.read_text(encoding="utf-8")), encoding="utf-8")
     out = Path(args.out) if args.out else src.with_suffix(".hwpx")
 
-    cmd = ["npx", "-y", "kordoc@^4", "generate", str(staged), "-o", str(out),
+    # 산출물이 한글·뷰어에 열려 있으면 덮어쓰기가 막힌다. kordoc은 이때 "문서 처리 중
+    # 오류"만 내놓아 원인을 알 수 없으므로, 임시 파일로 만든 뒤 교체하고 실패 사유를
+    # 직접 말한다.
+    tmp = out.with_name(f"{out.stem}.tmp{out.suffix}")
+    cmd = ["npx", "-y", "kordoc@^4", "generate", str(staged), "-o", str(tmp),
            "--preset", args.preset]
     if subprocess.run(cmd, cwd=ROOT, shell=(sys.platform == "win32")).returncode != 0:
         print("HWPX 생성 실패", file=sys.stderr)
         return 1
 
-    check = ["npx", "-y", "kordoc@^4", "validate", str(out)]
+    check = ["npx", "-y", "kordoc@^4", "validate", str(tmp)]
     if subprocess.run(check, cwd=ROOT, shell=(sys.platform == "win32")).returncode != 0:
         print("구조 검증 실패 — 한컴에서 열리지 않을 수 있습니다", file=sys.stderr)
+        return 1
+
+    try:
+        tmp.replace(out)
+    except OSError as exc:
+        print(f"기존 파일을 덮어쓰지 못했습니다: {out}", file=sys.stderr)
+        print(f"  → 한글이나 뷰어에서 열려 있으면 닫고 다시 실행하세요 ({exc})", file=sys.stderr)
+        print(f"  → 생성된 파일은 여기 있습니다: {tmp}", file=sys.stderr)
         return 1
 
     print(f"\n생성: {out}")
