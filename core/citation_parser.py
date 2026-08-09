@@ -318,6 +318,10 @@ def trim_law_name(name: str) -> str:
     첫 지점을 법령명으로 본다.
     """
     toks = str(name).split()
+    # '소득세법 시행령'은 두 낱말이 한 법령명이다. 뒤를 떼고 앞부분만 다듬는다
+    # (덜 다듬으면 '하지만 소득세법 시행령', 더 다듬으면 '시행령'이 된다).
+    if len(toks) >= 2 and toks[-1] in ("시행령", "시행규칙"):
+        return f"{trim_law_name(' '.join(toks[:-1]))} {toks[-1]}".strip()
     for i in range(len(toks)):
         rest = toks[i:]
         if len(rest) == 1:
