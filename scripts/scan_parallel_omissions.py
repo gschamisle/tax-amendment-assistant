@@ -33,6 +33,7 @@ _STATUS_LABEL = {
 }
 _SOURCE_LABEL = {
     "golden_manual": "매뉴얼 확정",
+    "bridge_confirmed": "다리 도출",
     "semantic_llm": "쌍별 판별",
     "code_hint": "코드 힌트",
     "related_hint": "연관 힌트",

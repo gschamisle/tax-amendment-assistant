@@ -45,8 +45,11 @@ _GRAPH_PATH = ROOT / "data" / "law-citation-graph.json"
 _ADJUDICATIONS_PATH = ROOT / "data" / "parallel-adjudications.json"
 _OUT = ROOT / "data" / "parallel-law-matrix.json"
 
+# 같은 쌍이 여러 출처로 들어오면 앞선 것을 남긴다.
+# bridge_confirmed(다리 공동인용)는 입법자가 한 조문에 나란히 적은 관계라
+# 스코어링 기반 semantic_llm보다 근거가 세다 — 코드·연관 힌트 다음에 둔다.
 _SOURCE_PRIORITY = (
-    "golden_manual", "code_hint", "related_hint",
+    "golden_manual", "bridge_confirmed", "code_hint", "related_hint",
     "semantic_llm", "citation", "back_citation",
 )
 

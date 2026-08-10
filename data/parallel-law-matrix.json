@@ -181,7 +181,7 @@
    "소득세법 시행령"
   ]
  ],
- "entry_count": 17313,
+ "entry_count": 17337,
  "entries": {
   "관세법|10": [
    {
@@ -51979,6 +51979,15 @@
   ],
   "법인세법|36": [
    {
+    "target_law": "소득세법",
+    "target_article": "제32조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 국고보조금 취득 사업용자산 필요경비 계산 ↔ 손금산입",
+    "validated": true
+   },
+   {
     "target_law": "국세기본법 시행령",
     "target_article": "제25조",
     "relation_type": "citation",
@@ -52621,6 +52630,24 @@
    }
   ],
   "법인세법|44": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제94조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 3건: 양도소득의 범위 ↔ 합병 시 피합병법인에 대한 과세",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제111조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 양도소득 확정신고납부 ↔ 합병 시 피합병법인에 대한 과세",
+    "validated": true
+   },
    {
     "target_law": "국세기본법 시행규칙",
     "target_article": "제12조",
@@ -54610,9 +54637,9 @@
     "target_law": "소득세법",
     "target_article": "제57조",
     "relation_type": "parallel_tax_law",
-    "confidence": "high",
-    "source": "semantic_llm",
-    "reason": "법인세법과 소득세법이 외국에서 납부한 세액을 공제하는 동일한 정책 목적을 법인과 개인사업자(거주자)에 대해 각각 규정하며, 공제한도금액 계산식, 초과액 이월공제, 조세조약 상 감면세액 처리 등 동일한 취지의 계산방법과 범위를 적용하고 있다.",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 외국납부세액공제 ↔ 외국 납부 세액공제 등",
     "validated": true
    },
    {
@@ -54932,6 +54959,15 @@
   ],
   "법인세법|6": [
    {
+    "target_law": "소득세법",
+    "target_article": "제5조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 3건: 과세기간 ↔ 사업연도",
+    "validated": true
+   },
+   {
     "target_law": "국제조세조정에 관한 법률",
     "target_article": "제15조",
     "relation_type": "citation",
@@ -54987,6 +55023,24 @@
    }
   ],
   "법인세법|60": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제70조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 종합소득과세표준 확정신고 ↔ 과세표준 등의 신고",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제70조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 성실신고확인서 제출 ↔ 과세표준 등의 신고",
+    "validated": true
+   },
    {
     "target_law": "국세기본법",
     "target_article": "제47조의2",
@@ -56063,6 +56117,33 @@
    }
   ],
   "법인세법|64": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제76조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 7건: 확정신고납부 ↔ 납부",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제111조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 4건: 양도소득 확정신고납부 ↔ 납부",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제94조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 3건: 양도소득의 범위 ↔ 납부",
+    "validated": true
+   },
    {
     "target_law": "소득세법",
     "target_article": "제61조",
@@ -58121,6 +58202,24 @@
   ],
   "법인세법|76의17": [
    {
+    "target_law": "소득세법",
+    "target_article": "제70조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 종합소득과세표준 확정신고 ↔ 연결과세표준 등의 신고",
+    "validated": true
+   },
+   {
+    "target_law": "소득세법",
+    "target_article": "제70조의2",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 성실신고확인서 제출 ↔ 연결과세표준 등의 신고",
+    "validated": true
+   },
+   {
     "target_law": "국세기본법",
     "target_article": "제47조의2",
     "relation_type": "citation",
@@ -58874,6 +58973,15 @@
    }
   ],
   "법인세법|93": [
+   {
+    "target_law": "소득세법",
+    "target_article": "제119조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 비거주자의 국내원천소득 ↔ 외국법인의 국내원천소득",
+    "validated": true
+   },
    {
     "target_law": "국세기본법",
     "target_article": "제26조의2",
@@ -97732,6 +97840,24 @@
   ],
   "소득세법|111": [
    {
+    "target_law": "법인세법",
+    "target_article": "제64조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 4건: 양도소득 확정신고납부 ↔ 납부",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제44조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 양도소득 확정신고납부 ↔ 합병 시 피합병법인에 대한 과세",
+    "validated": true
+   },
+   {
     "target_law": "국세기본법",
     "target_article": "제47조의4",
     "relation_type": "citation",
@@ -98143,6 +98269,15 @@
    }
   ],
   "소득세법|119": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제93조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 비거주자의 국내원천소득 ↔ 외국법인의 국내원천소득",
+    "validated": true
+   },
    {
     "target_law": "국세기본법",
     "target_article": "제26조의2",
@@ -105520,6 +105655,15 @@
   ],
   "소득세법|32": [
    {
+    "target_law": "법인세법",
+    "target_article": "제36조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 국고보조금 취득 사업용자산 필요경비 계산 ↔ 손금산입",
+    "validated": true
+   },
+   {
     "target_law": "소득세법 시행령",
     "target_article": "제60조",
     "relation_type": "citation",
@@ -106712,6 +106856,15 @@
   ],
   "소득세법|5": [
    {
+    "target_law": "법인세법",
+    "target_article": "제6조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 3건: 과세기간 ↔ 사업연도",
+    "validated": true
+   },
+   {
     "target_law": "국제조세조정에 관한 법률",
     "target_article": "제15조",
     "relation_type": "citation",
@@ -107115,9 +107268,9 @@
     "target_law": "법인세법",
     "target_article": "제57조",
     "relation_type": "parallel_tax_law",
-    "confidence": "high",
-    "source": "semantic_llm",
-    "reason": "법인세법과 소득세법이 외국에서 납부한 세액을 공제하는 동일한 정책 목적을 법인과 개인사업자(거주자)에 대해 각각 규정하며, 공제한도금액 계산식, 초과액 이월공제, 조세조약 상 감면세액 처리 등 동일한 취지의 계산방법과 범위를 적용하고 있다.",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 외국납부세액공제 ↔ 외국 납부 세액공제 등",
     "validated": true
    },
    {
@@ -107926,6 +108079,24 @@
   ],
   "소득세법|70": [
    {
+    "target_law": "법인세법",
+    "target_article": "제60조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 종합소득과세표준 확정신고 ↔ 과세표준 등의 신고",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제76조의17",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 종합소득과세표준 확정신고 ↔ 연결과세표준 등의 신고",
+    "validated": true
+   },
+   {
     "target_law": "국세기본법",
     "target_article": "제47조의2",
     "relation_type": "citation",
@@ -108278,6 +108449,24 @@
    }
   ],
   "소득세법|70의2": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제60조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 성실신고확인서 제출 ↔ 과세표준 등의 신고",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제76조의17",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 2건: 성실신고확인서 제출 ↔ 연결과세표준 등의 신고",
+    "validated": true
+   },
    {
     "target_law": "국제조세조정에 관한 법률",
     "target_article": "제6조",
@@ -108675,6 +108864,15 @@
    }
   ],
   "소득세법|76": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제64조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 7건: 확정신고납부 ↔ 납부",
+    "validated": true
+   },
    {
     "target_law": "소득세법 시행령",
     "target_article": "제134조",
@@ -110296,6 +110494,24 @@
    }
   ],
   "소득세법|94": [
+   {
+    "target_law": "법인세법",
+    "target_article": "제44조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 3건: 양도소득의 범위 ↔ 합병 시 피합병법인에 대한 과세",
+    "validated": true
+   },
+   {
+    "target_law": "법인세법",
+    "target_article": "제64조",
+    "relation_type": "parallel_tax_law",
+    "confidence": "confirmed",
+    "source": "bridge_confirmed",
+    "reason": "다리 공동인용 3건: 양도소득의 범위 ↔ 납부",
+    "validated": true
+   },
    {
     "target_law": "국제조세조정에 관한 법률",
     "target_article": "제32조",

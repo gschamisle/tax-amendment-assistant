@@ -26,10 +26,11 @@ from core.renumber_scan import _jo_label, directive_texts
 # 병행 관계만 본다. citation·back_citation은 단순 인용이라 renumber_scan이 담당한다
 # (여기 섞으면 인용 한 건마다 후보가 쏟아져 판단할 수 있는 양을 넘는다).
 PARALLEL_SOURCES: frozenset[str] = frozenset({
-    "golden_manual",    # 매뉴얼 확정 매핑 — 신뢰도 최상
-    "semantic_llm",     # 쌍별 판별로 확정된 동일 취지
-    "code_hint",        # config의 코드 매핑 힌트
-    "related_hint",     # 연관 조문 힌트(같은 법 안의 관련 조문 포함)
+    "golden_manual",     # 매뉴얼 확정 매핑 — 신뢰도 최상
+    "bridge_confirmed",  # 다리 법령 공동 인용에서 도출 (parallel_golden §4)
+    "semantic_llm",      # 쌍별 판별로 확정된 동일 취지
+    "code_hint",         # config의 코드 매핑 힌트
+    "related_hint",      # 연관 조문 힌트(같은 법 안의 관련 조문 포함)
 })
 
 _JO_IN_REF_RE = re.compile(r"제\s*(\d+)\s*조(?:\s*의\s*(\d+))?")
@@ -108,7 +109,8 @@ def scan(bills: list[Bill]) -> dict:
 
     order = {"missing": 0, "pending": 1, "covered": 2}
     # 근거 신뢰도 순: 매뉴얼 확정 → 쌍별 판별 → 힌트
-    src_order = {"golden_manual": 0, "semantic_llm": 1, "code_hint": 2, "related_hint": 3}
+    src_order = {"golden_manual": 0, "bridge_confirmed": 1, "semantic_llm": 2,
+                 "code_hint": 3, "related_hint": 4}
     rows.sort(key=lambda r: (
         order.get(r["상태"], 9), src_order.get(r["근거"], 9), r["법령명"], _jo_sort(r["조번호"]),
     ))
