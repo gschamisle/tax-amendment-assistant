@@ -1,6 +1,6 @@
 {
   "source_law": "조세특례제한법",
-  "article_count": 462,
+  "article_count": 458,
   "records": [
     {
       "source_law": "조세특례제한법",
@@ -27,6 +27,15 @@
       "explicit_citations": [
         {
           "raw": "「소득세법」 제70조"
+        },
+        {
+          "raw": "제71조"
+        },
+        {
+          "raw": "제74조"
+        },
+        {
+          "raw": "제110조"
         },
         {
           "raw": "「법인세법」 제60조"
@@ -71,6 +80,13 @@
         },
         {
           "law_name": "소득세법",
+          "article": "제110조",
+          "confidence": "high",
+          "reason": "명시 인용: 제110조",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
           "article": "제24조",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제24조",
@@ -88,6 +104,20 @@
           "article": "제70조",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제70조",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제71조",
+          "confidence": "high",
+          "reason": "명시 인용: 제71조",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제74조",
+          "confidence": "high",
+          "reason": "명시 인용: 제74조",
           "source": "citation"
         },
         {
@@ -246,7 +276,7 @@
           "source": "keyword"
         }
       ],
-      "review_note": "창업중소기업에 대한 세액감면과 관련된 소득세법 및 법인세법 조문을 검토할 필요가 있음."
+      "review_note": ""
     },
     {
       "source_law": "조세특례제한법",
@@ -312,7 +342,7 @@
           "source": "keyword"
         }
       ],
-      "review_note": "어음제도개선과 관련된 세액공제에 대한 소득세법 및 법인세법 조문을 검토할 필요가 있음."
+      "review_note": ""
     },
     {
       "source_law": "조세특례제한법",
@@ -529,19 +559,8 @@
       "jo_no": "10",
       "jo_label": "제10조",
       "title": "연구ㆍ인력개발비에 대한 세액공제",
-      "explicit_citations": [
-        {
-          "raw": "「법인세법」 제43조"
-        }
-      ],
+      "explicit_citations": [],
       "linked_articles": [
-        {
-          "law_name": "법인세법",
-          "article": "제43조",
-          "confidence": "high",
-          "reason": "명시 인용: 「법인세법」 제43조",
-          "source": "citation"
-        },
         {
           "law_name": "법인세법",
           "article": "",
@@ -697,7 +716,7 @@
           "source": "keyword"
         }
       ],
-      "review_note": "기술혁신형 합병에 대한 세액공제와 관련된 소득세법 및 법인세법 조문을 검토할 필요가 있음."
+      "review_note": ""
     },
     {
       "source_law": "조세특례제한법",
@@ -714,7 +733,7 @@
           "source": "keyword"
         }
       ],
-      "review_note": "기술혁신형 주식취득에 대한 세액공제와 관련된 소득세법 및 법인세법 조문을 검토할 필요가 있음."
+      "review_note": ""
     },
     {
       "source_law": "조세특례제한법",
@@ -850,10 +869,19 @@
           "raw": "「소득세법」 제17조"
         },
         {
+          "raw": "같은 법 제14조제4항"
+        },
+        {
           "raw": "「소득세법」 제16조제1항"
         },
         {
+          "raw": "제17조제1항제5호"
+        },
+        {
           "raw": "「소득세법」 제16조제2항"
+        },
+        {
+          "raw": "제17조제3항"
         }
       ],
       "linked_articles": [
@@ -862,6 +890,13 @@
           "article": "제104조제1항제11호",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제104조제1항제11호",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제14조제4항",
+          "confidence": "high",
+          "reason": "명시 인용: 같은 법 제14조제4항",
           "source": "citation"
         },
         {
@@ -883,6 +918,20 @@
           "article": "제17조",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제17조",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제17조제1항제5호",
+          "confidence": "high",
+          "reason": "명시 인용: 제17조제1항제5호",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제17조제3항",
+          "confidence": "high",
+          "reason": "명시 인용: 제17조제3항",
           "source": "citation"
         },
         {
@@ -973,7 +1022,7 @@
           "source": "keyword"
         }
       ],
-      "review_note": "벤처투자조합 출자에 대한 소득공제와 관련된 소득세법 및 법인세법 조문을 검토할 필요가 있음."
+      "review_note": ""
     },
     {
       "source_law": "조세특례제한법",
@@ -1002,7 +1051,16 @@
           "raw": "「소득세법」 제127조"
         },
         {
+          "raw": "제134조"
+        },
+        {
+          "raw": "제145조"
+        },
+        {
           "raw": "「소득세법」 제70조"
+        },
+        {
+          "raw": "제76조"
         },
         {
           "raw": "「소득세법」 제74조제4항"
@@ -1018,6 +1076,20 @@
         },
         {
           "law_name": "소득세법",
+          "article": "제134조",
+          "confidence": "high",
+          "reason": "명시 인용: 제134조",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제145조",
+          "confidence": "high",
+          "reason": "명시 인용: 제145조",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
           "article": "제70조",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제70조",
@@ -1028,6 +1100,13 @@
           "article": "제74조제4항",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제74조제4항",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제76조",
+          "confidence": "high",
+          "reason": "명시 인용: 제76조",
           "source": "citation"
         },
         {
@@ -1050,10 +1129,19 @@
           "raw": "「소득세법」 제20조"
         },
         {
+          "raw": "제21조"
+        },
+        {
           "raw": "「소득세법」 제94조제1항제3호"
         },
         {
           "raw": "「법인세법」 제19조"
+        },
+        {
+          "raw": "제20조"
+        },
+        {
+          "raw": "제52조"
         }
       ],
       "linked_articles": [
@@ -1065,10 +1153,31 @@
           "source": "citation"
         },
         {
+          "law_name": "법인세법",
+          "article": "제20조",
+          "confidence": "high",
+          "reason": "명시 인용: 제20조",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
+          "article": "제52조",
+          "confidence": "high",
+          "reason": "명시 인용: 제52조",
+          "source": "citation"
+        },
+        {
           "law_name": "소득세법",
           "article": "제20조",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제20조",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제21조",
+          "confidence": "high",
+          "reason": "명시 인용: 제21조",
           "source": "citation"
         },
         {
@@ -1316,7 +1425,7 @@
           "source": "keyword"
         }
       ],
-      "review_note": "성과공유 중소기업의 경영성과급에 대한 세액공제와 관련된 소득세법 및 법인세법 조문을 검토할 필요가 있음."
+      "review_note": ""
     },
     {
       "source_law": "조세특례제한법",
@@ -1409,7 +1518,7 @@
           "source": "keyword"
         }
       ],
-      "review_note": "비거주자 정기외화예금에 대한 이자소득세 비과세와 관련된 소득세법 및 법인세법 조문을 검토할 필요가 있음."
+      "review_note": ""
     },
     {
       "source_law": "조세특례제한법",
@@ -1453,71 +1562,6 @@
       "title": "",
       "explicit_citations": [],
       "linked_articles": [],
-      "review_note": ""
-    },
-    {
-      "source_law": "조세특례제한법",
-      "jo_no": "23의2",
-      "jo_label": "제23조의2",
-      "title": "외국자회사 수입배당금의 익금불산입 특례",
-      "explicit_citations": [
-        {
-          "raw": "「법인세법」 제57조의2제1항"
-        },
-        {
-          "raw": "「법인세법」 제16조"
-        },
-        {
-          "raw": "같은 법 제18조의4제1항"
-        },
-        {
-          "raw": "「법인세법」 제18조의4제4항"
-        }
-      ],
-      "linked_articles": [
-        {
-          "law_name": "법인세법",
-          "article": "제16조",
-          "confidence": "high",
-          "reason": "명시 인용: 「법인세법」 제16조",
-          "source": "citation"
-        },
-        {
-          "law_name": "법인세법",
-          "article": "제18조의4제1항",
-          "confidence": "high",
-          "reason": "명시 인용: 같은 법 제18조의4제1항",
-          "source": "citation"
-        },
-        {
-          "law_name": "법인세법",
-          "article": "제18조의4제4항",
-          "confidence": "high",
-          "reason": "명시 인용: 「법인세법」 제18조의4제4항",
-          "source": "citation"
-        },
-        {
-          "law_name": "법인세법",
-          "article": "제57조의2제1항",
-          "confidence": "high",
-          "reason": "명시 인용: 「법인세법」 제57조의2제1항",
-          "source": "citation"
-        },
-        {
-          "law_name": "법인세법",
-          "article": "",
-          "confidence": "low",
-          "reason": "조특법 제목·본문에 법인세 키워드",
-          "source": "keyword"
-        },
-        {
-          "law_name": "조세특례제한법",
-          "article": "",
-          "confidence": "low",
-          "reason": "투자세액공제 등 조특법 내부 연계",
-          "source": "keyword"
-        }
-      ],
       "review_note": ""
     },
     {
@@ -1639,7 +1683,7 @@
           "source": "keyword"
         }
       ],
-      "review_note": "영상콘텐츠 제작비용에 대한 세액공제와 관련된 소득세법 및 법인세법 조문을 검토할 필요가 있음."
+      "review_note": ""
     },
     {
       "source_law": "조세특례제한법",
@@ -1656,7 +1700,7 @@
           "source": "keyword"
         }
       ],
-      "review_note": "내국법인의 문화산업전문회사에의 출자에 대한 세액공제와 관련된 소득세법 및 법인세법 조문을 검토할 필요가 있음."
+      "review_note": ""
     },
     {
       "source_law": "조세특례제한법",
@@ -1680,7 +1724,7 @@
           "source": "keyword"
         }
       ],
-      "review_note": "웹툰콘텐츠 제작비용에 대한 세액공제와 관련된 소득세법 및 법인세법 조문을 검토할 필요가 있음."
+      "review_note": ""
     },
     {
       "source_law": "조세특례제한법",
@@ -1690,6 +1734,9 @@
       "explicit_citations": [
         {
           "raw": "「법인세법」 제63조"
+        },
+        {
+          "raw": "제63조의2"
         },
         {
           "raw": "같은 법 제63조의2제1항제2호"
@@ -1713,6 +1760,13 @@
           "article": "제63조",
           "confidence": "high",
           "reason": "명시 인용: 「법인세법」 제63조",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
+          "article": "제63조의2",
+          "confidence": "high",
+          "reason": "명시 인용: 제63조의2",
           "source": "citation"
         },
         {
@@ -2029,7 +2083,7 @@
           "source": "keyword"
         }
       ],
-      "review_note": "산업수요맞춤형고등학교 졸업자 복직에 대한 세액공제와 관련된 소득세법 및 법인세법 조문을 검토할 필요가 있음."
+      "review_note": ""
     },
     {
       "source_law": "조세특례제한법",
@@ -2038,13 +2092,6 @@
       "title": "경력단절 여성 고용 기업 등에 대한 세액공제",
       "explicit_citations": [],
       "linked_articles": [
-        {
-          "law_name": "법인세법",
-          "article": "제12조",
-          "confidence": "high",
-          "reason": "고용 관련 세액공제와 관련된 법인세 조문",
-          "source": "gpt"
-        },
         {
           "law_name": "법인세법",
           "article": "",
@@ -2071,13 +2118,6 @@
       "linked_articles": [
         {
           "law_name": "법인세법",
-          "article": "제12조",
-          "confidence": "high",
-          "reason": "고용 관련 세액공제와 관련된 법인세 조문",
-          "source": "gpt"
-        },
-        {
-          "law_name": "법인세법",
           "article": "",
           "confidence": "low",
           "reason": "조특법 제목·본문에 법인세 키워드",
@@ -2100,13 +2140,6 @@
       "title": "청년고용을 증대시킨 기업에 대한 세액공제",
       "explicit_citations": [],
       "linked_articles": [
-        {
-          "law_name": "법인세법",
-          "article": "제12조",
-          "confidence": "high",
-          "reason": "고용 관련 세액공제와 관련된 법인세 조문",
-          "source": "gpt"
-        },
         {
           "law_name": "법인세법",
           "article": "",
@@ -2178,13 +2211,6 @@
       "linked_articles": [
         {
           "law_name": "법인세법",
-          "article": "제12조",
-          "confidence": "high",
-          "reason": "고용 관련 세액공제와 관련된 법인세 조문",
-          "source": "gpt"
-        },
-        {
-          "law_name": "법인세법",
           "article": "",
           "confidence": "low",
           "reason": "조특법 제목·본문에 법인세 키워드",
@@ -2209,13 +2235,6 @@
       "linked_articles": [
         {
           "law_name": "법인세법",
-          "article": "제12조",
-          "confidence": "high",
-          "reason": "고용 관련 세액공제와 관련된 법인세 조문",
-          "source": "gpt"
-        },
-        {
-          "law_name": "법인세법",
           "article": "",
           "confidence": "low",
           "reason": "조특법 제목·본문에 법인세 키워드",
@@ -2238,13 +2257,6 @@
       "title": "중소기업 취업자에 대한 소득세 감면",
       "explicit_citations": [],
       "linked_articles": [
-        {
-          "law_name": "소득세법",
-          "article": "제19조",
-          "confidence": "high",
-          "reason": "중소기업 취업자에 대한 소득세 감면 관련 조문",
-          "source": "gpt"
-        },
         {
           "law_name": "법인세법",
           "article": "",
@@ -2302,13 +2314,6 @@
       "title": "중소기업 사회보험료 세액공제",
       "explicit_citations": [],
       "linked_articles": [
-        {
-          "law_name": "법인세법",
-          "article": "제12조",
-          "confidence": "high",
-          "reason": "사회보험료 세액공제와 관련된 법인세 조문",
-          "source": "gpt"
-        },
         {
           "law_name": "법인세법",
           "article": "",
@@ -2378,13 +2383,6 @@
       "linked_articles": [
         {
           "law_name": "법인세법",
-          "article": "제45조",
-          "confidence": "high",
-          "reason": "중소기업 간의 통합 관련 조문",
-          "source": "gpt"
-        },
-        {
-          "law_name": "법인세법",
           "article": "",
           "confidence": "low",
           "reason": "세액감면·감면 특례는 법인세 과세구조와 연동 검토",
@@ -2407,13 +2405,6 @@
       "title": "법인전환에 대한 양도소득세의 이월과세",
       "explicit_citations": [],
       "linked_articles": [
-        {
-          "law_name": "법인세법",
-          "article": "제45조",
-          "confidence": "high",
-          "reason": "법인전환 관련 조문",
-          "source": "gpt"
-        },
         {
           "law_name": "법인세법",
           "article": "",
@@ -2989,9 +2980,6 @@
       "explicit_citations": [
         {
           "raw": "「법인세법」 제2조제12호"
-        },
-        {
-          "raw": "「법인세법」 제55조"
         }
       ],
       "linked_articles": [
@@ -3000,13 +2988,6 @@
           "article": "제2조제12호",
           "confidence": "high",
           "reason": "명시 인용: 「법인세법」 제2조제12호",
-          "source": "citation"
-        },
-        {
-          "law_name": "법인세법",
-          "article": "제55조",
-          "confidence": "high",
-          "reason": "명시 인용: 「법인세법」 제55조",
           "source": "citation"
         },
         {
@@ -3941,14 +3922,44 @@
       "explicit_citations": [
         {
           "raw": "「소득세법」 제95조제4항"
+        },
+        {
+          "raw": "제97조제1항제1호"
+        },
+        {
+          "raw": "제98조"
+        },
+        {
+          "raw": "제104조제2항"
         }
       ],
       "linked_articles": [
         {
           "law_name": "소득세법",
+          "article": "제104조제2항",
+          "confidence": "high",
+          "reason": "명시 인용: 제104조제2항",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
           "article": "제95조제4항",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제95조제4항",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제97조제1항제1호",
+          "confidence": "high",
+          "reason": "명시 인용: 제97조제1항제1호",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제98조",
+          "confidence": "high",
+          "reason": "명시 인용: 제98조",
           "source": "citation"
         },
         {
@@ -4646,6 +4657,9 @@
           "raw": "「소득세법」 제48조"
         },
         {
+          "raw": "제55조"
+        },
+        {
           "raw": "「소득세법」 제21조"
         },
         {
@@ -4686,6 +4700,13 @@
           "article": "제48조",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제48조",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제55조",
+          "confidence": "high",
+          "reason": "명시 인용: 제55조",
           "source": "citation"
         },
         {
@@ -4767,13 +4788,13 @@
       "title": "주택청약종합저축 등에 대한 소득공제 등",
       "explicit_citations": [
         {
-          "raw": "「소득세법」 제99조제1항"
-        },
-        {
           "raw": "「소득세법」 제20조제2항"
         },
         {
           "raw": "「소득세법」 제52조제4항"
+        },
+        {
+          "raw": "제52조제4항부터 제6항까지"
         },
         {
           "raw": "「소득세법」 제52조제5항"
@@ -4799,6 +4820,13 @@
         },
         {
           "law_name": "소득세법",
+          "article": "제52조제4항~제6항",
+          "confidence": "high",
+          "reason": "명시 인용: 제52조제4항부터 제6항까지",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
           "article": "제52조제5항",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제52조제5항",
@@ -4809,13 +4837,6 @@
           "article": "제52조제6항",
           "confidence": "high",
           "reason": "명시 인용: 같은 조 제6항",
-          "source": "citation"
-        },
-        {
-          "law_name": "소득세법",
-          "article": "제99조제1항",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제99조제1항",
           "source": "citation"
         },
         {
@@ -5352,6 +5373,13 @@
           "confidence": "low",
           "reason": "조특법 제목·본문에 소득세 키워드",
           "source": "keyword"
+        },
+        {
+          "law_name": "조세특례제한법",
+          "article": "",
+          "confidence": "low",
+          "reason": "투자세액공제 등 조특법 내부 연계",
+          "source": "keyword"
         }
       ],
       "review_note": ""
@@ -5635,6 +5663,13 @@
       "explicit_citations": [],
       "linked_articles": [
         {
+          "law_name": "법인세법",
+          "article": "",
+          "confidence": "low",
+          "reason": "세액공제 특례는 법인세·소득세 공제 조문과 연동 검토",
+          "source": "keyword"
+        },
+        {
           "law_name": "소득세법",
           "article": "",
           "confidence": "low",
@@ -5786,16 +5821,10 @@
           "raw": "같은 법 제14조제2항"
         },
         {
-          "raw": "「소득세법」 제17조제1항제5호"
-        },
-        {
-          "raw": "「소득세법」 제17조제1항제9호"
-        },
-        {
-          "raw": "「소득세법」 제88조제3호"
-        },
-        {
           "raw": "「소득세법」 제130조"
+        },
+        {
+          "raw": "제155조의2"
         },
         {
           "raw": "「소득세법」 제59조의3제3항"
@@ -5825,16 +5854,9 @@
         },
         {
           "law_name": "소득세법",
-          "article": "제17조제1항제5호",
+          "article": "제155조의2",
           "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제17조제1항제5호",
-          "source": "citation"
-        },
-        {
-          "law_name": "소득세법",
-          "article": "제17조제1항제9호",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제17조제1항제9호",
+          "reason": "명시 인용: 제155조의2",
           "source": "citation"
         },
         {
@@ -5842,13 +5864,6 @@
           "article": "제59조의3제3항",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제59조의3제3항",
-          "source": "citation"
-        },
-        {
-          "law_name": "소득세법",
-          "article": "제88조제3호",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제88조제3호",
           "source": "citation"
         },
         {
@@ -5885,20 +5900,10 @@
       "title": "청년형 장기집합투자증권저축에 대한 소득공제",
       "explicit_citations": [
         {
-          "raw": "「소득세법」 제17조제1항제5호"
-        },
-        {
           "raw": "「소득세법」 제20조의3제1항제2호"
         }
       ],
       "linked_articles": [
-        {
-          "law_name": "소득세법",
-          "article": "제17조제1항제5호",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제17조제1항제5호",
-          "source": "citation"
-        },
         {
           "law_name": "소득세법",
           "article": "제20조의3제1항제2호",
@@ -5945,39 +5950,8 @@
       "jo_no": "91의22",
       "jo_label": "제91조의22",
       "title": "청년도약계좌에 대한 비과세",
-      "explicit_citations": [
-        {
-          "raw": "「소득세법」 제17조제1항제5호"
-        },
-        {
-          "raw": "「소득세법」 제17조제1항제9호"
-        },
-        {
-          "raw": "「소득세법」 제88조제3호"
-        }
-      ],
+      "explicit_citations": [],
       "linked_articles": [
-        {
-          "law_name": "소득세법",
-          "article": "제17조제1항제5호",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제17조제1항제5호",
-          "source": "citation"
-        },
-        {
-          "law_name": "소득세법",
-          "article": "제17조제1항제9호",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제17조제1항제9호",
-          "source": "citation"
-        },
-        {
-          "law_name": "소득세법",
-          "article": "제88조제3호",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제88조제3호",
-          "source": "citation"
-        },
         {
           "law_name": "소득세법",
           "article": "",
@@ -6063,155 +6037,6 @@
           "article": "",
           "confidence": "low",
           "reason": "조특법 제목·본문에 소득세 키워드",
-          "source": "keyword"
-        }
-      ],
-      "review_note": ""
-    },
-    {
-      "source_law": "조세특례제한법",
-      "jo_no": "91의26",
-      "jo_label": "제91조의26",
-      "title": "국내시장복귀계좌를 통한 투자에 대한 과세특례",
-      "explicit_citations": [
-        {
-          "raw": "「소득세법」 제17조제1항제5호"
-        },
-        {
-          "raw": "「소득세법」 제88조제3호"
-        },
-        {
-          "raw": "「소득세법」 제111조"
-        }
-      ],
-      "linked_articles": [
-        {
-          "law_name": "소득세법",
-          "article": "제111조",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제111조",
-          "source": "citation"
-        },
-        {
-          "law_name": "소득세법",
-          "article": "제17조제1항제5호",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제17조제1항제5호",
-          "source": "citation"
-        },
-        {
-          "law_name": "소득세법",
-          "article": "제88조제3호",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제88조제3호",
-          "source": "citation"
-        },
-        {
-          "law_name": "법인세법",
-          "article": "",
-          "confidence": "low",
-          "reason": "세액공제 특례는 법인세·소득세 공제 조문과 연동 검토",
-          "source": "keyword"
-        },
-        {
-          "law_name": "소득세법",
-          "article": "",
-          "confidence": "low",
-          "reason": "조특법 제목·본문에 소득세 키워드",
-          "source": "keyword"
-        },
-        {
-          "law_name": "조세특례제한법",
-          "article": "",
-          "confidence": "low",
-          "reason": "투자세액공제 등 조특법 내부 연계",
-          "source": "keyword"
-        }
-      ],
-      "review_note": ""
-    },
-    {
-      "source_law": "조세특례제한법",
-      "jo_no": "91의27",
-      "jo_label": "제91조의27",
-      "title": "환율변동위험회피상품에 대한 과세특례",
-      "explicit_citations": [
-        {
-          "raw": "「소득세법」 제94조제1항제5호"
-        }
-      ],
-      "linked_articles": [
-        {
-          "law_name": "소득세법",
-          "article": "제94조제1항제5호",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제94조제1항제5호",
-          "source": "citation"
-        },
-        {
-          "law_name": "법인세법",
-          "article": "",
-          "confidence": "low",
-          "reason": "세액공제 특례는 법인세·소득세 공제 조문과 연동 검토",
-          "source": "keyword"
-        },
-        {
-          "law_name": "소득세법",
-          "article": "",
-          "confidence": "low",
-          "reason": "조특법 제목·본문에 소득세 키워드",
-          "source": "keyword"
-        },
-        {
-          "law_name": "조세특례제한법",
-          "article": "",
-          "confidence": "low",
-          "reason": "투자세액공제 등 조특법 내부 연계",
-          "source": "keyword"
-        }
-      ],
-      "review_note": ""
-    },
-    {
-      "source_law": "조세특례제한법",
-      "jo_no": "91의28",
-      "jo_label": "제91조의28",
-      "title": "국민참여형 국민성장집합투자증권저축에 대한 과세특례",
-      "explicit_citations": [
-        {
-          "raw": "「소득세법」 제129조"
-        },
-        {
-          "raw": "같은 법 제14조제2항"
-        }
-      ],
-      "linked_articles": [
-        {
-          "law_name": "소득세법",
-          "article": "제129조",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제129조",
-          "source": "citation"
-        },
-        {
-          "law_name": "소득세법",
-          "article": "제14조제2항",
-          "confidence": "high",
-          "reason": "명시 인용: 같은 법 제14조제2항",
-          "source": "citation"
-        },
-        {
-          "law_name": "소득세법",
-          "article": "",
-          "confidence": "low",
-          "reason": "조특법 제목·본문에 소득세 키워드",
-          "source": "keyword"
-        },
-        {
-          "law_name": "조세특례제한법",
-          "article": "",
-          "confidence": "low",
-          "reason": "투자세액공제 등 조특법 내부 연계",
           "source": "keyword"
         }
       ],
@@ -6750,6 +6575,9 @@
           "raw": "「소득세법」 제106조"
         },
         {
+          "raw": "제111조"
+        },
+        {
           "raw": "「법인세법」 제64조"
         }
       ],
@@ -6773,6 +6601,13 @@
           "article": "제106조",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제106조",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제111조",
+          "confidence": "high",
+          "reason": "명시 인용: 제111조",
           "source": "citation"
         },
         {
@@ -6840,7 +6675,13 @@
           "raw": "「소득세법」 제92조"
         },
         {
+          "raw": "같은 법 제104조제1항"
+        },
+        {
           "raw": "「소득세법」 제14조"
+        },
+        {
+          "raw": "제15조"
         },
         {
           "raw": "「소득세법」 제19조제2항"
@@ -6852,9 +6693,23 @@
       "linked_articles": [
         {
           "law_name": "소득세법",
+          "article": "제104조제1항",
+          "confidence": "high",
+          "reason": "명시 인용: 같은 법 제104조제1항",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
           "article": "제14조",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제14조",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제15조",
+          "confidence": "high",
+          "reason": "명시 인용: 제15조",
           "source": "citation"
         },
         {
@@ -6914,6 +6769,9 @@
           "raw": "「법인세법」 제55조의2제1항제2호"
         },
         {
+          "raw": "제95조의2"
+        },
+        {
           "raw": "「소득세법」 제64조제1항"
         },
         {
@@ -6929,6 +6787,13 @@
           "article": "제55조의2제1항제2호",
           "confidence": "high",
           "reason": "명시 인용: 「법인세법」 제55조의2제1항제2호",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
+          "article": "제95조의2",
+          "confidence": "high",
+          "reason": "명시 인용: 제95조의2",
           "source": "citation"
         },
         {
@@ -7009,6 +6874,9 @@
           "raw": "「소득세법」 제95조제2항"
         },
         {
+          "raw": "제104조제1항제3호"
+        },
+        {
           "raw": "「소득세법」 제104조제1항제1호"
         }
       ],
@@ -7025,6 +6893,13 @@
           "article": "제104조제1항제1호",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제104조제1항제1호",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제104조제1항제3호",
+          "confidence": "high",
+          "reason": "명시 인용: 제104조제1항제3호",
           "source": "citation"
         },
         {
@@ -7116,6 +6991,9 @@
           "raw": "「소득세법」 제95조제2항"
         },
         {
+          "raw": "제104조제1항제3호"
+        },
+        {
           "raw": "「소득세법」 제104조제1항제1호"
         }
       ],
@@ -7125,6 +7003,13 @@
           "article": "제104조제1항제1호",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제104조제1항제1호",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제104조제1항제3호",
+          "confidence": "high",
+          "reason": "명시 인용: 제104조제1항제3호",
           "source": "citation"
         },
         {
@@ -7184,6 +7069,9 @@
           "raw": "「소득세법」 제95조제2항"
         },
         {
+          "raw": "제104조제1항제3호"
+        },
+        {
           "raw": "「소득세법」 제104조제1항제1호"
         }
       ],
@@ -7193,6 +7081,13 @@
           "article": "제104조제1항제1호",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제104조제1항제1호",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제104조제1항제3호",
+          "confidence": "high",
+          "reason": "명시 인용: 제104조제1항제3호",
           "source": "citation"
         },
         {
@@ -7478,9 +7373,6 @@
       "explicit_citations": [
         {
           "raw": "「소득세법」 제89조제1항제3호"
-        },
-        {
-          "raw": "「소득세법」 제99조"
         }
       ],
       "linked_articles": [
@@ -7489,13 +7381,6 @@
           "article": "제89조제1항제3호",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제89조제1항제3호",
-          "source": "citation"
-        },
-        {
-          "law_name": "소득세법",
-          "article": "제99조",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제99조",
           "source": "citation"
         },
         {
@@ -7836,12 +7721,6 @@
         },
         {
           "raw": "같은 법 제21조제1항제26호"
-        },
-        {
-          "raw": "「소득세법」 제19조제1항"
-        },
-        {
-          "raw": "「소득세법」 제20조제1항"
         }
       ],
       "linked_articles": [
@@ -7854,23 +7733,9 @@
         },
         {
           "law_name": "소득세법",
-          "article": "제19조제1항",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제19조제1항",
-          "source": "citation"
-        },
-        {
-          "law_name": "소득세법",
           "article": "제20조",
           "confidence": "high",
           "reason": "명시 인용: 같은 법 제20조",
-          "source": "citation"
-        },
-        {
-          "law_name": "소득세법",
-          "article": "제20조제1항",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제20조제1항",
           "source": "citation"
         },
         {
@@ -7930,6 +7795,9 @@
           "raw": "「소득세법」 제70조"
         },
         {
+          "raw": "제74조"
+        },
+        {
           "raw": "「소득세법」 제14조제3항제2호"
         },
         {
@@ -7970,6 +7838,13 @@
         },
         {
           "law_name": "소득세법",
+          "article": "제74조",
+          "confidence": "high",
+          "reason": "명시 인용: 제74조",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
           "article": "",
           "confidence": "low",
           "reason": "조특법 제목·본문에 소득세 키워드",
@@ -7986,6 +7861,9 @@
       "explicit_citations": [
         {
           "raw": "「소득세법」 제70조"
+        },
+        {
+          "raw": "제74조"
         }
       ],
       "linked_articles": [
@@ -7994,6 +7872,13 @@
           "article": "제70조",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제70조",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제74조",
+          "confidence": "high",
+          "reason": "명시 인용: 제74조",
           "source": "citation"
         },
         {
@@ -8265,13 +8150,25 @@
           "raw": "「소득세법」 제17조제1항"
         },
         {
+          "raw": "제119조제2호"
+        },
+        {
           "raw": "「법인세법」 제93조제2호"
         },
         {
           "raw": "「법인세법」 제73조"
         },
         {
+          "raw": "제73조의2"
+        },
+        {
           "raw": "「법인세법」 제74조의2"
+        },
+        {
+          "raw": "제75조"
+        },
+        {
+          "raw": "제75조의2부터 제75조의9까지"
         },
         {
           "raw": "「법인세법」 제55조의2"
@@ -8294,6 +8191,13 @@
         },
         {
           "law_name": "법인세법",
+          "article": "제73조의2",
+          "confidence": "high",
+          "reason": "명시 인용: 제73조의2",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
           "article": "제74조의2",
           "confidence": "high",
           "reason": "명시 인용: 「법인세법」 제74조의2",
@@ -8301,9 +8205,30 @@
         },
         {
           "law_name": "법인세법",
+          "article": "제75조",
+          "confidence": "high",
+          "reason": "명시 인용: 제75조",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
+          "article": "제75조의2~제75조의9",
+          "confidence": "high",
+          "reason": "명시 인용: 제75조의2부터 제75조의9까지",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
           "article": "제93조제2호",
           "confidence": "high",
           "reason": "명시 인용: 「법인세법」 제93조제2호",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제119조제2호",
+          "confidence": "high",
+          "reason": "명시 인용: 제119조제2호",
           "source": "citation"
         },
         {
@@ -8488,12 +8413,6 @@
           "raw": "「법인세법」 제98조제1항"
         },
         {
-          "raw": "「소득세법」 제55조"
-        },
-        {
-          "raw": "「법인세법」 제55조"
-        },
-        {
           "raw": "「소득세법」 제164조의2"
         },
         {
@@ -8509,7 +8428,22 @@
           "raw": "「소득세법」 제121조"
         },
         {
+          "raw": "제121조부터 제125조까지"
+        },
+        {
           "raw": "「법인세법」 제91조"
+        },
+        {
+          "raw": "제92조"
+        },
+        {
+          "raw": "제95조"
+        },
+        {
+          "raw": "제95조의2"
+        },
+        {
+          "raw": "제97조"
         },
         {
           "raw": "「소득세법」 제119조제3호"
@@ -8527,7 +8461,13 @@
           "raw": "「소득세법」 제156조의2"
         },
         {
+          "raw": "제156조의2부터 제156조의8까지"
+        },
+        {
           "raw": "「법인세법」 제98조의3"
+        },
+        {
+          "raw": "제98조의3부터 제98조의7까지"
         },
         {
           "raw": "「소득세법」 제120조"
@@ -8546,16 +8486,16 @@
         },
         {
           "law_name": "법인세법",
-          "article": "제55조",
+          "article": "제91조",
           "confidence": "high",
-          "reason": "명시 인용: 「법인세법」 제55조",
+          "reason": "명시 인용: 「법인세법」 제91조",
           "source": "citation"
         },
         {
           "law_name": "법인세법",
-          "article": "제91조",
+          "article": "제92조",
           "confidence": "high",
-          "reason": "명시 인용: 「법인세법」 제91조",
+          "reason": "명시 인용: 제92조",
           "source": "citation"
         },
         {
@@ -8588,9 +8528,37 @@
         },
         {
           "law_name": "법인세법",
+          "article": "제95조",
+          "confidence": "high",
+          "reason": "명시 인용: 제95조",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
+          "article": "제95조의2",
+          "confidence": "high",
+          "reason": "명시 인용: 제95조의2",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
+          "article": "제97조",
+          "confidence": "high",
+          "reason": "명시 인용: 제97조",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
           "article": "제98조의3",
           "confidence": "high",
           "reason": "명시 인용: 「법인세법」 제98조의3",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
+          "article": "제98조의3~제98조의7",
+          "confidence": "high",
+          "reason": "명시 인용: 제98조의3부터 제98조의7까지",
           "source": "citation"
         },
         {
@@ -8644,9 +8612,23 @@
         },
         {
           "law_name": "소득세법",
+          "article": "제121조~제125조",
+          "confidence": "high",
+          "reason": "명시 인용: 제121조부터 제125조까지",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
           "article": "제156조의2",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제156조의2",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제156조의2~제156조의8",
+          "confidence": "high",
+          "reason": "명시 인용: 제156조의2부터 제156조의8까지",
           "source": "citation"
         },
         {
@@ -8668,13 +8650,6 @@
           "article": "제164조의2",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제164조의2",
-          "source": "citation"
-        },
-        {
-          "law_name": "소득세법",
-          "article": "제55조",
-          "confidence": "high",
-          "reason": "명시 인용: 「소득세법」 제55조",
           "source": "citation"
         },
         {
@@ -8796,6 +8771,9 @@
           "raw": "「소득세법」 제70조"
         },
         {
+          "raw": "제74조"
+        },
+        {
           "raw": "「소득세법」 제59조의2"
         }
       ],
@@ -8812,6 +8790,13 @@
           "article": "제70조",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제70조",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제74조",
+          "confidence": "high",
+          "reason": "명시 인용: 제74조",
           "source": "citation"
         },
         {
@@ -9112,6 +9097,9 @@
           "raw": "「부가가치세법」 제9조"
         },
         {
+          "raw": "제10조"
+        },
+        {
           "raw": "「법인세법」 제4조"
         }
       ],
@@ -9149,6 +9137,13 @@
           "article": "제60조",
           "confidence": "high",
           "reason": "명시 인용: 「법인세법」 제60조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제10조",
+          "confidence": "high",
+          "reason": "명시 인용: 제10조",
           "source": "citation"
         },
         {
@@ -9205,6 +9200,12 @@
           "raw": "같은 법 제63조제3항"
         },
         {
+          "raw": "제64조"
+        },
+        {
+          "raw": "제65조"
+        },
+        {
           "raw": "「소득세법」 제65조제1항"
         },
         {
@@ -9241,6 +9242,20 @@
           "article": "제63조제3항",
           "confidence": "high",
           "reason": "명시 인용: 같은 법 제63조제3항",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제64조",
+          "confidence": "high",
+          "reason": "명시 인용: 제64조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제65조",
+          "confidence": "high",
+          "reason": "명시 인용: 제65조",
           "source": "citation"
         },
         {
@@ -9300,7 +9315,13 @@
           "raw": "「법인세법」 제13조"
         },
         {
+          "raw": "제13조부터 제54조까지"
+        },
+        {
           "raw": "「법인세법」 제73조"
+        },
+        {
+          "raw": "제73조의2"
         },
         {
           "raw": "「법인세법」 제63조의2제1항제2호"
@@ -9316,6 +9337,13 @@
         },
         {
           "law_name": "법인세법",
+          "article": "제13조~제54조",
+          "confidence": "high",
+          "reason": "명시 인용: 제13조부터 제54조까지",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
           "article": "제63조의2제1항제2호",
           "confidence": "high",
           "reason": "명시 인용: 「법인세법」 제63조의2제1항제2호",
@@ -9326,6 +9354,13 @@
           "article": "제73조",
           "confidence": "high",
           "reason": "명시 인용: 「법인세법」 제73조",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
+          "article": "제73조의2",
+          "confidence": "high",
+          "reason": "명시 인용: 제73조의2",
           "source": "citation"
         },
         {
@@ -9588,6 +9623,12 @@
           "raw": "「법인세법」 제16조제1항제5호"
         },
         {
+          "raw": "같은 법 제52조제2항"
+        },
+        {
+          "raw": "같은 법 제52조"
+        },
+        {
           "raw": "「법인세법」 제15조"
         },
         {
@@ -9614,6 +9655,20 @@
           "article": "제49조",
           "confidence": "high",
           "reason": "명시 인용: 「법인세법」 제49조",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
+          "article": "제52조",
+          "confidence": "high",
+          "reason": "명시 인용: 같은 법 제52조",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
+          "article": "제52조제2항",
+          "confidence": "high",
+          "reason": "명시 인용: 같은 법 제52조제2항",
           "source": "citation"
         },
         {
@@ -10132,19 +10187,8 @@
       "jo_no": "105",
       "jo_label": "제105조",
       "title": "부가가치세 영세율의 적용",
-      "explicit_citations": [
-        {
-          "raw": "「부가가치세법」 제26조"
-        }
-      ],
+      "explicit_citations": [],
       "linked_articles": [
-        {
-          "law_name": "부가가치세법",
-          "article": "제26조",
-          "confidence": "high",
-          "reason": "명시 인용: 「부가가치세법」 제26조",
-          "source": "citation"
-        },
         {
           "law_name": "부가가치세법",
           "article": "",
@@ -10210,6 +10254,9 @@
         },
         {
           "raw": "「부가가치세법」 제38조"
+        },
+        {
+          "raw": "제44조"
         }
       ],
       "linked_articles": [
@@ -10232,6 +10279,13 @@
           "article": "제38조",
           "confidence": "high",
           "reason": "명시 인용: 「부가가치세법」 제38조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제44조",
+          "confidence": "high",
+          "reason": "명시 인용: 제44조",
           "source": "citation"
         },
         {
@@ -10262,6 +10316,9 @@
         },
         {
           "raw": "「부가가치세법」 제26조"
+        },
+        {
+          "raw": "같은 법 제43조의4"
         }
       ],
       "linked_articles": [
@@ -10270,6 +10327,13 @@
           "article": "제26조",
           "confidence": "high",
           "reason": "명시 인용: 「부가가치세법」 제26조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제43조의4",
+          "confidence": "high",
+          "reason": "명시 인용: 같은 법 제43조의4",
           "source": "citation"
         },
         {
@@ -10327,6 +10391,9 @@
         },
         {
           "raw": "「부가가치세법」 제37조"
+        },
+        {
+          "raw": "제37조부터 제39조까지"
         }
       ],
       "linked_articles": [
@@ -10346,6 +10413,13 @@
         },
         {
           "law_name": "부가가치세법",
+          "article": "제37조~제39조",
+          "confidence": "high",
+          "reason": "명시 인용: 제37조부터 제39조까지",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
           "article": "제38조",
           "confidence": "high",
           "reason": "명시 인용: 「부가가치세법」 제38조",
@@ -10356,6 +10430,13 @@
           "article": "",
           "confidence": "low",
           "reason": "조특법 제목·본문에 부가가치세 키워드",
+          "source": "keyword"
+        },
+        {
+          "law_name": "조세특례제한법",
+          "article": "",
+          "confidence": "low",
+          "reason": "투자세액공제 등 조특법 내부 연계",
           "source": "keyword"
         }
       ],
@@ -10381,6 +10462,9 @@
         },
         {
           "raw": "「부가가치세법」 제37조"
+        },
+        {
+          "raw": "제38조"
         },
         {
           "raw": "「부가가치세법」 제48조"
@@ -10413,6 +10497,13 @@
           "article": "제37조",
           "confidence": "high",
           "reason": "명시 인용: 「부가가치세법」 제37조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제38조",
+          "confidence": "high",
+          "reason": "명시 인용: 제38조",
           "source": "citation"
         },
         {
@@ -10456,6 +10547,15 @@
       "explicit_citations": [
         {
           "raw": "「부가가치세법」 제48조"
+        },
+        {
+          "raw": "제49조"
+        },
+        {
+          "raw": "제66조"
+        },
+        {
+          "raw": "제67조"
         }
       ],
       "linked_articles": [
@@ -10464,6 +10564,27 @@
           "article": "제48조",
           "confidence": "high",
           "reason": "명시 인용: 「부가가치세법」 제48조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제49조",
+          "confidence": "high",
+          "reason": "명시 인용: 제49조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제66조",
+          "confidence": "high",
+          "reason": "명시 인용: 제66조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제67조",
+          "confidence": "high",
+          "reason": "명시 인용: 제67조",
           "source": "citation"
         },
         {
@@ -10593,7 +10714,13 @@
           "raw": "「부가가치세법」 제48조"
         },
         {
+          "raw": "제49조"
+        },
+        {
           "raw": "「부가가치세법」 제48조제3항"
+        },
+        {
+          "raw": "제66조제1항"
         },
         {
           "raw": "「부가가치세법」 제37조제2항"
@@ -10633,9 +10760,23 @@
         },
         {
           "law_name": "부가가치세법",
+          "article": "제49조",
+          "confidence": "high",
+          "reason": "명시 인용: 제49조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
           "article": "제60조",
           "confidence": "high",
           "reason": "명시 인용: 「부가가치세법」 제60조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제66조제1항",
+          "confidence": "high",
+          "reason": "명시 인용: 제66조제1항",
           "source": "citation"
         },
         {
@@ -10734,6 +10875,9 @@
       "explicit_citations": [
         {
           "raw": "「부가가치세법」 제21조"
+        },
+        {
+          "raw": "제21조부터 제25조까지"
         }
       ],
       "linked_articles": [
@@ -10742,6 +10886,13 @@
           "article": "제21조",
           "confidence": "high",
           "reason": "명시 인용: 「부가가치세법」 제21조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제21조~제25조",
+          "confidence": "high",
+          "reason": "명시 인용: 제21조부터 제25조까지",
           "source": "citation"
         },
         {
@@ -10779,6 +10930,15 @@
       "explicit_citations": [
         {
           "raw": "「부가가치세법」 제57조"
+        },
+        {
+          "raw": "제57조의2"
+        },
+        {
+          "raw": "제58조"
+        },
+        {
+          "raw": "제60조"
         }
       ],
       "linked_articles": [
@@ -10787,6 +10947,27 @@
           "article": "제57조",
           "confidence": "high",
           "reason": "명시 인용: 「부가가치세법」 제57조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제57조의2",
+          "confidence": "high",
+          "reason": "명시 인용: 제57조의2",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제58조",
+          "confidence": "high",
+          "reason": "명시 인용: 제58조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제60조",
+          "confidence": "high",
+          "reason": "명시 인용: 제60조",
           "source": "citation"
         },
         {
@@ -10908,7 +11089,13 @@
           "raw": "「부가가치세법」 제48조제3항"
         },
         {
+          "raw": "제66조제1항"
+        },
+        {
           "raw": "「부가가치세법」 제48조제4항"
+        },
+        {
+          "raw": "제66조제2항"
         }
       ],
       "linked_articles": [
@@ -10924,6 +11111,20 @@
           "article": "제48조제4항",
           "confidence": "high",
           "reason": "명시 인용: 「부가가치세법」 제48조제4항",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제66조제1항",
+          "confidence": "high",
+          "reason": "명시 인용: 제66조제1항",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제66조제2항",
+          "confidence": "high",
+          "reason": "명시 인용: 제66조제2항",
           "source": "citation"
         },
         {
@@ -11001,6 +11202,9 @@
           "raw": "「부가가치세법」 제66조"
         },
         {
+          "raw": "제67조"
+        },
+        {
           "raw": "같은 법 제63조제2항"
         },
         {
@@ -11011,6 +11215,9 @@
         },
         {
           "raw": "「부가가치세법」 제69조제2항"
+        },
+        {
+          "raw": "제69조제2항부터 제4항까지"
         }
       ],
       "linked_articles": [
@@ -11044,9 +11251,23 @@
         },
         {
           "law_name": "부가가치세법",
+          "article": "제67조",
+          "confidence": "high",
+          "reason": "명시 인용: 제67조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
           "article": "제69조제2항",
           "confidence": "high",
           "reason": "명시 인용: 「부가가치세법」 제69조제2항",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제69조제2항~제4항",
+          "confidence": "high",
+          "reason": "명시 인용: 제69조제2항부터 제4항까지",
           "source": "citation"
         },
         {
@@ -11992,16 +12213,22 @@
           "raw": "「부가가치세법」 제9조"
         },
         {
+          "raw": "제10조"
+        },
+        {
           "raw": "「법인세법」 제24조"
+        },
+        {
+          "raw": "제25조"
+        },
+        {
+          "raw": "제52조"
         },
         {
           "raw": "「법인세법」 제29조"
         },
         {
           "raw": "「법인세법」 제29조제1항제1호"
-        },
-        {
-          "raw": "「법인세법」 제52조"
         }
       ],
       "linked_articles": [
@@ -12010,6 +12237,13 @@
           "article": "제24조",
           "confidence": "high",
           "reason": "명시 인용: 「법인세법」 제24조",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
+          "article": "제25조",
+          "confidence": "high",
+          "reason": "명시 인용: 제25조",
           "source": "citation"
         },
         {
@@ -12037,7 +12271,14 @@
           "law_name": "법인세법",
           "article": "제52조",
           "confidence": "high",
-          "reason": "명시 인용: 「법인세법」 제52조",
+          "reason": "명시 인용: 제52조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제10조",
+          "confidence": "high",
+          "reason": "명시 인용: 제10조",
           "source": "citation"
         },
         {
@@ -12149,19 +12390,25 @@
           "raw": "「부가가치세법」 제9조"
         },
         {
+          "raw": "제10조"
+        },
+        {
           "raw": "「법인세법」 제47조제2항제2호"
         },
         {
           "raw": "「법인세법」제24조"
         },
         {
+          "raw": "제25조"
+        },
+        {
+          "raw": "제52조"
+        },
+        {
           "raw": "「법인세법」 제29조"
         },
         {
           "raw": "「법인세법」 제29조제1항제1호"
-        },
-        {
-          "raw": "「법인세법」 제52조"
         }
       ],
       "linked_articles": [
@@ -12170,6 +12417,13 @@
           "article": "제24조",
           "confidence": "high",
           "reason": "명시 인용: 「법인세법」제24조",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
+          "article": "제25조",
+          "confidence": "high",
+          "reason": "명시 인용: 제25조",
           "source": "citation"
         },
         {
@@ -12204,7 +12458,14 @@
           "law_name": "법인세법",
           "article": "제52조",
           "confidence": "high",
-          "reason": "명시 인용: 「법인세법」 제52조",
+          "reason": "명시 인용: 제52조",
+          "source": "citation"
+        },
+        {
+          "law_name": "부가가치세법",
+          "article": "제10조",
+          "confidence": "high",
+          "reason": "명시 인용: 제10조",
           "source": "citation"
         },
         {
@@ -12450,6 +12711,9 @@
       "explicit_citations": [
         {
           "raw": "「법인세법」 제44조제2항제2호"
+        },
+        {
+          "raw": "제46조제2항제2호"
         }
       ],
       "linked_articles": [
@@ -12458,6 +12722,13 @@
           "article": "제44조제2항제2호",
           "confidence": "high",
           "reason": "명시 인용: 「법인세법」 제44조제2항제2호",
+          "source": "citation"
+        },
+        {
+          "law_name": "법인세법",
+          "article": "제46조제2항제2호",
+          "confidence": "high",
+          "reason": "명시 인용: 제46조제2항제2호",
           "source": "citation"
         },
         {
@@ -12719,6 +12990,9 @@
           "raw": "「소득세법」 제1조의2제1항제5호"
         },
         {
+          "raw": "같은 법 제20조제2항"
+        },
+        {
           "raw": "「소득세법」 제127조제7항"
         }
       ],
@@ -12735,6 +13009,13 @@
           "article": "제1조의2제1항제5호",
           "confidence": "high",
           "reason": "명시 인용: 「소득세법」 제1조의2제1항제5호",
+          "source": "citation"
+        },
+        {
+          "law_name": "소득세법",
+          "article": "제20조제2항",
+          "confidence": "high",
+          "reason": "명시 인용: 같은 법 제20조제2항",
           "source": "citation"
         },
         {
