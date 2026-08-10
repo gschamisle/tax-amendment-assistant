@@ -12,6 +12,7 @@ core/
 ├── parallel_golden.py    병행개정 매뉴얼 골든 매핑 (빌드 주입 + recall 검증)
 ├── pdf_bill_text.py      PDF 개정안 강제 개행 복원
 ├── renumber_scan.py      번호 밀림 인용 정비 누락 검토 (결정적)
+├── parallel_omission.py  병행개정 대응 조문 미개정 후보 (판단 보조)
 └── hwpx_writer.py        HWPX 문서 생성
 
 ui/
@@ -122,6 +123,42 @@ ui/
 
 **소스 우선순위**: golden_manual → code_hint → related_hint → semantic_llm → citation → back_citation.
 citation/back_citation은 인용 관계라 병행 제안에서 제외하고 2단계 UI가 담당.
+
+---
+
+### parallel_omission.py
+
+**역할**: 한 법을 고쳤는데 **병행 대응 조문을 안 고쳤는지** 추린다.
+`renumber_scan`과 짝이지만 산출물의 성격이 다르다 — 그쪽은 기계적으로 확정되는
+누락이고, 이쪽은 **판단이 필요한 검토 후보**다.
+
+```
+개정안 묶음 ─► 개정 대상 조 + 지시문 (draft_bill_parser)
+            ─► 병행 매트릭스 조회 (parallel_matrix.parallel_hits)
+            ─► 대응 조문이 같은 묶음에서 개정됐는지 대조
+```
+
+**병행 관계만 본다**: `golden_manual`(매뉴얼 확정) · `semantic_llm`(쌍별 판별) ·
+`code_hint` · `related_hint`. `citation`/`back_citation`은 단순 인용이라 제외한다 —
+섞으면 인용 한 건마다 후보가 쏟아져 사람이 볼 수 있는 양을 넘고, 그 영역은
+`renumber_scan`이 이미 담당한다.
+
+**지시문을 함께 싣는 이유**: 관계가 실재해도 **이번 개정 내용과 무관한 경우가
+상당수다.** 실측(2026년 세법개정안 11건, 후보 18건) 기준 약칭 정리
+(`"조세조약"` 정의 이관)나 대응 개념이 없는 개정(소득세법의 부동산임대업 세분 →
+법인세법에는 그 소득 구분 자체가 없음)이 절반 가까이 섞였다. 지시문 한 줄이면
+사람이 몇 초 만에 가른다.
+
+**판정 3단계**: `missing`(그 법 개정안은 묶음에 있는데 대응 조문 미개정 — 검토 후보) ·
+`covered`(함께 개정됨) · `pending`(그 법 개정안이 묶음에 없어 보류).
+
+**스코프 한계**: 병행 후보 생성(`build_parallel_candidates._LAW_PAIRS`)이
+법인세↔소득세·법인세↔부가세(및 각 시행령) 4쌍으로 하드코딩돼 있다. 인용 그래프를
+32법령으로 넓혀도 병행 관계는 늘지 않는다. 다만 이는 결함이라기보다 실체에 가깝다 —
+병행개정은 '같은 위계·같은 취지' 관계인데, 종합부동산세법의 상대는 재산세(지방세법)라
+추적 밖이고 국세기본법·국세징수법은 절차법, 관세법은 별도 영역이다.
+`laws_with_parallel_relations()`가 '등재됨'이 아니라 '병행 상대가 있음'으로 판별해
+이 구분을 CLI 경고에 반영한다.
 
 ---
 
