@@ -30,7 +30,10 @@ _OPENING_RE = re.compile(
 )
 _TABLE_MARKERS = ("신ㆍ구조문대비표", "신·구조문대비표", "신구조문대비표")
 _DIRECTIVE_RE = re.compile(r"^제(\d+)조(?:의(\d+))?")
-_VERBS = ("신설한다", "개정한다", "삭제한다", "로 한다", "같이 한다", "각각 한다")
+# 지시문 서술어. 한 줄이 여러 지시를 이으면 '…으로 하고', '…를 삭제하며'처럼
+# 연결어미로 끝나서 종결형('한다')만 보면 통째로 놓친다 — 11개 법안에서 26개
+# 조문이 그렇게 빠졌고, 그 조가 개정 목록에서 사라지면 검토가 오탐을 낸다.
+_VERB_RE = re.compile(r"(?:신설|개정|삭제|한다|하고|하며|하되|같이|각각)")
 # 조(條) 자체를 신설하는 지시문: "제134조를 다음과 같이 신설" / "제29조의2부터 …까지를 … 신설".
 # 조번호 뒤에 항·호 없이 바로 (를/을 … 신설)이 와야 한다(항·호 신설은 기존 조 개정).
 _NEW_ARTICLE_RE = re.compile(
@@ -68,7 +71,7 @@ def _is_directive(line: str) -> tuple[str, str] | None:
     m = _DIRECTIVE_RE.match(s)
     if not m:
         return None
-    if not any(v in s for v in _VERBS):
+    if not _VERB_RE.search(s):
         return None
     # 신설 조문 본문 첫 줄("제X조(제목) ① …")은 지시문이 아니다
     if re.match(r"^제\d+조(의\d+)?\(", s):

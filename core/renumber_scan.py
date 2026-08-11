@@ -15,12 +15,19 @@ from dataclasses import dataclass, field
 
 from core.citation_graph import _parse_target_ref, back_citation_edges, graph_meta
 from core.citation_parser import base_law_name, parse_citations
-from core.draft_bill_parser import manual_amendment_targets
+from core.draft_bill_parser import _is_directive, manual_amendment_targets
 
 _QUOTED_RE = re.compile(r"[“”‘’\"'].*?[“”‘’\"']")
 _JO_HEAD_RE = re.compile(r"제\s*(\d+)\s*조(?:\s*의\s*(\d+))?")
-# 지시문 머리: 줄이 조번호로 시작. 신설 조문 '본문'("제5조(정의) ①…")은 제외한다.
-_DIRECTIVE_HEAD_RE = re.compile(r"^제\s*\d+\s*조(?:\s*의\s*\d+)?(?!\s*\()")
+def _is_directive_line(line: str) -> bool:
+    """지시문 줄인가. 판정은 draft_bill_parser 하나로 모은다.
+
+    한때 이 모듈이 자체 규칙(줄머리가 조번호인가)을 썼는데, 그러면 같은 개정문을
+    두 파서가 다르게 읽는다 — 실측에서 조특법안 기준 6개 조가 어긋났고
+    (신설 조문 본문 '제121조의36(제목) ① …'을 지시문으로 오인),
+    개정 조문 목록이 갈리면 covered/missing 판정이 통째로 흔들린다.
+    """
+    return _is_directive(line) is not None
 
 # 단위별 기호. 조·호는 가지번호("제1호의2")를 가질 수 있다.
 # PDF 개행 복원 과정에서 "제2 항"처럼 공백이 끼므로 공백을 허용한다.
@@ -90,7 +97,7 @@ def renumber_events(body: str) -> list[RenumberEvent]:
     events: list[RenumberEvent] = []
     for line in body.splitlines():
         # 신설 조문 '본문'에도 "제7항을 적용할 때 …로 한다" 꼴이 나온다 → 지시문 줄만 본다
-        if not _DIRECTIVE_HEAD_RE.match(line.strip()):
+        if not _is_directive_line(line):
             continue
         clean = _QUOTED_RE.sub(" ", line.strip())  # 문구 치환은 번호 이동이 아니다
         head = _JO_HEAD_RE.search(clean)
@@ -139,7 +146,7 @@ def directive_texts(body: str) -> dict[str, str]:
     out: dict[str, str] = {}
     for line in body.splitlines():
         s = line.strip()
-        if not _DIRECTIVE_HEAD_RE.match(s):
+        if not _is_directive_line(s):
             continue
         m = _JO_HEAD_RE.match(s)
         if not m:
