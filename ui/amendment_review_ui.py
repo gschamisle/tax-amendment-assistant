@@ -22,14 +22,12 @@ _SUPPORTED = ("pdf", "hwpx", "hwp", "md", "txt")
 
 def _read_upload(uploaded) -> tuple[str, str]:
     """업로드 파일을 data/uploads(gitignore)에 저장하고 텍스트를 뽑는다."""
-    from core.hwp_reader import extract_text
+    from core.document_text import extract
 
     _UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
     dest = _UPLOAD_DIR / uploaded.name
     dest.write_bytes(uploaded.getbuffer())
-    if dest.suffix.lower() in (".txt", ".md"):
-        return dest.read_text(encoding="utf-8", errors="replace"), str(dest)
-    return extract_text(dest), str(dest)
+    return extract(dest), str(dest)
 
 
 def _renumber_block(texts: list[tuple[str, str]]) -> None:
@@ -145,12 +143,24 @@ def render(law_api_key: str = "", openai_api_key: str = "") -> None:
         return
 
     if st.button("검토 실행", type="primary", key="ar_run"):
-        with st.spinner("파일 추출·파싱 중..."):
+        # PDF는 kordoc 변환을 거치므로 파일당 수 초 걸린다. 어디까지 됐는지 보여준다.
+        from core.document_text import ExtractError
+
+        texts: list[tuple[str, str]] = []
+        progress = st.progress(0.0, text="파일 추출 중...")
+        for i, u in enumerate(uploads, 1):
+            progress.progress(i / len(uploads), text=f"추출 중 — {u.name}")
             try:
-                st.session_state["ar_texts"] = [_read_upload(u) for u in uploads]
-            except Exception as exc:
-                st.error(f"파일을 읽지 못했습니다: {exc}")
-                return
+                texts.append(_read_upload(u))
+            except ExtractError as exc:
+                st.error(f"**{u.name}** — {exc}")
+            except Exception as exc:                     # noqa: BLE001
+                st.error(f"**{u.name}** — 읽는 중 오류: {exc}")
+        progress.empty()
+        if not texts:
+            st.warning("읽어 들인 파일이 없습니다.")
+            return
+        st.session_state["ar_texts"] = texts
 
     texts = st.session_state.get("ar_texts")
     if not texts:

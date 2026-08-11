@@ -36,18 +36,17 @@ def _format_jo_label(jo_key: str) -> str:
 
 def _ingest_upload(uploaded) -> dict | None:
     """업로드 파일 저장(data/uploads, git 제외) 후 개정문 본문 파싱."""
-    from core.hwp_reader import extract_text
+    from core.document_text import extract
+    from core.pdf_bill_text import unwrap
 
     _UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
     dest = _UPLOAD_DIR / uploaded.name
     dest.write_bytes(uploaded.getbuffer())
-    if dest.suffix.lower() == ".txt":
-        text = dest.read_text(encoding="utf-8", errors="replace")
-    else:
-        text = extract_text(dest)
+    text = extract(dest)
     if len(text) < 100:
         return None
-    law_name, body = find_amendment_body(text)
+    # PDF는 조판 폭에서 문장이 끊겨 지시문 인식이 통째로 실패한다
+    law_name, body = find_amendment_body(unwrap(text))
     if not body:
         return None
     return {"law_name": law_name, "body": body, "file": uploaded.name}
@@ -350,7 +349,7 @@ def render(law_api_key: str, openai_api_key: str) -> None:
 
         uploaded = st.file_uploader(
             "개정안 파일 업로드 (.hwpx / .hwp / .txt) — 수기 병행개정이 포함된 전체 조문안",
-            type=["hwpx", "hwp", "txt"],
+            type=["pdf", "hwpx", "hwp", "md", "txt"],
             key="na_file",
         )
         st.caption("🔒 업로드 파일은 로컬 data/uploads/ 에만 저장되며 git 저장소에는 포함되지 않습니다.")

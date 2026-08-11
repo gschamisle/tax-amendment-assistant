@@ -15,7 +15,7 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding="utf-8")
 
 from core.draft_bill_parser import find_amendment_body
-from core.hwp_reader import extract_text
+from core.document_text import extract as extract_document
 from core.pdf_bill_text import unwrap
 from core.renumber_scan import _jo_label, apply_batch_coverage, scan_renumber_omissions
 
@@ -33,9 +33,7 @@ _MISSING = ("missing", "missing_other", "touched", "touched_other")
 
 
 def _read(path: Path) -> str:
-    if path.suffix.lower() == ".md" or path.suffix.lower() == ".txt":
-        return path.read_text(encoding="utf-8")
-    return extract_text(path)
+    return extract_document(path)
 
 
 def analyze(path: Path) -> dict | None:

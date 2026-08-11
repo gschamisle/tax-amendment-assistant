@@ -17,7 +17,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-from core.hwp_reader import extract_text
+from core.document_text import extract as extract_document
 from core.parallel_omission import (
     Bill,
     group_by_source_article,
@@ -41,9 +41,7 @@ _SOURCE_LABEL = {
 
 
 def _read(path: Path) -> str:
-    if path.suffix.lower() in (".md", ".txt"):
-        return path.read_text(encoding="utf-8")
-    return extract_text(path)
+    return extract_document(path)
 
 
 def main() -> int:
