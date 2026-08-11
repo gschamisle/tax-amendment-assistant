@@ -91,3 +91,7 @@ CITATION_GRAPH_EXTRA_LAWS: tuple[str, ...] = (
     "종합부동산세법 시행령",
 )
 
+
+# 조문안 작성(GPT) 탭 — 외부 LLM이 필요해 내부망 배포에서는 숨긴다.
+# 나머지 탭은 발표 이후 공개된 정보만 다루고 LLM 없이 동작한다.
+ENABLE_DRAFT_TAB = os.getenv("ENABLE_DRAFT_TAB", "1") == "1"
