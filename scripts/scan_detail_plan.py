@@ -77,11 +77,11 @@ def main() -> int:
         if r["법령명"]:
             print(f"  {law_abbrev.law(r['법령명'])} {law_abbrev.jo_key(r['조번호'])}"
                   f"   (표기: {r['raw']})")
-        print(f"  항목: {r['제목'][:90]}")
+        print(f"  항목: {r['제목']}")
         if r["개정이유"]:
-            print(f"  개정이유: {r['개정이유'][:80]}")
+            print(f"  개정이유: {r['개정이유']}")
         if r["적용시기"]:
-            print(f"  적용시기: {r['적용시기'][:80]}")
+            print(f"  적용시기: {r['적용시기']}")
 
     if args.undisclosed:
         extra = result["undisclosed"]

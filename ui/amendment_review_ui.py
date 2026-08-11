@@ -79,7 +79,8 @@ def _renumber_block(texts: list[tuple[str, str]]) -> None:
 
 def _parallel_block(texts: list[tuple[str, str]]) -> None:
     from core.parallel_omission import (
-        group_by_source_article, laws_with_parallel_relations, load_bill, scan,
+        SOURCE_LABEL, group_by_source_article, laws_with_parallel_relations,
+        load_bill, scan,
     )
 
     bills = [b for b in (load_bill(t, n) for t, n in texts) if b]
@@ -114,15 +115,19 @@ def _parallel_block(texts: list[tuple[str, str]]) -> None:
             f"{law_abbrev.law(g['법령명'])} {law_abbrev.jo_key(g['조번호'])} "
             f"— 대응 {len(g['대응'])}건", expanded=False,
         ):
+            # 자르지 않는다. 판단하라고 내놓은 근거인데 문장이 중간에 끊기면
+            # 오히려 다시 원문을 찾아봐야 한다 — 확장 패널 안이라 길이는 문제되지 않는다.
             if g["개정지시문"]:
                 st.markdown("**개정 지시문**")
-                st.code(g["개정지시문"][:600], language=None)
+                st.code(g["개정지시문"], language=None, wrap_lines=True)
             for m in g["대응"]:
                 st.markdown(
                     f"- **{law_abbrev.law(m['대상법령'])} "
                     f"{law_abbrev.article(m['대상조문'])}** "
-                    f"`{m['근거']}` — {m['사유'][:70]}"
+                    f"`{SOURCE_LABEL.get(m['근거'], m['근거'])}`"
                 )
+                if m["사유"]:
+                    st.caption(m["사유"])
 
 
 def render(law_api_key: str = "", openai_api_key: str = "") -> None:

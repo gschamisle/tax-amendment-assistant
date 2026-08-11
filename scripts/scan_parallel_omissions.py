@@ -19,6 +19,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 from core.document_text import extract as extract_document
 from core.parallel_omission import (
+    SOURCE_LABEL as _SOURCE_LABEL,
     Bill,
     group_by_source_article,
     laws_with_parallel_relations,
@@ -31,13 +32,6 @@ _STATUS_LABEL = {
     "pending": "→ 그 법 개정안이 이번 묶음에 없음 — 판단 보류",
     "covered": "✓ 대응 조문도 함께 개정됨",
 }
-_SOURCE_LABEL = {
-    "golden_manual": "매뉴얼 확정",
-    "bridge_confirmed": "다리 도출",
-    "semantic_llm": "쌍별 판별",
-    "code_hint": "코드 힌트",
-    "related_hint": "연관 힌트",
-}
 
 
 def _read(path: Path) -> str:
@@ -48,7 +42,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("patterns", nargs="+", help="개정안 파일/글롭 (.pdf/.hwpx/.hwp/.md/.txt)")
     ap.add_argument("--all", action="store_true", help="함께 개정된 건·보류 건도 표시")
-    ap.add_argument("--directive-chars", type=int, default=180, help="지시문 표시 길이")
+    ap.add_argument("--directive-chars", type=int, default=0,
+                    help="지시문 표시 길이 (0=자르지 않음)")
     args = ap.parse_args()
 
     paths = sorted({Path(p) for pat in args.patterns for p in glob.glob(pat)})
@@ -93,12 +88,16 @@ def main() -> int:
         print(f"■ {group['법령명']} {group['조문']}")
         directive = group["개정지시문"]
         if directive:
-            head = directive[: args.directive_chars]
-            print(f"   개정: {head}{'…' if len(directive) > args.directive_chars else ''}")
+            cut = args.directive_chars
+            head = directive[:cut] if cut else directive
+            print(f"   개정: {head}{'…' if cut and len(directive) > cut else ''}")
         for m in group["대응"]:
             label = _STATUS_LABEL.get(m["상태"], m["상태"])
             src = _SOURCE_LABEL.get(m["근거"], m["근거"])
             print(f"   → {m['대상법령']} {m['대상조문']}  [{src}]  {label}")
+            if m.get("사유"):
+                # 판단 근거라 자르지 않는다 — 끊기면 원문을 다시 찾아야 한다
+                print(f"      근거: {m['사유']}")
 
     print("\n" + "=" * 78)
     print("이 목록은 '누락'이 아니라 '검토 후보'입니다. 관계는 매트릭스가 확정한 것이지만,")

@@ -33,6 +33,15 @@ PARALLEL_SOURCES: frozenset[str] = frozenset({
     "related_hint",      # 연관 조문 힌트(같은 법 안의 관련 조문 포함)
 })
 
+# 근거 표시명. CLI와 화면이 같은 말을 쓰도록 한 곳에 둔다.
+SOURCE_LABEL: dict[str, str] = {
+    "golden_manual": "매뉴얼 확정",
+    "bridge_confirmed": "다리 도출",
+    "semantic_llm": "쌍별 판별",
+    "code_hint": "코드 힌트",
+    "related_hint": "연관 힌트",
+}
+
 _JO_IN_REF_RE = re.compile(r"제\s*(\d+)\s*조(?:\s*의\s*(\d+))?")
 
 
