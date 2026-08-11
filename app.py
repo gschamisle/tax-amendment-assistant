@@ -4,8 +4,8 @@ import os
 import streamlit as st
 from config import LAW_API_KEY, OPENAI_API_KEY, ENABLE_HWPX_OUTPUT, ENABLE_DRAFT_TAB
 from ui import (
-    amendment_review_ui, law_map_ui, new_article_ui, opinion_ui,
-    stage1_draft, stage2_crossref, stage3_output,
+    amendment_review_ui, article_relations_ui, law_map_ui, new_article_ui,
+    opinion_ui, stage1_draft, stage2_crossref, stage3_output,
 )
 from ui.styles import inject_global_css
 
@@ -86,11 +86,16 @@ _TABS: list[tuple[str, object]] = [
     (":material/fact_check: 개정안 검토", amendment_review_ui),
     (":material/forum: 입법예고 의견", opinion_ui),
     (":material/hub: 세법 관계도", law_map_ui),
-    (":material/travel_explore: 조문 연관 조회", stage2_crossref),
+    # 조문 하나를 지정해 인용·역인용·병행·별표를 보는 화면. 법령명·조번호를 직접
+    # 받으므로 단독으로 돈다(1단계 값이 있으면 자동 채우기만 한다).
+    (":material/travel_explore: 조문 연관 조회", article_relations_ui),
     (":material/add_circle: 신설 조문 검토", new_article_ui),
 ]
+# 아래 둘은 1단계 초안이 있어야 의미가 있다. stage2_crossref를 앞에 두었더니
+# "1단계에서 먼저 초안을 생성하세요"만 뜨는 빈 탭이 됐다 — 의존하는 탭 옆에 붙인다.
 if ENABLE_DRAFT_TAB:
     _TABS.append((":material/edit_note: 조문안 작성 (GPT)", stage1_draft))
+    _TABS.append((":material/link: 인용·준용 확인 (초안 연계)", stage2_crossref))
 if ENABLE_HWPX_OUTPUT:
     _TABS.append((":material/description: HWPX 출력", stage3_output))
 

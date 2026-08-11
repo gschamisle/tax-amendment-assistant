@@ -61,7 +61,13 @@ def _forward_table(rows: list[dict]) -> None:
 
 
 def render(law_api_key: str, openai_api_key: str) -> None:
-    """조문 직접 입력 → 인용/준용/역인용/병행개정 4분류."""
+    """조문 직접 입력 → 인용/준용/역인용/병행개정 4분류.
+
+    독립 탭으로도, 1단계 '개정조문 직접 입력' 모드 안에서도 같은 화면을 쓴다.
+    1단계에서 넘어온 경우에만 법령·조문이 자동으로 채워진다.
+    """
+    st.markdown('<div class="mofe-section-header">조문 연관 조회</div>',
+                unsafe_allow_html=True)
     st.caption(
         "개정되는 조문 본문을 직접 입력하면 ① 인용 ② 준용 ③ 역인용(이 조문을 인용하는 조항) "
         "④ 병행개정(짝 세법 대응 조문)으로 구분해 연관 조문만 찾습니다. "
