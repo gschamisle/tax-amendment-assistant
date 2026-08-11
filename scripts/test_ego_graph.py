@@ -28,8 +28,8 @@ def test_grouping_by_law() -> None:
     """노드는 조문이 아니라 법령이다 — 역인용 수십 건이면 라벨이 겹친다."""
     ego = build(_SAMPLE)
     back = ego["nodes"]["back_cited"]
-    assert [n.law for n in back] == ["법인세법 시행령", "조세특례제한법"], back
-    assert back[0].count == 2 and back[0].articles == ["제50조의2", "제50조의3"], back[0]
+    assert [n.law for n in back] == ["법인령", "조특법"], back   # 약칭 표기
+    assert back[0].count == 2 and back[0].articles == ["§50의2", "§50의3"], back[0]
     # 인용과 준용은 한 사분면으로 합친다
     assert ego["totals"]["cited"] == 2, ego["totals"]
     assert ego["totals"]["parallel"] == 1
@@ -52,7 +52,7 @@ def test_render_is_byte_identical() -> None:
     assert a.startswith("<svg") and a.endswith("</svg>")
     for _kind, title, _color, _angle in SECTORS:
         assert title in a, f"사분면 제목 누락: {title}"
-    assert "법인세법 제27조의2" in a
+    assert "법인법 §27의2" in a
     print("  SVG 결정적 렌더 OK")
 
 

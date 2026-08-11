@@ -21,6 +21,8 @@ import math
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 
+from core import law_abbrev
+
 # 관계 유형 → (표시명, 색, 사분면 각도(도), 설명)
 # 각도는 12시=270°(위) 기준 SVG 좌표계.
 SECTORS: tuple[tuple[str, str, str, float], ...] = (
@@ -48,10 +50,8 @@ class LawNode:
 
 
 def _jo_label(jo: str) -> str:
-    parts = str(jo).split("의")
-    if not parts[0].isdigit():
-        return str(jo)
-    return f"제{parts[0]}조" + (f"의{parts[1]}" if len(parts) > 1 else "")
+    """그래프 내부 키('73의2') → 도표 표기('§73의2')."""
+    return law_abbrev.jo_key(jo)
 
 
 def build(relations: dict) -> dict:
@@ -71,8 +71,9 @@ def build(relations: dict) -> dict:
     for kind, rows in buckets.items():
         grouped: dict[str, list[str]] = defaultdict(list)
         for row in rows:
-            law = str(row.get("법령명") or relations.get("law_name") or "")
-            ref = row.get("조문") or row.get("별표") or _jo_label(str(row.get("조번호", "")))
+            law = law_abbrev.law(str(row.get("법령명") or relations.get("law_name") or ""))
+            raw = row.get("조문") or row.get("별표")
+            ref = law_abbrev.article(str(raw)) if raw else _jo_label(str(row.get("조번호", "")))
             ref = str(ref).strip()
             if ref and ref not in grouped[law]:
                 grouped[law].append(ref)
@@ -82,7 +83,9 @@ def build(relations: dict) -> dict:
             for law, arts in sorted(grouped.items(), key=lambda kv: (-len(kv[1]), kv[0]))
         ]
     return {
-        "center": f"{relations.get('law_name', '')} {relations.get('target_label', '')}".strip(),
+        "center": law_abbrev.full(
+            str(relations.get("law_name", "")), str(relations.get("target_label", ""))
+        ),
         "nodes": nodes,
         "totals": {k: sum(n.count for n in v) for k, v in nodes.items()},
     }
