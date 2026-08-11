@@ -21,6 +21,7 @@ MODULES: tuple[str, ...] = (
     "scripts.test_parallel_omission",
     "scripts.test_bridge_pairs",
     "scripts.test_ego_graph",
+    "scripts.test_detail_plan",
     "scripts.test_llm_fallback",
     "scripts.test_outline_intent",
     "scripts.test_related_article_129",
