@@ -1,4 +1,9 @@
-"""세법개정 AI 어시스턴트 — 메인 앱."""
+"""이번 세제개편안, 이렇게 하려는거 맞아? — 메인 앱.
+
+이름을 '세법개정 AI 어시스턴트'에서 바꿨다. 두 군데가 사실과 달랐다.
+개정문을 써 주는 도구가 아니라 이미 발표된 것을 읽어 대조하는 도구이고,
+기본 화면의 탭은 LLM을 쓰지 않는다(내부망 빌드에는 아예 없다).
+"""
 import base64
 import os
 import streamlit as st
@@ -10,7 +15,7 @@ from ui import (
 from ui.styles import inject_global_css
 
 st.set_page_config(
-    page_title="세법개정 AI 어시스턴트",
+    page_title="이번 세제개편안, 이렇게 하려는거 맞아?",
     page_icon="📋",
     layout="wide",
 )
@@ -28,7 +33,8 @@ st.markdown(f"""
 <div class="mofe-header-card">
   {_logo_html}
   <div class="mofe-app-title">
-    <h1>세법개정 AI 어시스턴트</h1>
+    <h1>이번 세제개편안, 이렇게 하려는거 맞아?</h1>
+    <p>빠진 조문, 국민의견, 조문 관계를 대조합니다.</p>
   </div>
 </div>
 """, unsafe_allow_html=True)
