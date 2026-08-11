@@ -72,9 +72,9 @@ def render(law_api_key: str = "", openai_api_key: str = "") -> None:
                 st.markdown(f"- **{a} → {b}** · {n:,}건")
 
     st.divider()
+    # 조문 단위 관계도(조문 연관 조회)는 지금 숨겨 둔 탭이라 여기서 안내하지 않는다 —
+    # 없는 탭으로 보내는 문구가 되기 때문. ENABLE_WIP_TABS를 켜면 다시 살릴 것.
     st.caption(
-        "조문 하나의 관계도(인용·역인용·병행·별표)는 **개정안 검토** 탭에서 "
-        "조문을 지정하면 나옵니다. 법령 약칭은 재정경제부 세제개편안 상세본의 "
-        f"공식 약어를 따릅니다 (예: {law_abbrev.law('소득세법 시행령')} "
-        f"{law_abbrev.article('제73조의2')})."
+        "법령 약칭은 재정경제부 세제개편안 상세본의 공식 약어를 따릅니다 "
+        f"(예: {law_abbrev.law('소득세법 시행령')} {law_abbrev.article('제73조의2')})."
     )

@@ -7,7 +7,10 @@
 import base64
 import os
 import streamlit as st
-from config import LAW_API_KEY, OPENAI_API_KEY, ENABLE_HWPX_OUTPUT, ENABLE_DRAFT_TAB
+from config import (
+    LAW_API_KEY, OPENAI_API_KEY,
+    ENABLE_HWPX_OUTPUT, ENABLE_DRAFT_TAB, ENABLE_WIP_TABS,
+)
 from ui import (
     amendment_review_ui, article_relations_ui, law_map_ui, new_article_ui,
     opinion_ui, stage1_draft, stage2_crossref, stage3_output,
@@ -42,8 +45,13 @@ st.markdown(f"""
 law_api_key = LAW_API_KEY
 openai_api_key = OPENAI_API_KEY
 
-if not law_api_key or not openai_api_key:
-    st.warning(".env 파일에 LAW_API_KEY, OPENAI_API_KEY를 설정하세요.")
+# 안 쓰는 키를 요구하지 않는다. 기본 3개 탭은 OpenAI를 부르지 않으므로,
+# 조문안 작성 탭을 켰을 때만 OPENAI_API_KEY를 따진다.
+_missing = [n for n, v in (("LAW_API_KEY", law_api_key),) if not v]
+if ENABLE_DRAFT_TAB and not openai_api_key:
+    _missing.append("OPENAI_API_KEY")
+if _missing:
+    st.warning(f".env 파일에 {', '.join(_missing)}를 설정하세요.")
 
 # 현행본 대조는 추적 법령(32건) 전체를 API로 조회해 1분 넘게 걸린다.
 # 기동 때 자동으로 돌리면 그동안 화면이 백지라, 사용자가 원할 때만 실행한다.
@@ -85,18 +93,19 @@ with _fresh_col:
 # 아이콘은 Material Symbols(:material/…:). 이모지는 OS·글꼴마다 모양과 폭이 달라
 # 정렬이 흔들리고 디자인 토큰으로 색을 맞출 수 없다.
 #
-# 순서는 '내부망에서 되는 것부터'다. 1~3번은 발표 이후 공개된 정보만 다루고
-# LLM 없이 동작한다. 조문안 생성(GPT)만 외부망이 필요해 맨 뒤로 뺐고,
-# ENABLE_DRAFT_TAB=0이면 아예 숨긴다.
+# 기본 화면은 이 셋뿐이다. 발표된 개정안을 읽고 → 국민의견을 읽고 → 법 사이
+# 관계를 보는, 하나로 이어지는 묶음이고 셋 다 LLM 없이 돈다.
 _TABS: list[tuple[str, object]] = [
     (":material/fact_check: 개정안 검토", amendment_review_ui),
     (":material/forum: 입법예고 의견", opinion_ui),
     (":material/hub: 세법 관계도", law_map_ui),
+]
+# 아래부터는 플래그로 감춘다(config 참고). 코드는 그대로 두고 노출만 끈다.
+if ENABLE_WIP_TABS:
     # 조문 하나를 지정해 인용·역인용·병행·별표를 보는 화면. 법령명·조번호를 직접
     # 받으므로 단독으로 돈다(1단계 값이 있으면 자동 채우기만 한다).
-    (":material/travel_explore: 조문 연관 조회", article_relations_ui),
-    (":material/add_circle: 신설 조문 검토", new_article_ui),
-]
+    _TABS.append((":material/travel_explore: 조문 연관 조회", article_relations_ui))
+    _TABS.append((":material/add_circle: 신설 조문 검토", new_article_ui))
 # 아래 둘은 1단계 초안이 있어야 의미가 있다. stage2_crossref를 앞에 두었더니
 # "1단계에서 먼저 초안을 생성하세요"만 뜨는 빈 탭이 됐다 — 의존하는 탭 옆에 붙인다.
 if ENABLE_DRAFT_TAB:
