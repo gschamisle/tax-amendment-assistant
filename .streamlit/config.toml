@@ -1,0 +1,26 @@
+# Streamlit 네이티브 테마.
+#
+# 탭 선택 표시·위젯 강조색 등은 Streamlit이 내부 클래스(.st-bd 등)로 직접 칠한다.
+# 이 값들은 CSS 주입으로 덮기 어렵다 — 특이도를 올리고 !important를 붙여도
+# 내부 테마 클래스를 이기지 못하는 지점이 있다. 그래서 색의 원천은 여기서 정하고,
+# ui/styles.py 는 레이아웃·밀도·표 서식 등 테마로 표현할 수 없는 부분만 맡는다.
+#
+# 값은 ui/styles.py 의 --c-* 토큰과 같은 팔레트다. 한쪽만 바꾸면 어긋난다.
+
+[theme]
+base = "light"
+primaryColor = "#1e40af"              # 남색 — 정부 문서 톤
+backgroundColor = "#f6f8fb"
+secondaryBackgroundColor = "#ffffff"
+textColor = "#0f172a"
+linkColor = "#1e40af"
+borderColor = "#d9e0ea"
+font = "Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif"
+baseRadius = "small"
+
+[theme.sidebar]
+backgroundColor = "#ffffff"
+
+[server]
+# 업로드 개정안(HWPX·PDF)이 커질 수 있다
+maxUploadSize = 50

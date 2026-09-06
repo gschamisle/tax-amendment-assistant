@@ -17,6 +17,12 @@ MODULES: tuple[str, ...] = (
     "scripts.test_article_relations",
     "scripts.test_new_article_scanner",
     "scripts.test_draft_bill_parser",
+    "scripts.test_renumber_scan",
+    "scripts.test_parallel_omission",
+    "scripts.test_bridge_pairs",
+    "scripts.test_ego_graph",
+    "scripts.test_detail_plan",
+    "scripts.test_document_text",
     "scripts.test_llm_fallback",
     "scripts.test_outline_intent",
     "scripts.test_related_article_129",
@@ -25,6 +31,8 @@ MODULES: tuple[str, ...] = (
     "scripts.test_citation_graph",
     "scripts.test_related_relation_types",
     "scripts.test_parallel_matrix",
+    "scripts.test_opinion_source",
+    "scripts.test_opinion_cluster",
 )
 
 

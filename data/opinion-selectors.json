@@ -1,0 +1,12 @@
+{
+  "_주석": "opinion.lawmaking.go.kr 실측 DOM (2026-08-07 확인). 의견 1건 = article.commentDetail.",
+  "_구조": "article.commentDetail > div.text(대상 개정항목) + div.comment > ul.comment_user(li.user 작성자 / li.date 제출일시) + div.comment_text > pre(본문)",
+  "_비고": "작성자는 사이트가 이미 '정 O O'로 마스킹해 내려준다. opinion_id에 해당하는 속성이 DOM에 없어 비워 둔다(본문 해시로 대체됨).",
+  "row": "//article[contains(@class,'commentDetail')]",
+  "opinion_id": "",
+  "title": ".//div[@class='text']//text()",
+  "body": ".//div[@class='comment_text']/pre//text()",
+  "author": ".//li[@class='user']//text()",
+  "posted_at": ".//li[@class='date']//text()",
+  "stance": ""
+}

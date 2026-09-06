@@ -239,7 +239,26 @@ def cmd_fetch(wait_seconds: int) -> int:
             n_err += 1
         results.append(row)
 
-    results.sort(key=lambda r: (not r.get("match"), r["law_a"], r["jo_a"]))
+    # 2단계는 '아직 판별되지 않은' 쌍만 후보로 낸다. 따라서 이번 배치 결과로
+    # 파일을 덮어쓰면 지난 회차에 판별된 쌍이 통째로 사라진다(실측: 1,936 → 1,861,
+    # semantic 356 → 220). 같은 쌍은 이번 결과로 갱신하고 나머지는 남긴다.
+    def _key(r: dict) -> tuple:
+        return (r.get("law_a"), str(r.get("jo_a")), r.get("law_b"), str(r.get("jo_b")))
+
+    merged: dict[tuple, dict] = {}
+    if _OUT.is_file():
+        try:
+            prev = json.loads(_OUT.read_text(encoding="utf-8")).get("results", [])
+            merged = {_key(r): r for r in prev}
+        except Exception as exc:
+            print(f"[경고] 기존 판별 결과를 읽지 못해 이번 배치만 남깁니다: {exc}")
+    carried = len(merged)
+    merged.update({_key(r): r for r in results})
+
+    results = sorted(
+        merged.values(), key=lambda r: (not r.get("match"), r["law_a"], str(r["jo_a"]))
+    )
+    n_match = sum(1 for r in results if r.get("match"))
     payload = {
         "built_at": date.today().isoformat(),
         "model": state.get("model", MODEL),
@@ -249,6 +268,7 @@ def cmd_fetch(wait_seconds: int) -> int:
         "error_count": n_err,
         "results": results,
     }
+    print(f"기존 {carried}건과 병합 → {len(results)}건")
     _OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"\n저장: {_OUT}")
     print(f"판별 {len(results)}건 — match {n_match}건 / 오류 {n_err}건")

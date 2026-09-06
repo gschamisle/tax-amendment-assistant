@@ -61,7 +61,13 @@ def _forward_table(rows: list[dict]) -> None:
 
 
 def render(law_api_key: str, openai_api_key: str) -> None:
-    """조문 직접 입력 → 인용/준용/역인용/병행개정 4분류."""
+    """조문 직접 입력 → 인용/준용/역인용/병행개정 4분류.
+
+    독립 탭으로도, 1단계 '개정조문 직접 입력' 모드 안에서도 같은 화면을 쓴다.
+    1단계에서 넘어온 경우에만 법령·조문이 자동으로 채워진다.
+    """
+    st.markdown('<div class="mofe-section-header">조문 연관 조회</div>',
+                unsafe_allow_html=True)
     st.caption(
         "개정되는 조문 본문을 직접 입력하면 ① 인용 ② 준용 ③ 역인용(이 조문을 인용하는 조항) "
         "④ 병행개정(짝 세법 대응 조문)으로 구분해 연관 조문만 찾습니다. "
@@ -120,6 +126,24 @@ def render(law_api_key: str, openai_api_key: str) -> None:
         st.warning("인용 그래프가 없어 역인용을 건너뜁니다. `build_law_citation_graph.py --all` 후 재시도.")
     if not result["matrix_ok"]:
         st.warning("병행 매트릭스가 없어 병행개정을 건너뜁니다. `build_parallel_matrix.py` 후 재시도.")
+
+    # ── 관계도 ───────────────────────────────────────────────────────────────
+    # 아래 ①~⑤ 목록은 유형별로 블록이 갈려서 '어느 쪽으로 무겁게 얽혔나'가
+    # 한눈에 안 들어온다. 1-hop 한 장으로 먼저 보여준다.
+    from core.ego_graph import build as build_ego, render_svg, summary_line
+
+    ego = build_ego(result)
+    with st.expander(f"관계도 — {summary_line(ego)}", expanded=True):
+        st.markdown(render_svg(ego), unsafe_allow_html=True)
+        st.caption(
+            "1-hop만 그립니다. 배치는 관계 유형별로 고정되어 있어 같은 조문이면 항상 같은 그림이 나옵니다. "
+            "원의 크기와 선 굵기는 건수입니다."
+        )
+        st.download_button(
+            "관계도 SVG 내려받기", data=render_svg(ego).encode("utf-8"),
+            file_name=f"관계도-{result['law_name']}-{result['jo']}.svg",
+            mime="image/svg+xml", key="ar_ego_svg",
+        )
 
     # ── ① 인용 ───────────────────────────────────────────────────────────────
     with st.container(border=True):

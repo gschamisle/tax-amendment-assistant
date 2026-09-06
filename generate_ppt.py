@@ -1,11 +1,12 @@
 """
-시나브로 팀 - 세법개정 AI 어시스턴트 발표용 PPT 생성 스크립트
+시나브로 팀 - "이번 세제개편안, 이렇게 하려는거 맞아?" 발표용 PPT 생성 스크립트
 
 실행 방법:
   pip install python-pptx
   python generate_ppt.py
 
-출력: 시나브로_세법개정_AI어시스턴트.pptx
+출력: 시나브로_이번_세제개편안_이렇게_하려는거_맞아.pptx
+      (물음표는 Windows 파일명에 못 써서 뺐다)
 """
 
 from pptx import Presentation
@@ -85,9 +86,9 @@ def add_title_slide(prs):
     add_shape_with_text(slide, Inches(1), Inches(1.2), Inches(8), Inches(0.7),
                         "팀 시나브로", font_size=18, color=ACCENT_BLUE, align=PP_ALIGN.CENTER)
 
-    # 메인 타이틀
+    # 메인 타이틀 — 제목이 길어져 두 줄로 흐른다. 40pt면 1.5in 상자를 넘겨 32pt로 낮춘다.
     add_shape_with_text(slide, Inches(0.5), Inches(2.0), Inches(9), Inches(1.5),
-                        "세법개정 AI 어시스턴트", font_size=40, bold=True,
+                        "이번 세제개편안, 이렇게 하려는거 맞아?", font_size=32, bold=True,
                         color=WHITE, align=PP_ALIGN.CENTER)
 
     # 서브 타이틀
@@ -680,7 +681,7 @@ def main():
     add_expected_effects_slide(prs)
     add_closing_slide(prs)
 
-    output_path = os.path.join(os.path.dirname(__file__), "시나브로_세법개정_AI어시스턴트.pptx")
+    output_path = os.path.join(os.path.dirname(__file__), "시나브로_이번_세제개편안_이렇게_하려는거_맞아.pptx")
     prs.save(output_path)
     print(f"✅ PPT 생성 완료: {output_path}")
     print(f"   총 {len(prs.slides)}장 슬라이드")

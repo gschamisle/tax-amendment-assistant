@@ -81,6 +81,30 @@ def graph_meta() -> dict:
     return meta
 
 
+def back_citation_edges(target_law: str, jo: str, jo_sub: str = "") -> list[dict]:
+    """대상 조를 인용하는 원본 엣지 전부 (source 조문당 1건으로 합치지 않음).
+
+    back_citation_hits()는 (법령, 조) 단위로 중복을 제거해 cite_raw를 하나만 남긴다.
+    번호 밀림 판정은 '어느 항을 인용했는가'를 raw별로 따져야 해서 원본 엣지가 필요하다.
+    """
+    reverse, _ = _load_graph()
+    jo_base = jo
+    if "의" in jo and not jo_sub:
+        jo_base, jo_sub = jo.split("의", 1)
+    out: list[dict] = []
+    seen: set[tuple] = set()
+    for edge in reverse.get((target_law, _jo_key(jo_base, jo_sub)), []):
+        ident = (
+            edge.get("source_law"), edge.get("source_jo"),
+            edge.get("cite_raw"), edge.get("target_ref"),
+        )
+        if ident in seen:
+            continue
+        seen.add(ident)
+        out.append(edge)
+    return out
+
+
 def back_citation_hits(
     target_law: str,
     jo: str,

@@ -5,7 +5,7 @@ import json
 from datetime import date
 from pathlib import Path
 
-from config import LAW_API_KEY, PARALLEL_LAWS
+from config import CITATION_GRAPH_EXTRA_LAWS, LAW_API_KEY, PARALLEL_LAWS
 from core.law_api import get_law_text, search_laws
 
 _MANIFEST_PATH = Path(__file__).resolve().parents[1] / "data" / "law-snapshot-manifest.json"
@@ -15,6 +15,8 @@ def monitored_law_names() -> list[str]:
     names: set[str] = set(PARALLEL_LAWS.keys())
     for vals in PARALLEL_LAWS.values():
         names.update(vals)
+    # 병행개정 대상은 아니지만 인용 관계가 실재하는 법령 (국기법·종부세법 등)
+    names.update(CITATION_GRAPH_EXTRA_LAWS)
     # 별표 다수가 시행규칙에 있으므로(인용 그래프 별표 스코프), 각 법률의 시행규칙도
     # 추적·그래프 스코프에 포함한다. PARALLEL_LAWS는 병행 의미라 시행규칙을 두지 않는다.
     rules = {
@@ -33,7 +35,9 @@ def _resolve_mst(law_name: str, law_api_key: str) -> str:
     for row in results:
         if target in row.get("법령명", "").replace(" ", ""):
             return row.get("MST", "")
-    return results[0].get("MST", "") if results else ""
+    # 이름이 안 맞으면 빈 값 — 검색 첫 결과로 폴백하면 없는 법령(예: 농어촌특별세법
+    # 시행규칙)이 다른 법령의 MST로 둔갑해 manifest·그래프에 유령 법령이 생긴다.
+    return ""
 
 
 def fetch_law_snapshot(law_name: str, law_api_key: str = "") -> dict | None:
@@ -92,6 +96,10 @@ def compare_with_manifest(law_api_key: str = "") -> list[dict]:
                 "detail": f"MST {current['mst']}, hash {current['content_hash']}",
             })
             continue
+        if str(prev.get("시행일", "")) > str(current.get("시행일", "")):
+            # 검색 API가 기록보다 이른 시행일 판을 돌려준 경우다(실측 사례 있음).
+            # refresh_manifest가 후퇴를 막으므로 갱신해도 바뀌지 않는다 — 알릴 변경이 아니다.
+            continue
         diffs: list[str] = []
         if prev.get("mst") != current["mst"]:
             diffs.append(f"MST {prev.get('mst')} → {current['mst']}")
@@ -109,11 +117,23 @@ def compare_with_manifest(law_api_key: str = "") -> list[dict]:
 
 
 def refresh_manifest(law_api_key: str = "") -> Path:
+    """현행본 스냅샷으로 manifest 갱신. 단, 기록된 판보다 이른 시행일로는 내려가지 않는다.
+
+    법제처 검색 API가 같은 법령명에 대해 늘 최신 시행일 판을 돌려주지는 않는다
+    (소득세법: 기록 20260421 → 검색 20260101). 그대로 받으면 조번호가 구판으로
+    후퇴해 인용 그래프가 통째로 어긋나므로, 시행일이 더 늦은 쪽을 남긴다.
+    """
+    existing = {str(e.get("name", "")): e for e in load_manifest().get("laws", [])}
     laws: list[dict] = []
     for name in monitored_law_names():
         snap = fetch_law_snapshot(name, law_api_key)
-        if snap:
+        prev = existing.get(name)
+        if snap and prev and str(prev.get("시행일", "")) > str(snap.get("시행일", "")):
+            laws.append(prev)
+        elif snap:
             laws.append(snap)
+        elif prev:
+            laws.append(prev)     # 조회 실패 시 기존 기록 보존
     return save_manifest(laws)
 
 

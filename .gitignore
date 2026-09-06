@@ -13,14 +13,25 @@ wheels/
 node_modules/
 .env
 pdf_pages/
-output/
 data/law-snapshots/
+
+# 산출물은 기본 제외. 입법예고 의견 분석 리포트만 예외로 커밋한다(파일 끝 참조).
+# 'output/' 로 디렉터리를 통째 제외하면 하위 파일을 !패턴으로 되살릴 수 없어
+# 'output/*' 로 둔다.
+output/*
 
 # Local reference materials (keep on disk, not in git)
 docs/*.pdf
+docs/입법예고/
+
+# 도구 상태 디렉터리 (bkit 플러그인)
+.bkit/
 docs/법령검색목록_법령.csv
 *.pptx
 presentation.html
+
+# 수집한 입법예고 의견 원문·요약 캐시 (개인 작성 글 — 커밋 금지)
+data/opinions/
 
 # 내부자료 — 업로드된 개정안 원문·분석 산출물 (절대 커밋 금지)
 data/uploads/
@@ -29,3 +40,16 @@ data/draft_report.txt
 data/golden_review_expected.json
 *.hwp
 *.hwpx
+
+# 예외 — 입법예고 의견 분석 리포트(공개된 입법의견의 집계·요약).
+# 위 *.hwpx 뒤에 와야 한다. .gitignore는 뒤 규칙이 이긴다.
+# 수집 원문(data/opinions/)과 전 건 CSV(members)는 계속 제외한다 —
+# 개인이 쓴 글 전문을 저장소에 올리지 않기 위함. 리포트는 집계와 대표 발췌만 담는다.
+!output/opinions-*.md
+!output/opinions-*.hwpx
+output/*-hwpx소스.md
+output/*.tmp.hwpx
+
+# 하위 폴더의 PDF도 제외한다. 기존 'docs/*.pdf'는 docs 바로 아래만 걸러서
+# 'docs/세법개정 세트/*.pdf' 같은 참고자료가 새어나갔다.
+docs/**/*.pdf

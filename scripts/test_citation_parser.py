@@ -11,6 +11,7 @@ from core.citation_parser import (
     find_back_citations,
     parse_citations,
     resolve_deictic_law,
+    trim_law_name,
 )
 from core.law_network import _choose_entry, _citation_matches, related_law_names
 
@@ -274,6 +275,74 @@ def test_enumerated_cross_law_name() -> None:
     assert find_back_citations(law, "9") == []
 
 
+def test_enumeration_chain_survives_fillers() -> None:
+    """열거 체인이 부스러기(항·호 범위, 괄호 한정, 호 가지번호)에서 끊기면 안 된다.
+
+    끊기면 뒤 조문이 출처법으로 오귀속돼, 존재하지도 않는 자기 조문을 가리키는
+    유령 엣지가 인용 그래프에 실린다 (농어촌특별세법 시행령 제4조에서 실제 발생).
+    """
+    # ① 앞 인용에 딸린 호 범위('제93조제4호부터 제7호까지')를 건너뛴다
+    text = ("「관세법」 제88조, 제92조, 제93조제4호부터 제7호까지 및 "
+            "제9호부터 제14호까지, 제94조, 제96조부터 제101조까지의 규정")
+    for jo in ("92", "94", "96"):
+        c = _one(text, jo=jo)
+        assert effective_law_name(c, "농어촌특별세법 시행령") == "관세법", (jo, c.law_name)
+
+    # ② 괄호·대괄호 한정어구를 건너뛴다
+    text = ("「조세특례제한법」 제66조부터 제70조까지, "
+            "제72조제1항(제1호, 제5호 및 제8호의 법인은 제외한다), "
+            "제77조[「조세특례제한법」 제69조제1항 본문에 따른 토지로 한정한다] 및 제102조")
+    for jo in ("77", "102"):
+        c = _one(text, jo=jo)
+        assert effective_law_name(c, "농어촌특별세법 시행령") == "조세특례제한법", (jo, c.law_name)
+
+    # ③ 호 가지번호 꼬리('제1호의2')를 건너뛴다
+    text = "「지방세특례제한법」 제13조제2항제1호의2, 제15조제2항, 제16조제1항, 제17조"
+    for jo in ("15", "16", "17"):
+        c = _one(text, jo=jo)
+        assert effective_law_name(c, "농어촌특별세법 시행령") == "지방세특례제한법", (jo, c.law_name)
+
+    # ④ 항 범위 인용 자체도 법령명을 물려받고, 뒤 열거의 앵커가 된다
+    text = "「지방세법」 제9조제3항부터 제5항까지, 제15조제1항제1호부터 제4호까지 및 제26조제2항"
+    for jo in ("9", "15", "26"):
+        c = _one(text, jo=jo)
+        assert effective_law_name(c, "농어촌특별세법 시행령") == "지방세법", (jo, c.law_name)
+
+    # ⑤ '각 호 외의 부분'도 부스러기
+    c = _one("「법인세법」 제10조제1항 각 호 외의 부분 및 제20조", jo="20")
+    assert effective_law_name(c, "소득세법 시행령") == "법인세법", c.law_name
+
+    # ⑥ 과탐 방지는 유지 — 실질 어구가 끼면 전파하지 않는다
+    c = _one("「법인세법」 제10조를 적용할 때 상시근로자의 범위 및 제20조", jo="20")
+    assert effective_law_name(c, "소득세법 시행령") == "소득세법 시행령", c.law_name
+    c = _one("「법인세법」 제10조에 따른 소득과 이 영 제20조에 따른 금액", jo="20")
+    assert effective_law_name(c, "소득세법 시행령") == "소득세법 시행령", c.law_name
+
+
+def test_law_name_trims_leading_prose() -> None:
+    """낫표 없는 법령명이 앞말을 끌어오면 안 된다.
+
+    _NAMED_LAW의 공백 허용 부분이 탐욕적이라 '하지만 헌법 제38조'에서 법령명이
+    '하지만 헌법'으로 잡혔다(입법예고 의견처럼 산문이 섞인 글에서 자주 나온다).
+    """
+    for raw, expected in [
+        ("하지만 헌법", "헌법"),
+        ("헌법", "헌법"),
+        ("그런데 조세특례제한법", "조세특례제한법"),
+        ("상속세 및 증여세법", "상속세 및 증여세법"),          # 진짜 두 낱말 법령명
+        ("하지만 국제조세조정에 관한 법률", "국제조세조정에 관한 법률"),
+        ("민간임대주택에 관한 특별법", "민간임대주택에 관한 특별법"),
+        ("소득세법 및 종합부동산세법", "종합부동산세법"),      # 열거의 뒤엣것이 대상
+        ("소득세법 시행령", "소득세법 시행령"),                # 시행령·시행규칙은 두 낱말
+        ("하지만 소득세법 시행령", "소득세법 시행령"),
+        ("법인세법 시행규칙", "법인세법 시행규칙"),
+    ]:
+        assert trim_law_name(raw) == expected, (raw, trim_law_name(raw))
+
+    c = _one("하지만 헌법 제38조에 따라", jo="38")
+    assert effective_law_name(c, "종합부동산세법") == "헌법", c.law_name
+
+
 def test_related_law_names_normalized() -> None:
     # P1③: 공백 없는 법령명 표기로도 병행 법령군이 채워진다
     rel = {n.replace(" ", "") for n in related_law_names("상속세및증여세법")}
@@ -296,19 +365,13 @@ def test_choose_entry_fuzzy() -> None:
 
 
 def main() -> int:
-    test_deictic_parsing()
-    test_deictic_resolution()
-    test_citation_matches_cross_law()
-    test_find_back_citations_deictic()
-    test_naeji_range_parsing()
-    test_article_range_covers()
-    test_range_expansion_back_citations()
-    test_citation_matches_range_subarticle()
-    test_range_inherits_cross_law_name()
-    test_enumerated_cross_law_name()
-    test_related_law_names_normalized()
-    test_choose_entry_fuzzy()
-    print("ALL OK")
+    # 목록을 손으로 유지하면 새 테스트를 등록하는 걸 잊는다(실제로 놓친 적 있음).
+    # 모듈 안의 test_* 를 전부 찾아 돌린다.
+    tests = [fn for name, fn in sorted(globals().items())
+             if name.startswith("test_") and callable(fn)]
+    for fn in tests:
+        fn()
+    print(f"ALL OK ({len(tests)} tests)")
     return 0
 
 

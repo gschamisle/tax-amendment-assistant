@@ -75,7 +75,7 @@ _REVIEW_SCHEMA = {
 }
 
 _STRUCTURE_SYSTEM = (
-    "당신은 기획재정부 세제실의 법령 입안 검토관이다. 일부개정법률안의 개정문을 읽고 "
+    "당신은 재정경제부 세제실의 법령 입안 검토관이다. 일부개정법률안의 개정문을 읽고 "
     "신설 제도가 차지하는 조번호 범위를 정확히 판별한다.\n"
     "주의: '제X조의 제목 …를 …로 하고'는 기존 조문을 새 내용으로 대체(사실상 신설)하는 형식이다. "
     "반면 절(節) 번호·제목만 신설되거나 기존 제도가 문구 수정으로 존치되는 조문은 신설이 아니다. "
@@ -83,7 +83,7 @@ _STRUCTURE_SYSTEM = (
 )
 
 _REVIEW_SYSTEM = (
-    "당신은 기획재정부 세제실의 법령 입안 검토관이다. 신설 제도 개정안에서 병행개정이 "
+    "당신은 재정경제부 세제실의 법령 입안 검토관이다. 신설 제도 개정안에서 병행개정이 "
     "누락됐을 가능성이 있는 조문 목록을 받아, 각 항목을 검토해 삼분류한다.\n\n"
     "분류 기준:\n"
     "- 누락: 신설 제도의 성격상 해당 조문 개정(열거 추가·인용 정비)이 필요한데 개정안에 없음. "
@@ -154,6 +154,11 @@ def _structured_call(
         f"사용 가능한 모델이 없습니다 (시도: {', '.join(models)}). "
         f"마지막 오류: {last_unavailable}"
     )
+
+
+def structured_call(models, system: str, user_text: str, schema: dict, api_key: str = "") -> dict:
+    """다른 모듈이 재사용하는 공개 진입점 — 모델 폴백 + JSON 스키마 강제를 한 곳에 둔다."""
+    return _structured_call(models, system, user_text, schema, api_key)
 
 
 def analyze_bill_structure(body: str, api_key: str = "") -> dict:

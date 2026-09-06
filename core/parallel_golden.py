@@ -64,6 +64,37 @@ _SECTION3_ROWS: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
 )
 
 
+# ── §4: 다리 법령 공동 인용에서 도출한 병행쌍 (docs/bridge-parallel-pairs.md) ──
+# 국조법·조특법의 한 조문이 소득세법·법인세법 조문을 나란히 인용하면 그 둘은
+# 개인↔법인 짝이다. 그 판단을 내린 것은 스코어링이 아니라 입법자 자신이다.
+# 다리 2건 이상(여러 곳에서 반복해 함께 인용)만 확정으로 올린다.
+#
+# §1과 출처를 나눈 이유:
+#   * 근거가 매뉴얼이 아니라 인용 구조다 — source를 섞으면 검토 화면에서
+#     '매뉴얼 확정'으로 잘못 표시된다.
+#   * 제목·용어 스코어링으로는 찾을 수 없는 쌍이라, 임계값 보정용 recall
+#     정답셋(golden_direct_pairs)에 넣으면 '임계값 미달' 경고만 늘린다.
+BRIDGE_SOURCE = "bridge_confirmed"
+
+# (소득세법 조번호, 법인세법 조번호, 다리 건수, 취지)
+_SECTION4_BRIDGE: tuple[tuple[str, str, int, str], ...] = (
+    ("119", "93", 2, "비거주자의 국내원천소득 ↔ 외국법인의 국내원천소득"),
+    ("57", "57", 2, "외국납부세액공제 ↔ 외국 납부 세액공제 등"),
+    ("32", "36", 2, "국고보조금 취득 사업용자산 필요경비 계산 ↔ 손금산입"),
+    ("5", "6", 3, "과세기간 ↔ 사업연도"),
+    ("94", "44", 3, "양도소득의 범위 ↔ 합병 시 피합병법인에 대한 과세"),
+    ("76", "64", 7, "확정신고납부 ↔ 납부"),
+    ("111", "64", 4, "양도소득 확정신고납부 ↔ 납부"),
+    ("94", "64", 3, "양도소득의 범위 ↔ 납부"),
+    ("111", "44", 2, "양도소득 확정신고납부 ↔ 합병 시 피합병법인에 대한 과세"),
+    ("70", "60", 2, "종합소득과세표준 확정신고 ↔ 과세표준 등의 신고"),
+    ("70의2", "60", 2, "성실신고확인서 제출 ↔ 과세표준 등의 신고"),
+    # 연결법인 — 신고 조문끼리의 대응. 실무상 함께 볼 짝인지는 검토 대상으로 둔다
+    ("70", "76의17", 2, "종합소득과세표준 확정신고 ↔ 연결과세표준 등의 신고"),
+    ("70의2", "76의17", 2, "성실신고확인서 제출 ↔ 연결과세표준 등의 신고"),
+)
+
+
 _ART_JO_RE = re.compile(r"제(?:(\d+)의(\d+)조|(\d+)조(?:의(\d+))?)")
 
 
@@ -104,13 +135,19 @@ def _jo_display(jo_no: str) -> str:
     return f"제{jo_no}조"
 
 
-def _entry(target_law: str, target_article: str, relation_type: str, reason: str) -> dict:
+def _entry(
+    target_law: str,
+    target_article: str,
+    relation_type: str,
+    reason: str,
+    source: str = GOLDEN_SOURCE,
+) -> dict:
     return {
         "target_law": target_law,
         "target_article": target_article,
         "relation_type": relation_type,
         "confidence": "confirmed",
-        "source": GOLDEN_SOURCE,
+        "source": source,
         "reason": reason,
     }
 
@@ -147,5 +184,13 @@ def golden_entries() -> dict[str, list[dict]]:
                 add("소득세법 시행령", sd,
                     _entry("법인세법 시행령", _jo_display(bd), "parallel_tax_law",
                            f"감가상각 병행: {reason}"))
+
+    # §4 — 다리 도출 병행쌍 (대칭 등록, 출처 구분)
+    for ij, bj, weight, reason in _SECTION4_BRIDGE:
+        note = f"다리 공동인용 {weight}건: {reason}"
+        add("소득세법", ij,
+            _entry("법인세법", _jo_display(bj), "parallel_tax_law", note, BRIDGE_SOURCE))
+        add("법인세법", bj,
+            _entry("소득세법", _jo_display(ij), "parallel_tax_law", note, BRIDGE_SOURCE))
 
     return out
