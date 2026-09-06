@@ -49,3 +49,7 @@ data/golden_review_expected.json
 !output/opinions-*.hwpx
 output/*-hwpx소스.md
 output/*.tmp.hwpx
+
+# 하위 폴더의 PDF도 제외한다. 기존 'docs/*.pdf'는 docs 바로 아래만 걸러서
+# 'docs/세법개정 세트/*.pdf' 같은 참고자료가 새어나갔다.
+docs/**/*.pdf
